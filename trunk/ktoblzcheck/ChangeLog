@@ -1,5 +1,11 @@
 2003-05-04  Christian Stimming  <stimming@tuhh.de>
 
+	* src/bankdata/bankdata.txt: Update BLZ list from bundesbank.de to
+	the state of 03.03.2003.
+	
+	* src/lib/ktoblzcheck.cc (check): Fix stupid bug (caused by
+	myself) when looking for the method to use.
+
 	* */Makefile.am: Edited all Makefile.am's to use autotools
 	standard targets and paths. Now --prefix will adjust all
 	installation places accordingly.

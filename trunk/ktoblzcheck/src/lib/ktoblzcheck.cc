@@ -185,13 +185,12 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
   int weight[10]  = {0,0,0,0,0,0,0,0,0,0};
   string method = given_method;
 
-  if (method != "") {
+  if (method.empty()) {
     try {
       Record rec = findBank(bankId);
       method = rec.method;
     } catch (int i) {
-      // bank was not found, return error if not forced to use a spec. method
-      if ("" == method)
+	// bank was not found, return error if not forced to use a spec. method
 	return BANK_NOT_KNOWN;
     }
   }
@@ -931,6 +930,8 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	number2Array("0001212120", weight);
 	return algo01(10, weight, true, 10, account);
   }
+  std::cerr << "AccountNumberCheck::check: Specified method '" << method 
+	    << "' is unknown." << std::endl;
   return UNKNOWN;
 }
 
