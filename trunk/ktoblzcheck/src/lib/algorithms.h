@@ -36,12 +36,18 @@ long long number2LongLong(std::string number);
 int    algo02(int modulus, int weight[10], bool crossfoot, int accountId[10]);
 int    algo03(int modulus, int weight[10], bool crossfoot, int accountId[10], 
 			  int startAdd, int stopAdd);
+int    algo03a(int weight[10], bool crossfoot, int accountId[10], 
+			  int startAdd, int stopAdd);
 AccountNumberCheck::Result 
 algo04(std::string bankId, std::string accountId);
+AccountNumberCheck::Result 
+algo04a(std::string bankId, std::string accountId);
 AccountNumberCheck::Result 
 algo05(std::string accountId);
 AccountNumberCheck::Result
 algo06(std::string accountId);
+AccountNumberCheck::Result
+algo07(int accountId[10], int transform[6][10]);
 AccountNumberCheck::Result 
 algo01(int modulus, int weight[10], bool crossfoot, 
        int checkIndex, int accountId[10]);

@@ -78,6 +78,23 @@ int algo03(int modulus, int weight[10], bool crossfoot, int accountId[10],
   return result;
 }
 
+int algo03a(int weight[10], bool crossfoot, int accountId[10], 
+		   int startAdd, int stopAdd) {
+  int res[10];
+  // same as algo03, but return result before modulus
+  // mult the weight with the account id
+  multArray(accountId, weight, res);
+
+  // for 00,...: calc the crossfoot for each value
+  if (crossfoot)
+	crossFoot(res, res, 0, 9);
+
+  // add all values
+  int result = add(res, startAdd, stopAdd);
+  //  cout << "add: " << result << endl;
+  return result;
+}
+
 AccountNumberCheck::Result
 algo05(string accountId) {
   int account[10];
@@ -249,40 +266,43 @@ algo04(string bankId, string accountId) {
 
   // the last 4 digits of the bankid (without leading "0")
   string bankPart = bankId.substr(bankId.length() - 4);
-  while ('0' == bankPart[0])
+  while (bankPart.length() > 0 && '0' == bankPart[0])
 	bankPart = bankPart.substr(1);
-  cout << "bankpart: " << bankPart << endl;
+  // cout << "bankpart: " << bankPart << endl;
   // the first 2 digits of the accountid
   string checkPart = accountId.substr(0, 2);
-  cout << "checkPart: " << checkPart << endl;
+  // cout << "checkPart: " << checkPart << endl;
   string accountPart = accountId.substr(2);
   // skip leading "0" in the the accountPart
   while (accountPart.length() > 0 && '0' == accountPart[0])
   	accountPart = accountPart.substr(1);
-  cout << "accoutPart: " << accountPart << endl;
+  // cout << "accoutPart: " << accountPart << endl;
   string eser12unpadded = bankPart + checkPart + accountPart;
   cout << "eser12unpadded: " << eser12unpadded << endl;
   // concat and padd to 12 byte
   string eser12 = eser12unpadded;
   while (eser12.length() < 12)
 	eser12 = "0" + eser12;
-  cout << "eser12: " << eser12 << endl;
+  // cout << "eser12: " << eser12 << endl;
 
   // special handling for eser12 that start with "009"
-  if (eser12.substr(0, 3) == "009") {
+  // Changed by Jens Gecius: I do not see special handling for 009 
+  // - the special handling for 10-digit accountIDs starting with "9"
+  // is handled directly in ktoblzcheck, hence, removed
+  //if (eser12.substr(0, 3) == "009") {
 	// run method 2
-	int weight[10];
-	int account[10];
-	number2Array(accountId, account);
-	number2Array("2987654321", weight);
-	int tmp = algo02(11, weight, false, account) % 10;
-	if (tmp == account[9])
-	  return AccountNumberCheck::OK;
-	else 
-	  return AccountNumberCheck::ERROR;
-  }
+	//int weight[10];
+	//int account[10];
+	//number2Array(accountId, account);
+	//number2Array("2987654321", weight);
+	//int tmp = algo02(11, weight, false, account) % 10;
+	//if (tmp == account[9])
+	  //return AccountNumberCheck::OK;
+	//else 
+	  //return AccountNumberCheck::ERROR;
+  //}
 
-  // spilit so we can use the int[10]-methods we already have
+  // slit so we can use the int[10]-methods we already have
   // xx xxxxxxxxxx (eser02 and eser10)
   //  string eser10 = eser12.substr(2);
   //  string eser02 = eser12.substr(0, 2);
@@ -290,8 +310,8 @@ algo04(string bankId, string accountId) {
   int eser02[10];
   number2Array(eser12.substr(2), eser10);
   number2Array(eser12.substr(0, 2), eser02);
-  cout << "eser02: " << array2Number(eser02) << endl;
-  cout << "eser10: " << array2Number(eser10) << endl;
+  // cout << "eser02: " << array2Number(eser02) << endl;
+  // cout << "eser10: " << array2Number(eser10) << endl;
 
   int weight02[10];
   int weight10[10];
@@ -308,33 +328,33 @@ algo04(string bankId, string accountId) {
   multArray(eser10, weight10, res10);
 
   int result = (add(res02, 0, 9));
-  cout << "result add1: " << result << endl;
-  cout << "result add2: " << add(res10, 0, 9) << endl;
+  // cout << "result add1: " << result << endl;
+  // cout << "result add2: " << add(res10, 0, 9) << endl;
   result += (add(res10, 0, 9));
-  cout << "result: " << result << endl;
+  // cout << "result: " << result << endl;
   result = result % 11;
-  cout << "result: " << result << endl;
+  // cout << "result: " << result << endl;
   // now after calculating, we can set the weight in weight10 correct
   // we may need it
   weight10[5] = 10;
-  cout << "weight02: " << array2Number(weight02) << endl;
-  cout << "weight10: " << array2Number(weight10) << endl;
+  // cout << "weight02: " << array2Number(weight02) << endl;
+  // cout << "weight10: " << array2Number(weight10) << endl;
   // the weight for the check-digit
   int realWeight = weight10[9 - accountPart.length()];
-  cout << "realWeight: " << realWeight << endl;
+  // cout << "realWeight: " << realWeight << endl;
 
   // find a multiple of realWeight so that
   // (result + i*realWeight) % 11 = 10
   int i = 0;
   while (i < 12) {
 	int tmp = (result + (i * realWeight));
-	cout << "tmp: " << tmp << endl;
+        // cout << "tmp: " << tmp << endl;
 	tmp = tmp % 11;
 	if (10 == tmp) 
 	  break;
 	  i++;
   }
-  cout << "i: " << i << endl;
+  // cout << "i: " << i << endl;
   // none found?
   if (12 == i)
 	return AccountNumberCheck::ERROR;
@@ -343,6 +363,118 @@ algo04(string bankId, string accountId) {
   if (i+48 == checkPart[1])
 	return AccountNumberCheck::OK;
 
+  return AccountNumberCheck::ERROR;
+}
+
+// Added by Jens Gecius
+// same as algo04, but for nine digit accountIDs with
+// a little different eser12 system.
+AccountNumberCheck::Result 
+algo04a(string bankId, string accountId) {
+
+  if (9 != accountId.length())
+	return AccountNumberCheck::ERROR;
+  if (5 > bankId.length())
+	return AccountNumberCheck::ERROR;
+
+  // the middle 2 digits of the bankid
+  string bankPart = bankId.substr(bankId.length() - 4, 2);
+  //while (bankPart.length() > 0 && '0' == bankPart[0])
+            //bankPart = bankPart.substr(1);
+  string bankPart2 = bankId.substr(bankId.length());
+  // cout << "bankpart: " << bankPart << endl;
+  // the first 2 digits of the accountid
+  string checkPart = accountId.substr(2, 1);
+  // cout << "checkPart: " << checkPart << endl;
+  string accountPart1 = accountId.substr(0, 1);
+  string accountPart = accountId.substr(3);
+  // skip leading "0" in the the accountPart
+  while (accountPart.length() > 0 && '0' == accountPart[0])
+  	accountPart = accountPart.substr(1);
+  // cout << "accoutPart: " << accountPart << endl;
+  string eser12unpadded = bankPart + accountPart1 + bankPart2 + checkPart + accountPart;
+  cout << "eser12unpadded: " << eser12unpadded << endl;
+  // concat and padd to 12 byte
+  string eser12 = eser12unpadded;
+  while (eser12.length() < 12)
+	eser12 = "0" + eser12;
+
+  // slit so we can use the int[10]-methods we already have
+  // xx xxxxxxxxxx (eser02 and eser10)
+  //  string eser10 = eser12.substr(2);
+  //  string eser02 = eser12.substr(0, 2);
+  int eser10[10];
+  int eser02[10];
+  number2Array(eser12.substr(2), eser10);
+  number2Array(eser12.substr(0, 2), eser02);
+  // cout << "eser02: " << array2Number(eser02) << endl;
+  // cout << "eser10: " << array2Number(eser10) << endl;
+
+  int weight02[10];
+  int weight10[10];
+  number2Array("0000000042", weight02);
+  number2Array("1637905842", weight10);
+  // weight10[5] should be 10. but for the multArray, we need =0 because
+  // this is the position of the ceck-digit (which must not be included)
+  // weight10[5] = 10;
+
+  int res02[10];
+  int res10[10];
+  // mult the weight
+  multArray(eser02, weight02, res02);
+  multArray(eser10, weight10, res10);
+
+  int result = (add(res02, 0, 9));
+  // cout << "result add1: " << result << endl;
+  // cout << "result add2: " << add(res10, 0, 9) << endl;
+  result += (add(res10, 0, 9));
+  // cout << "result: " << result << endl;
+  result = result % 11;
+  // cout << "result: " << result << endl;
+  // now after calculating, we can set the weight in weight10 correct
+  // we may need it
+  weight10[5] = 10;
+  // cout << "weight02: " << array2Number(weight02) << endl;
+  // cout << "weight10: " << array2Number(weight10) << endl;
+  // the weight for the check-digit
+  int realWeight = weight10[9 - accountPart.length()];
+  // cout << "realWeight: " << realWeight << endl;
+
+  // find a multiple of realWeight so that
+  // (result + i*realWeight) % 11 = 10
+  int i = 0;
+  while (i < 12) {
+	int tmp = (result + (i * realWeight));
+        // cout << "tmp: " << tmp << endl;
+	tmp = tmp % 11;
+	if (10 == tmp) 
+	  break;
+	  i++;
+  }
+  // cout << "i: " << i << endl;
+  // none found?
+  if (12 == i)
+	return AccountNumberCheck::ERROR;
+
+  // if asc(i)=checkdigit -> ok
+  if (i+48 == checkPart[1])
+	return AccountNumberCheck::OK;
+
+  return AccountNumberCheck::ERROR;
+}
+
+// iterated transformation
+AccountNumberCheck::Result 
+algo07(int accountId[10], int transform[6][10]) {
+  int result = 0;
+  for (int i=0; i<10; i++) {
+        result = result + transform[transform[5][i]][accountId[i]];
+  }
+  result = 10 - (result % 10);
+  if (result == 10)
+        result = 0;
+  if (result == accountId[9])
+        return AccountNumberCheck::OK;
   return AccountNumberCheck::ERROR;
 }
 

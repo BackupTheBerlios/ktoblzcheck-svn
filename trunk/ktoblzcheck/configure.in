@@ -18,7 +18,8 @@ AC_PROG_CXXCPP
 AM_PROG_LIBTOOL
 
 # check whether hash_map is available
-AC_CXX_HAVE_EXT_HASH_MAP
+#AC_CXX_HAVE_EXT_HASH_MAP
+# disabled because std::map is used always.
 
 # check path for installation of bank data
 AC_MSG_CHECKING(bankdata path)
@@ -42,4 +43,5 @@ AC_OUTPUT( \
   src/bin/Makefile \
   src/include/Makefile \
   src/lib/Makefile \
+  doc/Makefile
 )

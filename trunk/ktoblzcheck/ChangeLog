@@ -1,3 +1,16 @@
+2003-08-03  Christian Stimming  <stimming@tuhh.de>
+
+	* src/include/ktoblzcheck.h: Removed __gnu_cxx::hash_map since
+	library headers that change depending on some define variable are
+	no good -- imagine compiling the lib with this define active, but
+	using it without. Then the program sees objects with a different
+	ABI. Therefore removed that.
+
+	* doc/ktoblzcheck.1, src/lib/ktoblzcheck.cc,
+	src/lib/algorithms.{h,cc}: Many more algorithm implementation by
+	Jens Gecius <jens@gecius.de>. According to him now all
+	Bundesbank's algorithms are now implemented. Plus man page.
+
 2003-06-16  Christian Stimming <stimming@tuhh.de>
 
 	* src/include/ktoblzcheck.h, src/lib/ktoblzcheck.cc: It turned out

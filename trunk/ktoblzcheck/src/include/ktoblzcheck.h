@@ -32,9 +32,11 @@
 
 #include <string>
 #include <map>
-#ifdef HAVE_EXT_HASH_MAP 
-#  include <ext/hash_map>
-#endif
+/*#ifdef HAVE_EXT_HASH_MAP 
+  #  include <ext/hash_map>
+  #endif
+  -- disabled because the header file shouldn't change with some defines.
+*/
 
 /** Class that stores a list of known banks, returns banks with given
     bank codes and validates account numbers accordings to the bank's
@@ -152,12 +154,12 @@ public:
 
 
 private:
+  /*#ifdef HAVE_EXT_HASH_MAP 
+    typedef __gnu_cxx::hash_map<unsigned long, Record*> banklist_type;
+    #else*/
   /* The list of the bank data */
-#ifdef HAVE_EXT_HASH_MAP 
-  typedef __gnu_cxx::hash_map<unsigned long, Record*> banklist_type;
-#else
   typedef std::map<unsigned long, Record*> banklist_type;
-#endif
+  /*#endif*/
   banklist_type data;
 
   /** Deletes all records inside the bank data list */

@@ -3,7 +3,7 @@
 AUTOMAKE_OPTIONS = 1.4
 
 
-SUBDIRS = src 
+SUBDIRS = src doc
 
 EXTRA_DIST = AUTHORS TODO README configure 
 
