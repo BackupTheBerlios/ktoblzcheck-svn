@@ -27,14 +27,15 @@
 #include <config.h>
 #include <ktoblzcheck.h>
 #include <iostream>
+#include <fstream>
 #include <stdio.h>
+#include <assert.h>
 
 using namespace std;
 
-
-int main(int argc, char **argv) {
-    unsigned long tries = 5, 
-	nr_found = 0, 
+int check_bankData_lookup(unsigned long tries = 5)
+{
+    unsigned long nr_found = 0, 
 	nr_notfound = 0,
 	rand_blz;
     char buf[50];
@@ -43,9 +44,6 @@ int main(int argc, char **argv) {
     std::string bankId;
     
     AccountNumberCheck checker;
-
-    if (argc > 1)
-	tries = atol(argv[1]);
 
     for (unsigned long i = 0; i < tries; i++) {
 	/*
@@ -77,5 +75,50 @@ int main(int argc, char **argv) {
 	      << int(100*double(nr_found)/double(tries)) << "%." 
 	      << std::endl;
     return 0;
+}
+
+std::string result_to_string(AccountNumberCheck::Result result)
+{
+	string text;
+	if (result == AccountNumberCheck::OK)
+	  text = "OK";
+	if (result == AccountNumberCheck::UNKNOWN)
+	  text = "Sorry, I don't know";
+	if (result == AccountNumberCheck::ERROR)
+	  text = "ERROR, they do not match";
+	if (result == AccountNumberCheck::BANK_NOT_KNOWN)
+	  text = "bank is not known";
+	return text;
+}
+
+int check_testkontos(const std::string& filename)
+{
+   assert(filename.size()>0);
+   AccountNumberCheck checker("../bankdata/bankdata.txt");
+   AccountNumberCheck::Result res;
+   char blz[20],kto[20],method[200],info[200];
+   FILE *istr = fopen(filename.c_str(), "r");
+   while(fscanf(istr, "%20[^;];%20[^;];%200[^;];%200[^;\n]\n", blz, kto, method, info) > 0)
+   {
+      res = checker.check(blz, kto);
+      std::cout << "Result of " << blz << ";" << kto << ";" << method << ";" << info << ": " << 
+	 result_to_string(res) << std::endl;
+   }
+   return 0;
+}
+
+int main(int argc, char **argv) {
+
+   unsigned long tries = 5;
+   if (argc > 1)
+      tries = atol(argv[1]);
+   check_bankData_lookup(tries);
+   
+//    std::string filename;
+//    if (argc > 1)
+//       filename = argv[1];
+//    check_testkontos(filename);
+   
+   return 0;
 }
 

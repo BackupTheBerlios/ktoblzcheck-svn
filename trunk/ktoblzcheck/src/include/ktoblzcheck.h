@@ -190,15 +190,29 @@ public:
 
 
 private:
-  /* The list of the bank data */
+  /** The type of the list of the bank data */
   typedef std::map<unsigned long, Record*> banklist_type;
+  /** The list of the bank data */
   banklist_type data;
+
+public:
+  typedef Result (*MethodFunc)(int *account, int *weight);
+  typedef Result (*MethodFuncLong)(int *account, int *weight, 
+				   const std::string& accountId, const std::string& bankId);
+private:
+  typedef std::map<std::string, MethodFunc> method_map_t;
+  method_map_t method_map;
+  typedef std::map<std::string, MethodFuncLong> method_map2_t;
+  method_map2_t method_map2;
 
   /** Deletes all records inside the bank data list */
   void deleteList();
   /** The function to actually read data from file into the list;
       clears all existing data. */
   void readFile(const std::string &filename);
+
+  /** Initialized the map of method string to the respective callback function */
+  void initMethodMap();
 };
 
 typedef AccountNumberCheck::Result AccountNumberCheck_Result;

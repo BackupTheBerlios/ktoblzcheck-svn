@@ -10,6 +10,7 @@ lib_LTLIBRARIES = libktoblzcheck.la
 
 libktoblzcheck_la_SOURCES = \
   ktoblzcheck.cc \
+  methods.cc \
   algorithms.cc \
   accnum.cc \
   iban.cc

@@ -1,3 +1,11 @@
+2005-01-16  Christian Stimming  <stimming@tuhh.de>
+
+	* src/lib/ktoblzcheck.cc, src/lib/methods.cc: Modified lookup of
+	code for method from the original "giant if-statement" to a
+	std::map hash table of callback functions. However, this sped up
+	the number checking only by roughly 15%, so it probably wasn't
+	worth the effort :-(
+
 2005-01-11  Christian Stimming <stimming@tuhh.de>
 
 	* src/lib/ktoblzcheck.cc: Fix for method 11 by Erik Kerger
