@@ -2,13 +2,13 @@
 
 bin_PROGRAMS = ktoblzcheck 
 
-INCLUDES = $(ktoblzcheck_includes)
+INCLUDES = -I$(top_srcdir)/src/include
 #EXTRA_DIST=
 
 ktoblzcheck_SOURCES = \
   ktoblzcheck.cc
 
-LIBS = $(ktoblzcheck_libs)
+LIBS = -L$(top_builddir)/src/lib -lktoblzcheck
 
 #ktoblzcheck_LDADD = 
 
