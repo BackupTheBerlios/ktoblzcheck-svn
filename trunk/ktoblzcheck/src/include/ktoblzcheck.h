@@ -34,8 +34,11 @@
 #include <map>
 
 /** Class that stores a list of known banks, returns banks with given
-    bank codes and validates account numbers accordings to the bank's
-    known validation/checking algorithms.
+ * bank codes and validates account numbers accordings to the bank's
+ * known validation/checking algorithms.
+ *
+ * The list of known banks is read from the configuration file when
+ * this object is constructed.
  */
 class AccountNumberCheck {
 public:
@@ -44,42 +47,62 @@ public:
    * Gives information about the success of the check
    * <ul>
    * <li><b>OK:</b> everything is ok, account and bank match
-   * <li><b>UNKNOWN:</b> could not be validated due to an unknown reason
-   * <li><b>ERROR:</b> account and bank probably do not match
-   * <li><b>BANK_NOT_KNOWN:</b> the specified bankid is invalid
+   *
+   * <li><b>UNKNOWN:</b> Could not be validated because the validation
+   * algorithm is unknown/unimplemented in ktoblzcheck
+   *
+   * <li><b>ERROR:</b> The result of the validation algorithm is that
+   * the account and bank probably do <b>not</b> match
+   *
+   * <li><b>BANK_NOT_KNOWN:</b> No bank with the specified bankid
+   * could be found
+   *
    * </ul>
    */
   typedef enum Result {
-	OK = 0,
-	UNKNOWN = 1,
-	ERROR = 2,
-	BANK_NOT_KNOWN = 3
+      /** Everything is ok: account and bank match */
+      OK = 0,
+      /** Could not be validated because the validation algorithm is
+       * unknown/unimplemented in ktoblzcheck */
+      UNKNOWN = 1,
+      /** The result of the validation algorithm is that the account
+       * and bank probably do <b>not</b> match */
+      ERROR = 2,
+      /** No bank with the specified bankid could be found */
+      BANK_NOT_KNOWN = 3
   } Result;
   
   /**
-   * Gives information about the bank<br>
+   * This class holds information about one bank.
+   *
    * <ul>
-   * <li><b>bankId</b> The id of the bank (german BLZ)
-   * <li><b>method</b> The method used to validate accountId and bankId<br>
-   * You won't get in contact with it
+   * <li><b>bankId</b> The id of the bank (german BLZ)</li>
+   *
+   * <li><b>method</b> The method used to validate accountId and
+   * bankId (This information is only needed in AccountNumberCheck
+   * internally; an application probably does not need this)</li>
+   *
    * <li><b>bankName</b> The name of the bank as listed in the file of the 
-   * <b>Deutsche Bundesbank</b>
-   * <li><b>location</b> The town where the bank is located
+   * <b>Deutsche Bundesbank</b></li>
+   *
+   * <li><b>location</b> The town where the bank is located</li>
    * </ul>
    */
   class Record {
     public:
     /** The id of the bank (german BLZ) */
     unsigned long bankId;
-    /** The method used to validate accountId and bankId.<br> You won't
-     * get in contact with it. */
+    /** The method used to validate accountId and bankId.
+     * 
+     * This information is only needed in AccountNumberCheck
+     * internally; an application probably does not need this. */
     std::string method;
     /**  The name of the bank as listed in the file of the 
      * <b>Deutsche Bundesbank</b>*/
     std::string bankName;
     /** The town where the bank is located */
     std::string location;
-    /** Default Constructor */
+    /** Default Constructor for an empty record. */
     Record();
     /** Constructor with all values */
     Record(unsigned long id, const std::string& method, 
@@ -88,23 +111,37 @@ public:
   };
 
   /**
-   * Initialize the bank-database<br>
-   * You must call it prior to any operation you want to perform.
+   * Default Constructor. 
    *
-   * The bank data is obtained from the location specified at compiler
+   * This constructor also initializes the bank-database.  The bank
+   * data is obtained from the location specified at compiler
    * time. Default is $prefix/share/ktoblzcheck/bankdata.txt (set in
-   * configure.in) where default for $prefix is /usr/local.
+   * configure.in) where default for $prefix is /usr/local. 
+   *
+   * On Windows, this constructor also looks up the location of the
+   * bank data in the registry in the key
+   * HKEY_LOCAL_MACHINE/Software/Ktoblzcheck/Paths, key "datadir".
    */
   AccountNumberCheck();
 
   /**
-   * Initialize the bank-database specified by <code>filename</code>
+   * Constructor that initialize the bank-database from a data file at
+   * <code>filename</code>. 
+   *
+   * If the file could not be found, then the resulting
+   * AccountNumberCheck object simply has an empty bank database and a
+   * message is printed to stderr.
+   *
    * @param filename The absolute location of the KTOBLZCheck-database
    */
   AccountNumberCheck(const std::string& filename);
 
   /**
-   * Destructor. Flushes all resources.
+   * Destructor. All entries of the bank database are deleted as well.
+   *
+   * @note This destructor also destroys any references that have been
+   * returned by findBank()! You have to make sure not to use these
+   * references any longer after this destructor has been called.
    */
   ~AccountNumberCheck();
 
@@ -123,7 +160,16 @@ public:
    * Find the info-record for a bank specified by <code>bankId</code>
    * or otherwise throw an exception.
    *
-   * @throws int if <code>bankId</code> could not be found in the database
+   * @note The returned objects are still owned by this object! You
+   * have to make sure not to use the returned references after
+   * the destructor ~AccountNumberCheck() has been called.
+   *
+   * @throws int if a bank with bank code <code>bankId</code> (german
+   * BLZ) could not be found in the database
+   *
+   * @return A reference to the resulting bank object. The returned
+   * reference is still owned by this AccountNumberObject and it
+   * becomes invalid if the AcccountNumberObject is being deleted.
    */
   const Record& findBank(const std::string& bankId) const;
 
@@ -133,12 +179,12 @@ public:
   unsigned int bankCount() const;
 
   /**
-   * Generates an index over the bankIds.<br>
-   * This way you can speed up the checking if you want to check
-   * 100s of combination (batch-processing)
+   * Generates an index over the bankIds. This is supposed to speed up
+   * the checking if you want to check 100s of combination
+   * (batch-processing)
    *
-   * Currently not implemented. For a hash_map this isn't necessary
-   * anyway.
+   * Currently this does nothing. The bank list structure (std::map)
+   * does not need this anyway.
    */
   void createIndex();
 
@@ -166,24 +212,61 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
 #endif /* __cplusplus */
 
   /*@{*/
-  /** Constructor for banklist compiled into library. Returns NULL if
-      not available. */
+
+  /**
+   * Default Constructor. 
+   *
+   * This constructor also initializes the bank-database.  The bank
+   * data is obtained from the location specified at compiler
+   * time. Default is $prefix/share/ktoblzcheck/bankdata.txt (set in
+   * configure.in) where default for $prefix is /usr/local. 
+   *
+   * On Windows, this constructor also looks up the location of the
+   * bank data in the registry in the key
+   * HKEY_LOCAL_MACHINE/Software/Ktoblzcheck/Paths, key "datadir".
+   */
   extern AccountNumberCheck *AccountNumberCheck_new();
 
-  /** Constructor for banklist in separate file. Returns NULL if not
-      available. */
+  /**
+   * Constructor that initialize the bank-database from a data file at
+   * <code>filename</code>. 
+   *
+   * If the file could not be found, then the resulting
+   * AccountNumberCheck object simply has an empty bank database and a
+   * message is printed to stderr.
+   *
+   * @param filename The absolute location of the KTOBLZCheck-database
+   */
   extern AccountNumberCheck *AccountNumberCheck_new_file(const char *filename);
 
-  /** Destructor */
+  /**
+   * Destructor. All entries of the bank database are deleted as well.
+   *
+   * @note This destructor also destroys any references that have been
+   * returned by AccountNumberCheck_findBank()! You have to make sure
+   * not to use these references any longer after this destructor has
+   * been called.
+   */
   extern void AccountNumberCheck_delete(AccountNumberCheck *a);
 
   /**
    * Check if <code>bankId</code> and <code>accountId</code> form a valid
    * combination. 
    *
-   * The returned value is simply an integer. Please look up the
-   * meanings of each integer values as defined in the
-   * AccountNumberCheck::Result enum.
+   * The returned value is simply an integer. The meanings of each
+   * integer values are defined in the AccountNumberCheck::Result
+   * enum, which is the following:
+   *
+   * <ul>
+   * <li><b>0</b> everything is ok, account and bank match
+   * <li><b>1</b> Could not be validated because the validation algorithm is unknown/unimplemented in ktoblzcheck
+   * <li><b>2</b> account and bank probably do not match
+   * <li><b>3</b> No bank with the specified bankid could be found
+   * </ul>
+   *
+   * @param bankId The bank code (BLZ) of the bank to test
+   * @param accountId The account id to check
+   * @param method If set, force the use of specified check-method
    */
   extern AccountNumberCheck_Result
   AccountNumberCheck_check(const AccountNumberCheck *a, 
@@ -192,7 +275,16 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
 
   /**
    * Find the info-record for a bank specified by <code>bankId</code>
-   * @throws int if <code>bankId</code> could not be found in the database
+   * or otherwise return NULL.
+   *
+   * @note The returned objects are still owned by this object! You
+   * have to make sure not to use the returned references after
+   * the destructor AccountNumberCheck_delete() has been called.
+   *
+   * @return A pointer to the resulting bank object, or NULL if no
+   * matching bank could be found. The returned object is still owned
+   * by this AccountNumberObject and it becomes invalid if the
+   * AcccountNumberObject is being deleted.
    */
   extern const AccountNumberCheck_Record *
   AccountNumberCheck_findBank(const AccountNumberCheck *a, 
@@ -215,6 +307,14 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
   /** Destructor */
   extern void
   AccountNumberCheck_Record_delete(AccountNumberCheck_Record *a);
+
+  /** Copy constructor. The returned object will be owned by the
+   * caller and has to be deleted by the caller when no longer
+   * used. FIXME: Needs to be tested whether it works correctly --
+   * internally it uses the automatically synthetized copy constructor
+   * of the C++ compiler. */
+  extern AccountNumberCheck_Record *
+  AccountNumberCheck_Record_copy(const AccountNumberCheck_Record *a);
 
   /** Returns the id of the bank (german BLZ) */
   extern unsigned long 

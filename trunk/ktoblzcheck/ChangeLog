@@ -1,3 +1,12 @@
+2004-09-10   Christian Stimming <stimming@tuhh.de>
+
+	* src/include/ktoblzcheck.h, src/lib/accnum.cc: Improve
+	documentation. Add C wrapper for copy constructor of
+	AccountNumberCheck::Record class.
+	
+	* src/lib/Makefile.am: Increase SO_VERSION and SO_AGE because a
+	function has been added.
+
 2004-09-08   Christian Stimming <stimming@tuhh.de>
 
 	* configure.in: Released version 1.1

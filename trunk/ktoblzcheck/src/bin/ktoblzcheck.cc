@@ -81,10 +81,13 @@ int main(int argc, char **argv) {
 	     << endl
 	     << "  --returncode: no output, result is returned via the returncode"
 	     << endl;
-	cout << "                0: account/bank ok" << endl;
-	cout << "                1: unknown" << endl;
-	cout << "                2: account/bank not ok" << endl;
-	cout << "                3: bank not found" << endl << endl;
+
+	cout
+	    << "                0: Everything is ok: account and bank match" << endl
+	    << "                1: Validation algorithm is unknown/unimplemented" << endl
+	    << "                2: Account and bank do not match" << endl
+	    << "                3: No bank with given bank-id found" << endl 
+	    << endl;
 
 	exit(1);
   }

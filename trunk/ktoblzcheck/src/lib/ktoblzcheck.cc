@@ -58,11 +58,8 @@ AccountNumberCheck::Record::Record(unsigned long id,
 
 
 AccountNumberCheck::AccountNumberCheck() 
-    : 
-    data() // std::map doesn't take size as argument
+    : data() // std::map doesn't take size as argument
 {
-  // Disabled COMPILE_RESOURCE because the big list cannot be handled by the compiler anyway.
-
    string registry_path = accnum_getRegKey("datadir");
    string data_path = BANKDATA_PATH;
    string filename = (registry_path.empty() ? data_path : registry_path)
@@ -76,9 +73,10 @@ AccountNumberCheck::AccountNumberCheck()
    readFile(filename);
 }
 
-AccountNumberCheck::AccountNumberCheck(const string& filename) {
-  // I guess it is okay to simply accept this function call,
-  // even if COMPILE_RESOURCE was activated.
+AccountNumberCheck::AccountNumberCheck(const string& filename) 
+    : 
+    data() // std::map doesn't take size as argument
+{
   readFile(filename);
 }
 
@@ -88,7 +86,7 @@ AccountNumberCheck::~AccountNumberCheck()
 }
 
 
-#define LINEBUFFER_SIZE 200
+#define LINEBUFFER_SIZE 250
 void 
 AccountNumberCheck::readFile(const string &filename) 
 {
@@ -173,17 +171,20 @@ class MatchBlz {
 };
 
 const AccountNumberCheck::Record& 
-AccountNumberCheck::findBank(const string& bankId) const {  
-
+AccountNumberCheck::findBank(const string& bankId) const 
+{
   unsigned long lbankId = atol(bankId.c_str());
   banklist_type::const_iterator iter;
+
+  // Lookup the object
   iter = data.find(lbankId);
 
+  // Did we find it? Yes, return the reference.
   if (iter != data.end()) {
     return *(iter->second);
   }
-  
-  throw -1;
+  else
+    throw -1;
 }
 
 

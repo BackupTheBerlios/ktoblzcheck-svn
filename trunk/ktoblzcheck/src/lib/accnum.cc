@@ -116,3 +116,10 @@ AccountNumberCheck_Record_location(const AccountNumberCheck_Record *a)
     assert(a);
     return a->location.c_str();
 }
+
+AccountNumberCheck_Record *
+AccountNumberCheck_Record_copy(const AccountNumberCheck_Record *a)
+{
+    assert(a);
+    return new AccountNumberCheck_Record(*a);
+}

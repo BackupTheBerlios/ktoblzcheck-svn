@@ -14,7 +14,7 @@ libktoblzcheck_la_SOURCES = \
   accnum.cc \
   iban.cc
 
-libktoblzcheck_la_LDFLAGS = -version-info 1:3:0
+libktoblzcheck_la_LDFLAGS = -version-info 2:0:1
 libktoblzcheck_la_LIBADD = -lstdc++
 
 ############################################################
