@@ -1,8 +1,8 @@
 AC_INIT(src/lib/ktoblzcheck.cc)
-AM_INIT_AUTOMAKE(ktoblzcheck, 0.4)
+AM_INIT_AUTOMAKE(ktoblzcheck, 0.5)
 AM_CONFIG_HEADER(config.h)
 
-rpm_version="0.4"
+rpm_version="0.5"
 rpm_release="1"
 AC_SUBST(rpm_version)
 AC_SUBST(rpm_release)
@@ -28,12 +28,17 @@ if test "x$prefix" != xNONE; then
 else
   BANKDATA_PATH="$ac_default_prefix/share/ktoblzcheck"
 fi
-AC_ARG_WITH(bankdata-path, [  --with-bankdata-path=DIR where to store the bank data],
+
+AC_ARG_WITH(bankdata-path, 
+  [  --with-bankdata-path=DIR where to store the bank data],
   [BANKDATA_PATH="$withval"])
+
 AC_SUBST(BANKDATA_PATH)
 AC_DEFINE_UNQUOTED(BANKDATA_PATH, "$BANKDATA_PATH", [Default path for bank data])
 AC_MSG_RESULT($BANKDATA_PATH)
 
+# Add compile switches
+ACX_COMPILE_WARN
 
 AC_OUTPUT( \
   Makefile \

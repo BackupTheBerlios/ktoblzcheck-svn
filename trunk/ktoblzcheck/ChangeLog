@@ -1,4 +1,12 @@
+2003-11-19  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in: released version 0.5. Added argument for compile
+	switches.
+
 2003-10-29  Fabian Kaiser <fabian@openhbci.de>
+
+	* src/bankdata/bankdata.txt: Updated, now valid from 2003-07-31
+	onwards.
 
 	* src/lib/algorithms.cc: Fix for algo04 (method 52)
 
