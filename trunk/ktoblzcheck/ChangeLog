@@ -1,3 +1,13 @@
+2003-11-29  Christian Stimming  <stimming@tuhh.de>
+
+	* configure.in: Released version 0.6.
+	
+	* src/bankdata/bankdata.txt: Updated, now valid from 2003-12-03
+	onwards.
+
+	* src/bankdata/bundesbank.sed: Remove \r\n line endings to fix sed
+	script, after the hint by Thomas Viehmann <tv@beamnet.de>.
+
 2003-11-19  Christian Stimming <stimming@tuhh.de>
 
 	* configure.in: released version 0.5. Added argument for compile

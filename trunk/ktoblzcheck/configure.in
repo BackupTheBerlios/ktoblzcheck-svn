@@ -1,8 +1,8 @@
 AC_INIT(src/lib/ktoblzcheck.cc)
-AM_INIT_AUTOMAKE(ktoblzcheck, 0.5)
+AM_INIT_AUTOMAKE(ktoblzcheck, 0.6)
 AM_CONFIG_HEADER(config.h)
 
-rpm_version="0.5"
+rpm_version="0.6"
 rpm_release="1"
 AC_SUBST(rpm_version)
 AC_SUBST(rpm_release)
