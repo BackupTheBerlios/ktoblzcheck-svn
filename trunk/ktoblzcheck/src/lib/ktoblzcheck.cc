@@ -323,6 +323,36 @@ AccountNumberCheck::check(string bankId, string accountId) {
 	}
 	return ERROR;
   }
+  if ("68" == method) {
+	// size=10
+	if (0 != account[0]) {
+	  // and digit 3 is not "9"? error
+	  if (9 != account[3])
+		return ERROR;
+
+	  number2Array("0001212120", weight);
+	  if (OK == algo01(10, weight, true, 10, account))
+		return OK;	  
+	} else { // size = 10
+	  // some account id can not be checked:
+	  if ("400000000" <= array2Number(account) &&
+		  array2Number(account) <= "499999999")
+		return OK;
+
+	  number2Array("0121212120", weight);
+	  if (OK == algo01(10, weight, true, 10, account))
+		// variant 1
+		return OK;
+	  else {
+		// variant 2
+		number2Array("0100212120", weight);
+		if (OK == algo01(10, weight, true, 10, account))
+		  return OK;
+	  }
+	}
+
+	return ERROR;
+  }
   if ("76" == method) {
 	number2Array("0765432000", weight);
 	int tmp = algo03(11, weight, false, account, 0, 6);
@@ -398,9 +428,8 @@ algo01(int modulus, int weight[10], bool crossfoot,
   int result = algo02(modulus, weight, crossfoot, accountId);
 
   // compare the result with the real check number
-  if (accountId[checkIndex - 1] == result) {
+  if (accountId[checkIndex - 1] == result)
 	return AccountNumberCheck::OK;
-  }
   else 
 	return AccountNumberCheck::ERROR;
 }
