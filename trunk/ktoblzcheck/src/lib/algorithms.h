@@ -2,7 +2,7 @@
                              -------------------
     cvs         : $Id$
     begin       : Sat Aug 10 2002
-    copyright   : (C) 2002 by Fabian Kaiser
+    copyright   : (C) 2002, 2003 by Fabian Kaiser and Christian Stimming
     email       : fabian@openhbci.de
 
  ***************************************************************************
