@@ -1,1 +1,1 @@
-SUBDIRS = bankdata lib bin
+SUBDIRS = bankdata lib bin include

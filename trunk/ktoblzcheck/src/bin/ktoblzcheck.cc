@@ -27,6 +27,7 @@
 #include <config.h>
 #include <ktoblzcheck.hh>
 #include <iostream>
+#include <fstream>
 
 string resFile = "../bankdata/bankdata.txt";
 string method = "";
@@ -76,15 +77,24 @@ int main(int argc, char **argv) {
 	exit(1);
   }
 
+  // This is the location of the installed data file
+  string default_path = BANKDATA_PATH;
+  string default_filename = default_path + "/bankdata.txt";
+
+  // Can we open the specified data file? If not, use the installed data file
+  ifstream test(resFile.c_str());
+  if (test.fail())
+      resFile = default_filename;
+
   // skip the init-stuff, we don't need the banknames
   // if method is forced
   //  if ("" == method) {  
-#ifdef COMPILE_RESOURCE
-    AccountNumberCheck checker();
-#else
-    AccountNumberCheck checker(resFile);
-#endif
-    //  }
+  //#ifdef COMPILE_RESOURCE
+  //AccountNumberCheck checker();
+  //#else
+  AccountNumberCheck checker(resFile);
+  //#endif
+  //  }
 
   bankId = argv[nextArg++];
   accountId = argv[nextArg++];

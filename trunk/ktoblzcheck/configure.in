@@ -3,6 +3,7 @@ AM_INIT_AUTOMAKE(KtoBlzCheck, 0.1)
 AM_CONFIG_HEADER(config.h)
 
 
+AC_PREFIX_DEFAULT(/usr/local)
 AC_ISC_POSIX
 AC_PROG_CC
 AM_PROG_CC_STDC
@@ -13,23 +14,44 @@ AC_PROG_CXXCPP
 AM_PROG_LIBTOOL
 
 
-AC_MSG_CHECKING([whether the resource file should be compiled into the library])
-AC_ARG_WITH(compile-into-lib,
-        [  --with-compile-into-lib Should the resource file be compiled 
-                                   into the library instead of manualy 
-                                   reading it from your application],[
-        COMPILETOLIB="$withval"
-        COMPILETOLIB="$withval"
-        ])
+# check whether to compile bank data into library
 
-if test -z "$COMPILETOLIB"; then
-	AC_MSG_RESULT([no, manualy read it in your application])
-else
-	AC_DEFINE(COMPILE_RESOURCE)
-	define_compile_resource="#define COMPILE_RESOURCE"
-	AC_SUBST(define_compile_resource)
+# May 05, 2003: Disabled this because it simply is impossible for
+# compilers to handle the big list of banks.
+dnl AC_MSG_CHECKING([whether the resource file should be compiled into the library])
+dnl AC_ARG_WITH(compile-into-lib,
+dnl         [  --with-compile-into-lib Should the resource file be compiled 
+dnl                                    into the library instead of manualy 
+dnl                                    reading it from your application],[
+dnl         COMPILETOLIB="$withval"
+dnl         COMPILETOLIB="$withval"
+dnl         ])
 
-	AC_MSG_RESULT([yes])
-fi
+dnl if test -z "$COMPILETOLIB"; then
+dnl 	AC_MSG_RESULT([no, manually read it in your application])
+dnl else
+dnl 	AC_DEFINE(COMPILE_RESOURCE)
+dnl 	define_compile_resource="#define COMPILE_RESOURCE"
+dnl 	AC_SUBST(define_compile_resource)
 
-AC_OUTPUT(Makefile src/Makefile src/bankdata/Makefile src/bin/Makefile src/lib/Makefile)
+dnl 	AC_MSG_RESULT([yes])
+dnl fi
+
+# check path for installation of bank data
+AC_MSG_CHECKING(bankdata path)
+BANKDATA_PATH="`eval echo $datadir`/ktoblzcheck"
+AC_ARG_WITH(bankdata-path, [  --with-bankdata-path=DIR where to store the bank data],
+  [BANKDATA_PATH="$withval"])
+AC_SUBST(BANKDATA_PATH)
+AC_DEFINE_UNQUOTED(BANKDATA_PATH, "$BANKDATA_PATH", [Default path for bank data])
+AC_MSG_RESULT($BANKDATA_PATH)
+
+
+AC_OUTPUT( \
+  Makefile \
+  src/Makefile \
+  src/bankdata/Makefile \
+  src/bin/Makefile \
+  src/include/Makefile \
+  src/lib/Makefile \
+)

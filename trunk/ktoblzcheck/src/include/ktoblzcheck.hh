@@ -64,28 +64,30 @@ public:
    * <li><b>location</b> The town where the bank is located
    * </ul>
    */
-  struct Record {
+  class Record {
+    public:
 	unsigned long bankId;
 	string method;
 	string bankName;
-	string location;
+        string location;
+        Record();
+        Record(unsigned long id, const string& method, const string& name, 
+	       const string& loc);
   };
 
   /**
    * Initialize the bank-database<br>
-   * You must call it prior to any operation you want to perform<br>
+   * You must call it prior to any operation you want to perform.
    *
-   * If compiled with wrong "--with-compile-into-lib" option, this
-   * will output an error message and you won't have any bank data.
+   * The bank data is obtained from the location specified at compiler
+   * time. Default is $prefix/share/ktoblzcheck/bankdata.txt where
+   * default for $prefix is /usr/local.
    */
   AccountNumberCheck();
 
   /**
    * Initialize the bank-database specified by <code>filename</code>
    * @param filename The absolute location of the KtoBlzCheck-database
-   *
-   * If compiled with wrong "--with-compile-into-lib" option, this
-   * will output an error message and you won't have any bank data.
    */
   AccountNumberCheck(const string& filename);
 
@@ -99,6 +101,8 @@ public:
   /**
    * Check if <code>bankId</code> and <code>accountId</code> form a valid
    * combination.
+   * @param bankId The bank code (BLZ) of the bank to test
+   * @param accountId The account id to check
    * @param method If set, force the use of specified check-method
    */
   Result check(const string& bankId, const string& accountId, 
@@ -128,7 +132,14 @@ public:
 
 
 private:
+  /* The list of the bank data */
   list<Record*> data;
+
+  /** Deletes all records inside the bank data list */
+  void deleteList();
+  /** The function to actually read data from file into the list;
+      clears all existing data. */
+  void readFile(const string &filename);
 };
 
 typedef AccountNumberCheck::Result AccountNumberCheck_Result;
@@ -141,6 +152,7 @@ typedef struct AccountNumberCheck AccountNumberCheck;
 typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
 #endif /* __cplusplus */
 
+  /*@{*/
   /** Constructor for banklist compiled into library. Returns NULL if
       not available. */
   extern AccountNumberCheck *AccountNumberCheck_new();
@@ -184,19 +196,26 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
    * Currently not implemented.
    */
   extern void AccountNumberCheck_createIndex(AccountNumberCheck *a);
+  /*@}*/
 
-
+  /*@{*/
+  /** Destructor */
   extern void
   AccountNumberCheck_Record_delete(AccountNumberCheck_Record *a);
 
+  /** Returns the id of the bank (german BLZ) */
   extern unsigned long 
   AccountNumberCheck_Record_bankId(const AccountNumberCheck_Record *a);
 
+  /** Returns the  name of the bank as listed in the file of the 
+   * <b>Deutsche Bundesbank</b> */
   extern const char *
   AccountNumberCheck_Record_bankName(const AccountNumberCheck_Record *a);
 
+  /**  Returns the city where the bank is located */
   extern const char *
   AccountNumberCheck_Record_location(const AccountNumberCheck_Record *a);
+  /*@}*/
 
 #ifdef __cplusplus
 }

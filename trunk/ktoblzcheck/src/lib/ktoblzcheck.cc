@@ -50,43 +50,75 @@ AccountNumberCheck::Result
 			  int checkIndex, int accountId[10]);
 
 
-// a macro to ease the loading of inline-data
-#define ADD_RECORD(id, meth, name, loc) {\
-  newRecord = new Record; \
-  newRecord->bankId = id;\
-  newRecord->method = meth;\
-  newRecord->bankName = name;\
-  newRecord->location = loc;\
-  data.push_back(newRecord);\
+AccountNumberCheck::Record::Record()
+{
+}
+AccountNumberCheck::Record::Record(unsigned long id, 
+				   const string& meth, 
+				   const string& name, 
+				   const string& loc)
+  : bankId(id)
+    , method(meth)
+    , bankName(name)
+    , location(loc)
+{
 }
 
+// a macro to ease the loading of inline-data
+//#define ADD_RECORD(id, meth, name, loc) data.push_back(new Record(id, meth, name, loc));
+
 AccountNumberCheck::AccountNumberCheck() {
-#ifdef COMPILE_RESOURCE
+  //#ifdef COMPILE_RESOURCE
+  // data.cc is a long list of ADD_RECORD macros.
+  //#include "data.cc"
+  //#else /* COMPILE_RESOURCE */
+  // Disabled the above because the big list cannot be handled by the compiler anyway.
 
-  Record *newRecord = NULL;
-#include "data.cc"
+  string data_path = BANKDATA_PATH;
+  string filename = data_path + "/bankdata.txt";
+  readFile(filename);
 
-#else /* COMPILE_RESOURCE */
-  std::cerr << "AccountNumberCheck::AccountNumberCheck(): "
-    "KtoBlzCheck was not compiled with bank data compiled into. "
-    "Don't use this function, you won't have any bank data."
-	    << std::endl;
-#endif
+  //#endif
 }
 
 AccountNumberCheck::AccountNumberCheck(const string& filename) {
-#ifdef COMPILE_RESOURCE
-  std::cerr << "AccountNumberCheck::AccountNumberCheck(const string&): "
-    "KtoBlzCheck was compiled with bank data compiled into. "
-    "Don't use this function, you won't have any bank data."
-	    << std::endl;
-#else /* COMPILE_RESOURCE */
+  // I guess it is okay to simply accept this function call,
+  // even if COMPILE_RESOURCE was activated.
+  readFile(filename);
+}
+
+AccountNumberCheck::~AccountNumberCheck() 
+{
+  deleteList();
+}
+
+
+#define LINEBUFFER_SIZE 200
+void 
+AccountNumberCheck::readFile(const string &filename) 
+{
+  // First clear existing data 
+  if (data.size() > 0)
+    deleteList();
+
+  // Now read file
   ifstream file(filename.c_str());
-  char *buffer = new char[200];
+  // FIXME: Do a lot of error checking here.
+  if (file.fail())
+    {
+      std::cerr << "AccountNumberCheck::readFile: File " << filename 
+		<< " could not be opened. "
+	"AccountNumberCheck could not obtain bank data." << std::endl;
+      return;
+    }
+  
+  char *buffer = new char[LINEBUFFER_SIZE];
   string line;
   while (file) {
-	file.getline(buffer, 200);
-	line = (const char*) buffer;
+        // get line from file
+	file.getline(buffer, LINEBUFFER_SIZE);
+	// copy line to string variable
+	line.assign(buffer);
 	if (line.length() < 10)
 	  break;
 
@@ -113,13 +145,15 @@ AccountNumberCheck::AccountNumberCheck(const string& filename) {
 
 	data.push_back(newRecord);
   }
-#endif /* COMPILE_RESOURCE */
 }
 
-AccountNumberCheck::~AccountNumberCheck() {
+void 
+AccountNumberCheck::deleteList() 
+{
   for (list<Record*>::iterator iter = data.begin(); iter != data.end(); iter++)
-	delete (*iter);
+    delete (*iter);
 }
+
 
 unsigned int AccountNumberCheck::bankCount() const {
   return data.size();
