@@ -1,5 +1,8 @@
 2004-01-28  Christian Stimming <stimming@tuhh.de>
 
+	* README.WIN32: Windows DLLs can be built. This is described in
+	this file.
+
 	* configure.in, everywhere: Improve build system for compiling on
 	Windows/mingw.
 

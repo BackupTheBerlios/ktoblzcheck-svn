@@ -1,7 +1,12 @@
 # Input file to autoconf to produce a ./configure script
 
-AC_INIT(src/lib/ktoblzcheck.cc)
+AC_INIT(README)
+AC_CANONICAL_TARGET([])
 
+#############################################################
+#
+# Version numbering
+#
 VERSION_MAJOR="0"
 VERSION_MINOR="6"
 rpm_release="1"
@@ -16,6 +21,7 @@ AC_SUBST(VERSION_MINOR)
 AC_SUBST(rpm_release)
 # rpm_version is set by the VERSION in AM_INIT_AUTOMAKE
 
+#############################################################
 #
 # Check for programs
 #
@@ -33,6 +39,29 @@ AC_PROG_CXXCPP
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 
+#############################################################
+#
+# OS dependant settings
+#
+AQ_CHECK_OS
+
+case "$OS_TYPE" in
+    posix)
+        ktoblzcheck_libs='-L$(top_builddir)/src/lib -lktoblzcheck'
+	ktoblzcheck_includes='-I$(top_srcdir)/src/include'
+    	;;
+    windows)
+        AQ_WINDOZE
+        ktoblzcheck_libs='-L$(WIN_PATH_SYSTEM_MINGW) -L$(top_builddir)/src/lib -lktoblzcheck32'
+	ktoblzcheck_includes='-I$(top_srcdir)/src/include'
+    	;;
+esac
+AC_SUBST(ktoblzcheck_libs)
+AC_SUBST(ktoblzcheck_includes)
+
+AM_CONDITIONAL(IS_WINDOWS, [test "$OS_TYPE" = "windows"])
+
+#############################################################
 #
 # check path for installation of bank data
 #
@@ -46,37 +75,24 @@ fi
 AC_ARG_WITH(bankdata-path, 
   [  --with-bankdata-path=DIR where to store the bank data],
   [BANKDATA_PATH="$withval"])
+AC_MSG_RESULT($BANKDATA_PATH)
+
+# add some quotations, necessary for windows paths
+BANKDATA_PATH="`echo $BANKDATA_PATH | sed 's:\\\\:\\\\\\\\:g'`"
 
 AC_SUBST(BANKDATA_PATH)
 AC_DEFINE_UNQUOTED(BANKDATA_PATH, "$BANKDATA_PATH", [Default path for bank data])
-AC_MSG_RESULT($BANKDATA_PATH)
 
-#
-# OS dependant settings
-#
-AQ_CHECK_OS
-
-case "$OS_TYPE" in
-    posix)
-        ktoblzcheck_libs="-L${top_builddir}/src/lib -lktoblzcheck"
-	ktoblzcheck_includes="-I${top_srcdir}/src/include"
-    	;;
-    windows)
-        AQ_WINDOZE
-        ktoblzcheck_libs="-L${WIN_PATH_SYSTEM_MINGW} -L${top_builddir}/src/lib -lktoblzcheck32"
-	ktoblzcheck_includes="-I${top_srcdir}/src/include"
-    	;;
-esac
-AC_SUBST(ktoblzcheck_libs)
-AC_SUBST(ktoblzcheck_includes)
-
-AM_CONDITIONAL(IS_WINDOWS, [test "$OS_TYPE" = "windows"])
-
+#############################################################
 #
 # Add compile switches
 #
 ACX_COMPILE_WARN
 
+#############################################################
+#
+# Output
+#
 AC_OUTPUT( \
   Makefile \
   ktoblzcheck.spec \

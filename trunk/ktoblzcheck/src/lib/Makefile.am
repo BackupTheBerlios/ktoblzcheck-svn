@@ -50,3 +50,7 @@ ressource.o: ressource.rc
 
 exports.o: $(DLL_OBJS)
 	$(DLLTOOL) -e exports.o $(DLL_OBJS)
+
+if IS_WINDOWS
+all-local: dll
+endif

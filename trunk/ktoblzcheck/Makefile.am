@@ -8,6 +8,7 @@ SUBDIRS = src doc macros
 ACLOCAL_AMFLAGS = -I macros
 
 EXTRA_DIST = AUTHORS TODO README INSTALL \
+  README.WIN32 \
   ktoblzcheck.spec.in \
   ktoblzcheck.spec
 

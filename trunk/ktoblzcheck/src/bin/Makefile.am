@@ -8,7 +8,7 @@ INCLUDES = -I$(top_srcdir)/src/include
 ktoblzcheck_SOURCES = \
   ktoblzcheck.cc
 
-LIBS = -L$(top_builddir)/src/lib -lktoblzcheck
+LIBS = $(ktoblzcheck_libs)
 
 #ktoblzcheck_LDADD = 
 
