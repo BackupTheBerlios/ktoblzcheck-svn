@@ -54,3 +54,5 @@ exports.o: $(DLL_OBJS)
 if IS_WINDOWS
 all-local: dll
 endif
+
+CLEANFILES = $(DLL_NAME) $(DLL_EXP_LIB) $(DLL_EXP_DEF)
