@@ -76,12 +76,20 @@ int main(int argc, char **argv) {
 
   bankId = argv[nextArg++];
   accountId = argv[nextArg++];
+  bool found = true;
 
+  AccountNumberCheck::Record bankData;
+  try {
+	bankData = AccountNumberCheck::findBank(bankId);
+  } catch (int i) {
+	found = false;
+  }
   AccountNumberCheck::Result result = 
 	AccountNumberCheck::check(bankId, accountId);
 
   if (! justReturnCode) {
-	cout << "Bank-id " << bankId << " and Account-id " << accountId << endl;
+	cout << "Bank: " << (found?(bankData.bankName + " " + bankData.location):"<unknown>") << " (" << bankId << ")" << endl;
+	cout << "Account: " << accountId << endl;
 	string text;
 	if (result == AccountNumberCheck::OK)
 	  text = "OK";
