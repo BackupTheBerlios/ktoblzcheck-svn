@@ -1,3 +1,8 @@
+2003-06-09  Christian Stimming  <stimming@tuhh.de>
+
+	* ktoblzcheck.spec.in, Makefile.am: Add spec file and automated
+	rules for rpm building.
+
 2003-06-08  Christian Stimming  <stimming@tuhh.de>
 
 	* src/lib/accnum.cc (AccountNumberCheck_new): Fix stoopid bug that

@@ -1,5 +1,9 @@
+*.tar.gz
+Doxyfile
 Makefile
 Makefile.in
+aclocal.m4
+apidoc
 autom4te.cache
 config.cache
 config.h
@@ -7,10 +11,8 @@ config.h.in
 config.log
 config.status
 configure
+distribution
+html
+ktoblzcheck.spec
 libtool
 stamp-h1
-aclocal.m4
-Doxyfile
-apidoc
-html
-*.tar.gz

@@ -2,6 +2,10 @@ AC_INIT(src/lib/ktoblzcheck.cc)
 AM_INIT_AUTOMAKE(ktoblzcheck, 0.2)
 AM_CONFIG_HEADER(config.h)
 
+rpm_version="0.2"
+rpm_release="1"
+AC_SUBST(rpm_version)
+AC_SUBST(rpm_release)
 
 AC_PREFIX_DEFAULT(/usr/local)
 AC_ISC_POSIX
@@ -30,6 +34,7 @@ AC_MSG_RESULT($BANKDATA_PATH)
 
 AC_OUTPUT( \
   Makefile \
+  ktoblzcheck.spec \
   src/Makefile \
   src/bankdata/Makefile \
   src/bin/Makefile \
