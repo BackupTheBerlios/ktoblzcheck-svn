@@ -183,12 +183,13 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 {
   int account[10] = {9,1,3,0,0,0,0,2,0,1};
   int weight[10]  = {0,0,0,0,0,0,0,0,0,0};
-  int transform[6][10] = {0,0,0,0,0,0,0,0,0,0, // zero for non-transform [0][x]
-                          0,1,5,9,3,7,4,8,2,6, // first transform line   [1][x]
-                          0,1,7,6,9,8,3,2,5,4, // second transform line  [2][x]
-                          0,1,8,4,6,2,9,5,7,3, // third transform line   [3][x]
-                          0,1,2,3,4,5,6,7,8,9, // fourth transform line  [4][x]
-                          1,4,3,2,1,4,3,2,1,0}; // which transform line
+  int transform[6][10] = 
+      { {0,0,0,0,0,0,0,0,0,0}, // zero for non-transform [0][x]
+	{0,1,5,9,3,7,4,8,2,6}, // first transform line   [1][x]
+	{0,1,7,6,9,8,3,2,5,4}, // second transform line  [2][x]
+	{0,1,8,4,6,2,9,5,7,3}, // third transform line   [3][x]
+	{0,1,2,3,4,5,6,7,8,9}, // fourth transform line  [4][x]
+	{1,4,3,2,1,4,3,2,1,0} }; // which transform line
 
   string method = given_method;
 
@@ -202,7 +203,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
     }
   }
 
-//  method = "39";
+  //  method = "39";
   number2Array(accountId, account);
 
   if ("00" == method) {
@@ -294,7 +295,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	else
 	  return algo01(11, weight, false, 10, account);
   }
-// Added by Jens Gecius, validated with one test accountID
+  // Added by Jens Gecius, validated with one test accountID
   if ("17" == method) {
 	number2Array("0121212000", weight);
         int tmp = algo03a(weight, true, account, 1, 6);
@@ -366,7 +367,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
   if ("24" == method) {
 	return algo05(accountId); 
   }
-// Added by Jens Gecius, validated with one test accountID
+  // Added by Jens Gecius, validated with one test accountID
   if ("25" == method) {
         number2Array("987654320", weight);
         int result = algo03(11, weight, false, account, 1, 8);
@@ -379,14 +380,14 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
             return OK;
         return ERROR;
   }
-// Added by Jens Gecius, validated with three test accountIDs and one own accountID
+  // Added by Jens Gecius, validated with three test accountIDs and one own accountID
   if ("26" == method) {
         if (account[0] == 0 && account[1] == 0)
             number2Array(array2Number(account).substr(2) + "00", account);
         number2Array("2765432000", weight);
         return algo01(11, weight, false, 8, account);
   }
-// Added by Jens Gecius, validated with nine own accountIDs + testaccountID (six > 1000000000)
+  // Added by Jens Gecius, validated with nine own accountIDs + testaccountID (six > 1000000000)
   if ("27" == method) {
         if (atol(array2Number(account).c_str()) < 1000000000) {
             number2Array("2121212120", weight);
@@ -401,7 +402,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	number2Array("8765432000", weight);
 	return algo01(11, weight, false, 8, account);
   }
-// Added by Jens Gecius, validated with test accountID
+  // Added by Jens Gecius, validated with test accountID
   if ("29" == method) {
         return algo07(account, transform);
   }
@@ -409,7 +410,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	number2Array("2000012120", weight);
 	return algo01(10, weight, false, 10, account);
   }
-// Changed by Jens Gecius, validated with two test accountIDs
+  // Changed by Jens Gecius, validated with two test accountIDs
   if ("31" == method) {
 	number2Array("1234567890", weight);
 	int result = algo03(11, weight, false, account, 0, 9);
@@ -442,7 +443,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	number2Array("7905842000", weight); weight[2] = 10;
 	return algo01(11, weight, false, 8, account);
   }
-// Added by Jens Gecius, not validated due to missing bank using this algo
+  // Added by Jens Gecius, not validated due to missing bank using this algo
   if ("35" == method) {
         number2Array("0987654320",weight); weight[0] = 10;
         int result = algo03(11, weight, false, account, 0, 9);
@@ -485,7 +486,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	number2Array("0987654320", weight);
 	return algo01(11, weight, false, 10, account);
   }
-// Added by Jens Gecius, validated with two test accountIDs
+  // Added by Jens Gecius, validated with two test accountIDs
   if ("43" == method) {
         number2Array("9876543210", weight);
         return algo01(10, weight, false, 10, account);
@@ -536,7 +537,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	  return algo01(11, weight, false, 7, account);
 	}
   }
-// Added by Jens Gecius, validated with six test accountIDs
+  // Added by Jens Gecius, validated with six test accountIDs
   if ("51" == method) {
         number2Array("0007654320", weight);
         if (OK == algo01(11, weight, false, 10, account))
@@ -563,7 +564,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	// return UNKNOWN;
 	//	return algo04(bankId, accountId);
   }
-// Added by Jens Gecius, *NOT* validated
+  // Added by Jens Gecius, *NOT* validated
   if ("53" == method) {
         // Changed by Jens Gecius, only 10 digit accountIDs starting with "9",
         // *NOT* validated
@@ -585,7 +586,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	number2Array("8787654320", weight);
 	return algo01(11, weight, false, 10, account);
   }
-// Added by Jens Gecius, validated with two test accountIDs
+  // Added by Jens Gecius, validated with two test accountIDs
   if ("56" == method) {
         number2Array("4327654320", weight);
         int result = 11 - algo03(11, weight, false, account, 0, 9);
@@ -604,7 +605,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	number2Array("1212121210", weight);
 	return algo01(10, weight, true, 10, account);
   }
-// Added by Jens Gecius, validated with four test accountIDs
+  // Added by Jens Gecius, validated with four test accountIDs
   if ("58" == method) {
         if (0 == atoi(array2Number(account).substr(0,5).c_str()))
             return ERROR;
@@ -629,7 +630,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	  number2Array("2121212012", weight);
 	return algo01(10, weight, true, 8, account);
   }
-// Added by Jens Gecius, validated with one test accountID
+  // Added by Jens Gecius, validated with one test accountID
   if ("62" == method) {
         number2Array("0021212000", weight);
         return algo01(10, weight, true, 8, account);
@@ -659,7 +660,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	}
 	return algo01(10, weight, true, 8, account);
   }
-// Added by Jens Gecius, validated with five test accountIDs
+  // Added by Jens Gecius, validated with five test accountIDs
   if ("66" == method) {
         if (0 != account[0])
             return ERROR;
@@ -680,7 +681,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	return algo01(10, weight, true, 8, account);	
   }
   if ("68" == method) {
-// Modified by Jens Gecius, verified with three test accountIDs
+        // Modified by Jens Gecius, verified with three test accountIDs
 	// size=10
 	if (0 != account[0]) {
 	  // and digit 4 is not "9"? error
@@ -708,7 +709,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 
 	return ERROR;
   }
-// Added by Jens Gecius, validated with three test accountIDs
+  // Added by Jens Gecius, validated with three test accountIDs
   if ("69" == method) {
         long int lastnine = atol(array2Number(account).substr(1).c_str());
         if (account[0] == 9 && lastnine >= 300000000 && lastnine <= 399999999)
@@ -753,7 +754,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	number2Array("0001212120", weight);
 	return algo01(10, weight, true, 10, account);
   }
-// Added by Jens Gecius, validated with two test accountIDs
+  // Added by Jens Gecius, validated with two test accountIDs
   if ("73" == method) {
         if (account[2] == 9) {
             number2Array("0987654320", weight); weight[0] = 10;
@@ -762,7 +763,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
         number2Array("0001212120", weight);
         return algo01(10,weight, true, 10, account);
   }
-// Added by Jens Gecius, validated with one (double) test accountID
+  // Added by Jens Gecius, validated with one (double) test accountID
   if ("74" == method) {
         number2Array("2121212120", weight);
         if (OK == algo01(10, weight, true, 10, account))
@@ -804,7 +805,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	}
 	return ERROR;
   }
-// Added by Jens Gecius, validated with four test accountIDs
+  // Added by Jens Gecius, validated with four test accountIDs
   if ("77" == method) {
         number2Array("0000054321", weight);
         if (0 == algo03(11, weight, false, account, 0, 9))
@@ -1137,7 +1138,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	number2Array("0021212120", weight);
 	return algo01(10, weight, true, 10, account);
   }
-// Added by Jens Gecius, validated with six test accountIDs (4 positives, 2 negatives)
+  // Added by Jens Gecius, validated with six test accountIDs (4 positives, 2 negatives)
   if ("A2" == method) {
         number2Array("2121212120", weight);
         if (OK == algo01(10, weight, true, 10, account))
@@ -1145,7 +1146,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
         number2Array("4327654320", weight);
         return algo01(11, weight, false, 10, account);
   }
-// Added by Jens Gecius, NOT validated as no bank seems to use it...
+  // Added by Jens Gecius, NOT validated as no bank seems to use it...
   if ("A3" == method) {
         number2Array("2121212120", weight);
         if (OK == algo01(10, weight, true, 10, account))
@@ -1153,10 +1154,11 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
         number2Array("0987654320", weight); weight[0] = 10;
         return algo01(11, weight, false, 10, account);
   }
-// Added by Jens Gecius, validated with 16 test accountIDs (11 pos and 5 negs)
-// The test accountIDs chosen in the Bundesbank paper are stupid as some of the
-// false ones are actually correct as of other variants also relevant for them!!!
-// costed me another hour calculating all of them by hand! grr.
+  // Added by Jens Gecius, validated with 16 test accountIDs (11 pos
+  // and 5 negs). The test accountIDs chosen in the Bundesbank paper
+  // are stupid, as some of the false ones are actually correct as of
+  // other variants also relevant for them!!!  costed me another hour
+  // calculating all of them by hand! grr.
   if ("A4" == method) {
         number2Array("0000654320", weight);
         if (account[2] == 9 && account[3] == 9) { // variant 3
@@ -1188,7 +1190,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
             return OK;
         return ERROR;
   }
-// Added by Jens Gecius, NOT validated as no bank seems to use it...
+  // Added by Jens Gecius, NOT validated as no bank seems to use it...
   if ("A5" == method) {
         number2Array("2121212120", weight);
         if (OK == algo01(10, weight, true, 10, account))
