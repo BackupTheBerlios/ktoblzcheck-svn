@@ -90,6 +90,7 @@ int check_testkontos(const std::string& filename)
       std::cout << "Result of " << blz << ";" << kto << ";" << method << ";" << info << ": " << 
 	 checker.resultToString(res) << std::endl;
    }
+   fclose(istr);
    return 0;
 }
 
