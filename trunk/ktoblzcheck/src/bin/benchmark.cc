@@ -27,6 +27,7 @@
 #include <config.h>
 #include <ktoblzcheck.h>
 #include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
