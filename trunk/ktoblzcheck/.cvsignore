@@ -27,3 +27,5 @@ Debug
 *.ncb
 *.suo
 ktoblzcheck.iss
+*.rpm
+*.zip
