@@ -1,9 +1,8 @@
-# $Id$
 # (c) 2004 Martin Preuss<martin@libchipcard.de>
 # These functions retrieve some important paths
 
 
-AC_DEFUN(AQ_WINDOZE_GETPATH, [
+AC_DEFUN([AQ_WINDOZE_GETPATH], [
 dnl IN:
 dnl   - $1: type of path to get:
 dnl         - windows: windows path
@@ -15,6 +14,7 @@ dnl   - aq_windoze_path: path retrieved
 dnl
 
 rm -f conf.winpath
+
 AC_TRY_RUN([
 #include <windows.h>
 #include <string.h>
@@ -23,6 +23,7 @@ AC_TRY_RUN([
 
 int main (){
   char buffer[260];
+  const char *choice = "$1";
   FILE *f;
 
   buffer[0]=0;
@@ -35,13 +36,13 @@ int main (){
     strcpy(buffer, "$2");
   }
   else {
-    if (strcasecmp("$1", "windows")==0) {
+    if (strcasecmp(choice, "windows")==0) {
       GetWindowsDirectory(buffer, sizeof(buffer));
     }
-    else if (strcasecmp("$1", "system")==0) {
+    else if (strcasecmp(choice, "system")==0) {
       GetSystemDirectory(buffer, sizeof(buffer));
     }
-    else if (strcasecmp("$1", "home")==0) {
+    else if (strcasecmp(choice, "home")==0) {
       GetWindowsDirectory(buffer, sizeof(buffer));
     }
     else {
@@ -67,11 +68,12 @@ int main (){
  [AC_MSG_ERROR(Could not determine path for $1)],
  [aq_windoze_path="$2"; AC_MSG_RESULT([Crosscompiling, assuming $2])]
 )
+
 rm -f conf.winpath
 ])
 
 
-AC_DEFUN(AQ_WINDOZE_GETPATH_MINGW, [
+AC_DEFUN([AQ_WINDOZE_GETPATH_MINGW], [
 dnl IN:
 dnl   - $1: type of path to get:
 dnl         - windows: windows path
@@ -83,15 +85,18 @@ dnl   - aq_windoze_path: path retrieved
 dnl
 
 rm -f conf.winpath
+
 AC_TRY_RUN([
 #include <windows.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+/* #include <shlobj.h> */
 
 int main (){
   char buffer[260];
   char buffer2[260+2];
+  const char *choice = "$1";
   char *p;
   char *tp;
   FILE *f;
@@ -107,13 +112,13 @@ int main (){
     strcpy(buffer, "$2");
   }
   else {
-    if (strcasecmp("$1", "windows")==0) {
+    if (strcasecmp(choice, "windows")==0) {
       GetWindowsDirectory(buffer, sizeof(buffer));
     }
-    else if (strcasecmp("$1", "system")==0) {
+    else if (strcasecmp(choice, "system")==0) {
       GetSystemDirectory(buffer, sizeof(buffer));
     }
-    else if (strcasecmp("$1", "home")==0) {
+    else if (strcasecmp(choice, "home")==0) {
       GetWindowsDirectory(buffer, sizeof(buffer));
     }
     else {
@@ -171,11 +176,12 @@ int main (){
  [AC_MSG_ERROR(Could not determine path for $1)],
  [aq_windoze_path="$2"; AC_MSG_RESULT([Crosscompiling, assuming $2])]
 )
+
 rm -f conf.winpath
 ])
 
 
-AC_DEFUN(ACX_WINDOWS_PATHS,[
+AC_DEFUN([ACX_WINDOWS_PATHS],[
 dnl IN: 
 dnl   - AC_CANONICAL_SYSTEM muste be called before
 dnl OUT:
