@@ -28,20 +28,36 @@
 #include <ktoblzcheck.hh>
 #include <iostream>
 
+string resFile = "../bankdata/bankdata.txt";
+bool justReturnCode = false;
+int nextArg = 1;
+
+void checkArg(string argument) {
+  if (argument == "--returncode") {
+	nextArg++;
+	justReturnCode = true;
+  }
+  
+  if (argument.length() > string("--file=").length()) {
+	if (argument.substr(0, 7) == "--file=") {
+	  resFile = argument.substr(7);
+	  nextArg++;
+	}
+  }
+}
+
 int main(int argc, char **argv) {
-  bool justReturnCode = false;
-  int nextArg = 1;
   string bankId;
   string accountId;
 
-  if (argc > 1 && string(argv[1]) == "--returncode") {
-	justReturnCode = true;
-	nextArg++;
+  for (int i=1; i<argc; i++) {
+	checkArg(argv[i]);
   }
-	
-  if ((justReturnCode && argc < 4) || (!justReturnCode && argc < 3)) {
+
+  if (argc - nextArg < 2) {
 	cout << "Usage:" << endl;
-	cout << "./ktoblzcheck --returncode <bank-id> <account-id>" << endl;
+	cout << argv[0] << " [--returncode] [--file=datafile] <bank-id> <account-id>" << endl;
+	cout << "  --file=<resource-file>: The file that contains the bankinformation" << endl;
 	cout << "  --returncode: no output, result is returned via the returncode";
 	cout << endl;
 	cout << "                0: account/bank ok" << endl;
@@ -55,7 +71,7 @@ int main(int argc, char **argv) {
 #ifdef COMPILE_RESOURCE
   AccountNumberCheck::init();
 #else
-  AccountNumberCheck::init("../bankdata/bankdata.txt");
+  AccountNumberCheck::init(resFile);
 #endif
 
   bankId = argv[nextArg++];
