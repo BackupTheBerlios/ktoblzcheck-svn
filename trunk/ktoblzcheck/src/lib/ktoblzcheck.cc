@@ -36,11 +36,14 @@ void   crossFoot(int source[10], int dest[10], int start, int stop);
 int    add(int source[10], int start, int stop);
 string array2Number(int a[10]);
 void   number2Array(string number, int a[10]);
+long long number2LongLong(string number);
 int    algo02(int modulus, int weight[10], bool crossfoot, int accountId[10]);
 int    algo03(int modulus, int weight[10], bool crossfoot, int accountId[10], 
 			  int startAdd, int stopAdd);
 AccountNumberCheck::Result 
        algo04(string bankId, string accountId);
+AccountNumberCheck::Result 
+       algo05(string accountId);
 AccountNumberCheck::Result 
        algo01(int modulus, int weight[10], bool crossfoot, 
 			  int checkIndex, int accountId[10]);
@@ -186,8 +189,7 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
 	return OK;
   }
   if ("10" == method) {
-	number2Array("987654320", weight);
-	weight[0] = 10;
+	number2Array("987654320", weight); weight[0] = 10;
 	return algo01(11, weight, false, 10, account);
   }
   if ("11" == method) {
@@ -247,9 +249,76 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
 	number2Array("3987654320", weight);
 	return algo01(11, weight, false, 10, account);
   }
+  if ("21" == method) {
+	int res[10];
+	number2Array("2121212120", weight);
+
+	// mult the weight with the account id
+	multArray(account, weight, res);
+
+	// for 00,...: calc the crossfoot for each value
+	crossFoot(res, res, 0, 9);
+
+	// add all values
+	int result = add(res, 0, 9);
+
+	// crossfoot for the result until only one digit is left
+	while (result > 9) {
+	  int tmp = result % 10;
+	  result /= 10;
+	  result += tmp;
+	}	
+	result = 10 - result;
+
+	if (result == account[9])
+	  return OK;
+	else
+	  return ERROR;
+  }
+  if ("22" == method) {
+	number2Array("3131313130", weight);
+	return algo01(10, weight, false, 10, account);
+  }
+  if ("23" == method) {
+	number2Array("7654320", weight);
+	int tmp = algo03(11, weight, false, account, 0, 9);
+	tmp = tmp % 11;
+	if (0 == tmp && 0 == account[6])
+	  return OK;
+	if (1 == tmp && account[5] == account[6])
+	  return OK;
+	if (1 < tmp && account[6] == (11 - tmp))
+	  return OK;
+	
+	return ERROR;
+  }
+  if ("24" == method) {
+	return algo05(accountId);
+  }
   if ("28" == method) {
 	number2Array("8765432000", weight);
 	return algo01(11, weight, false, 8, account);
+  }
+  if ("30" == method) {
+	number2Array("2000012120", weight);
+	return algo01(10, weight, false, 10, account);
+  }
+  if ("31" == method) {
+	number2Array("1234567890", weight);
+	int result = algo03(11, weight, false, account, 0, 9);
+
+	// no rest after division by modulus (in algo03)?
+	// then the the result will be 0!
+	if (0 == result)
+	  result = 11;
+
+	if (10 == result)
+	  return ERROR;
+
+	if (result == account[9])
+	  return OK;
+	else
+	  return ERROR;
   }
   if ("32" == method) {
 	number2Array("0007654320", weight);
@@ -263,6 +332,14 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
 	number2Array("7905842000", weight); weight[2] = 10;
 	return algo01(11, weight, false, 8, account);
   }
+  if ("36" == method) {
+	number2Array("0000058420", weight);
+	return algo01(11, weight, false, 10, account);
+  }
+  if ("37" == method) {
+	number2Array("0000058420", weight); weight[4] = 10;
+	return algo01(11, weight, false, 10, account);
+  }
   if ("38" == method) {
 	number2Array("0009058420", weight);
 	weight[4] = 10;
@@ -275,6 +352,31 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
   if ("40" == method) {
 	number2Array("6379058420", weight); weight[4] = 10;
 	return algo01(11, weight, false, 10, account);
+  }
+  if ("41" == method) {
+	number2Array("2121212120", weight);
+	if (9 == account[3]) {
+	  weight[0] = 0; 
+	  weight[1] = 0;
+	  weight[2] = 0;
+	}
+	return algo01(10, weight, true, 10, account);	
+  }
+  if ("42" == method) {
+	number2Array("0987654320", weight);
+	return algo01(11, weight, false, 10, account);
+  }
+  if ("44" == method) {
+	number2Array("0000058420", weight); weight[4] = 10;
+	return algo01(11, weight, false, 10, account);
+  }
+  if ("45" == method) {
+	// some numbers can not be checked
+	if (0 == account[0] || 1 == account[4])
+	  return OK;
+
+	number2Array("2121212120", weight);
+	return algo01(10, weight, true, 10, account);	
   }
   if ("46" == method) {
 	number2Array("0065432000", weight);
@@ -323,6 +425,10 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
 	number2Array("0027654320", weight);
 	return algo01(11, weight, false, 10, account);
   }
+  if ("55" == method) {
+	number2Array("8787654320", weight);
+	return algo01(11, weight, false, 10, account);
+  }
   if ("57" == method) {	
 	// many numbers can not be checked:
 	int firstTwo = atoi(array2Number(account).substr(0, 2).c_str());
@@ -363,6 +469,10 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
 	  return algo01(10, weight, true, 8, account);
 	}
   }
+  if ("64" == method) {
+	number2Array("9058420000", weight); weight[1] = 10;
+	return algo01(11, weight, false, 7, account);
+  }
   if ("67" == method) {
 	number2Array("2121212000", weight);
 	return algo01(10, weight, true, 7, account);	
@@ -374,6 +484,10 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
 	  weight[9] = 2;
 	}
 	return algo01(10, weight, true, 8, account);
+  }
+  if ("67" == method) {
+	number2Array("2121212000", weight);
+	return algo01(10, weight, true, 8, account);	
   }
   if ("68" == method) {
 	// size=10
@@ -412,6 +526,41 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
 	  number2Array("0007654320", weight);
 	return algo01(11, weight, false, 10, account);
   }
+  if ("71" == method) {
+	number2Array("0654321000", weight);	
+	int tmp = algo03(11, weight, false, account, 0, 9);
+
+	// no rest after division by modulus (in algo03)?
+	if (0 == tmp)
+	  // this way we get 1 as final result
+	  tmp = 10;
+
+	// and calc the check number
+	tmp = (11 - tmp) % 10;
+	if (tmp == account[9])
+	  return OK;
+	else
+	  return ERROR;
+  }
+  if ("72" == method) {
+	number2Array("0001212120", weight);
+	return algo01(10, weight, true, 10, account);
+  }
+  if ("75" == method) {
+	int checkIndex;
+	if ("000" == array2Number(account).substr(0, 3)) {
+	  checkIndex = 9;
+	  number2Array("0000212120", weight);
+	} else if ("09" == array2Number(account).substr(0, 2)) {
+	  checkIndex = 7;
+	  number2Array("0021212000", weight);
+	} else {
+	  checkIndex = 6;
+	  number2Array("0212120000", weight);
+	}
+
+	return algo01(10, weight, true, checkIndex + 1, account);
+  }
   if ("76" == method) {
 	number2Array("0765432000", weight);
 	int tmp = algo03(11, weight, false, account, 0, 6);
@@ -427,6 +576,27 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
 	}
 	return ERROR;
   }
+  if ("78" == method) {
+	if (0 == account[0] && 0 == account[1])
+	  return OK;
+	
+	number2Array("2121212120", weight);
+	return algo01(10, weight, true, 10, account);	
+  }
+  if ("79" == method) {
+	if (0 == account[0])
+	  return ERROR;
+	int checkIndex = 9;
+
+	if (2 < account[0] && 9 > account[0])
+	  number2Array("2121212120", weight);
+	else {
+	  checkIndex--;
+	  number2Array("1212121200", weight);
+	}
+
+	return algo01(10, weight, true, checkIndex + 1, account);
+  }
   if ("81" == method) {
 	number2Array("0987654320", weight); weight[0] = 10;
 	if (9 != account[2] && 9 != account[3]) {
@@ -434,10 +604,63 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
 	}
 	return algo01(11, weight, false, 10, account);
   }
+  if ("82" == method) {
+	if (9 == account[2] && 9 == account[3]) {
+	  number2Array("987654320", weight); weight[0] = 10;
+	  return algo01(11, weight, false, 10, account);
+	} else {
+	  number2Array("0000654320", weight);
+	  return algo01(11, weight, false, 10, account);
+	}
+  }
   if ("88" == method) {
 	number2Array("0007654320", weight);
 	if (9 == account[2])
 	  number2Array("0087654320", weight);
+	return algo01(11, weight, false, 10, account);
+  }
+  if ("89" == method) {
+	// some numbers can not be checked
+	string acc10 = array2Number(account);
+	if (acc10 < "0000999999" || 0 != account[0])
+	  return OK;
+
+	// those with length 7
+	if (0 == account[0] && 0 == account[1] && 0 == account[2]) {
+	  number2Array("0007654320", weight);
+	  return algo01(11, weight, true, 10, account);
+	}
+
+	// length 8 or 9? check with method 10
+	number2Array("987654320", weight); weight[0] = 10;
+	return algo01(11, weight, false, 10, account);
+  }
+  if ("90" == method) {
+	// variant a
+	number2Array("0007654320", weight);	
+	if (OK == algo01(11, weight, false, 10, account))
+	  return OK;
+
+	// variant b
+	number2Array("0000654320", weight);
+	if (OK == algo01(11, weight, false, 10, account))
+	  return OK;
+	
+	// variant c
+	if (OK == algo01(07, weight, false, 10, account))
+	  return OK;
+	
+	// variant d
+	if (OK == algo01(9, weight, false, 10, account))
+	  return OK;
+
+	// variant e
+	number2Array("0000212120", weight);
+	if (OK == algo01(10, weight, false, 10, account))
+	  return OK;
+
+	// non-customer-accounts
+	number2Array("0087654320", weight);
 	return algo01(11, weight, false, 10, account);
   }
   if ("91" == method) {
@@ -460,6 +683,19 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
 	number2Array("0001731730", weight);
 	return algo01(10, weight, false, 10, account);
   }
+  if("93" == method) {
+	int checkIndex = 5;
+	number2Array("6543200000", weight);
+	if ("0000" == array2Number(account).substr(0, 4)) {
+	  checkIndex = 9;
+	  number2Array("0000654320", weight);	  
+	}
+
+	if (OK == algo01(11, weight, false, checkIndex + 1, account))
+	  return OK;
+	else
+	  return algo01(07, weight, false, checkIndex + 1, account);
+  }
   if ("94" == method) {
 	number2Array("1212121210", weight);
 	return algo01(10, weight, true, 10, account);
@@ -477,12 +713,57 @@ AccountNumberCheck::check(string bankId, string accountId, string method="") {
 
 	return algo01(11, weight, false, 10, account);
   }
+  if ("96" == method) {
+	number2Array("1987654320", weight);
+	if (ERROR == algo01(11, weight, false, 10, account)) {
+	  // check with 00
+	  number2Array("2121212120", weight);
+	  if (ERROR == algo01(10, weight, true, 10, account)) {
+		string acc10 = array2Number(account);
+		if (acc10 < "0001300000" || acc10 > "0099399999")
+		  return ERROR;
+	  }
+	}
+	return OK;
+  }
+  if ("97" == method) {
+	string tmp = array2Number(account).substr(0, 9);
+	long long valueX = number2LongLong(tmp);
+	valueX -= (valueX / 11) * 11;
+	valueX = valueX % 10;
+	
+	if (valueX == account[9])
+	  return OK;
+	else 
+	  return ERROR;
+  }
+  if ("98" == method) {
+	number2Array("0037137130", weight);
+	if (OK == algo01(10, weight, false, 10, account))
+	  return OK;
+
+	// on error run method 32
+	number2Array("0007654320", weight);
+	return algo01(11, weight, false, 10, account);
+  }
   if ("99" == method) {
 	if ("0396000000" <= array2Number(account) && 
 		array2Number(account) <= "0499999999")
 	  return OK;
 	number2Array("4327654320", weight);
 	return algo01(11, weight, false, 10, account);
+  }
+  if ("A0" == method) {
+	// some numbers are not checked
+	if ("0000000" == array2Number(account).substr(0, 7))
+	  return OK;
+
+	number2Array("0000058420", weight); weight[4] = 0;
+	return algo01(11, weight, false, 10, account);
+  }
+  if ("A1" == method) {
+	number2Array("0001212120", weight);
+	return algo01(10, weight, true, 10, account);
   }
   return UNKNOWN;
 }
@@ -529,10 +810,57 @@ int algo03(int modulus, int weight[10], bool crossfoot, int accountId[10],
 
   // add all values
   int result = add(res, startAdd, stopAdd);
-  //  cout << "add: " << result << endl;
+  cout << "add: " << result << endl;
   result = result % modulus;
 
   return result;
+}
+
+AccountNumberCheck::Result
+algo05(string accountId) {
+  int account[10];
+  int weight[10];
+  
+  number2Array(accountId, account);
+
+	if (2 < account[0] && 7 > account[0])
+	  account[0] = 0;
+	if (9 == account[0]) {
+	  account[0] = 0;
+	  account[1] = 0;
+	  account[2] = 0;
+	  if (0 == account[3])
+		return AccountNumberCheck::ERROR;
+	}
+	
+	// check how many leading "0", shift weight to right
+	string weightString = "";
+	for (int i=0; i<10; i++) {
+	  if (0 == account[i])
+		weightString += "0";
+	  else
+		break;
+	}
+	     	
+	weightString += "123123123";
+	weightString = weightString.substr(0, 9) + "0";
+	number2Array(weightString, weight);
+
+	// now mult the account with the weight
+	int res[10];	
+	multArray(account, weight, res);
+
+	// add the weight
+	for (int i=0; i<10; i++)
+	  res[i] = (res[i] + weight[i]) % 11;
+
+	// sum the stuff
+	int result = add(res, 0, 9) % 10;
+	
+	if (result == account[9])
+	  return AccountNumberCheck::OK;
+	else
+	  return AccountNumberCheck::ERROR;
 }
 
 AccountNumberCheck::Result 
@@ -685,4 +1013,15 @@ void number2Array(string number, int a[10]) {
   for (int i=9; i>-1; i--) {
 	a[i] = number[i] - 48;
   }
+}
+
+long long number2LongLong(string number) {
+  long long result = 0;
+
+  for (int i=0; i<number.length(); i++) {
+	result *= 10;
+	result += number[i] - 48;
+  }
+
+  return result;
 }
