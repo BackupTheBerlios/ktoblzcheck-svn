@@ -37,6 +37,9 @@ int    add(int source[10], int start, int stop);
 string array2Number(int a[10]);
 void   number2Array(string number, int a[10]);
 int    algo02(int modulus, int weight[10], bool crossfoot, int accountId[10]);
+int    algo03(int modulus, int weight[10], bool crossfoot, int accountId[10], 
+			  int startAdd, int stopAdd);
+
 AccountNumberCheck::Result 
        algo01(int modulus, int weight[10], bool crossfoot, 
 			  int checkIndex, int accountId[10]);
@@ -306,6 +309,35 @@ AccountNumberCheck::check(string bankId, string accountId) {
 	else
 	  return ERROR;
   }
+  if ("63" == method) {
+	number2Array("0121212000", weight);
+	int tmp = (10 - algo03(10, weight, true, account, 1, 6)) % 10;
+	if (tmp == account[7])
+	  return OK;
+	else {
+	  // shift left, add 00 as subaccount id and try again
+	  number2Array(array2Number(account).substr(2) + "00", account);
+	  tmp = (10 - algo03(10, weight, true, account, 1, 6)) % 10;
+	  if (tmp == account[7])
+		return OK;
+	}
+	return ERROR;
+  }
+  if ("76" == method) {
+	number2Array("0765432000", weight);
+	int tmp = algo03(11, weight, false, account, 0, 6);
+
+	if (tmp == account[7])
+	  return OK;
+	else {
+	  // shift left, add 00 as subaccount id and try again
+	  number2Array(array2Number(account).substr(2) + "00", account);
+	  tmp = algo03(11, weight, false, account, 0, 6);
+	  if (tmp == account[7])
+		return OK;
+	}
+	return ERROR;
+  }
   if ("88" == method) {
 	number2Array("0007654321", weight);
 	if (9 == account[2])
@@ -320,6 +352,19 @@ AccountNumberCheck::check(string bankId, string accountId) {
 }
 
 int algo02(int modulus, int weight[10], bool crossfoot, int accountId[10]) {
+  int result = algo03(modulus, weight, crossfoot, accountId, 0, 8);
+
+  // and calc the check number
+  result = modulus - result;
+
+  if (result == modulus)
+	result = 0;
+
+  return result;
+}
+
+int algo03(int modulus, int weight[10], bool crossfoot, int accountId[10], 
+		   int startAdd, int stopAdd) {
   int res[10];
   // mult the weight with the account id
   multArray(accountId, weight, res);
@@ -329,13 +374,8 @@ int algo02(int modulus, int weight[10], bool crossfoot, int accountId[10]) {
 	crossFoot(res, res, 0, 9);
 
   // add all values
-  int result = add(res, 0, 8);
-  cout << "algo2: res1: " << result << endl;
-  // and calc the check number
-  result = modulus - (result % modulus);
-  cout << "algo2: res2: " << result << endl;
-  if (result == modulus)
-	result = 0;
+  int result = add(res, startAdd, stopAdd);
+  result = result % modulus;
 
   return result;
 }
@@ -348,7 +388,6 @@ algo01(int modulus, int weight[10], bool crossfoot,
 
   // compare the result with the real check number
   if (accountId[checkIndex - 1] == result) {
-	cout << "ok" << endl;
 	return AccountNumberCheck::OK;
   }
   else 
@@ -383,10 +422,8 @@ string array2Number(int a[10]) {
   string result;
   char c;
 
-  for (int i=9; i>-1; i--) {
+  for (int i=0; i<10; i++) {
 	c = 48 + a[i];
-	//	result *= 10;
-	//	result += a[i];
 	result += c;
   }
 
