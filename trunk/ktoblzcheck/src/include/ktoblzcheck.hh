@@ -71,8 +71,10 @@ public:
   /**
    * Check if <code>bankId</code> and <code>accountId</code> form a valid
    * combination.
+   * @param method If set, force the use of specified check-method
    */
-  static const Result check(string bankId, string accountId); 
+  static const Result check(string bankId, string accountId, 
+							string method=""); 
 
   /**
    * Find the info-record for a bank specified by <code>bankId</code>

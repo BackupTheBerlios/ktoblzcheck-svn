@@ -29,6 +29,7 @@
 #include <iostream>
 
 string resFile = "../bankdata/bankdata.txt";
+string method = "";
 bool justReturnCode = false;
 int nextArg = 1;
 
@@ -41,6 +42,13 @@ void checkArg(string argument) {
   if (argument.length() > string("--file=").length()) {
 	if (argument.substr(0, 7) == "--file=") {
 	  resFile = argument.substr(7);
+	  nextArg++;
+	}
+  }
+
+  if (argument.length() > string("--method=").length()) {
+	if (argument.substr(0, string("--method=").length()) == "--method=") {
+	  method = argument.substr(string("--method=").length());
 	  nextArg++;
 	}
   }
@@ -67,12 +75,16 @@ int main(int argc, char **argv) {
 
 	exit(1);
   }
-  
+
+  // skip the init-stuff, we don't need the banknames
+  // if method is forced
+  if ("" == method) {  
 #ifdef COMPILE_RESOURCE
-  AccountNumberCheck::init();
+	AccountNumberCheck::init();
 #else
-  AccountNumberCheck::init(resFile);
+	AccountNumberCheck::init(resFile);
 #endif
+  }
 
   bankId = argv[nextArg++];
   accountId = argv[nextArg++];
@@ -84,8 +96,9 @@ int main(int argc, char **argv) {
   } catch (int i) {
 	found = false;
   }
-  AccountNumberCheck::Result result = 
-	AccountNumberCheck::check(bankId, accountId);
+
+  AccountNumberCheck::Result result =
+	AccountNumberCheck::check(bankId, accountId, method);
 
   if (! justReturnCode) {
 	cout << "Bank: " << (found?(bankData.bankName + " " + bankData.location):"<unknown>") << " (" << bankId << ")" << endl;
