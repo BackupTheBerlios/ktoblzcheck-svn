@@ -1,9 +1,3 @@
 This file contains any messages produced by compilers while
 running configure, to aid debugging if configure makes a mistake.
 
-configure:730: checking for a BSD compatible install
-configure:783: checking whether build environment is sane
-configure:840: checking whether make sets ${MAKE}
-configure:886: checking for working aclocal
-configure:899: checking for working autoconf
-configure:912: checking for working automake
