@@ -1,3 +1,8 @@
+2004-08-23  Christian Stimming  <stimming@tuhh.de>
+
+	* src/lib/algorithms.cc: Another fix for algo 53/54 by Erik Kerger
+	<erik@kedo.com>.
+
 2004-08-14  Christian Stimming  <stimming@tuhh.de>
 
 	* src/bankdata/bankdata.txt: Updated, now valid from 2004-09-06

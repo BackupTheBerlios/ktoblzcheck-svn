@@ -261,6 +261,9 @@ algo06(string accountId) {
 AccountNumberCheck::Result 
 algo04(string bankId, string accountId) {
 
+  while (8 < accountId.length() && '0' == accountId[0])
+    accountId = accountId.substr(1);
+
   if (8 != accountId.length())
 	return AccountNumberCheck::ERROR;
   if (5 > bankId.length())
@@ -332,6 +335,9 @@ algo04(string bankId, string accountId) {
 // a little different eser12 system.
 AccountNumberCheck::Result 
 algo04a(string bankId, string accountId) {
+
+  while (9 < accountId.length() && '0' == accountId[0])
+    accountId = accountId.substr(1);
 
   if (9 != accountId.length())
 	return AccountNumberCheck::ERROR;
