@@ -1,3 +1,12 @@
+2004-07-20  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in: Released version 1.0
+
+	* README: Updated new URL of bankdata source
+	
+	* src/bankdata/bankdata.txt: Updated, now valid from 2004-06-07
+	onwards.
+
 2004-05-04  Christian Stimming  <stimming@tuhh.de>
 
 	* ktoblzcheck.vcproj: Add project file for Microsoft Visual Studio

@@ -6,9 +6,28 @@ the file INSTALL.WIN32.
 Compiling Ktoblzcheck on Windows
 =================================
 
-First: Compiling under Windows is not easy for the average Windows user.
-So please, if you aren't used to *nix (correct, I don't mean Windows here),
-then you probably shouldn't try to.
+There are two ways to compile ktoblzcheck: Either you are using
+Microsoft Visual Studio C++ compiler (MSVC), or you are using the
+MinGW32 environment. 
+
+MSVC
+------
+
+For the MSVC, a project file ktoblzcheck.vcproj is provided. 
+
+The only necessary adjustment probably is the preprocessor definition
+of the BANKDATA_PATH variable, since this is where the file
+src/bankdata/bankdata.txt needs to be copied to. 
+
+Apart from that, the project file should compile everything and you
+can safely ignore the rest of this file.
+
+MinGW32
+-------
+
+First: Compiling under Windows with mingw32 is not easy for the
+average Windows user.  So please, if you aren't used to *nix (correct,
+I don't mean Windows here), then you probably shouldn't try to.
 
 However, developers who worked with Linux/*BSD before will find the compiler
 environment chosen very familiar.

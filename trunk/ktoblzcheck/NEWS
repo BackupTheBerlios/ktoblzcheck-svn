@@ -1,3 +1,11 @@
+July 20, 2004: Released ktoblzcheck-1.0
+
+Mit dem Versionssprung in diesem Release wird auch offiziell bekannt
+gegeben, daß der Quellcode schon lange sehr stabil läuft. Abgesehen
+von den aktualisierten Bankdaten gab es keine inhaltlichen
+Änderungen. Neu ist allerdings trotzdem, daß auch ein project file für
+den Microsoft Visual Studio C++ compiler mitgeliefert wird.
+
 November 19, 2003: Released ktoblzcheck-0.5
 
 Die allerletzten fehlenden Algorithmen für die Nummernprüfung sind nun

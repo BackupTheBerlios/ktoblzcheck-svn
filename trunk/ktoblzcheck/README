@@ -45,7 +45,9 @@ Bank List Format
 
 The file with all bank codes (BLZ Datei) can regularly be retrieved
 from bundesbank.de, more specifically from
-http://192.109.2.70/internet/bankleit.nsf/ludownloads/Download+Bankleitzahlen?OpenDocument
+
+http://www.bundesbank.de/zahlungsverkehr/zahlungsverkehr_bankleitzahlen_download.php
+
 The bankdata.txt file contains only four tab-delimited columns. The
 sed script src/bankdata/bundesbank.sed (provided by Daniel Gloeckner
 <daniel-gl@gmx.net>) will automatically convert the Bundesbank's ascii

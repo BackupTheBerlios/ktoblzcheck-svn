@@ -78,6 +78,7 @@ make DESTDIR=$RPM_BUILD_ROOT install
 %{_bindir}/ktoblzcheck
 %{_datadir}/ktoblzcheck/bankdata.txt
 %{_includedir}/ktoblzcheck.h
+%{_includedir}/iban.h
 %{_mandir}/man1/ktoblzcheck.1*
 
 %changelog
