@@ -4,6 +4,8 @@
 # as available from the Deutsche Bundesbank into the bankdata.txt file
 # for the ktoblzcheck library.
 #
+#   Usage: ./bundesbank.sed < blzAABB.txt > bankdata.txt
+#
 # By Daniel Gloeckner <daniel-gl@gmx.net>
 #
 /^.\{8\}1/ {

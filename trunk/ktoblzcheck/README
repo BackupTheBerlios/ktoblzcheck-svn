@@ -37,16 +37,6 @@ And then give it a try:
 FIXME: need some example BLZ/account ids here.
 
 
-Compilation Options
--------------------
-
-Note: If you have the GNU C++ extension __gnu_cxx::hash_map available
-(in include <ext/hash_map>), then the lookup of specific banks in the
-list will be performed in a hash map, i.e. *very* fast! If hash_map is
-not available, std::map will be used, which is still almost as fast
-(see below).
-
-
 Bank List Format
 ----------------
 
@@ -68,9 +58,6 @@ Authors
 
 Jan 2003, Fabian Kaiser (fabian@openhbci.de)
 May 2003, Christian Stimming <stimming@tuhh.de>
-
-PS: "./configure --with-compile-into-lib" was disabled because the
-compiler would need way too much memory to actually compile that.
 
 
 PS: Benchmark Notes
@@ -96,5 +83,8 @@ __gnu_cxx::hash_map. Results:
 __gnu_cxx::hash_hash<...>:                   0.89s
 std::map<...>:                               0.91s
 
-Wow. Therefore the default fallback data type, if <ext/hash_map> is
-unavailable, is changed now to std::map<>. 
+Well, it seems that stdc++'s implementation of std::map probably uses
+a hash map internally. That, and together with the thought that a
+header file dependency on a configuration variable is probably a bad
+idea, lead to the decision to throw out <ext/hash_map> completely and
+only use std::map<>.
