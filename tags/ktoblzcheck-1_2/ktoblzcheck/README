@@ -1,0 +1,115 @@
+KtoBLZCheck is a library to check account numbers and bank codes of
+German banks.
+
+Introduction
+------------
+
+Both a library for other programs as well as a short command-line tool
+is available. It is possible to check pairs of account numbers and
+bank codes (BLZ) of German banks, and to map bank codes (BLZ) to the
+clear-text name and location of the bank.
+
+For compile instructions concerning MS Windows, please see the file
+README.WIN32.
+
+
+Compile & Install
+-----------------
+
+How to compile:
+
+If you got this package from CVS, then type "./autogen.sh" to create
+the necessary build tools. Then:
+
+Type 
+
+  ./configure
+
+to calculate some system dependencies. See "./configure --help" for
+possible options. Usually you might want to write something like
+"./configure --prefix=/your/prefix
+--with-bankdata-path=/your/favorite/directory", which installs
+KtoBLZCheck under the given prefix and its bank data file at the
+specified path. The default bank data path is
+$prefix/share/ktoblzcheck where the default for $prefix is
+/usr/local. 
+
+Now type 
+
+  make
+  make install
+
+and you're done.
+
+Running
+-------
+
+And then give it a try:
+
+"ktoblzcheck <your-bank-id> <your-account-id>"
+
+FIXME: need some example BLZ/account ids here.
+
+
+Bank List Format
+----------------
+
+A file with all bank codes (BLZ Datei) can regularly be retrieved from
+the Deutsche Bundesbank at bundesbank.de, more specifically from
+
+http://www.bundesbank.de/zahlungsverkehr/zahlungsverkehr_bankleitzahlen_download.php
+
+The bankdata.txt file used by ktoblzcheck contains less information
+than the file provided by the Bundesbank. Namely, it contains only
+four tab-delimited columns and only those lines that refer to the main
+institutes instead of all branches. The provided sed script
+src/bankdata/bundesbank.sed (provided by Daniel Gloeckner
+<daniel-gl@gmx.net>) will automatically convert the Bundesbank's ascii
+file into the required ktoblzcheck format.
+
+If you got the Bundesbank BLZ file in excel format, the four columns
+for bankdata.txt are A, O, G, J, in that order, and it has only those
+lines which have a '1' in column B.
+
+
+Authors
+-------
+
+The original author was Fabian Kaiser <fabian@openhbci.de>. The
+current maintainer is Christian Stimming <stimming@tuhh.de>.  
+
+For contacting the authors, please write to the mailing list
+<openhbci-general@sourceforge.net>. This list is subscriber-only which
+means you need to subscribe if you want to post to the
+list. Subscription information can be found on
+http://lists.sourceforge.net/lists/listinfo/openhbci-general
+
+
+PS: Benchmark Notes
+-------------------
+
+Some benchmark notes:
+
+Each time tried 10000 BLZs with random first 2 digits so that 66% of
+the banks are found, see src/bin/benchmark.cc. All results in seconds
+on my 1.3 GHz Duron, compiled with no optimization. Time check simply
+by calling "time ./benchmark 10000".
+
+With list<Record*> and manual finding with for(...) loop:  5.3s
+With list<Record*> and find_if() from <algorithm>:         4.2s
+With vector<Record*> and find_if():                        1.6s 
+(the above at a later test: 3.5s)
+With hash_map<...> and hash_map::find:                     0.2s (!!)
+
+Gee. This is kind of obvious :-)
+
+Actually, some time later I tested 100000 BLZs between std::map<> and 
+__gnu_cxx::hash_map. Results:
+__gnu_cxx::hash_hash<...>:                   0.89s
+std::map<...>:                               0.91s
+
+Well, it seems that stdc++'s implementation of std::map probably uses
+a hash map internally. That, and together with the thought that a
+header file dependency on a configuration variable is probably a bad
+idea, lead to the decision to throw out <ext/hash_map> completely and
+only use std::map<>.
