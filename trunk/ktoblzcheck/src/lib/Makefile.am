@@ -8,7 +8,7 @@ noinst_HEADERS = \
 
 lib_LTLIBRARIES = libktoblzcheck.la
 
-libktoblzcheck_la_SOURCES= \
+libktoblzcheck_la_SOURCES = \
   ktoblzcheck.cc \
   algorithms.cc \
   accnum.cc \
@@ -17,24 +17,24 @@ libktoblzcheck_la_SOURCES= \
 libktoblzcheck_la_LDFLAGS = -version-info 1:3:0
 libktoblzcheck_la_LIBADD = -lstdc++
 
-#
-# dll stuff
-#
+############################################################
+# DLL settings: 
+# Only these need to be modified
 
-DLLTOOL = dlltool
-DLLWRAP = dllwrap
-WINDRES = windres
+DLL_BASENAME = ktoblzcheck32
 
-DLL_NAME = ktoblzcheck32.dll
-DLL_EXP_LIB = ktoblzcheck32.lib
-DLL_EXP_DEF = ktoblzcheck32.def
-DLL_OBJS = \
-  .libs/ktoblzcheck.o \
-  .libs/algorithms.o \
-  .libs/accnum.o 
-
-
+DLL_OBJS = $(libktoblzcheck_la_SOURCES:%.cc=%.o)
 DLL_LDLIBS = -L/mingw/lib -lstdc++
+
+# No changes should be necessary below
+DLLTOOL=dlltool
+DLLWRAP=dllwrap
+WINDRES=windres
+
+DLL_NAME = $(DLL_BASENAME).dll
+DLL_EXP_LIB = $(DLL_BASENAME).lib
+DLL_EXP_DEF = $(DLL_BASENAME).def
+
 DLL_WRAP_FLAGS=--export-all --output-def $(DLL_EXP_DEF) \
 	--implib $(DLL_EXP_LIB) \
 	--driver-name $(CXX)
