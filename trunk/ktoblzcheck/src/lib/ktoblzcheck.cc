@@ -147,10 +147,11 @@ AccountNumberCheck::check(string bankId, string accountId) {
   }
   if ("02" == method) {
 	number2Array("2987654321", weight);
-	if (algo02(11, weight, false, account) == 1)
-	  return ERROR;
-	else 
+	int tmp = algo02(11, weight, false, account) % 10;
+	if (tmp == account[9])
 	  return OK;
+	else 
+	  return ERROR;
   }
   if ("03" == method) {
 	number2Array("2121212121", weight);
@@ -158,10 +159,11 @@ AccountNumberCheck::check(string bankId, string accountId) {
   }
   if ("04" == method) {
 	number2Array("4327654321", weight);
-	if (algo02(11, weight, false, account) == 1)
-	  return ERROR;
-	else 
+	int tmp = algo02(11, weight, false, account) % 10;
+	if (tmp == account[9])
 	  return OK;
+	else 
+	  return ERROR;
   }
   if ("05" == method) {
 	number2Array("1371371371", weight);
@@ -178,10 +180,11 @@ AccountNumberCheck::check(string bankId, string accountId) {
   if ("07" == method) {
 	number2Array("987654321", weight);
 	weight[0] = 10;
-	if (algo02(11, weight, false, account) == 1)
-	  return ERROR;
-	else 
+	int tmp = algo02(11, weight, false, account) % 10;
+	if (tmp == account[9])
 	  return OK;
+	else 
+	  return ERROR;
   }
   if ("08" == method) {
 	if (atol(array2Number(account).c_str()) < 60000)
@@ -228,8 +231,9 @@ AccountNumberCheck::check(string bankId, string accountId) {
 	return OK;
   }
   if ("14" == method) {
-	number2Array("0002345671", weight);
-	if (account[9] == algo02(11, weight, false, account))
+	number2Array("0007654321", weight);//"0002345671", weight);
+	int tmp = algo02(11, weight, false, account) % 10;
+	if (tmp == account[9])
 	  return OK;	
 	else 	
 	  return ERROR;
@@ -326,10 +330,10 @@ int algo02(int modulus, int weight[10], bool crossfoot, int accountId[10]) {
 
   // add all values
   int result = add(res, 0, 8);
-
+  cout << "algo2: res1: " << result << endl;
   // and calc the check number
   result = modulus - (result % modulus);
-
+  cout << "algo2: res2: " << result << endl;
   if (result == modulus)
 	result = 0;
 
