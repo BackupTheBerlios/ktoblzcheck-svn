@@ -574,7 +574,9 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
             number2Array("3987654320", weight);
             return algo01(11, weight, false, 10, account);
         }
-        return algo04(bankId, accountId);
+	// Hint by Erik Kerger <erik@kedo.com>, 2004-08-14: return
+	// algo04a instead of algo04
+        return algo04a(bankId, accountId);
   }
   if ("54" == method) {
 	// ids must start with 49

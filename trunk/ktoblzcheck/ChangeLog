@@ -1,3 +1,8 @@
+2004-08-14  Christian Stimming  <stimming@tuhh.de>
+
+	* src/lib/algorithms.cc, src/lib/ktoblzcheck.cc: Fix for algo 53
+	by Erik Kerger <erik@kedo.com>.
+
 2004-07-20  Christian Stimming <stimming@tuhh.de>
 
 	* configure.in: Released version 1.0

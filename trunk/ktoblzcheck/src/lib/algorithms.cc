@@ -327,6 +327,7 @@ algo04(string bankId, string accountId) {
 }
 
 // Added by Jens Gecius
+// Some corrections by Erik Kerger
 // same as algo04, but for nine digit accountIDs with
 // a little different eser12 system.
 AccountNumberCheck::Result 
@@ -341,19 +342,21 @@ algo04a(string bankId, string accountId) {
   string bankPart = bankId.substr(bankId.length() - 4, 2);
   //while (bankPart.length() > 0 && '0' == bankPart[0])
             //bankPart = bankPart.substr(1);
-  string bankPart2 = bankId.substr(bankId.length());
+  string bankPart2 = bankId.substr(bankId.length() - 1);
   // cout << "bankpart: " << bankPart << endl;
-  // the first 2 digits of the accountid
+  // the second digit of the accountid
   string checkPart = accountId.substr(2, 1);
   // cout << "checkPart: " << checkPart << endl;
   string accountPart1 = accountId.substr(0, 1);
+  string accountPart2 = accountId.substr(1, 1);
   string accountPart = accountId.substr(3);
   // skip leading "0" in the the accountPart
   while (accountPart.length() > 0 && '0' == accountPart[0])
   	accountPart = accountPart.substr(1);
   // cout << "accoutPart: " << accountPart << endl;
-  string eser12unpadded = bankPart + accountPart1 + bankPart2 + checkPart + accountPart;
-  cout << "eser12unpadded: " << eser12unpadded << endl;
+  string eser12unpadded = bankPart + accountPart2 + bankPart2
+    + accountPart1 + checkPart + accountPart;
+  // cout << "eser12unpadded: " << eser12unpadded << endl;
   // concat and padd to 12 byte
   string eser12 = eser12unpadded;
   while (eser12.length() < 12)
@@ -374,9 +377,8 @@ algo04a(string bankId, string accountId) {
   int weight10[10];
   number2Array("0000000042", weight02);
   number2Array("1637905842", weight10);
-  // weight10[5] should be 10. but for the multArray, we need =0 because
-  // this is the position of the ceck-digit (which must not be included)
-  // weight10[5] = 10;
+  // weight10[5] must be 10. 
+  weight10[5] = 10;
 
   int res02[10];
   int res10[10];
@@ -391,33 +393,15 @@ algo04a(string bankId, string accountId) {
   // cout << "result: " << result << endl;
   result = result % 11;
   // cout << "result: " << result << endl;
-  // now after calculating, we can set the weight in weight10 correct
-  // we may need it
-  weight10[5] = 10;
   // cout << "weight02: " << array2Number(weight02) << endl;
   // cout << "weight10: " << array2Number(weight10) << endl;
   // the weight for the check-digit
-  int realWeight = weight10[9 - accountPart.length()];
+  // int realWeight = weight10[9 - accountPart.length()];
   // cout << "realWeight: " << realWeight << endl;
-
-  // find a multiple of realWeight so that
-  // (result + i*realWeight) % 11 = 10
-  int i = 0;
-  while (i < 12) {
-	int tmp = (result + (i * realWeight));
-        // cout << "tmp: " << tmp << endl;
-	tmp = tmp % 11;
-	if (10 == tmp) 
-	  break;
-	  i++;
-  }
-  // cout << "i: " << i << endl;
-  // none found?
-  if (12 == i)
-	return AccountNumberCheck::ERROR;
-
-  // if asc(i)=checkdigit -> ok
-  if (i+48 == checkPart[1])
+  // the "Pruefziffernberechnung" doku shows a way to calculate the
+  // check num. As we have to check only, so only have to check the
+  // result we calculated including the check digit is 10.
+  if (result == 10)
 	return AccountNumberCheck::OK;
 
   return AccountNumberCheck::ERROR;
