@@ -517,24 +517,26 @@ int add(int source[10], int start, int stop) {
 }
 
 string array2Number(int a[10]) {
-  string result;
-  char c;
+    string result(10,'0');
+    for (unsigned i=0; i<10; i++) {
+	result[i] = 48 + a[i];
+    }
 
-  for (int i=0; i<10; i++) {
-	c = 48 + a[i];
-	result += c;
-  }
-
-  return result;
+    return result;
 }
 
 void number2Array(string number, int a[10]) {
-  while (number.length() < 10)
-	number = "0" + number;
-	
-  for (int i=9; i>-1; i--) {
-	a[i] = number[i] - 48;
-  }
+    unsigned padd_size = 10 - number.size();
+    if (padd_size == 0) {
+	for (unsigned i = 0; i < 10; i++) 
+	    a[i] = number[i] - 48;
+    } else {
+	unsigned i = 0;
+	for ( ; i < padd_size; i++)
+	    a[i] = 0;
+	for ( ; i < 10; i++) 
+	    a[i] = number[i-padd_size] - 48;
+    }
 }
 
 long_long number2LongLong(string number) {
