@@ -151,7 +151,7 @@ int Iban::modulo97(const char *pszNumber)
 	int iPos = 0;
 	int iModLen = 0;
 	char szPart[10];
-	long lNum;
+	long lNum = 0;
 	
 	szPart[0] = 0;
 	
