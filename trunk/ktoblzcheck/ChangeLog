@@ -1,5 +1,10 @@
 2005-01-17  Christian Stimming <stimming@tuhh.de>
 
+	* src/lib/algorithms.h, algorithms.cc: Implement some slight
+	performance improvements because Michael Plugge showed how much
+	faster you can get. Probably the loading of the datafile should be
+	optimized as well, but currently isn't.
+
 	* src/lib/methods.cc: Fix method 56 after hint from Michael Plugge
 	<m.plugge@fh-mannheim.de> and the test numbers in his konto_check
 	package.

@@ -189,10 +189,10 @@ AccountNumberCheck::Result method_21(int *account, int *weight) {
     multArray(account, weight, res);
 
     // for 00,...: calc the crossfoot for each value
-    crossFoot(res, res, 0, 9);
+    crossFoot(res);
 
     // add all values
-    int result = add(res, 0, 9);
+    int result = add_10(res);
 
     // crossfoot for the result until only one digit is left
     while (result > 9) {

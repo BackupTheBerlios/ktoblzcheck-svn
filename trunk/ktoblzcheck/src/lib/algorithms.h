@@ -33,25 +33,32 @@
 #endif // HAVE_LONG_LONG
 
 // forward declarations
-void   multArray(int a[10], int b[10], int dest[10]);
-void   crossFoot(int source[10], int dest[10], int start, int stop);
-int    add(int source[10], int start, int stop);
+void   multArray(const int *a, const int *b, int dest[10]);
+/** @param source Must be array of size 10 */
+void   crossFoot(const int *source, int dest[10], int start, int stop);
+/** @param source Must be array of size 10 */
+void   crossFoot(int *source);
+/** @param source Must be array of size 10 */
+int    add(const int *source, int start, int stop);
+/** @param source Must be array of size 10 */
+inline int add_10(const int *source);
 std::string array2Number(int a[10]);
-void   number2Array(std::string number, int a[10]);
-long_long number2LongLong(std::string number);
+void   number2Array(const std::string& number, int a[10]);
+long_long number2LongLong(const std::string& number);
+
 int    algo02(int modulus, int weight[10], bool crossfoot, int accountId[10]);
 int    algo03(int modulus, int weight[10], bool crossfoot, int accountId[10], 
 			  int startAdd, int stopAdd);
 int    algo03a(int weight[10], bool crossfoot, int accountId[10], 
 			  int startAdd, int stopAdd);
 AccountNumberCheck::Result 
-algo04(std::string bankId, std::string accountId);
+algo04(const std::string& bankId, std::string accountId);
 AccountNumberCheck::Result 
-algo04a(std::string bankId, std::string accountId);
+algo04a(const std::string& bankId, std::string accountId);
 AccountNumberCheck::Result 
-algo05(std::string accountId);
+algo05(const std::string& accountId);
 AccountNumberCheck::Result
-algo06(std::string accountId);
+algo06(const std::string& accountId);
 AccountNumberCheck::Result
 algo07(int accountId[10], int transform[6][10]);
 AccountNumberCheck::Result 
@@ -59,3 +66,8 @@ algo01(int modulus, int weight[10], bool crossfoot,
        int checkIndex, int accountId[10]);
 
 std::string accnum_getRegKey(const char *value_name);
+
+inline int add_10(const int *sp) {
+    return sp[0] + sp[1] + sp[2] + sp[3] + sp[4] 
+	+ sp[5] + sp[6] + sp[7] + sp[8] + sp[9];
+}
