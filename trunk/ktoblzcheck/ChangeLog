@@ -1,5 +1,8 @@
 2005-03-17  Christian Stimming <stimming@tuhh.de>
 
+	* configure.in: Released version 1.4 -sigh- because of the
+	installation problem with SED.
+
 	* src/bankdata/bundesbank.sed.in: Use the SED variable from
 	configure time instead of fixed path.
 
