@@ -1,0 +1,15 @@
+November 19, 2003: Released ktoblzcheck-0.5
+
+Die allerletzten fehlenden Algorithmen für die Nummernprüfung sind nun
+dank Daniel Gloeckner <daniel-gl@gmx.net> ebenfalls eingebaut. Ein
+fehlerhafter (selten benutzter) Algorithmus wurde dank des
+ausführlichen Feedbacks eines Benutzers korrigiert. Die Bankdate ist
+aktualisiert worden.
+
+
+August 11, 2003: Released ktoblzcheck-0.4
+
+Dank der großartigen Arbeit von Jens Gecius <jens@gecius.de> sind nun
+alle bekannten Nummernprüf-Algorithmen aus der Bundesbank-Datei
+implementiert. Diese Version kann nun für alle deutschen Banken die
+Kontonummern prüfen. 
