@@ -1,3 +1,7 @@
+2003-10-29  Fabian Kaiser <fabian@openhbci.de>
+
+	* src/lib/algorithms.cc: Fix for algo04 (method 52)
+
 2003-09-01  Christian Stimming <stimming@tuhh.de>
 
 	* src/lib/ktoblzcheck.cc: Implementation for A6, A7, A8 algorithms
