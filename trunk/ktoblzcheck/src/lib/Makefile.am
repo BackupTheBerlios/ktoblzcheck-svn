@@ -14,7 +14,7 @@ libktoblzcheck_la_SOURCES= \
   algorithms.cc \
   accnum.cc 
 
-libktoblzcheck_la_LDFLAGS= -version-info 1:2:0
+libktoblzcheck_la_LDFLAGS= -version-info 1:3:0
 libktoblzcheck_la_LIBADD= @LIBS@ -lstdc++
 
 #ktoblzcheck.cc: data.cc
