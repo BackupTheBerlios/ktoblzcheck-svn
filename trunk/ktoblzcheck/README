@@ -29,9 +29,31 @@ And then give it a try:
 
 FIXME: need some example BLZ/account ids here.
 
+Note: If you have the GNU C++ extension __gnu_cxx::hash_map available
+(in include <ext/hash_map>), then the lookup of specific banks in the
+list will be performed in a hash map, i.e. *very* fast! If hash_map is
+not available, std::vector will be used as a fallback solution. For an
+application it shouldn't make a difference at all.
+
 
 Jan 2003, Fabian Kaiser (fabian@openhbci.de)
 May 2003, Christian Stimming <stimming@tuhh.de>
 
 PS: "./configure --with-compile-into-lib" was disabled because the
 compiler would need way too much memory to actually compile that.
+
+
+Some benchmark notes:
+
+Each time tried 10000 BLZs with random first 2 digits so that 66% of
+the banks are found, see src/bin/benchmark.cc. All results in seconds
+on my 1.3 GHz Duron, compiled with no optimization. Time check simply
+by calling "time ./benchmark 10000".
+
+With list<Record*> and manual finding with for(...) loop:  5.3s
+With list<Record*> and find_if() from <algorithm>:         4.2s
+With vector<Record*> and find_if():                        1.6s 
+(the above at a later test: 3.5s)
+With hash_map<...> and hash_map::find:                     0.2s (!!)
+
+Gee. This is kind of obvious :-)

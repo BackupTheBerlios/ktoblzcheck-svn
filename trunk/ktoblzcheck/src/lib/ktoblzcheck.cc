@@ -24,10 +24,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
+#include "config.h"
+
+#ifdef HAVE_EXT_HASH_MAP 
+// Inside this file only this define is used
+#  define USING_HASH_MAP 1
+#endif
+
 #include "ktoblzcheck.h"
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 
 // The actual algorithms for number checking are there
 #include "algorithms.h"
@@ -52,17 +59,14 @@ AccountNumberCheck::Record::Record(unsigned long id,
 {
 }
 
-// a macro to ease the loading of inline-data
-//#define ADD_RECORD(id, meth, name, loc) data.push_back(new Record(id, meth, name, loc));
-
-AccountNumberCheck::AccountNumberCheck() {
+AccountNumberCheck::AccountNumberCheck() 
+    : data(6000)
+{
   // Disabled COMPILE_RESOURCE because the big list cannot be handled by the compiler anyway.
 
   string data_path = BANKDATA_PATH;
   string filename = data_path + "/bankdata.txt";
   readFile(filename);
-
-  //#endif
 }
 
 AccountNumberCheck::AccountNumberCheck(const string& filename) {
@@ -127,15 +131,24 @@ AccountNumberCheck::readFile(const string &filename)
 	// bank location
 	newRecord->location = line.substr(pos1);
 
+#if USING_HASH_MAP
+	data.insert(banklist_type::value_type(newRecord->bankId, newRecord));
+#else
 	data.push_back(newRecord);
+#endif
   }
 }
 
 void 
 AccountNumberCheck::deleteList() 
 {
-  for (list<Record*>::iterator iter = data.begin(); iter != data.end(); iter++)
+  for (banklist_type::iterator iter = data.begin(); iter != data.end(); iter++) {
+#if USING_HASH_MAP
+    delete iter->second;
+#else
     delete (*iter);
+#endif
+  }
 }
 
 
@@ -144,22 +157,45 @@ unsigned int AccountNumberCheck::bankCount() const {
 }
 
 void AccountNumberCheck::createIndex() {
-  // not yet implemented
+  // not yet implemented; for hash_map this isn't necessary anyway.
 }
+
+
+
+// Function object for the predicate of matching a job result
+class MatchBlz {
+    unsigned long blz;
+  public:
+    MatchBlz(unsigned long bankId) 
+	: blz(bankId) { };
+    bool operator()(const AccountNumberCheck::Record *r) { 
+	return r && (r->bankId == blz);
+    }
+};
 
 const AccountNumberCheck::Record& 
 AccountNumberCheck::findBank(const string& bankId) const {  
-  list<Record*>::const_iterator iter = data.begin();
 
   unsigned long lbankId = atol(bankId.c_str());
-  while (iter != data.end()) {
-	if ((*iter)->bankId == lbankId)
-	  return *(*iter);
-	iter++;
-  }
+  banklist_type::const_iterator iter;
+#if USING_HASH_MAP
+  iter = data.find(lbankId);
+#else
+  iter = find_if(data.begin(), data.end(), MatchBlz(lbankId));
+#endif
 
+  if (iter != data.end()) {
+#if USING_HASH_MAP
+    return *(iter->second);
+#else
+    return **iter;
+#endif
+  }
+  
   throw -1;
 }
+
+
 
 AccountNumberCheck::Result 
 AccountNumberCheck::check(const string& bankId, const string& accountId, 

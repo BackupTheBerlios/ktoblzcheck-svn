@@ -10,5 +10,7 @@ ktoblzcheck_SOURCES = \
 
 ktoblzcheck_LDADD = -L../lib -lktoblzcheck @LIBS@
 
-noinst_PROGRAMS = ctest
+noinst_PROGRAMS = ctest benchmark
 ctest_LDADD = -L../lib -lktoblzcheck @LIBS@
+benchmark_LDADD = -L../lib -lktoblzcheck @LIBS@
+benchmark_SOURCES = benchmark.cc

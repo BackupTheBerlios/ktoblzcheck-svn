@@ -1,5 +1,14 @@
 2003-06-09  Christian Stimming  <stimming@tuhh.de>
 
+	* src/bin/benchmark.cc: Added program to evaluate the different
+	lookup methods.
+
+	* acinclude.m4, configure.in: Added macros for checking for
+	<ext/hash_map>
+
+	* src/include/ktoblzcheck.h, src/lib/ktoblzcheck.cc: Implemented
+	hash_map support if it is available.
+
 	* ktoblzcheck.spec.in, Makefile.am: Add spec file and automated
 	rules for rpm building.
 

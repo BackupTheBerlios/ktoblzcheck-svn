@@ -31,8 +31,20 @@
 #ifdef __cplusplus
 
 #include <string>
-#include <list>
+#include <vector>
+#ifdef HAVE_EXT_HASH_MAP 
+#include <ext/hash_map>
+#endif
 
+/** Class that stores a list of known banks, returns banks with given
+    bank codes and validates account numbers accordings to the bank's
+    known validation/checking algorithms.
+
+    If at the compile time of your system the GNU C++ extension
+    __gnu_cxx::hash_map is available (in include <ext/hash_map>), then
+    the lookup of specific banks in the list will be performed in a
+    hash map, i.e. *very* fast. 
+ */
 class AccountNumberCheck {
 public:
 
@@ -75,7 +87,9 @@ public:
     std::string bankName;
     /** The town where the bank is located */
     std::string location;
+    /** Default Constructor */
     Record();
+    /** Constructor with all values */
     Record(unsigned long id, const std::string& method, 
 	   const std::string& name, 
 	   const std::string& loc);
@@ -131,14 +145,20 @@ public:
    * This way you can speed up the checking if you want to check
    * 100s of combination (batch-processing)
    *
-   * Currently not implemented.
+   * Currently not implemented. For a hash_map this isn't necessary
+   * anyway.
    */
   void createIndex();
 
 
 private:
   /* The list of the bank data */
-  std::list<Record*> data;
+#ifdef HAVE_EXT_HASH_MAP 
+  typedef __gnu_cxx::hash_map<unsigned long, Record*> banklist_type;
+#else
+  typedef std::vector<Record*> banklist_type;
+#endif
+  banklist_type data;
 
   /** Deletes all records inside the bank data list */
   void deleteList();
