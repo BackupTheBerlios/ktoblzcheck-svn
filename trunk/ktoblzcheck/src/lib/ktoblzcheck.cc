@@ -1,6 +1,6 @@
 /***************************************************************************
                              -------------------
-    cvs         : $Id$
+    cvs         : 
     begin       : Sat Aug 10 2002
     copyright   : (C) 2002, 2003 by Fabian Kaiser and Christian Stimming
     email       : fabian@openhbci.de
@@ -60,7 +60,7 @@ AccountNumberCheck::Record::Record(const char *id,
 				   const char *meth, 
 				   const char *name, 
 				   const char *loc)
-   : bankId(atol(id))
+  : bankId(atol(id))
    , method(meth)
    , bankName(name)
    , location(loc)
@@ -126,30 +126,23 @@ AccountNumberCheck::readFile(const string &filename)
     deleteList();
 
   // Now read file
-  ifstream file(filename.c_str());
+  FILE *istr = fopen(filename.c_str(), "r");
   // FIXME: Do a lot of error checking here.
-  if (file.fail())
-    {
-      std::cerr << "AccountNumberCheck::readFile: File " << filename 
-		<< " could not be opened. "
+  if (!istr)
+  {
+     std::cerr << "AccountNumberCheck::readFile: File " << filename 
+	       << " could not be opened. "
 	"AccountNumberCheck could not obtain bank data." << std::endl;
-      return;
-    }
-  
+     return;
+  }
+
   char blz[BLZ_SIZE];
   char method[METHOD_SIZE];
   char name[NAME_SIZE];
   char place[PLACE_SIZE];
 
-  string line;
-  while (file) 
+  while (fscanf(istr, "%8s\t%2s\t%58[^\t]\t%29[^\t\n]\n", blz, method, name, place) > 0)
   {
-     // get indiviual fields from file
-     file.getline(blz, BLZ_SIZE, '\t');
-     file.getline(method, METHOD_SIZE, '\t');
-     file.getline(name, NAME_SIZE, '\t');
-     file.getline(place, PLACE_SIZE, '\n');
-     
      // Create new record object
      Record *newRecord = 
 	new Record(blz, method, name, place);
@@ -158,6 +151,7 @@ AccountNumberCheck::readFile(const string &filename)
      // ascending BLZ
      data.insert(data.end(), banklist_type::value_type(newRecord->bankId, newRecord));
   }
+  fclose(istr);
 }
 
 void 
