@@ -1,3 +1,15 @@
+2003-06-08  Christian Stimming  <stimming@tuhh.de>
+
+	* configure.in: Released version 0.2
+	
+	* src/lib/algorithms.{h,cpp}: Moved algorithm functions into
+	seperate file to make maintaining easier.
+
+	* src/include/ktoblzcheck.h: Moved code to here.
+
+	* src/include/ktoblzcheck.hh: Added deprecated warning since .hh
+	suffix is totally unusual for system-wide installed headers.
+
 2003-05-22  Christian Stimming <stimming@tuhh.de>
 
 	* configure.in: Fixed detection of bankdata installation path.

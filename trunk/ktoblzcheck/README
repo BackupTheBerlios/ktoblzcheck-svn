@@ -1,10 +1,15 @@
-KtoBLZCheck is both, a tool and a library to check pairs or
-account-ids and bank-ids (german only).
+KtoBLZCheck is a library to check account numbers and bank codes of
+German banks.
+
+Both a library for other programs as well as a short command-line tool
+is available. It is possible to check pairs of account numbers and
+bank codes (BLZ) of German banks, and to map bank codes (BLZ) to the
+clear-text name and location of the bank.
 
 How to compile:
 
 Type 
-"./autogen.sh" to create ne necessary build-stuff
+"./autogen.sh" to create the necessary build-stuff
 
 Type "./configure" to calculate some system dependencies.
 

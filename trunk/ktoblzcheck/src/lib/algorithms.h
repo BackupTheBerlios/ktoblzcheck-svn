@@ -1,4 +1,4 @@
-/***************************************************************************
+/*-*-c++-*-*****************************************************************
                              -------------------
     cvs         : $Id$
     begin       : Sat Aug 10 2002
@@ -24,15 +24,25 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KTOBLZCHECK_HH
-#define KTOBLZCHECK_HH
+#include "ktoblzcheck.h"
 
-#include <ktoblzcheck.h>
+// forward declarations
+void   multArray(int a[10], int b[10], int dest[10]);
+void   crossFoot(int source[10], int dest[10], int start, int stop);
+int    add(int source[10], int start, int stop);
+std::string array2Number(int a[10]);
+void   number2Array(std::string number, int a[10]);
+long long number2LongLong(std::string number);
+int    algo02(int modulus, int weight[10], bool crossfoot, int accountId[10]);
+int    algo03(int modulus, int weight[10], bool crossfoot, int accountId[10], 
+			  int startAdd, int stopAdd);
+AccountNumberCheck::Result 
+algo04(std::string bankId, std::string accountId);
+AccountNumberCheck::Result 
+algo05(std::string accountId);
+AccountNumberCheck::Result
+algo06(std::string accountId);
+AccountNumberCheck::Result 
+algo01(int modulus, int weight[10], bool crossfoot, 
+       int checkIndex, int accountId[10]);
 
-/* DEPRECATED. Don't use this file any longer. Instead, include ktoblzcheck.h. 
- *
- * The content of this file has been moved to ktoblzcheck.h */
-
-#warning "Dont use this file any longer. Instead, use #include <ktoblzcheck.h>"
-
-#endif

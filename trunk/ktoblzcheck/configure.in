@@ -1,5 +1,5 @@
 AC_INIT(src/lib/ktoblzcheck.cc)
-AM_INIT_AUTOMAKE(ktoblzcheck, 0.1)
+AM_INIT_AUTOMAKE(ktoblzcheck, 0.2)
 AM_CONFIG_HEADER(config.h)
 
 
@@ -13,29 +13,6 @@ AC_PROG_CXX
 AC_PROG_CXXCPP
 AM_PROG_LIBTOOL
 
-
-# check whether to compile bank data into library
-
-# May 05, 2003: Disabled this because it simply is impossible for
-# compilers to handle the big list of banks.
-dnl AC_MSG_CHECKING([whether the resource file should be compiled into the library])
-dnl AC_ARG_WITH(compile-into-lib,
-dnl         [  --with-compile-into-lib Should the resource file be compiled 
-dnl                                    into the library instead of manualy 
-dnl                                    reading it from your application],[
-dnl         COMPILETOLIB="$withval"
-dnl         COMPILETOLIB="$withval"
-dnl         ])
-
-dnl if test -z "$COMPILETOLIB"; then
-dnl 	AC_MSG_RESULT([no, manually read it in your application])
-dnl else
-dnl 	AC_DEFINE(COMPILE_RESOURCE)
-dnl 	define_compile_resource="#define COMPILE_RESOURCE"
-dnl 	AC_SUBST(define_compile_resource)
-
-dnl 	AC_MSG_RESULT([yes])
-dnl fi
 
 # check path for installation of bank data
 AC_MSG_CHECKING(bankdata path)

@@ -25,9 +25,11 @@
  ***************************************************************************/
 
 #include <config.h>
-#include <ktoblzcheck.hh>
+#include <ktoblzcheck.h>
 #include <iostream>
 #include <fstream>
+
+using namespace std;
 
 string resFile = "../bankdata/bankdata.txt";
 string method = "";
@@ -111,7 +113,10 @@ int main(int argc, char **argv) {
 	checker.check(bankId, accountId, method);
 
   if (! justReturnCode) {
-	cout << "Bank: " << (found?(bankData.bankName + " " + bankData.location):"<unknown>") << " (" << bankId << ")" << endl;
+	cout << "Bank: " 
+	     << (found ? 
+		 ("'" + bankData.bankName + "' at '" + bankData.location + "'") :
+		 "<unknown>") << " (" << bankId << ")" << endl;
 	cout << "Account: " << accountId << endl;
 	string text;
 	if (result == AccountNumberCheck::OK)

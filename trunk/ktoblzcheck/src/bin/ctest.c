@@ -25,9 +25,9 @@
  ***************************************************************************/
 
 #include <config.h>
-#include <ktoblzcheck.hh>
+#include <ktoblzcheck.h>
 
-/* This is a stupid empty file, simply to test whether ktoblzcheck.hh
+/* This is a stupid empty file, simply to test whether ktoblzcheck.h
  * is C compatible.
  */
 

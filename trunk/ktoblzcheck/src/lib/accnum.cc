@@ -33,26 +33,18 @@
  * the code.
  */
 #include <config.h>
-#include "ktoblzcheck.hh"
+#include "ktoblzcheck.h"
 #include <assert.h>
 
 
 AccountNumberCheck *AccountNumberCheck_new()
 {
-#ifdef COMPILE_RESOURCE
-    return new AccountNumberCheck();
-#else
     return NULL;
-#endif
 }
 
 AccountNumberCheck *AccountNumberCheck_new_file(const char *filename)
 {
-#ifdef COMPILE_RESOURCE
-    return NULL;
-#else
-    return new AccountNumberCheck(string(filename ? filename : ""));
-#endif
+    return new AccountNumberCheck(std::string(filename ? filename : ""));
 }
 
 void AccountNumberCheck_delete(AccountNumberCheck *a)
@@ -66,8 +58,8 @@ AccountNumberCheck_check(const AccountNumberCheck *a,
 			 const char *accountId)
 {
     assert(a);
-    return a->check(string(bankId ? bankId : ""),
-		   string(accountId ? accountId : ""));
+    return a->check(std::string(bankId ? bankId : ""),
+		   std::string(accountId ? accountId : ""));
 }
 
 const AccountNumberCheck_Record *
@@ -76,7 +68,7 @@ AccountNumberCheck_findBank(const AccountNumberCheck *a,
 {
     assert(a);
     try {
-	return &(a->findBank(string(bankId ? bankId : "")));
+	return &(a->findBank(std::string(bankId ? bankId : "")));
     } 
     catch (...) {
 	return NULL;

@@ -4,12 +4,16 @@ INCLUDES=-I../include
 
 iheaderdir=${includedir}
 include_HEADERS = 
+noinst_HEADERS = \
+  algorithms.h
 
 lib_LTLIBRARIES=libktoblzcheck.la
 
 libktoblzcheck_la_SOURCES= \
-	ktoblzcheck.cc \
-	accnum.cc 
+  ktoblzcheck.cc \
+  algorithms.cc \
+  accnum.cc 
+
 libktoblzcheck_la_LDFLAGS= -version-info 1:0:0
 libktoblzcheck_la_LIBADD= @LIBS@ -lstdc++
 
