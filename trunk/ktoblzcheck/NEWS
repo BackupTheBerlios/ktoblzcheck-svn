@@ -1,0 +1,6 @@
+August 11, 2003: Released ktoblzcheck-0.4
+
+Dank der großartigen Arbeit von Jens Gecius <jens@gecius.de> sind nun
+alle bekannten Nummernprüf-Algorithmen aus der Bundesbank-Datei
+implementiert. Diese Version kann nun für alle deutschen Banken die
+Kontonummern prüfen. 
