@@ -1,3 +1,11 @@
+2003-09-01  Christian Stimming <stimming@tuhh.de>
+
+	* src/lib/ktoblzcheck.cc: Implementation for A6, A7, A8 algorithms
+	by Daniel Gloeckner <daniel-gl@gmx.net>.
+
+	* src/bankdata/bundesbank.sed: Script for ascii file conversion by
+	Daniel Gloeckner <daniel-gl@gmx.net>.
+
 2003-08-11  Christian Stimming <stimming@tuhh.de>
 	
 	* configure.in: released version 0.4

@@ -1,7 +1,11 @@
 # Installation of the data file
+
 datadir=@BANKDATA_PATH@
-data_DATA=bankdata.txt
-EXTRA_DIST=bankdata.txt
+data_DATA= bankdata.txt
+
+EXTRA_DIST= \
+  bankdata.txt \
+  bundesbank.sed
 
 #all-local:
 #	if test bankdata.txt -nt ../lib/data.cc; then \

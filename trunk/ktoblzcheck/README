@@ -53,8 +53,12 @@ Bank List Format
 The file with all bank codes (BLZ Datei) can regularly be retrieved
 from bundesbank.de, more specifically from
 http://192.109.2.70/internet/bankleit.nsf/ludownloads/Download+Bankleitzahlen?OpenDocument
-The bankdata.txt file contains only four tab-delimited columns. If
-you got the BLZ file in excel format, the four columns for
+The bankdata.txt file contains only four tab-delimited columns. The
+sed script src/bankdata/bundesbank.sed (provided by Daniel Gloeckner
+<daniel-gl@gmx.net>) will automatically convert the Bundesbank's ascii
+file into the required ktoblzcheck format.
+
+If you got the BLZ file in excel format, the four columns for
 bankdata.txt are A, O, G, J, in that order, and it has only those
 lines which have a '1' in column B.
 

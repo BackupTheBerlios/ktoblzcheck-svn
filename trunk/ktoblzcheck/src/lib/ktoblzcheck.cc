@@ -1200,6 +1200,32 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
         number2Array("0987654320", weight); weight[0] = 10;
         return algo01(11, weight, false, 10, account);
   }
+  if ("A6" == method) {
+        if (account[1] == 8) {
+            number2Array("2121212120", weight);
+            return algo01(10, weight, true, 10, account);
+        } else {
+            number2Array("1731731730", weight);
+            return algo01(10, weight, false, 10, account);
+        }
+  }
+  if ("A7" == method) {
+        number2Array("2121212120", weight);
+        if (OK == algo01(10, weight, true, 10, account))
+            return OK;
+        return algo01(10, weight, false, 10, account);
+  }
+  if ("A8" == method) {
+	number2Array("0987654320", weight); weight[0] = 10;
+	if (9 != account[2])
+	  weight[1] = weight[2] = 0;
+	if (OK == algo01(11, weight, false, 10, account))
+	    return OK;
+        if (account[2] == 9)
+            return ERROR;
+        number2Array("0001212120", weight);
+        return algo01(10,weight, true, 10, account);
+  }
   std::cerr << "AccountNumberCheck::check: Specified method '" << method 
 	    << "' is unknown." << std::endl;
   return UNKNOWN;
