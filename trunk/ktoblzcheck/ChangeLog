@@ -1,3 +1,9 @@
+2005-01-17  Christian Stimming <stimming@tuhh.de>
+
+	* src/lib/methods.cc: Fix method 56 after hint from Michael Plugge
+	<m.plugge@fh-mannheim.de> and the test numbers in his konto_check
+	package.
+
 2005-01-16  Christian Stimming  <stimming@tuhh.de>
 
 	* src/lib/ktoblzcheck.cc, src/lib/methods.cc: Modified lookup of

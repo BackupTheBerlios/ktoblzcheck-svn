@@ -481,14 +481,19 @@ AccountNumberCheck::Result method_55(int *account, int *weight) {
 }
 // Added by Jens Gecius, validated with two test accountIDs
 AccountNumberCheck::Result method_56(int *account, int *weight) {
-   // FIXME: This needs to be checked: 
-   // Result of 10320800;9718304037;56;Bundesbank: ERROR, they do not match
-   // Result of 30030100;0290545005;56;Bundesbank: OK
-   // Result of 30030880;9718304037;56;Bundesbank: ERROR, they do not match
-   // Result of 50230880;0290545005;56;Bundesbank: OK
-   // Result of 60030400;0290545005;56;Bundesbank: OK
     number2Array("4327654320", weight);
     int result = 11 - algo03(11, weight, false, account, 0, 9);
+    // Ausnahme fuer 9 als erste Stelle; nach Hinweis von Michael
+    // Plugge <m.plugge@fh-mannheim.de>
+    if (result > 9) {
+	if (account[0] == 9) {
+	    if (result == 10)
+		result = 7;
+	    else
+		result = 8;
+	} else
+	    return AccountNumberCheck::ERROR;
+    }
     if (result == account[9])
 	return AccountNumberCheck::OK;
     return AccountNumberCheck::ERROR;
