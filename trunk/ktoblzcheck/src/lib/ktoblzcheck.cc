@@ -27,6 +27,7 @@
 #include <config.h>
 #include "ktoblzcheck.hh"
 #include <fstream>
+#include <iostream>
 
 list<AccountNumberCheck::Record*> AccountNumberCheck::data;
 
@@ -131,7 +132,7 @@ AccountNumberCheck::findBank(string bankId) {
 }
 
 const AccountNumberCheck::Result 
-AccountNumberCheck::check(string bankId, string accountId, string method="") {
+AccountNumberCheck::check(string bankId, string accountId, string method) {
   int account[10] = {9,1,3,0,0,0,0,2,0,1};
   int weight[10]  = {0,0,0,0,0,0,0,0,0,0};
 

@@ -27,6 +27,7 @@
 #ifndef _ANCHECK_HH
 #define _ANCHECK_HH
 
+using namespace std;
 
 #include <string>
 #include <list>

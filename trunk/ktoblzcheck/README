@@ -1,0 +1,30 @@
+KtoBLZCheck is both, a tool and a library to check pairs or
+account-ids and bank-ids (german only).
+
+How to compile:
+
+type 
+"./autogen.sh" to create ne necessary build-stuff
+
+type "./configure" or "./configure --with-compile-into-lib" to
+calculate some system dependencies.
+
+Note: "./configure --with-compile-into-lib" compiles the ressource
+file into the library, which means you can not modify the bankdata
+file afterwards, on the other hand, you don't have to care for its
+location.  
+
+"./configure" compiles KtoBLZCheck without the bankdata file and reads
+it at runtime. The advantage is, you can update it regularly but you
+may have to specify the location.
+
+Now type "make", "make install"
+
+And then give it a try:
+
+"ktoblzcheck <your-bank-id> <your-account-id>"
+
+
+
+
+Jan 2003, Fabian Kaiser (fabian@openhbci.de)
