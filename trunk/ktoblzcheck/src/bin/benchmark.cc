@@ -77,20 +77,6 @@ int check_bankData_lookup(unsigned long tries = 5)
     return 0;
 }
 
-std::string result_to_string(AccountNumberCheck::Result result)
-{
-	string text;
-	if (result == AccountNumberCheck::OK)
-	  text = "OK";
-	if (result == AccountNumberCheck::UNKNOWN)
-	  text = "Sorry, I don't know";
-	if (result == AccountNumberCheck::ERROR)
-	  text = "ERROR, they do not match";
-	if (result == AccountNumberCheck::BANK_NOT_KNOWN)
-	  text = "bank is not known";
-	return text;
-}
-
 int check_testkontos(const std::string& filename)
 {
    assert(filename.size()>0);
@@ -102,7 +88,7 @@ int check_testkontos(const std::string& filename)
    {
       res = checker.check(blz, kto);
       std::cout << "Result of " << blz << ";" << kto << ";" << method << ";" << info << ": " << 
-	 result_to_string(res) << std::endl;
+	 checker.resultToString(res) << std::endl;
    }
    return 0;
 }

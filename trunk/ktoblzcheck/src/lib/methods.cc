@@ -1439,12 +1439,16 @@ void AccountNumberCheck::initMethodMap()
   const struct method_func_s* ptr = cb_funcs;
   for ( ; ptr->str != 0; ptr++)
   {
-     method_map.insert(method_map_t::value_type(ptr->str, ptr->func));
+     // Insertion list is sorted alphabetically
+     method_map.insert(method_map.end(),
+		       method_map_t::value_type(ptr->str, ptr->func));
   }
 
   const struct method_funcLong_s* ptr2 = cb_funcs_long;
   for ( ; ptr2->str != 0; ptr2++)
   {
-     method_map2.insert(method_map2_t::value_type(ptr2->str, ptr2->func));
+     // Insertion list is sorted alphabetically
+     method_map2.insert(method_map2.end(),
+			method_map2_t::value_type(ptr2->str, ptr2->func));
   }
 }
