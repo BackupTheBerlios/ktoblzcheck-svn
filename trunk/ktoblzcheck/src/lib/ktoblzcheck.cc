@@ -348,6 +348,17 @@ AccountNumberCheck::check(string bankId, string accountId) {
 	else 
 	  return ERROR;	
   }
+  if ("99" == method) {
+	if ("0396000000" <= array2Number(account) && 
+		array2Number(account) <= "0499999999")
+	  return OK;
+	number2Array("4327654320", weight);
+	int tmp = algo02(11, weight, false, account) % 10;
+	if  (tmp == account[9])
+	  return OK;
+	else 
+	  return ERROR;
+  }
   return UNKNOWN;
 }
 
