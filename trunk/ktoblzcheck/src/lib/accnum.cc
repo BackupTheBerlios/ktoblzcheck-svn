@@ -34,6 +34,7 @@
  */
 #include <config.h>
 #include "ktoblzcheck.hh"
+#include <assert.h>
 
 
 AccountNumberCheck *AccountNumberCheck_new()

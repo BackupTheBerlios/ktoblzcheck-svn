@@ -1,3 +1,7 @@
+2003-05-03  Christian Stimming  <stimming@tuhh.de>
+
+	* src/lib/accnum.cc: Add missing include to satisfy gcc3.3.
+
 2003-05-02  Christian Stimming <stimming@tuhh.de>
 
 	* src/lib/accnum.cc: Created new file with the C wrappers inside.

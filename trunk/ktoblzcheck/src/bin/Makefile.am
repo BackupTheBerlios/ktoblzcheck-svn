@@ -4,9 +4,6 @@ bin_PROGRAMS = ktoblzcheck ctest
 
 INCLUDES=-I../include
 EXTRA_DIST =
-CPPFLAGS=@CPPFLAGS@
-CFLAGS=@CFLAGS@
-CXXFLAGS=@CXXFLAGS@
 
 
 ktoblzcheck_SOURCES = \
