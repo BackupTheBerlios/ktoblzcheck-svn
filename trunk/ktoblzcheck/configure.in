@@ -51,7 +51,7 @@ case "$OS_TYPE" in
 	ktoblzcheck_includes='-I$(top_srcdir)/src/include'
     	;;
     windows)
-        AQ_WINDOZE
+	ACX_WINDOWS_PATHS
         ktoblzcheck_libs='-L$(WIN_PATH_SYSTEM_MINGW) -L$(top_builddir)/src/lib -lktoblzcheck32'
 	ktoblzcheck_includes='-I$(top_srcdir)/src/include'
     	;;

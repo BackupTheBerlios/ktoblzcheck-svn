@@ -14,8 +14,6 @@ dnl OUT:
 dnl   - aq_windoze_path: path retrieved
 dnl
 
-AC_MSG_CHECKING([for windoze $1 path (program)])
-
 rm -f conf.winpath
 AC_TRY_RUN([
 #include <windows.h>
@@ -65,7 +63,7 @@ int main (){
   exit(0);
 }
  ],
- [aq_windoze_path="`cat conf.winpath`"; AC_MSG_RESULT([$aq_windoze_path])],
+ [aq_windoze_path="`cat conf.winpath`"],
  [AC_MSG_ERROR(Could not determine path for $1)],
  [aq_windoze_path="$2"; AC_MSG_RESULT([Crosscompiling, assuming $2])]
 )
@@ -83,8 +81,6 @@ dnl   - $2: default value
 dnl OUT:
 dnl   - aq_windoze_path: path retrieved
 dnl
-
-AC_MSG_CHECKING([for windoze $1 path (mingw)])
 
 rm -f conf.winpath
 AC_TRY_RUN([
@@ -171,7 +167,7 @@ int main (){
   exit(0);
 }
  ],
- [aq_windoze_path=`cat conf.winpath`; AC_MSG_RESULT([$aq_windoze_path])],
+ [aq_windoze_path=`cat conf.winpath`],
  [AC_MSG_ERROR(Could not determine path for $1)],
  [aq_windoze_path="$2"; AC_MSG_RESULT([Crosscompiling, assuming $2])]
 )
@@ -179,7 +175,7 @@ rm -f conf.winpath
 ])
 
 
-AC_DEFUN(AQ_WINDOZE,[
+AC_DEFUN(ACX_WINDOWS_PATHS,[
 dnl IN: 
 dnl   - AC_CANONICAL_SYSTEM muste be called before
 dnl OUT:
@@ -203,21 +199,64 @@ AC_ARG_WITH(system-path,  [  --with-system-path=DIR  specify the system director
 AC_ARG_WITH(windows-path, [  --with-windows-path=DIR specify the windows directory],
   [aq_windoze_path_windows="$withval"])
 
-AQ_WINDOZE_GETPATH(home, [$aq_windoze_path_home])
-WIN_PATH_HOME="$aq_windoze_path"
-AQ_WINDOZE_GETPATH_MINGW(home, [$aq_windoze_path_home])
-WIN_PATH_HOME_MINGW="$aq_windoze_path"
+# home directory
+AC_MSG_CHECKING([for windoze home path (program)])
+AC_CACHE_VAL(gwenhywfar_cv_path_home,
+[
+  AQ_WINDOZE_GETPATH(home, [$aq_windoze_path_home])
+  gwenhywfar_cv_path_home="$aq_windoze_path"
+])
+WIN_PATH_HOME="$gwenhywfar_cv_path_home"
+AC_MSG_RESULT([$WIN_PATH_HOME])
 
-AQ_WINDOZE_GETPATH(windows, [$aq_windoze_path_windows])
-WIN_PATH_WINDOWS="$aq_windoze_path"
-AQ_WINDOZE_GETPATH_MINGW(windows, [$aq_windoze_path_windows])
-WIN_PATH_WINDOWS_MINGW="$aq_windoze_path"
+AC_MSG_CHECKING([for windoze home path (mingw)])
+AC_CACHE_VAL(gwenhywfar_cv_path_home_mingw,
+[
+  AQ_WINDOZE_GETPATH_MINGW(home, [$aq_windoze_path_home])
+  gwenhywfar_cv_path_home_mingw="$aq_windoze_path"
+])
+WIN_PATH_HOME_MINGW="$gwenhywfar_cv_path_home_mingw"
+AC_MSG_RESULT([$WIN_PATH_HOME_MINGW])
 
-AQ_WINDOZE_GETPATH(system, [$aq_windoze_path_system])
-WIN_PATH_SYSTEM="$aq_windoze_path"
-AQ_WINDOZE_GETPATH_MINGW(system, [$aq_windoze_path_system])
-WIN_PATH_SYSTEM_MINGW="$aq_windoze_path"
+# windows directory
+AC_MSG_CHECKING([for windoze windows path (program)])
+AC_CACHE_VAL(gwenhywfar_cv_path_windows,
+[
+  AQ_WINDOZE_GETPATH(windows, [$aq_windoze_path_windows])
+  gwenhywfar_cv_path_windows="$aq_windoze_path"
+])
+WIN_PATH_WINDOWS="$gwenhywfar_cv_path_windows"
+AC_MSG_RESULT([$WIN_PATH_WINDOWS])
 
+AC_MSG_CHECKING([for windoze windows path (mingw)])
+AC_CACHE_VAL(gwenhywfar_cv_path_windows_mingw,
+[
+  AQ_WINDOZE_GETPATH_MINGW(windows, [$aq_windoze_path_windows])
+  gwenhywfar_cv_path_windows_mingw="$aq_windoze_path"
+])
+WIN_PATH_WINDOWS_MINGW="$gwenhywfar_cv_path_windows_mingw"
+AC_MSG_RESULT([$WIN_PATH_WINDOWS_MINGW])
+
+# windows system directory
+AC_MSG_CHECKING([for windoze system path (program)])
+AC_CACHE_VAL(gwenhywfar_cv_path_system,
+[
+  AQ_WINDOZE_GETPATH(system, [$aq_windoze_path_system])
+  gwenhywfar_cv_path_system="$aq_windoze_path"
+])
+WIN_PATH_SYSTEM="$gwenhywfar_cv_path_system"
+AC_MSG_RESULT([$WIN_PATH_SYSTEM])
+
+AC_MSG_CHECKING([for windoze system path (mingw)])
+AC_CACHE_VAL(gwenhywfar_cv_path_system_mingw,
+[
+  AQ_WINDOZE_GETPATH_MINGW(system, [$aq_windoze_path_system])
+  gwenhywfar_cv_path_system_mingw="$aq_windoze_path"
+])
+WIN_PATH_SYSTEM_MINGW="$gwenhywfar_cv_path_system_mingw"
+AC_MSG_RESULT([$WIN_PATH_SYSTEM_MINGW])
+
+# finish variables
 AC_SUBST(WIN_PATH_HOME)
 AC_DEFINE_UNQUOTED(WIN_PATH_HOME, "$WIN_PATH_HOME", [home path])
 AC_SUBST(WIN_PATH_HOME_MINGW)
@@ -228,9 +267,3 @@ AC_SUBST(WIN_PATH_SYSTEM)
 AC_DEFINE_UNQUOTED(WIN_PATH_SYSTEM, "$WIN_PATH_SYSTEM", [system path])
 AC_SUBST(WIN_PATH_SYSTEM_MINGW)
 ])
-
-
-
-
-
-
