@@ -3,7 +3,6 @@
 10010111	13	SEB	Berlin
 10010222	10	ABN AMRO Bank Ndl Deutschland	Berlin
 10010424	09	Aareal Bank	Berlin
-10010600	09	IKB Deutsche Industriebank	Berlin
 10020000	69	Berliner Bank Ndl d Landesbank Berlin	Berlin
 10020100	09	Riggs Bank Europe	Berlin
 10020200	60	ING BHF-BANK	Berlin
@@ -46,14 +45,13 @@
 10110300	09	Masel, Dr. - & Co.	Berlin
 10110400	09	Investitionsbank Berlin	Berlin
 10110600	00	Berliner Effektenbank, Ndl Consors Capital	Berlin
-10110900	09	KfW Ndl Berlin	Berlin
 10120100	94	Weberbank Privatbankiers	Berlin
 10120600	41	ALLBANK	Berlin
-10120760	70	Bayer Hypo- und Vereinsbank Ndl 260 Bln	Aschheim
+10120760	70	Bayer Hypo- und Vereinsbank Ndl 260 -alt-	Aschheim
 10120800	09	VON ESSEN Bankgesellschaft	Berlin
 10120900	09	ABC Privatkunden-Bank	Berlin
 10130600	06	Isbank Fil Berlin	Berlin
-10130800	01	E*TRADE Bank	Berlin
+10130800	01	XCOM Bank Ndl Dreieich	Dreieich
 10190100	06	Berliner Volksbank (eh Grundkreditbank)	Berlin
 10210900	09	Münchener Hypothekenbank Berlin	Berlin
 10220700	09	Hanseatic Bank	Berlin
@@ -65,10 +63,8 @@
 12030700	09	Hanseatic Bank Berlin-Mitte	Berlin
 12030900	10	Merck Finck & Co	Berlin
 12040000	13	Commerzbank Berlin Ost	Berlin
-12050555	27	Nord/LB-FinanzIT Berlin	Berlin
-12050566	09	WestLB-FinanzIT Berlin	Berlin
+12050555	09	NLB FinanzIT	Berlin
 12060000	09	DZ BANK	Berlin
-12060016	09	DZ BANK Zw 16	Berlin
 12070000	63	Deutsche Bank Ld Brandenburg	Berlin
 12070024	63	Deutsche Bank Privat und Geschäftskunden	Berlin
 12080000	76	Dresdner Bank	Berlin
@@ -76,11 +72,10 @@
 12096597	A8	Sparda-Bank Berlin	Berlin
 13000000	09	Bundesbank	Rostock
 13010111	13	SEB	Rostock
-13020780	70	Bayer Hypo- und Vereinsbank (ehem Hypo)	Rostock
+13020780	70	Bayer Hypo- und Vereinsbank -alt-	Rostock
 13020800	16	Hanseatic Bank	Rostock
 13040000	13	Commerzbank	Rostock
 13050000	20	Ostseesparkasse Rostock	Rostock
-13051022	52	Sparkasse Vorpommern	Greifswald, Hansestadt
 13051042	52	Kreissparkasse Rügen, Sitz Bergen	Bergen auf Rügen
 13051052	52	Sparkasse Hansestadt Stralsund	Stralsund
 13061008	32	Volksbank Wolgast	Wolgast
@@ -99,7 +94,7 @@
 13091174	06	Rostocker Volks- und Raiffeisenbank (eh VB)	Rostock
 14000000	09	Bundesbank	Schwerin, Meckl
 14020700	16	Hanseatic Bank	Schwerin, Meckl
-14020781	70	Bayer Hypo- und Vereinsbank (ehem Hypo)	Schwerin, Meckl
+14020781	70	Bayer Hypo- und Vereinsbank -alt-	Schwerin, Meckl
 14040000	13	Commerzbank	Schwerin, Meckl
 14051000	20	Sparkasse Mecklenburg-Nordwest	Wismar, Meckl
 14051362	20	Sparkasse Parchim-Lübz	Parchim
@@ -114,8 +109,8 @@
 15000000	09	Bundesbank	Neubrandenburg, Meckl
 15040068	13	Commerzbank	Neubrandenburg, Meckl
 15050100	20	Müritz-Sparkasse	Waren (Müritz)
-15050200	20	Neubrandenburger Sparkasse	Neubrandenburg, Meckl
-15050300	20	Kreissparkasse Demmin	Demmin, Hansestadt
+15050200	20	Sparkasse Neubrandenburg-Demmin	Neubrandenburg, Meckl
+15050300	20	KrSpk Demmin -alt-	Demmin, Hansestadt
 15050400	20	Sparkasse Uecker-Randow	Pasewalk
 15050500	20	Sparkasse Vorpommern	Greifswald, Hansestadt
 15051732	52	Sparkasse Mecklenburg-Strelitz	Neustrelitz
@@ -154,7 +149,7 @@
 17052302	52	Stadtsparkasse Schwedt	Schwedt /Oder
 17052472	52	Stadtsparkasse Frankfurt (Oder)	Frankfurt (Oder)
 17054040	20	Sparkasse Märkisch-Oderland	Strausberg
-17055050	20	Sparkasse Oder-Spree	Eisenhüttenstadt
+17055050	20	Sparkasse Oder-Spree	Frankfurt (Oder)
 17056060	20	Sparkasse Uckermark	Prenzlau
 17062318	32	Raiffeisenbank Uckermark	Schwedt /Oder
 17062428	32	Raiffeisenbank-Volksbank Oder-Spree	Beeskow
@@ -180,12 +175,12 @@
 20000000	09	Bundesbank	Hamburg
 20010020	24	Postbank (Giro)	Hamburg
 20010111	13	SEB	Hamburg
-20010200	09	HSH Nordbank Hypo AG	Hamburg
+20010200	09	HSH Nordbank Hypo	Hamburg
 20010424	09	Aareal Bank	Hamburg
 20010800	09	Hanseatische i-Bank	Hamburg
 20020200	09	SEB Merchant Bank Hamburg	Hamburg
 20020500	09	Jyske Bank Fil Hamburg	Hamburg
-20020860	70	Bayer Hypo- und Vereinsbank (ehem Hypo)	Hamburg
+20020860	70	Bayer Hypo- und Vereinsbank -alt-	Hamburg
 20020900	09	Signal Iduna Bauspar	Hamburg
 20030000	68	Vereins- und Westbank	Hamburg
 20030300	06	Donner Bank, C.H.	Hamburg
@@ -197,13 +192,11 @@
 20040000	13	Commerzbank	Hamburg
 20041111	13	comdirect bank	Quickborn, Kr Pinneberg
 20041133	13	comdirect Bank	Quickborn, Kr Pinneberg
-20045050	13	Commerzbank Service-BZ	Hamburg
-20050000	75	Hamburgische Landesbank - Girozentrale	Hamburg
+20050000	75	HSH Nordbank Hamburg	Hamburg
 20050001	75	HSH Nordbank Zw S	Hamburg
 20050550	00	Hamburger Sparkasse	Hamburg
 20060000	09	DZ BANK	Hamburg
 20069111	32	Norderstedter Bank	Norderstedt
-20069117	33	Raiffeisenbank Südstormarn	Oststeinbek
 20069119	32	Raiffeisen- und Volksbank	Henstedt-Ulzburg
 20069125	33	Raiffeisenbank	Kaltenkirchen, Holst
 20069130	32	Raiffeisenbank	Bad Bramstedt
@@ -212,8 +205,6 @@
 20069145	33	Volks- u Raiffeisenbank Halstenbek-Schenefeld	Schenefeld, Bz Hamburg
 20069177	32	Raiffeisenbank Südstormarn	Großhansdorf
 20069232	33	Raiffeisenbank	Struvenhütten
-20069524	28	Zevener Volksbank -alt-	Heeslingen
-20069547	28	Zevener Volksbank -alt-	Rhade b Zeven
 20069625	28	Volksbank	Gnarrenburg
 20069641	33	Raiffeisenbank Owschlag	Owschlag
 20069780	28	Volksbank Ahlerstedt	Ahlerstedt
@@ -356,7 +347,6 @@
 21630063	68	Vereins- und Westbank	Süderbrarup
 21650110	04	Sparkasse Schleswig-Flensburg -alt-	Schleswig
 21661719	32	VR Bank Flensburg-Schleswig	Schleswig
-21663723	33	Volksbank Raiffeisenbank Schleswig	Kropp b Schleswig
 21690020	32	Volksbank Raiffeisenbank Schleswig	Schleswig
 21700000	09	Bundesbank eh Husum	Flensburg
 21730040	68	Vereins- und Westbank	Husum, Nordsee
@@ -372,11 +362,9 @@
 21751230	00	Spar- und Leihkasse zu Bredstedt	Bredstedt
 21762550	32	Volksbank-Raiffeisenbank	Husum, Nordsee
 21763542	32	VR Bank	Niebüll
-21766615	33	Volksbank Raiffeisenbank Schleswig alt Raiffbk	Erfde
 21770011	63	Deutsche Bank	Husum, Nordsee
 21770024	63	Deutsche Bank Privat und Geschäftskunden	Husum, Nordsee
 21791402	33	Volksbank Eiderstedt -alt-	Garding
-21791601	33	VR Bank ehem VB Niebüll	Niebüll
 21791805	33	Volks- und Raiffeisenbank Sylt	Sylt-Ost
 21791906	32	Föhr-Amrumer Bank	Wyk auf Föhr
 21830030	68	Vereins- und Westbank	Heide, Holst
@@ -413,9 +401,9 @@
 22230024	68	Vereins- und Westbank	Krempe, Holst
 22230025	68	Vereins- und Westbank	Wilster
 22240073	13	Commerzbank	Itzehoe
-22250020	04	Sparkasse in Steinburg	Itzehoe
+22250020	04	Sparkasse Westholstein	Itzehoe
 22251580	04	Landsparkasse Schenefeld	Schenefeld, Mittelholst
-22252050	04	Verbandssparkasse Wilster	Wilster
+22252050	04	Verbandssparkasse Wilster -alt-	Wilster
 22260136	33	Raiffeisenbank	Itzehoe
 22280000	76	Dresdner Bank	Itzehoe
 22290031	10	Volksbank	Itzehoe
@@ -463,7 +451,6 @@
 24151116	00	Kreissparkasse Stade	Stade, Niederelbe
 24151235	00	Sparkasse Rotenburg-Bremervörde	Zeven
 24161594	28	Zevener Volksbank	Sittensen
-24161814	28	Volksbank Stade-Cuxhaven -alt-	Cuxhaven
 24162898	28	Spar- u Darlehnskasse Börde Lamstedt-Hechthsn	Lamstedt
 24180000	76	Dresdner Bank	Otterndorf, Niederelbe
 24180001	76	Dresdner Bank	Cuxhaven
@@ -479,20 +466,18 @@
 25020200	60	ING BHF-BANK	Hannover
 25020600	41	ALLBANK	Hannover
 25020700	09	Hanseatic Bank	Hannover
-25021000	00	Clearing Bank	Hannover
 25030000	68	Vereins- und Westbank	Hannover
 25040066	13	Commerzbank	Hannover
 25050000	27	Norddeutsche Landesbank Girozentrale	Hannover
 25050180	A3	Sparkasse Hannover	Hannover
 25050299	A3	Kreissparkasse Hannover -alt-	Hannover
-25052000	00	NB EXPO-Bank S-Finanzgruppe	Hannover
+25052000	00	NB EXPO-Bank	Hannover
 25055500	26	LBS-Norddeutsche Landesbausparkasse	Hannover
 25060000	09	DZ BANK	Hannover
 25060180	00	Bankhaus Hallbaum	Hannover
 25060701	32	Evangelische Kreditgenossenschaft	Hannover
 25069168	28	Volks- und Raiffeisenbank Leinebergland	Delligsen
 25069262	28	Raiffeisen-Volksbank Hagen	Neustadt am Rübenberge
-25069263	28	Volksbank Steyerberg	Raddestorf
 25069270	28	Volksbank Aller-Oker	Müden (Aller)
 25069278	28	Raiffeisenbank	Bevern, Kr Holzminden
 25069365	09	Volksbank Celler Land	Eschede
@@ -515,15 +500,15 @@
 25090608	14	Deutsche Apotheker- und Ärztebank	Hannover
 25090900	91	PSD Bank	Hannover
 25120510	09	Sozialbank	Hannover
-25120960	70	Bayer Hypo- und Vereinsbank (ehem Hypo)	Hannover
+25120960	70	Bayer Hypo- und Vereinsbank -alt-	Hannover
 25151270	00	Stadtsparkasse Barsinghausen	Barsinghausen
 25151371	00	Stadtsparkasse Burgdorf	Burgdorf, Kr Hannover
 25152375	00	Kreissparkasse Fallingbostel in Walsrode	Walsrode
 25152490	00	Stadtsparkasse Wunstorf	Wunstorf
 25161322	28	Volksbank Burgdorf-Celle	Celle
 25162563	28	Volksbank Garbsen	Garbsen
-25190001	09	Volksbank Hannover	Hannover
-25190101	28	Lindener Volksbank	Hannover
+25190001	09	Hannoversche Volksbank	Hannover
+25190101	28	Lindener Volksbank -alt-	Hannover
 25191510	10	Volksbank -alt-	Lehrte b Hannover
 25193331	28	Volksbank	Pattensen b Hannover
 25250001	00	Kreissparkasse Peine	Peine
@@ -537,7 +522,6 @@
 25440047	13	Commerzbank	Hameln
 25450001	00	Stadtsparkasse Hameln	Hameln
 25450110	00	Sparkasse Weserbergland	Hameln
-25451135	00	Sparkasse Schaumburg	Pohle
 25451345	00	Stadtsparkasse Bad Pyrmont	Bad Pyrmont
 25451450	00	Sparkasse Weserbergland	Bodenwerder
 25451655	00	Sparkasse Weserbergland	Hessisch Oldendorf
@@ -585,7 +569,6 @@
 25841403	13	Commerzbank	Lüchow (Wendland)
 25841708	13	Commerzbank	Schneverdingen
 25850110	00	Sparkasse Uelzen	Uelzen, Lüneburger Heide
-25851230	00	Gemeindesparkasse Bergen	Bergen (Dumme)
 25851335	00	Kreissparkasse Lüchow-Dannenberg	Dannenberg (Elbe)
 25851660	00	Kreissparkasse Soltau	Soltau
 25861395	28	Volksbank Dannenberg -alt-	Dannenberg (Elbe)
@@ -623,7 +606,6 @@
 26060184	00	Bankhaus Hallbaum	Göttingen, Niedersachs
 26061291	48	Volksbank Eichsfeld-Northeim	Duderstadt, Niedersachs
 26061556	28	Volksbank	Adelebsen
-26061826	28	Volksbank Eichsfeld-Northeim	Bodensee
 26062433	32	Volksbank Dransfeld	Dransfeld
 26062575	28	Raiffeisenbank	Rosdorf, Kr Göttingen
 26066458	28	Raiffeisenbank Seulingen -alt-	Seulingen
@@ -754,7 +736,6 @@
 27240004	13	Commerzbank	Holzminden
 27260053	09	Raiffeisenbank -alt-	Holzminden
 27290087	47	Volksbank Weserbergland	Holzminden
-27362207	28	VB-Raiffbk Bad Gandersheim-Harriehausen-Bornh	Bad Gandersheim
 27893215	32	Vereinigte Volksbank	Wernigerode
 27893359	48	Volksbank Braunlage	Braunlage
 27893760	28	Volksbank	Seesen, Harz
@@ -798,7 +779,6 @@
 28064179	28	Volksbank Vechta	Vechta
 28064241	28	Raiffeisen-Volksbank Varel-Nordenham	Nordenham
 28064465	28	Volksbank Mühlen -alt-	Steinfeld (Oldenburg)
-28064772	28	Volksbank Osterfeine	Damme, Dümmer
 28065061	28	Volksbank Löningen	Löningen
 28065108	28	VR-Bank Dinklage-Steinfeld	Dinklage
 28065286	28	Raiffeisenbank Scharrel	Saterland
@@ -820,13 +800,10 @@
 28069109	28	Volksbank Emstek	Emstek
 28069128	28	Raiffeisenbank Garrel	Garrel
 28069138	28	Volksbank Ahlhorn-Großenkneten	Großenkneten
-28069146	28	Raiffeisenbank Rastede ehem Raiffbk Hahn -alt-	Rastede
 28069195	28	Raiffeisenbank Wardenburg	Wardenburg
 28069293	28	Volksbank Obergrafschaft	Bad Bentheim
 28069336	28	Raiffeisenbank Hage-Dornum-Großheide	Hage, Ostfriesl
 28069381	28	Hümmlinger Volksbank	Werlte, Emsl
-28069480	28	Volksbank Obergrafschaft	Schüttorf
-28069548	28	Volksbank Haselünne	Herzlake
 28069706	28	Volksbank Nordhümmling	Börger
 28069755	28	Raiffeisenbank Oldersum	Moormerland
 28069762	28	Raiffeisenbank Emsland-Mitte	Spahnharrenstätte
@@ -843,7 +820,6 @@
 28069959	28	Raiffeisenbank	Voltlage
 28069991	28	Volksbank Emstal	Lathen
 28069994	28	Volksbank Spelle-Freren	Spelle
-28069998	28	Volksbank Niedergrafschaft -alt-	Emlichheim
 28070024	63	Deutsche Bank Privat und Geschäftskunden	Oldenburg (Oldb)
 28070057	63	Deutsche Bank	Oldenburg (Oldb)
 28090045	10	Volksbank Oldenburg	Oldenburg (Oldb)
@@ -876,11 +852,10 @@
 28421030	61	Oldenburgische Landesbank AG	Aurich, Ostfriesland
 28440037	13	Commerzbank	Emden, Ostfriesland
 28450000	00	Sparkasse Emden	Emden, Ostfriesland
-28451050	00	Kreissparkasse Aurich	Aurich, Ostfriesland
+28451050	00	Sparkasse Aurich-Norden	Aurich, Ostfriesland
 28470024	63	Deutsche Bank Privat und Geschäftskunden	Emden, Ostfriesland
 28470091	63	Deutsche Bank	Emden, Ostfriesland
 28490073	28	Raiffeisen-Volksbank Emden-Pewsum -alt-	Emden, Ostfriesland
-28491324	28	Borkumer Volksbank -alt-	Borkum
 28500000	09	Bundesbank eh Leer	Oldenburg (Oldb)
 28520009	61	Oldenburgische Landesbank AG	Leer (Ostfriesland)
 28521518	61	Oldenburgische Landesbank AG	Papenburg
@@ -947,7 +922,6 @@
 29152300	00	Kreissparkasse Osterholz	Osterholz-Scharmbeck
 29152550	00	Zwecksverbandssparkasse Scheeßel	Scheeßel
 29152670	09	Kreissparkasse Verden	Verden (Aller)
-29152930	00	Kreissparkasse Rotenburg	Rotenburg (Wümme)
 29162394	28	Volksbank	Osterholz-Scharmbeck
 29162453	28	Volksbank Schwanewede	Schwanewede
 29162697	28	Volksbank	Verden (Aller)
@@ -1023,7 +997,7 @@
 30110833	09	CC-Bank	Düsseldorf
 30120400	10	ABN AMRO Bank Ndl Deutschland	Düsseldorf
 30120500	18	KBC Bank Deutschland	Düsseldorf
-30120764	70	Bayer Hypo- und Vereinsbank Ndl 450 Düs	Aschheim
+30120764	70	Bayer Hypo- und Vereinsbank Ndl 450 -alt-	Aschheim
 30130100	09	Demir-Halk Bank (Nederland)	Düsseldorf
 30130200	09	GarantiBank International	Düsseldorf
 30130600	06	Isbank Fil Düsseldorf	Düsseldorf
@@ -1031,10 +1005,10 @@
 30130800	09	Düsseldorfer Hypothekenbank	Düsseldorf
 30150001	09	Westdeutsche Landesbank Clearingkto Düsseldorf	Düsseldorf
 30150200	00	Kreissparkasse Düsseldorf	Düsseldorf
-30151660	00	Sparkasse Ratingen	Ratingen
+30151660	00	Sparkasse Ratingen -alt-	Ratingen
 30160213	06	Volksbank Düsseldorf Neuss	Düsseldorf
 30220190	99	Bayer Hypo- und Vereinsbank	Düsseldorf
-30350000	00	Stadt-Sparkasse Hilden	Hilden
+30350000	00	Stadt-Sparkasse Hilden -alt-	Hilden
 30351220	00	Stadt-Sparkasse Haan	Haan, Rheinl
 30520000	09	Renault Bank Ndl RCI S.A. Banque	Neuss
 30530000	09	Bankhaus Werhahn	Neuss
@@ -1047,7 +1021,6 @@
 31010833	09	CC-Bank	Mönchengladbach
 31040015	13	Commerzbank	Mönchengladbach
 31050000	00	Stadtsparkasse Mönchengladbach	Mönchengladbach
-31051240	00	Stadtsparkasse Korschenbroich	Korschenbroich
 31060181	06	Gladbacher Bank von 1922	Mönchengladbach
 31060297	09	Volksbank Rheydt	Mönchengladbach
 31060517	06	Volksbank Mönchengladbach	Mönchengladbach
@@ -1099,7 +1072,7 @@
 33070090	63	Deutsche Bank	Wuppertal
 33080030	76	Dresdner Bank	Wuppertal
 33440035	13	Commerzbank	Velbert
-33450000	00	Sparkasse Velbert	Velbert
+33450000	00	Sparkasse Hilden-Ratingen-Velbert	Velbert
 33451220	00	Sparkasse Heiligenhaus -alt-	Heiligenhaus b Velbert
 34040049	13	Commerzbank	Remscheid
 34050000	00	Stadtsparkasse Remscheid	Remscheid
@@ -1118,7 +1091,7 @@
 35010111	13	SEB	Duisburg
 35020030	10	National-Bank	Duisburg
 35040038	13	Commerzbank	Duisburg
-35050000	00	Stadtsparkasse Duisburg	Duisburg
+35050000	00	Sparkasse Duisburg	Duisburg
 35060190	06	KD-Bank	Duisburg
 35060386	40	Volksbank Rhein-Ruhr	Duisburg
 35060632	14	Deutsche Apotheker- und Ärztebank	Duisburg
@@ -1129,7 +1102,7 @@
 35211012	13	SEB	Dinslaken
 35251000	00	Sparkasse Dinslaken-Voerde-Hünxe	Dinslaken
 35261248	06	Volksbank Dinslaken	Dinslaken
-35450000	04	Sparkasse Moers	Moers
+35450000	A2	Sparkasse Moers	Moers
 35451250	00	Stadtsparkasse Kamp-Lintfort	Kamp-Lintfort
 35451460	00	Sparkasse Neukirchen-Vluyn	Neukirchen-Vluyn
 35451775	00	Sparkasse Rheinberg	Rheinberg
@@ -1187,7 +1160,6 @@
 37020090	99	Bayer Hypo- und Vereinsbank	Köln
 37020100	09	Renault Bank Ndl RCI S.A. Banque	Köln
 37020200	09	AXA Bank	Köln
-37020383	00	Delbrück & Co	Köln
 37020400	09	TOYOTA Kreditbank	Köln
 37020500	09	Sozialbank	Köln
 37020600	79	CC-Bank Köln	Köln
@@ -1219,7 +1191,6 @@
 37069101	06	Spar- und Darlehnskasse Aegidienberg	Bad Honnef
 37069103	06	Raiffeisenbank Aldenhoven	Aldenhoven b Jülich
 37069125	06	Raiffeisenbank Kürten-Odenthal	Kürten
-37069141	06	Volksbank Kerpen	Kerpen, Rheinl
 37069153	06	Spar- und Darlehnskasse Brachelen	Hückelhoven
 37069164	06	Volksbank Meerbusch	Meerbusch
 37069210	34	Bäcker-Darlehnskasse West	Duisburg
@@ -1245,7 +1216,6 @@
 37069520	06	VR-Bank Rhein-Sieg	Siegburg
 37069521	06	Raiffeisenbank Rhein-Berg	Monheim am Rhein
 37069524	06	Raiffeisenbank Much-Ruppichteroth	Much
-37069570	06	Raiffeisenbank Oberaußem	Bergheim, Erft
 37069577	06	Raiffeisenbank Odenthal -alt-	Odenthal
 37069582	06	Raiffeisenbank Overath-Rösrath	Overath, Bergisches Land
 37069620	06	Raiffeisenbank Radevormwald	Radevormwald
@@ -1255,7 +1225,6 @@
 37069707	06	Raiffeisenbank St Augustin	Sankt Augustin
 37069720	06	VR-Bank Nordeifel	Schleiden, Eifel
 37069805	06	Volksbank Wachtberg	Wachtberg
-37069810	06	Raiffeisenbank	Hürtgenwald
 37069833	06	Raiffeisenbk Wesseling -alt-	Wesseling, Rheinl
 37069840	06	Volksbank Wipperfürth-Lindlar	Wipperfürth
 37069991	09	Brühler Kreditbank	Brühl, Rheinl
@@ -1349,7 +1318,7 @@
 40060560	85	Sparda-Bank Münster	Münster, Westf
 40060614	14	Deutsche Apotheker- und Ärztebank	Münster, Westf
 40061238	34	Volksbank Greven	Greven, Westf
-40062624	34	Volksbank Telgte-Westbevern	Telgte
+40062624	34	Volksbank Telgte-Westbevern -alt-	Telgte
 40069226	34	Volksbank Darup-Rorup	Nottuln
 40069266	34	Volksbank Marsberg	Marsberg, Sauerland
 40069283	34	Volksbank Schlangen	Schlangen
@@ -1360,7 +1329,7 @@
 40069408	34	Volksbank Baumberge	Billerbeck, Westf
 40069462	34	Volksbank Sprakel	Münster, Westf
 40069477	34	Volksbank Wulfen -alt-	Dorsten
-40069537	34	Volksbank Ostbevern-Kattenvenne	Ostbevern
+40069537	34	Volksbank Ostbevern-Kattenvenne -alt-	Ostbevern
 40069545	34	Volksbank Schönholthausen	Finnentrop
 40069546	34	Volksbank Senden	Senden, Westf
 40069600	34	Volksbank Amelsbüren	Münster, Westf
@@ -1375,14 +1344,12 @@
 40080040	76	Dresdner Bank	Münster, Westf
 40090900	91	PSD Bank	Münster, Westf
 40150001	09	Westdeutsche Landesbank Clearingkto Münster	Münster, Westf
-40153452	00	Stadtsparkasse Billerbeck -alt-	Billerbeck, Westf
 40153768	01	Verbundsparkasse Emsdetten Ochtrup	Emsdetten
 40154006	00	Stadtsparkasse Gronau	Gronau (Westf.)
 40154476	00	Stadtsparkasse Lengerich	Lengerich, Westf
 40154530	00	Sparkasse Westmünsterland	Ahaus
 40154680	00	Stadtsparkasse Ochtrup -alt-	Ochtrup
 40154702	00	Stadtsparkasse Stadtlohn	Stadtlohn
-40154870	00	Sparkasse Vreden -alt-	Vreden
 40160050	34	Volksbank Münster	Münster, Westf
 40163123	34	Volksbank Coesfeld	Coesfeld
 40163720	34	Volksbank Nordmünsterland	Rheine
@@ -1428,7 +1395,7 @@
 41261324	34	Volksbank Enniger-Ostenfelde-Westkirchen	Ennigerloh
 41261419	34	Volksbank Oelde-Ennigerloh-Neubeckum	Ennigerloh
 41262501	34	Volksbank Ahlen-Sassenberg-Warendorf	Ahlen, Westf
-41262621	34	Volksbank 2000	Sendenhorst
+41262621	34	Vereinigte Volksbank Telgte	Telgte
 41280043	76	Dresdner Bank	Beckum, Westf
 41440018	13	Commerzbank	Soest, Westf
 41450075	00	Sparkasse Soest	Soest, Westf
@@ -1507,7 +1474,7 @@
 44010111	13	SEB	Dortmund
 44010200	09	AXA Bausparkasse	Dortmund
 44010300	10	ABN AMRO Bank Ndl Deutschland	Dortmund
-44010400	09	Westfälische Hypothekenbank	Dortmund
+44010400	09	Hypo Real Estate Bank Dortmund	Dortmund
 44020090	99	Bayer Hypo- und Vereinsbank	Dortmund
 44040037	13	Commerzbank	Dortmund
 44040038	13	Commerzbank Zw 38	Dortmund
@@ -1582,7 +1549,6 @@
 46051240	00	Sparkasse Burbach-Neunkirchen	Burbach, Siegerl
 46051733	00	Stadtsparkasse Freudenberg	Freudenberg, Westf
 46051875	00	Stadtsparkasse Hilchenbach	Hilchenbach, Siegerland
-46052065	00	Stadtsparkasse Kreuztal -alt-	Kreuztal, Westf
 46052855	00	Stadtsparkasse Schmallenberg	Schmallenberg
 46053480	00	Sparkasse Wittgenstein	Bad Berleburg
 46060040	34	Volksbank im Siegerland	Siegen
@@ -1725,7 +1691,7 @@
 50010800	09	DEPFA Deutsche Pfandbriefbank	Frankfurt am Main
 50010900	09	Bank of America	Frankfurt am Main
 50012800	09	Alte Leipziger Bauspar	Bad Homburg v d Höhe
-50020160	70	Bayer Hypo- und Vereinsbank Ndl 427 Ffm	Aschheim
+50020160	70	Bayer Hypo- und Vereinsbank Ndl 427 -alt-	Aschheim
 50020200	60	ING BHF-BANK	Frankfurt am Main
 50020300	18	KBC Bank Deutschland	Frankfurt am Main
 50020400	09	KfW Kreditanstalt für Wiederaufbau Frankfurt	Frankfurt am Main
@@ -1742,7 +1708,6 @@
 50040033	09	Commerzbank	Frankfurt am Main
 50042500	13	Commerzbank Zw 425 - keine Auslandsbanken	Frankfurt am Main
 50044444	13	Commerzbank Vermögensverwaltung	Frankfurt am Main
-50045050	13	Commerzbank Service-BZ	Frankfurt am Main
 50050000	00	Landesbank Hessen-Thür Girozentrale	Frankfurt am Main
 50050201	96	Frankfurter Sparkasse	Frankfurt am Main
 50050515	04	Nassauische Sparkasse	Wiesbaden
@@ -1767,7 +1732,6 @@
 50069727	32	Raiffeisenbank Mockstadt	Ranstadt
 50069828	32	Raiffeisenbank Mücke	Mücke
 50069842	32	Raiffeisen Volksbank	Schwabenheim an der Selz
-50069893	06	Raiffeisenbank	Trebur
 50069976	32	Volksbank Wißmar	Wettenberg, Hess
 50070010	63	Deutsche Bank Filiale	Frankfurt am Main
 50070024	63	Deutsche Bank Privat und Geschäftskunden	Frankfurt am Main
@@ -1794,7 +1758,6 @@
 50083838	76	Dresdner Bank in Frankfurt MBP	Frankfurt am Main
 50083900	76	Dresdner Bank in Frankfurt SETR	Frankfurt am Main
 50089400	09	Dresdner Bank ITGK	Frankfurt am Main
-50090100	06	Ökobank Zndl d BAG Bankaktiengesellschaft	Frankfurt am Main
 50090200	00	VR DISKONTBANK	Eschborn, Taunus
 50090500	73	Sparda-Bank Frankfurt	Frankfurt am Main
 50090607	14	Deutsche Apotheker- und Ärztebank	Frankfurt am Main
@@ -1835,9 +1798,9 @@
 50220200	09	LGT Bank in Liechtenstein	Frankfurt am Main
 50220400	72	Gontard & MetallBank	Frankfurt am Main
 50220600	68	Vereins- und Westbank	Frankfurt am Main
-50220800	06	Commercial Bank of Greece (Germany)	Frankfurt am Main
+50220800	06	Emporiki Bank Germany	Frankfurt am Main
 50220900	00	Hauck & Aufhäuser Privatbankiers	Frankfurt am Main
-50230000	00	Arab Banking Corporation - Daus & Co	Frankfurt am Main
+50230000	00	ABC International Bank Frankfurt am Main	Frankfurt am Main
 50230100	09	Morgan Stanley Dean Witter Bank Ltd	Frankfurt am Main
 50230200	09	DIF Bank	Bad Homburg v d Höhe
 50230300	06	YAPI KREDI BANK Deutschland	Frankfurt am Main
@@ -1857,7 +1820,6 @@
 50320200	97	INVESCO Bank	Frankfurt am Main
 50320300	09	Lombardkasse in Liquidation	Frankfurt am Main
 50320500	00	Banco Santander Central Hispano, Fil Frankfurt	Frankfurt am Main
-50320700	09	Nols, Fritz - Global Equity Services	Frankfurt am Main
 50320900	09	Pictet & Cie (Europe)	Frankfurt am Main
 50330000	06	State Bank of India	Frankfurt am Main
 50330200	06	Mitteleurop Handelsbank Deutsch-Polnische Bank	Frankfurt am Main
@@ -1867,6 +1829,7 @@
 50330800	09	Mizuho Corporate Bank (Germany)	Frankfurt am Main
 50400000	09	Bundesbank Zentrale	Frankfurt am Main
 50510111	13	SEB	Offenbach am Main
+50520000	00	Honda Bank	Offenbach am Main
 50520190	99	Bayer Hypo- und Vereinsbank	Offenbach am Main
 50530000	06	Cronbank	Dreieich
 50530001	06	CRONBANK Zw CS	Dreieich
@@ -1894,7 +1857,6 @@
 50670024	63	Deutsche Bank Privat und Geschäftskunden	Hanau
 50680002	76	Dresdner Bank	Hanau
 50690000	32	Volksbank Raiffeisenbank Hanau Ndl d Frankf VB	Hanau
-50690500	73	Sparda-Bank Frankfurt Zw Hanau	Hanau
 50691300	09	DZB Die Zentralregulierungsbank	Mainhausen
 50692100	06	Volksbank Seligenstadt	Seligenstadt, Hess
 50750094	01	Kreissparkasse Gelnhausen	Gelnhausen
@@ -1902,7 +1864,7 @@
 50761506	32	Volksbank Gedern	Gedern
 50761613	32	Volksbank	Nidda
 50762649	32	VR Bank Bad Orb-Gelnhausen	Gelnhausen
-50763189	32	Volksbank Raiffeisenbank Main-Kinzig	Linsengericht
+50763189	32	Volksbank Raiffeisenbank Main-Kinzig-alt-	Linsengericht
 50763319	32	Raiffeisenbank Vogelsberg	Birstein
 50780006	76	Dresdner Bank	Gelnhausen
 50790000	09	VR Bank Bad Orb-Gelnhausen	Gelnhausen
@@ -1935,7 +1897,6 @@
 50864421	32	Vereinigte Volksbank -alt-	Rodgau
 50864808	32	Volksbank Seeheim	Seeheim-Jugenheim
 50865224	32	VB Mörfelden-Walldorf Ndl d Frankfurter VB	Mörfelden-Walldorf
-50865404	32	Volksbank Raiffeisen Riedstadt	Riedstadt
 50865503	32	Volksbank	Eppertshausen
 50870005	63	Deutsche Bank	Darmstadt
 50870024	63	Deutsche Bank Privat und Geschäftskunden	Darmstadt
@@ -1972,7 +1933,6 @@
 51080060	76	Dresdner Bank	Wiesbaden
 51089410	09	Dresdner Bank ITGK	Wiesbaden
 51090000	06	Wiesbadener Volksbank	Wiesbaden
-51090500	73	Sparda-Bank Frankfurt Zw Wiesbaden	Wiesbaden
 51090636	14	Deutsche Apotheker- und Ärztebank	Wiesbaden
 51091400	06	Volksbank Eltville	Eltville am Rhein
 51091500	06	Rheingauer Volksbank	Geisenheim, Rheingau
@@ -2001,12 +1961,12 @@
 51220800	09	Banco do Brasil	Frankfurt am Main
 51220900	09	Morgan Stanley Bank	Frankfurt am Main
 51230000	09	Royal Bank of Scotland Ndl Frankfurt	Frankfurt am Main
-51230100	09	Deutsche Hyp -alt-	Frankfurt am Main
+51230100	09	Eurohypo	Frankfurt am Main
 51230400	10	ABN AMRO Bank Deutschland	Frankfurt am Main
 51230500	09	American Express Bank	Frankfurt am Main
 51230502	09	American Express Bank Zw R	Frankfurt am Main
 51230600	09	ARABBANK Frankfurt	Frankfurt am Main
-51230800	01	E*TRADE Bank Ndl Dreieich	Dreieich
+51230800	01	XCOM Bank Ndl Dreieich	Dreieich
 51250000	06	Taunus-Sparkasse	Bad Homburg v d Höhe
 51300000	09	Bundesbank	Gießen, Lahn
 51310111	13	SEB	Gießen, Lahn
@@ -2027,7 +1987,6 @@
 51370024	63	Deutsche Bank Privat und Geschäftskunden	Gießen, Lahn
 51380040	76	Dresdner Bank	Gießen, Lahn
 51390000	06	Volksbank Gießen	Gießen, Lahn
-51390500	73	Sparda-Bank Frankfurt Zw Gießen	Gießen, Lahn
 51410111	13	SEB direct	Frankfurt am Main
 51410200	09	Banca di Roma Zndl. Frankfurt am Main	Frankfurt am Main
 51410600	09	Merrill Lynch Capital Markets Bank	Frankfurt am Main
@@ -2094,7 +2053,7 @@
 52069013	32	Raiffeisenbank Burghaun	Burghaun
 52069029	32	Spar- und Kredit-Bank	Gemünden (Wohra)
 52069065	32	Raiffeisenbank Langenschwarz	Burghaun
-52069082	32	Raiffeisenbank Oberlistingen	Breuna
+52069082	32	Raiffeisenbank Oberlistingen-alt-	Breuna
 52069103	32	Raiffeisenbank Trendelburg	Trendelburg
 52069111	32	VR-Bank Chattengau	Wabern, Hess
 52069129	32	Raiffeisenbank Freienhagen-Höringhausen	Waldeck, Hess
@@ -2117,9 +2076,8 @@
 52092400	06	Volksbank Raiffeisenbank Werra-Meißner	Hessisch Lichtenau
 52240006	13	Commerzbank	Eschwege
 52250030	00	Sparkasse Werra-Meißner	Eschwege
-52260385	32	Volksbank Raiffeisenbank Werra-Meißner	Eschwege
-52261089	32	Raiffeisenbk Eschwege-Hess Lichtenau-Wehretal	Wehretal
-52262465	32	Raiffeisenbk Eschwege-Hess Lichtenau-Wehretal	Hessisch Lichtenau
+52260385	32	Volksbank Raiffeisenbank Werra-Meißner -alt-	Eschwege
+52262465	32	Raiffbk Eschwege-Hess Lichtenau-Wehretal -alt-	Hessisch Lichtenau
 52270012	63	Deutsche Bank	Eschwege
 52270024	63	Deutsche Bank Privat und Geschäftskunden	Eschwege
 52350005	00	Sparkasse Waldeck-Frankenberg	Korbach
@@ -2164,7 +2122,6 @@
 53262073	32	Raiffeisenbank Haunetal	Haunetal
 53262339	32	Raiffeisenbank Gründchen -alt-	Grebenau, Hess
 53262455	32	Raiffeisenbank Ronshausen-Hönebach-Marksuhl	Ronshausen
-53263051	32	Raiffeisenbank Bebra-Sontra	Bebra
 53270012	63	Deutsche Bank	Bad Hersfeld
 53270024	63	Deutsche Bank Privat und Geschäftskunden	Bad Hersfeld
 53280081	76	Dresdner Bank	Bad Hersfeld
@@ -2183,7 +2140,7 @@
 53390635	14	Deutsche Apotheker- und Ärztebank	Marburg
 54000000	09	Bundesbank	Kaiserslautern
 54020090	99	Bayer Hypo- und Vereinsbank	Kaiserslautern
-54020474	70	Bayer Hypo- und Vereinsbank Ndl 697 Kais	Aschheim
+54020474	70	Bayer Hypo- und Vereinsbank Ndl 697 -alt-	Aschheim
 54030011	09	Service Credit Union Overseas Headquarters	Kaiserslautern
 54040042	13	Commerzbank	Kaiserslautern
 54050110	00	Stadtsparkasse Kaiserslautern	Kaiserslautern
@@ -2202,7 +2159,7 @@
 54092400	06	Volksbank Glan-Münchweiler	Glan-Münchweiler
 54210111	13	SEB	Pirmasens
 54220091	99	Bayer Hypo- und Vereinsbank	Pirmasens
-54220576	70	Bayer Hypo- und Vereinsbank Ndl 358 Pirm	Aschheim
+54220576	70	Bayer Hypo- und Vereinsbank Ndl 358 -alt-	Aschheim
 54240032	13	Commerzbank	Pirmasens
 54250010	00	Sparkasse Südwestpfalz	Pirmasens
 54261700	32	VR-Bank Südwestpfalz	Zweibrücken, Pfalz
@@ -2217,16 +2174,15 @@
 54390000	06	Volksbank Zweibrücken	Zweibrücken, Pfalz
 54500000	09	Bundesbank	Ludwigshafen am Rhein
 54510067	24	Postbank	Ludwigshafen am Rhein
-54520071	70	Bayer Hypo- und Vereinsbank Ndl 650 Lu	Aschheim
+54520071	70	Bayer Hypo- und Vereinsbank Ndl 650 -alt-	Aschheim
 54520194	99	Bayer Hypo- und Vereinsbank	Ludwigshafen am Rhein
 54530001	09	Fürstlich Castellsche Bank	Ludwigshafen am Rhein
 54540033	13	Commerzbank	Ludwigshafen am Rhein
 54550010	00	Stadtsparkasse Ludwigshafen	Ludwigshafen am Rhein
-54550120	00	Kreissparkasse Ludwigshafen	Ludwigshafen am Rhein
+54550120	00	Kreissparkasse Rhein-Pfalz	Ludwigshafen am Rhein
 54551030	00	Stadtsparkasse Frankenthal	Frankenthal (Pfalz)
 54560320	32	VR Bank Ludwigshafen	Ludwigshafen am Rhein
 54561310	32	RV Bank Frankenthal	Lambsheim
-54561406	32	Raiffeisen- und Volksbank Mutterstadt	Mutterstadt
 54561510	32	Raiffeisenbank Weisenheim	Weisenheim am Sand
 54561640	32	Raiffeisenbank	Maxdorf, Pfalz
 54570024	63	Deutsche Bank Privat und Geschäftskunden	Ludwigshafen am Rhein
@@ -2235,12 +2191,12 @@
 54590800	32	BBBank Zndl Bayern	Ludwigshafen am Rhein
 54591200	06	Volksbank Grünstadt	Grünstadt
 54620093	99	Bayer Hypo- und Vereinsbank	Neustadt an der Weinstraße
-54620574	70	Bayer Hypo- und Vereinsbank Ndl 660 Ne/W	Aschheim
+54620574	70	Bayer Hypo- und Vereinsbank Ndl 660 -alt-	Aschheim
 54640035	13	Commerzbank	Neustadt an der Weinstraße
 54651240	00	Sparkasse Mittelhaardt-Deutsche Weinstraße	Bad Dürkheim
 54660110	32	Raiffeisenbank Neustadt, Wstr-Süd	Neustadt an der Weinstraße
 54661108	32	Raiffeisenbank Haßloch-Meckenheim	Haßloch, Pfalz
-54661800	32	Raiffeisenbank	Freinsheim
+54661800	32	Raiffeisenbank Freinsheim	Freinsheim
 54662160	32	Raiffeisenbank Mittelhaardt Neustadt-Deide alt	Deidesheim
 54663270	09	Raiffeisenbank Friedelsheim-Rödersheim	Friedelsheim
 54670024	63	Deutsche Bank Privat und Geschäftskunden	Neustadt an der Weinstraße
@@ -2254,7 +2210,7 @@
 54760900	32	Evangelische Kreditgenossenschaft	Speyer
 54761411	32	Raiffeisenbank Schifferstadt	Schifferstadt
 54790000	06	Volksbank Speyer-Neustadt-Hockenheim	Speyer
-54820674	70	Bayer Hypo- und Vereinsbank Ndl 659 Lan/P	Aschheim
+54820674	70	Bayer Hypo- und Vereinsbank Ndl 659 -alt-	Aschheim
 54850010	00	Sparkasse Südliche Weinstraße in Landau	Landau in der Pfalz
 54851440	00	Sparkasse Germersheim-Kandel	Kandel, Pfalz
 54861080	32	Raiffeisenbank Südliche Weinstraße Billigheim	Billigheim-Ingenheim
@@ -2278,7 +2234,7 @@
 55040022	13	Commerzbank	Mainz a Rhein
 55050000	59	LRP Landesbank Rheinland-Pfalz -Girozentrale-	Mainz a Rhein
 55050120	00	Sparkasse Mainz	Mainz a Rhein
-55051260	00	Kreissparkasse Alzey	Alzey
+55051260	00	Kreissparkasse Alzey-alt-	Alzey
 55060321	32	Volksbank Mainz-Finthen	Mainz a Rhein
 55060417	32	VR-Bank Mainz	Mainz a Rhein
 55060611	32	Genobank Mainz	Mainz a Rhein
@@ -2303,7 +2259,7 @@
 55190088	00	Mainzer Volksbank	Sprendlingen, Rheinhess
 55190094	00	Mainzer Volksbank	Saulheim
 55340041	13	Commerzbank	Worms
-55350010	03	Sparkasse Worms	Worms
+55350010	03	Sparkasse Worms-Alzey-Ried	Worms
 55360784	32	Volksbank Rheindürkheim	Worms
 55361202	32	Raiffeisenbank Alsheim-Gimbsheim	Alsheim, Rheinhess
 55361313	32	Raiffeisenbank	Gundersheim, Rheinhess
@@ -2314,12 +2270,12 @@
 56051790	00	Kreissparkasse Rhein-Hunsrück	Simmern, Hunsrück
 56061151	38	Raiffeisenbank Kastellaun	Kastellaun
 56061472	38	Volksbank Hunsrück	Simmern, Hunsrück
-56061974	38	Volksbank Nahetal	Stromberg, Hunsrück
+56061974	38	Volksbank Nahetal -alt-	Stromberg, Hunsrück
 56062227	40	Volksbank	Rheinböllen
 56062577	38	Vereinigte Raiffeisenkassen	Weinsheim, Kr Bad Kreuznach
 56070024	63	Deutsche Bank Privat und Geschäftskunden	Bad Kreuznach
 56070040	63	Deutsche Bank	Bad Kreuznach
-56090000	09	Kreuznacher Volksbank	Bad Kreuznach
+56090000	09	Volksbank Nahetal	Bad Kreuznach
 56240050	13	Commerzbank	Idar-Oberstein
 56250030	07	Kreissparkasse Birkenfeld	Idar-Oberstein
 56261073	38	Volksbank Kirn-Sobernheim	Kirn, Nahe
@@ -2337,11 +2293,10 @@
 57040044	13	Commerzbank	Koblenz am Rhein
 57050120	00	Sparkasse Koblenz	Koblenz am Rhein
 57051001	00	Kreissparkasse Westerwald	Montabaur
-57051870	00	Kreissparkasse Cochem-Zell	Cochem
+57051870	00	Kreissparkasse Cochem-Zell -alt-	Cochem
 57060000	44	Westdeutsche Genossenschafts-Zentralbank	Koblenz am Rhein
 57060354	64	Volksbank Koblenz Mittelrhein -alt-	Koblenz am Rhein
 57060612	14	Deutsche Apotheker- und Ärztebank	Koblenz am Rhein
-57061225	38	Bacharacher Volksbank	Bacharach
 57062675	38	Raiffeisenbank	Niederwallmenach
 57062815	32	Raiffeisenbank Lahnstein -alt-	Lahnstein
 57063478	38	Volksbank Vallendar-Niederwerth	Vallendar
@@ -2352,11 +2307,10 @@
 57069126	38	Raiffeisenbank Koblenz-Horchheim	Koblenz am Rhein
 57069141	38	Raiffeisenbank Kaifenheim	Kaifenheim
 57069144	38	Raiffeisenbank Kaisersesch	Kaisersesch
-57069154	38	Raiffeisenbank Kelberg -alt-	Kelberg
-57069238	38	Raiffeisenbank Asbach-Neustadt	Neustadt (Wied)
+57069238	38	Raiffeisenbank Neustadt	Neustadt (Wied)
 57069246	09	Raiffeisenbank Rhens-Spay -alt-	Spay, Rhein
 57069257	38	Raiffeisenbank Untermosel	Treis-Karden
-57069315	38	Raiffeisenbank Straßenhaus	Straßenhaus, Westerw
+57069315	38	Raiffeisenbank Straßenhaus -alt-	Straßenhaus, Westerw
 57069361	38	Raiffeisenbank Welling	Welling b Mayen
 57069362	38	Raiffeisenbank Wershofen	Wershofen
 57069371	37	Raiffeisenbank Winningen	Winningen, Mosel
@@ -2366,8 +2320,8 @@
 57069617	38	Raiffeisenbank Alftal	Bausendorf
 57069632	38	Raiffeisenbank Bleialf	Bleialf
 57069727	38	Raiffeisenbank Irrel	Irrel
-57069806	38	Raiffeisenbank Haardtkopf Hunsrück-Mosel	Morbach, Hunsrück
-57069820	38	Raiffeisenbank	Neumagen-Dhron
+57069806	38	VR-Bank Hunsrück-Mosel	Morbach, Hunsrück
+57069820	38	Raiffeisenbank Neumagen-Dhron-alt-	Neumagen-Dhron
 57069858	38	Raiffeisenbank Pronsfeld-Waxweiler Gs	Pronsfeld
 57069898	38	Raiffeisenkasse	Strohn
 57070024	63	Deutsche Bank Privat und Geschäftskunden	Koblenz am Rhein
@@ -2386,7 +2340,7 @@
 57351030	00	Kreissparkasse Altenkirchen	Altenkirchen (Westerwald)
 57361008	38	Raiffeisenbank 2000 Westerwald	Altenkirchen (Westerwald)
 57361476	38	Volksbank	Gebhardshain
-57363243	38	Raiffeisenbank	Niederfischbach
+57363243	38	Raiffeisenbank Niederfischbach	Niederfischbach
 57391200	06	Volksbank Daaden	Daaden
 57391500	06	Volksbank Hamm, Sieg	Hamm (Sieg)
 57391700	06	Volksbank Wissen	Wissen, Sieg
@@ -2420,12 +2374,10 @@
 58561594	38	Raiffeisenbank Schweich	Schweich, Mosel
 58561626	38	Volksbank Saarburg	Saarburg, Saar
 58561771	38	Raiffeisenbank Mehring-Leiwen	Leiwen
-58563675	38	Raiffeisenbank Fell-Longuich	Fell
 58563837	38	Raiffeisenbank Oberemmel	Konz
-58564788	11	Volksbank Hochwald	Hermeskeil
+58564788	38	Volksbank Hochwald	Hermeskeil
 58570024	63	Deutsche Bank Privat und Geschäftskunden	Trier
 58570048	63	Deutsche Bank	Trier
-58580074	76	Dresdner Bank	Trier
 58590900	91	PSD Bank	Trier
 58650030	00	Kreissparkasse Bitburg-Prüm	Bitburg
 58651240	00	Kreissparkasse Daun	Daun
@@ -2435,16 +2387,16 @@
 58663628	38	Raiffeisenbank Biersdorf -alt-	Biersdorf am See
 58668818	38	Raiffeisenbank Neuerburg-Land	Neuerburg, Eifel
 58691500	38	Volksbank Eifel Mitte	Prüm
-58751230	00	Kreissparkasse Bernkastel-Wittlich	Bernkastel-Kues
+58751230	00	Sparkasse Mittelmosel	Bernkastel-Kues
 58760954	38	Raiffeisenbank Bernkastel-Wittlich	Wittlich
 58761343	38	Raiffeisenbank Zeller Land	Briedel
-58761475	38	Raiffeisenbank Enkirch	Enkirch
+58761475	38	Raiffeisenbank Enkirch-alt-	Enkirch
 58761587	38	Raiffeisenbank Reil-Burg	Reil
-58761760	38	Raiffeisenbank Zeltingen	Zeltingen-Rachtig
+58761760	38	Raiffeisenbank Zeltingen-alt-	Zeltingen-Rachtig
 58761853	38	Raiffeisenbank	Kröv
 58771224	63	Deutsche Bank Privat und Geschäftskunden	Bernkastel-Kues
 58771242	63	Deutsche Bank	Bernkastel-Kues
-58790000	38	Volksbank Traben-Trarbach	Traben-Trarbach
+58790000	38	Volksbank Traben-Trarbach-alt-	Traben-Trarbach
 58790100	06	Vereinigte Volksbank	Cochem
 59000000	09	Bundesbank	Saarbrücken
 59010066	24	Postbank	Saarbrücken
@@ -2452,7 +2404,7 @@
 59010400	32	Saarl Investitionskreditbank	Saarbrücken
 59020090	99	Bayer Hypo- und Vereinsbank	Saarbrücken
 59020700	09	Hanseatic Bank	Saarbrücken
-59021000	09	DFH Eigenheimbank	Saarbrücken
+59021000	09	GMAC-RFC Bank	Saarbrücken
 59040000	13	Commerzbank	Saarbrücken
 59050000	27	Landesbank Saar	Saarbrücken
 59050101	00	Sparkasse Saarbrücken	Saarbrücken
@@ -2504,7 +2456,6 @@
 60000000	09	Bundesbank	Stuttgart
 60010070	24	Postbank	Stuttgart
 60010111	13	SEB	Stuttgart
-60010300	10	Deutsche Verkehrs-Bank	Stuttgart
 60010424	09	Aareal Bank	Stuttgart
 60010500	09	Württembergische Hypothekenbank	Stuttgart
 60010600	09	Nationalbank von Griechenland Fil Stuttgart	Stuttgart
@@ -2523,13 +2474,12 @@
 60030600	09	CreditPlus Bank	Stuttgart
 60030700	09	AKTIVBANK	Pforzheim
 60030900	06	Isbank Fil Stuttgart	Stuttgart
-60033000	09	Wüstenrot Bausparkasse	Leonberg, Württ
+60033000	09	Wüstenrot Bausparkasse	Ludwigsburg, Württ
 60035810	06	IBM Deutschland Kreditbank	Stuttgart
 60040071	13	Commerzbank	Stuttgart
 60040088	13	Commerzbank Stuttgart	Stuttgart
-60040090	13	Commerzbank Stuttgart	Stuttgart
-60050000	09	Landesbank Baden-Württemberg (ehem SüdwestLB)	Stuttgart
-60050101	01	Landesbank Baden-Württemberg (ehem Landesgiro)	Stuttgart
+60050000	09	Landesbank Baden-Württemberg	Stuttgart
+60050101	01	Landesbank Bad.-Württ.Service-Center Stuttgart	Stuttgart
 60060000	09	DZ BANK	Stuttgart
 60060396	10	Untertürkheimer Volksbank	Stuttgart
 60060497	10	Volksbank Weilimdorf -alt-	Stuttgart
@@ -2576,7 +2526,6 @@
 60069420	10	Raiffeisenbank Mittelbiberach	Mittelbiberach
 60069431	10	Raiffeisenbank Oberessendorf	Eberhardzell
 60069442	10	Raiffeisenbank Frankenhardt-Stimpfach	Stimpfach
-60069446	10	Raiffeisenbank	Adelmannsfelden
 60069455	10	Raiffeisenbank Vordersteinenberg	Alfdorf
 60069457	10	Raiffeisenbank Ottenbach	Ottenbach, Württ
 60069461	10	Raiffeisenbank Rottumtal	Ochsenhausen
@@ -2584,7 +2533,6 @@
 60069465	10	Raiffeisenbank Unterhausen-Honau	Lichtenstein, Württ
 60069476	10	Raiffeisenbank Heidenheimer Alb	Gerstetten, Württ
 60069485	10	Raiffeisenbank Oberer Wald	Simmersfeld
-60069504	10	Raiffeisenbank Unterstadion-Hundersingen	Unterstadion
 60069505	10	Volksbank Murgtal Baiersbr-Klosterreichenbach	Baiersbronn
 60069511	10	Genossenschaftsbank Honhardt	Frankenhardt
 60069516	10	Plattenhardter Bank	Filderstadt
@@ -2603,12 +2551,9 @@
 60069553	10	Raiffeisenbank Aichhalden-Hardt-Sulgen	Hardt b Schramberg
 60069554	10	Raiffeisenbank Langenenslingen	Langenenslingen
 60069556	10	Volksbank Strohgäu	Gerlingen, Württ
-60069557	10	Raiffeisenbank	Gomadingen
 60069564	10	Raiffeisenbank Vordere Alb	Hülben
-60069566	10	Raiffeisenbank Jagstzell	Jagstzell
 60069593	10	Raiffeisenbank Oberes Schlichemtal	Schömberg b Balingen
 60069595	10	Raiffeisenbank Schrozberg-Rot am See	Schrozberg
-60069624	10	Raiffeisenbank Gussenstadt	Gerstetten, Württ
 60069628	10	Raiffeisenbank	Dietenheim, Iller
 60069639	10	Raiffeisenbank Ingersheim	Ingersheim, Württ
 60069647	10	Ebhauser Bank -Raiffeisenbank-	Ebhausen
@@ -2621,7 +2566,6 @@
 60069673	10	Abtsgmünder Bank -Raiffeisen-	Abtsgmünd
 60069680	10	Raiffeisenbank	Bretzfeld
 60069685	10	Raiffeisenbank	Wangen, Kr Göppingen
-60069687	10	Raiffeisenbank Pfahlheim	Ellwangen (Jagst)
 60069692	10	Raiffeisenbank Enzberg	Mühlacker
 60069695	10	Raiffeisenbank Wald-Hohenfels	Wald, Hohenz
 60069699	10	Raiffeisenbank	Bergatreute
@@ -2643,11 +2587,8 @@
 60069780	10	Genossenschaftsbank	Grabenstetten
 60069795	10	Volksbank Freiberg und Umgebung	Hessigheim
 60069798	10	Raiffeisenbank Horb	Horb am Neckar
-60069807	10	Raiffeisenbank Neuler	Neuler
 60069817	10	Raiffeisenbank	Mötzingen
 60069821	10	Neckarwestheimer Bank -Raiffeisen-Volksbank-	Neckarwestheim
-60069823	10	Raiffeisenbank Röhlingen	Ellwangen (Jagst)
-60069824	10	Volksbank Alb-Lauchert	Gammertingen
 60069825	10	Raiffeisenbank Mittelstadt	Reutlingen
 60069832	10	Raiffeisenbank Urbach	Urbach, Rems
 60069835	10	Stettener Bank	Leinfelden-Echterdingen
@@ -2670,7 +2611,6 @@
 60069946	10	Empfinger Bank	Empfingen
 60069948	10	Raiffeisenbank Bolheim	Herbrechtingen
 60069950	10	Raiffeisenbank Tüngental	Schwäbisch Hall
-60069954	10	Raiffeisenbank	Tannhausen b Ellwangen
 60069971	10	Raiffeisenbank Oberdischingen-Donaurieden	Oberdischingen
 60069972	10	Raiffeisenbank Sechta-Ries	Unterschneidheim
 60069976	10	Raiffeisenbank Böllingertal	Heilbronn, Neckar
@@ -2691,7 +2631,7 @@
 60090700	10	Südwestbank	Stuttgart
 60090800	87	Sparda-Bank Baden-Württemberg	Stuttgart
 60090900	91	PSD Bank RheinNeckarSaar	Stuttgart
-60120050	70	Bayer Hypo- und Vereinsbank Ndl 434 Stgt	Aschheim
+60120050	70	Bayer Hypo- und Vereinsbank Ndl 434 -alt-	Aschheim
 60120200	60	ING BHF-BANK	Stuttgart
 60120500	09	Sozialbank	Stuttgart
 60130100	00	FFS Bank	Stuttgart
@@ -2717,7 +2657,6 @@
 60320291	99	Bayer Hypo- und Vereinsbank	Böblingen
 60340071	13	Commerzbank	Sindelfingen
 60350130	01	Kreissparkasse Böblingen	Böblingen
-60361829	10	Vereinigte Volksbank	Weil der Stadt
 60361923	10	Raiffeisenbank	Weissach, Württ
 60362804	10	Volksbank Schönbuch	Schönaich, Württ
 60380002	76	Dresdner Bank	Böblingen
@@ -2729,7 +2668,7 @@
 60410600	09	Wüstenrot Hypothekenbank	Ludwigsburg, Württ
 60420000	06	Wüstenrot Bank	Ludwigsburg, Württ
 60420186	99	Bayer Hypo- und Vereinsbank	Ludwigsburg, Württ
-60422000	09	Salamander-Bund	Kornwestheim
+60422000	09	SABU Schuh & Marketing	Kornwestheim
 60430060	65	Baden-Württembergische Bank	Ludwigsburg, Württ
 60431061	65	Baden-Württembergische Bank	Bietigheim-Bissingen
 60440073	13	Commerzbank	Ludwigsburg, Württ
@@ -2742,7 +2681,7 @@
 60480008	76	Dresdner Bank	Ludwigsburg, Württ
 60490150	10	Volksbank Ludwigsburg	Ludwigsburg, Württ
 60491430	10	Volksbank Besigheim-Bönnigheim	Bönnigheim
-60651070	01	Kreissparkasse Calw	Calw
+60651070	A9	Sparkasse Pforzheim Calw	Calw
 60661369	10	Raiffeisenbank	Birkenfeld, Württ
 60661906	10	Raiffeisenbank Wimsheim-Mönsheim	Wimsheim
 60663084	10	Raiffeisenbank Calw	Neubulach
@@ -2751,7 +2690,7 @@
 61030000	09	Bankhaus Gebr. Martin	Göppingen
 61040014	13	Commerzbank	Göppingen
 61050000	01	Kreissparkasse Göppingen	Göppingen
-61050181	01	Landesbank Baden-Württemberg (ehem Landesgiro)	Göppingen
+61050181	01	Landesbank Baden-Württemberg	Göppingen
 61060500	10	Volksbank	Göppingen
 61070024	63	Deutsche Bank Privat und Geschäftskunden	Göppingen
 61070078	63	Deutsche Bank	Göppingen
@@ -2776,7 +2715,6 @@
 61261339	10	Volksbank Hohenneuffen	Frickenhausen, Württ
 61262258	10	Genossenschaftsbank	Wolfschlugen
 61262345	10	Bernhauser Bank	Filderstadt
-61262547	10	Sielminger Bank	Filderstadt
 61262625	10	Bonlander Bank	Filderstadt
 61281007	76	Dresdner Bank	Kirchheim unter Teck
 61290120	10	Volksbank Kirchheim-Nürtingen	Nürtingen
@@ -2789,11 +2727,11 @@
 61390140	10	Volksbank Schwäbisch Gmünd	Schwäbisch Gmünd
 61391410	10	Volksbank Welzheim	Welzheim
 61400000	09	Bundesbank eh Aalen	Ulm, Donau
-61420086	99	Bayer Hypo- und Vereinsbank	Aalen, Württ
+61420086	99	Bayer Hypo- und Vereinsbank-alt-	Aalen, Württ
 61430000	65	Baden-Württembergische Bank	Aalen, Württ
 61440086	13	Commerzbank	Aalen, Württ
 61450050	01	Kreissparkasse Ostalb	Aalen, Württ
-61450191	01	Landesbank Baden-Württemberg (ehem Landesgiro)	Aalen, Württ
+61450191	01	Landesbank Baden-Württemberg	Aalen, Württ
 61460127	10	Raiffeisenbank Aalen-Unterrombach -alt-	Aalen, Württ
 61461958	10	Wasseralfinger Bank -alt-	Aalen, Württ
 61480001	76	Dresdner Bank	Aalen, Württ
@@ -2809,7 +2747,7 @@
 62032000	09	Iveco Finance	Heilbronn, Neckar
 62040060	13	Commerzbank	Heilbronn, Neckar
 62050000	01	Kreissparkasse Heilbronn	Heilbronn, Neckar
-62050181	01	Landesbank Baden-Württemberg (ehem Landesgiro)	Heilbronn, Neckar
+62050181	01	Landesbank Baden-Württemberg	Heilbronn, Neckar
 62060326	10	Raiffeisenbank Heilbronn-Neckargartach	Heilbronn, Neckar
 62061226	10	Volksbank Bad Friedrichshall	Bad Friedrichshall
 62061365	10	Volksbank Bad Wimpfen-Gundelsheim	Bad Wimpfen
@@ -2840,10 +2778,10 @@
 63010111	13	SEB	Ulm, Donau
 63020086	99	Bayer Hypo- und Vereinsbank	Ulm, Donau
 63020130	65	Baden-Württembergische Bank	Ulm, Donau
-63020450	70	Bayer Hypo- und Vereinsbank Ndl 274 Ulm	Aschheim
+63020450	70	Bayer Hypo- und Vereinsbank Ndl 274 -alt-	Aschheim
 63040053	13	Commerzbank	Ulm, Donau
 63050000	01	Sparkasse Ulm	Ulm, Donau
-63050181	01	Landesbank Baden-Württemberg (ehem Landesgiro)	Ulm, Donau
+63050181	01	Landesbank Baden-Württemberg	Ulm, Donau
 63061486	10	VR-Bank Langenau-Ulmer Alb	Langenau, Württ
 63070024	63	Deutsche Bank Privat und Geschäftskunden	Ulm, Donau
 63070088	63	Deutsche Bank	Ulm, Donau
@@ -2864,7 +2802,7 @@
 64040033	13	Commerzbank	Reutlingen
 64040045	13	Commerzbank	Metzingen, Württ
 64050000	01	Kreissparkasse Reutlingen	Reutlingen
-64050181	01	Landesbank Baden-Württemberg (ehem Landesgiro)	Reutlingen
+64050181	01	Landesbank Baden-Württemberg	Reutlingen
 64060145	10	Raiffeisenbank Wannweil-Betzingen	Reutlingen
 64061854	10	Volksbank Steinlach-Wiesaz	Gomaringen
 64070024	63	Deutsche Bank Privat und Geschäftskunden	Reutlingen
@@ -2877,7 +2815,7 @@
 64120030	65	Baden-Württembergische Bank	Tübingen
 64140036	13	Commerzbank	Tübingen
 64150020	01	Kreissparkasse Tübingen	Tübingen
-64150182	01	Landesbank Baden-Württemberg (ehem Landesgiro)	Tübingen
+64150182	01	Landesbank Baden-Württemberg	Tübingen
 64161397	10	Volksbank Ammerbuch -Ammertalbank-	Ammerbuch
 64161608	10	Raiffeisenbank Härten	Kusterdingen
 64161956	10	Volksbank	Mössingen
@@ -2901,7 +2839,7 @@
 64291010	10	Volksbank im Kreis Freudenstadt	Freudenstadt
 64291420	10	Volksbank Deißlingen	Deißlingen, Neckar
 64291710	10	Volksbank Oberndorf	Oberndorf am Neckar
-64291900	10	Volksbank Balingen	Rosenfeld, Württ
+64291900	10	Volksbank Rosenfeld -alt-	Rosenfeld, Württ
 64292020	10	Volksbank Schwarzwald-Neckar	Schramberg
 64292310	10	Volksbank Trossingen	Trossingen
 64330010	09	Privatbank Reithinger	Tuttlingen
@@ -2911,14 +2849,14 @@
 64380011	76	Dresdner Bank	Tuttlingen
 64390130	10	Volksbank Donau-Neckar	Tuttlingen
 64420030	65	Baden-Württembergische Bank	Villingen-Schwenningen
-64450288	01	Landesbank Baden-Württemberg (ehem Landesgiro)	Villingen-Schwenningen
+64450288	01	Landesbank Baden-Württemberg	Villingen-Schwenningen
 64490140	10	Volksbank Donau-Neckar	Villingen-Schwenningen
 65000000	09	Bundesbank eh Ravensburg	Ulm, Donau
 65020030	65	Baden-Württembergische Bank	Ravensburg, Württ
 65020186	99	Bayer Hypo- und Vereinsbank	Ravensburg, Württ
 65040073	13	Commerzbank	Ravensburg, Württ
 65050110	01	Kreissparkasse Ravensburg	Ravensburg, Württ
-65050281	01	Landesbank Baden-Württemberg (ehem Landesgiro)	Ravensburg, Württ
+65050281	01	Landesbank Baden-Württemberg	Ravensburg, Württ
 65061219	10	Raiffeisenbank Aulendorf	Aulendorf, Württ
 65062395	10	Baienfurter Bank	Baienfurt
 65062577	10	Raiffeisenbank Ravensburg	Horgenzell
@@ -2938,7 +2876,7 @@
 65110200	71	Internationales Bankhaus Bodensee	Friedrichshafen
 65120091	99	Bayer Hypo- und Vereinsbank	Friedrichshafen
 65140072	13	Commerzbank	Friedrichshafen
-65150040	01	Sparkasse Bodensee	Friedrichshafen
+65150040	01	Sparkasse Bodensee -alt-	Friedrichshafen
 65161497	10	Genossenschaftsbank	Meckenbeuren
 65162832	10	Raiffeisenbank	Oberteuringen
 65180005	76	Dresdner Bank	Friedrichshafen
@@ -2948,7 +2886,7 @@
 65310111	13	SEB	Albstadt, Württ
 65340004	13	Commerzbank	Albstadt, Württ
 65341204	13	Commerzbank	Balingen
-65350186	01	Landesbank Baden-Württemberg (ehem Landesgiro)	Albstadt, Württ
+65350186	01	Landesbank Baden-Württemberg	Albstadt, Württ
 65351050	01	Hohenz Landesbank Kreissparkasse Sigmaringen	Sigmaringen
 65351260	01	Sparkasse Zollernalb	Balingen
 65361469	10	Volksbank Heuberg	Meßstetten
@@ -2975,13 +2913,13 @@
 66010200	09	Deutsche Bausparkasse Badenia	Karlsruhe, Baden
 66010700	09	Landeskreditbank Baden-Württemberg Förderbank	Karlsruhe, Baden
 66020020	65	Baden-Württembergische Bank	Karlsruhe, Baden
-66020150	70	Bayer Hypo- und Vereinsbank Ndl 145 Kruhe	Aschheim
+66020150	70	Bayer Hypo- und Vereinsbank Ndl 145 -alt-	Aschheim
 66020286	99	Bayer Hypo- und Vereinsbank	Karlsruhe, Baden
 66020500	09	Sozialbank	Karlsruhe, Baden
 66030600	06	Isbank Fil Karlsruhe	Karlsruhe, Baden
 66040018	13	Commerzbank	Karlsruhe, Baden
 66040026	13	Commerzbank/Kreditcenter Badenia	Karlsruhe, Baden
-66050000	09	Landesbank Baden-Württemberg (ehem SüdwestLB)	Karlsruhe, Baden
+66050000	09	Landesbank Baden-Württemberg	Karlsruhe, Baden
 66050101	00	Sparkasse Karlsruhe	Karlsruhe, Baden
 66051220	00	Sparkasse Ettlingen	Ettlingen
 66051326	A7	Sparkasse Graben-Neudorf/Philippsburg	Graben-Neudorf
@@ -2998,7 +2936,7 @@
 66069103	06	Raiffeisenbank Elztal	Elztal
 66069104	06	Spar- und Kreditbank	Dauchingen
 66069117	06	Raiffeisenbank Döggingen-Mundelfingen -alt-	Bräunlingen
-66069265	06	Raiffeisenbank Hilsbach	Sinsheim, Elsenz
+66069265	06	Raiffeisenbank Hilsbach -alt-	Sinsheim, Elsenz
 66069323	06	Spar- und Kreditbank Daxlanden Karlsruhe	Karlsruhe, Baden
 66069342	06	Volksbank Krautheim	Krautheim, Jagst
 66069573	06	Raiffeisenbank	Sexau
@@ -3016,7 +2954,7 @@
 66190000	06	Volksbank Karlsruhe	Karlsruhe, Baden
 66190100	06	Volksbank Durlach	Karlsruhe, Baden
 66220020	65	Baden-Württembergische Bank	Baden-Baden
-66220562	70	Bayer Hypo- und Vereinsbank Ndl 410 Baba	Aschheim
+66220562	70	Bayer Hypo- und Vereinsbank Ndl 410 -alt-	Aschheim
 66240002	13	Commerzbank	Baden-Baden
 66250030	00	Stadtsparkasse Baden-Baden	Baden-Baden
 66251434	00	Sparkasse Bühl	Bühl, Baden
@@ -3032,7 +2970,6 @@
 66290000	06	Volksbank Baden-Baden Rastatt	Rastatt
 66291300	06	Volksbank Achern	Achern, Baden
 66291400	06	Volksbank Bühl	Bühl, Baden
-66291600	06	Volksbank Sasbach	Sasbach b Achern, Baden
 66340018	13	Commerzbank	Bruchsal
 66350036	03	Sparkasse Kraichgau Bruchsal-Bretten-Sinsheim	Bruchsal
 66351642	03	Sparkasse Karlsruhe	Philippsburg, Baden
@@ -3095,15 +3032,14 @@
 67010111	13	SEB	Mannheim
 67020020	65	Baden-Württembergische Bank	Mannheim
 67020190	99	Bayer Hypo- und Vereinsbank	Mannheim
-67020259	70	Bayer Hypo- und Vereinsbank Ndl 681 Mnh	Aschheim
+67020259	70	Bayer Hypo- und Vereinsbank Ndl 681 -alt-	Aschheim
 67020500	09	AB Anker Bank	Mannheim
 67030600	06	ISBANK	Mannheim
 67040031	13	Commerzbank	Mannheim
-67050000	09	Landesbank Baden-Württemberg (ehem SüdwestLB)	Mannheim
+67050000	09	Landesbank Baden-Württemberg	Mannheim
 67050101	00	Sparkasse Mannheim	Mannheim
 67050505	06	Sparkasse Rhein Neckar Nord	Mannheim
 67051203	00	Sparkasse Hockenheim	Hockenheim
-67051310	00	Bezirkssparkasse Schwetzingen	Schwetzingen
 67052385	06	Bezirkssparkasse Weinheim	Weinheim, Bergstr
 67060031	06	Volksbank Sandhofen	Mannheim
 67062532	06	Raiffeisenbank Reilingen	Reilingen
@@ -3117,22 +3053,18 @@
 67089440	09	Dresdner Bank ITGK	Stuttgart
 67090000	06	Volksbank Rhein-Neckar	Mannheim
 67090617	14	Deutsche Apotheker- und Ärztebank	Mannheim
-67091200	06	Volksbank Hockenheim	Hockenheim
 67091300	06	Volksbank Bezirk Schwetzingen	Schwetzingen
 67091500	06	Volksbank Neckar-Bergstraße	Schriesheim
 67092300	06	Volksbank Weinheim	Weinheim, Bergstr
 67210111	13	SEB	Heidelberg, Neckar
 67220020	65	Baden-Württembergische Bank	Heidelberg, Neckar
 67220286	99	Bayer Hypo- und Vereinsbank	Heidelberg, Neckar
-67220464	70	Bayer Hypo- und Vereinsbank Ndl 488 Hd	Aschheim
+67220464	70	Bayer Hypo- und Vereinsbank Ndl 488 -alt-	Aschheim
 67230000	92	MLP Bank	Heidelberg, Neckar
 67230001	92	MLP Bank Zw CS	Heidelberg, Neckar
 67240039	13	Commerzbank	Heidelberg, Neckar
 67250020	06	Sparkasse Heidelberg	Heidelberg, Neckar
-67251709	00	Bezirkssparkasse Neckargemünd-Schönau	Neckargemünd
 67251918	00	Sparkasse Sinsheim -alt-	Sinsheim, Elsenz
-67252240	00	Sparkasse Wiesloch	Wiesloch
-67261235	06	Volksbank Dossenheim	Dossenheim
 67261909	06	Raiffeisenbank Steinsberg	Sinsheim, Elsenz
 67262243	06	Raiffeisenbank Baiertal	Wiesloch
 67262314	06	Volksbank Ziegelhausen	Heidelberg, Neckar
@@ -3141,12 +3073,12 @@
 67263256	06	Volksbank Helmstadt-Reichartshausen	Helmstadt-Bargen
 67270003	63	Deutsche Bank	Heidelberg, Neckar
 67270024	63	Deutsche Bank Privat und Geschäftskunden	Heidelberg, Neckar
-67280051	76	Dresdner Bank	Heidelberg, Neckar
+67280051	76	Dresdner Bank	Mannheim
 67290000	06	Heidelberger Volksbank	Heidelberg, Neckar
 67290100	06	H + G BANK Heidelberg	Heidelberg, Neckar
 67290200	06	Volksbank Kurpfalz Heidelberg	Heidelberg, Neckar
 67291300	06	Volksbank Eberbach-Hess Neckartal	Eberbach, Baden
-67291400	06	Volksbank Leimen-Sandhausen	Leimen, Baden
+67291400	06	Volksbank Leimen-Sandhausen -alt-	Leimen, Baden
 67291500	06	Volksbank f d Angelbachtal	Rauenberg, Kraichgau
 67291700	06	Volksbank Neckartal	Eberbach, Baden
 67291900	06	Volksbank Sinsheim	Sinsheim, Elsenz
@@ -3156,7 +3088,6 @@
 67352565	00	Sparkasse Tauberfranken	Tauberbischofsheim
 67362210	06	Volksbank Boxberg -alt-	Boxberg, Baden
 67362560	06	Volksbank Tauber -alt-	Tauberbischofsheim
-67362714	06	Raiffeisenbank Wenkheim -alt-	Werbach
 67390000	06	Volksbank Main-Tauber	Wertheim a Main
 67450048	00	Sparkasse Neckartal-Odenwald	Mosbach, Baden
 67451475	00	Sparkasse Buchen-Walldürn	Buchen (Odenwald)
@@ -3165,15 +3096,15 @@
 67461424	06	Volksbank Franken	Buchen (Odenwald)
 67461733	06	Volksbank Kirnau	Rosenberg, Baden
 67462368	06	Volksbank Limbach	Limbach, Baden
-67462480	06	Raiffeisenbank Schefflenz-Seckach	Schefflenz
+67462480	06	Raiffeisenbank Schefflenz-Seckach -alt-	Schefflenz
 68000000	09	Bundesbank	Freiburg im Breisgau
 68010111	13	SEB	Freiburg im Breisgau
 68020020	65	Baden-Württembergische Bank	Freiburg im Breisgau
 68020186	99	Bayer Hypo- und Vereinsbank	Freiburg im Breisgau
-68020460	70	Bayer Hypo- und Vereinsbank Ndl 405 Frb	Aschheim
+68020460	70	Bayer Hypo- und Vereinsbank Ndl 405 -alt-	Aschheim
 68030000	32	Bankhaus E. Mayer	Freiburg im Breisgau
 68040007	13	Commerzbank	Freiburg im Breisgau
-68050000	09	Landesbank Baden-Württemberg (ehem SüdwestLB)	Freiburg im Breisgau
+68050000	09	Landesbank Baden-Württemberg	Freiburg im Breisgau
 68050101	01	Sparkasse Freiburg-Nördlicher Breisgau	Freiburg im Breisgau
 68051004	00	Sparkasse Hochschwarzwald	Titisee-Neustadt
 68051207	00	Sparkasse Bonndorf-Stühlingen	Bonndorf im Schwarzwald
@@ -3204,7 +3135,7 @@
 68092300	06	Volksbank Staufen	Staufen im Breisgau
 68092400	06	Volksbank Waldkirch	Waldkirch, Breisgau
 68092500	06	Kaiserstühler Volksbank -alt-	Endingen am Kaiserstuhl
-68250040	03	Sparkasse Lahr	Lahr, Schwarzwald
+68250040	03	Sparkasse Lahr -alt-	Lahr, Schwarzwald
 68261476	06	Volksbank Unterer Breisgau	Rheinhausen, Breisgau
 68263318	06	Raiffeisenbank Kappel-Grafenhausen	Kappel-Grafenhausen
 68270024	63	Deutsche Bank Privat und Geschäftskunden	Lahr, Schwarzwald
@@ -3218,19 +3149,18 @@
 68350048	00	Sparkasse Lörrach-Rheinfelden	Lörrach
 68351557	00	Sparkasse Schopfheim-Zell	Schopfheim
 68351865	00	Sparkasse Markgräflerland	Weil am Rhein
-68351976	00	Sparkasse Zell i W	Zell im Wiesental
-68361394	06	Raiffeisenbank Maulburg	Maulburg
+68351976	00	Sparkasse Zell i W -alt-	Zell im Wiesental
+68361394	06	Raiffeisenbank Maulburg -alt-	Maulburg
 68370024	63	Deutsche Bank Privat und Geschäftskunden	Lörrach
 68370034	63	Deutsche Bank	Lörrach
 68390000	06	Volksbank Dreiländereck	Lörrach
-68391500	06	Volksbank Schopfheim	Schopfheim
-68451887	00	Bezirkssparkasse Stühlingen	Stühlingen
+68391500	06	VR Bank	Schopfheim
 68452290	00	Sparkasse Hochrhein	Waldshut-Tiengen
 68461313	06	Volksbank Klettgau -alt-	Klettgau
 68462427	06	Volksbank Klettgau-Wutöschingen	Wutöschingen
 68463203	06	Hotzenwald-Bank -alt-	Görwihl
 68463379	06	Raiffeisenbank Dogern-Laufenburg -alt-	Laufenburg (Baden)
-68490000	06	Volksbank Rhein-Wehra Säckingen	Bad Säckingen
+68490000	06	Volksbank Rhein-Wehra	Bad Säckingen
 68491500	06	Volksbank Jestetten	Jestetten
 68492200	06	Volksbank Hochrhein	Waldshut-Tiengen
 69000000	09	Bundesbank eh Konstanz	Villingen-Schwenningen
@@ -3248,7 +3178,7 @@
 69091200	06	Hagnauer Volksbank	Hagnau am Bodensee
 69091600	06	Volksbank Pfullendorf	Pfullendorf, Baden
 69220020	65	Baden-Württembergische Bank	Singen (Hohentwiel)
-69220186	99	Bayer Hypo- und Vereinsbank	Singen (Hohentwiel)
+69220186	99	Bayer Hypo- und Vereinsbank-alt-	Singen (Hohentwiel)
 69230010	09	Privatbank Reithinger	Singen (Hohentwiel)
 69240075	13	Commerzbank	Singen (Hohentwiel)
 69250035	00	Sparkasse Singen-Radolfzell	Singen (Hohentwiel)
@@ -3279,10 +3209,10 @@
 70010080	24	Postbank (Giro)	München
 70010111	13	SEB	München
 70010424	09	Aareal Bank	München
-70010500	09	HVB Real Estate Bank	München
+70010500	09	Hypo Real Estate Bank München	München
 70011000	09	HKB Hypotheken- und Kommunalkredit-Bank	Hallbergmoos
 70011200	09	Bank Vontobel Österreich	München
-70020001	70	Bayer Hypo- und Vereinsbank Ndl 645 M	Aschheim
+70020001	70	Bayer Hypo- und Vereinsbank Ndl 645 -alt-	Aschheim
 70020270	95	Bayer Hypo- und Vereinsbank	München
 70020300	09	Cetelem Bank	München
 70020500	09	Sozialbank	München
@@ -3300,7 +3230,7 @@
 70040039	13	Commerzbank	München
 70040041	13	Commerzbank	München
 70045050	13	Commerzbank Service-BZ	München
-70050000	09	Bayerische Landesbank Girozentrale	München
+70050000	09	Bayerische Landesbank	München
 70051003	00	Sparkasse Freising	Freising, Oberbay
 70051540	00	Sparkasse Dachau	Dachau
 70051755	00	Kreis- und Stadtsparkasse Dorfen -alt-	Dorfen, Stadt
@@ -3331,14 +3261,13 @@
 70090800	32	BBBank Zndl Bayern	München
 70091500	88	Volksbank Raiffeisenbank Dachau	Dachau
 70091600	88	Landsberg-Ammersee Bank	Kaufering
-70091900	88	Volksbank-Raiffeisenbank Erding VR-Bank	Erding
+70091900	88	VR-Bank Erding	Erding
 70093200	88	VR-Bank Starnberg-Herrsching-Landsberg	Starnberg
-70093400	88	Volksbank Ismaning	Ismaning
-70094300	88	Volksbank Wolfratshausen	Wolfratshausen
+70093400	88	Volksbank Raiffeisenbank Ismaning	Ismaning
 70110088	09	Postbank (Spar)	München
 70110400	09	Süddeutsche Bodencreditbank -alt-	München
 70110500	09	Münchener Hypothekenbank	München
-70110600	09	Banca Popolare di Bergamo - C.V. Ndl München	München
+70110600	09	Banca Popolare di Bergamo Ndl München	München
 70120100	09	State Street Bank	München
 70120200	10	ABN AMRO Bank Ndl Deutschland	München
 70120400	00	DAB bank	München
@@ -3346,8 +3275,8 @@
 70120600	30	Salzburg München Bank	München
 70120700	00	Oberbank Bayern	München
 70120800	06	Commercial Bank of Greece (Germany)	München
-70120900	09	Bayer Hypo- und Vereinsbank Ndl BACA	Aschheim
-70121099	95	Bayer Hypo- und Vereinsbank Scheckeinzug (GSE)	Aschheim
+70120900	09	Bayer Hypo- und Vereinsbank Ndl -alt-	Aschheim
+70121099	95	Bayer Hypo- und Vereinsbank Scheckeinzug -alt-	Aschheim
 70130500	00	LHB Internationale Handelsbank Fil	München
 70130700	09	Lenz, August - & Co	München
 70130800	88	Merkur Bank	München
@@ -3376,12 +3305,11 @@
 70169195	88	Raiffeisenbank	Traunreut
 70169310	88	Raiffeisenbank Alxing-Bruck	Bruck, Oberbay
 70169322	88	Raiffeisenbank Aufkirchen	Berg, Starnberger See
-70169330	88	Raiffeisenbank Auerberg	Bernbeuren
 70169331	88	Raiffeisenbank Bernried-Seeshaupt	Seeshaupt
 70169333	88	Raiffeisenbank Beuerberg-Eurasburg	Eurasburg b Wolfratshausen
 70169343	88	Raifffeisenbank Dingharting-Straßlach	Straßlach-Dingharting
 70169344	88	Raiffeisen-Volksbank -alt-	Dorfen, Stadt
-70169348	88	Raiffeisenbank Eching	Eching, Kr Freising
+70169348	88	Raiffeisenbank Eching -alt-	Eching, Kr Freising
 70169351	88	Raiffeisenbank Nordkreis Landsberg	Egling a d Paar
 70169353	88	Raiffeisenbank Endlhausen	Egling b Wolfratshausen
 70169356	88	Raiffeisenbank Erding	Erding
@@ -3408,7 +3336,7 @@
 70169464	88	Genossenschaftsbank München	München
 70169465	88	Raiffeisenbank München-Nord	Unterschleißheim
 70169466	88	Raiffeisenbank München-Süd	München
-70169471	88	Raiffeisenbank	Neuching
+70169471	88	Raiffeisenbank -alt-	Neuching
 70169472	88	Raiffeisenbank Hallbergmoos-Neufahrn	Neufahrn b. Freising
 70169474	88	Raiffeisenbank	Neumarkt-Sankt Veit
 70169476	88	Raiffeisenbank	Niederbergkirchen
@@ -3443,7 +3371,7 @@
 70169604	88	Raiffeisenbank Vierseenland	Weßling, Oberbay
 70169605	88	Raiffeisen-Volksbank Isen-Sempt	Isen, Oberbay
 70169614	88	Freisinger Bank Volksbank-Raiffeisenbank	Freising, Oberbay
-70169615	88	Raiffeisenbank	Altomünster
+70169615	88	Raiffeisenbank -alt-	Altomünster
 70169619	88	Raiffeisenbank Zorneding	Zorneding
 70169653	88	Raiffeisenbank Aiglsbach	Aiglsbach
 70169693	88	Raiffeisenbank Hallertau	Rudelzhausen
@@ -3463,7 +3391,7 @@
 70230600	06	Isbank Fil München	München
 70250150	00	Kreissparkasse München Starnberg	München
 70320090	99	Bayer Hypo- und Vereinsbank	Garmisch-Partenkirchen
-70320305	70	Bayer Hypo- und Vereinsbank Ndl 635 Gar	Aschheim
+70320305	70	Bayer Hypo- und Vereinsbank Ndl 635 -alt-	Aschheim
 70321194	99	Bayer Hypo- und Vereinsbank	Weilheim i. OB
 70322192	99	Bayer Hypo- und Vereinsbank	Murnau a. Staffelsee
 70350000	00	Kreissparkasse Garmisch-Partenkirchen	Garmisch-Partenkirchen
@@ -3512,7 +3440,7 @@
 72000000	09	Bundesbank	Augsburg, Bay
 72010111	13	SEB	Augsburg, Bay
 72020070	99	Bayer Hypo- und Vereinsbank	Augsburg, Bay
-72020240	70	Bayer Hypo- und Vereinsbank Ndl 677 Agsb	Aschheim
+72020240	70	Bayer Hypo- und Vereinsbank Ndl 677 -alt-	Aschheim
 72020700	09	Augsburger Aktienbank	Augsburg, Bay
 72021271	99	Bayer Hypo- und Vereinsbank	Aichach a d Paar
 72021876	99	Bayer Hypo- und Vereinsbank	Günzburg
@@ -3523,7 +3451,6 @@
 72050101	00	Kreissparkasse Augsburg	Augsburg, Bay
 72051210	00	Stadtsparkasse Aichach	Aichach a d Paar
 72051303	00	Marktsparkasse Altomünster -alt-	Altomünster
-72051730	00	Stadtsparkasse Augsburg	Friedberg, Bay
 72051840	00	Sparkasse Günzburg-Krumbach	Günzburg
 72052370	00	Sparkasse Günzburg-Krumbach (alt)	Krumbach (Schwaben)
 72060300	88	Handels- und Gewerbebank	Augsburg, Bay
@@ -3534,11 +3461,9 @@
 72069025	88	Raiffeisenbank	Balzhausen b Krumbach
 72069034	88	Raiffeisenbank	Bissingen, Schwab
 72069036	88	Raiffeisenbank	Bobingen
-72069038	88	Raiffeisenbank	Breitenthal b Krumbach
 72069043	88	Raiffeisenbank	Burgau, Schwab
 72069044	88	Raiffeisenbank Burlafingen	Neu-Ulm
 72069048	88	Raiffeisenbank Dasing-Obergriesbach -alt-	Dasing
-72069052	88	Raiffeisenbank	Dinkelscherben
 72069063	88	Raiffbk Eppishausen-Haselbach-Hasberg -alt-	Eppishausen
 72069071	88	Raiffeisenbank Fristingen-Kicklingen	Dillingen a d Donau
 72069081	88	Raiffeisenbank Gersthofen	Gersthofen
@@ -3559,7 +3484,7 @@
 72069138	88	Raiffeisenbank Langerringen	Langerringen
 72069139	88	Raiffeisenbank Langweid-Achsheim	Langweid a. Lech
 72069140	88	Raiffeisenbank Laugna-Osterbuch	Laugna
-72069141	88	Raiffeisenbank	Emersacker
+72069141	88	Raiffeisenbank -alt-	Emersacker
 72069145	88	Raiffeisenbank Breitenbrunn-Loppenhsn-Bedernau	Breitenbrunn, Schwab
 72069155	88	Raiffeisenbank Kissing-Mering	Mering, Schwab
 72069165	88	Raiffeisenbank Neuburg an der Kammel	Neuburg a d Kammel
@@ -3594,10 +3519,9 @@
 72091800	10	Volksbank Günzburg	Günzburg
 72100000	09	Bundesbank eh Ingolstadt	München
 72120078	99	Bayer Hypo- und Vereinsbank	Ingolstadt, Donau
-72120079	99	Bayer Hypo- und Vereinsbank	Ingolstadt, Donau
-72120207	70	Bayer Hypo- und Vereinsbank Ndl 648 Ing	Aschheim
+72120079	99	Bayer Hypo- und Vereinsbank-alt-	Ingolstadt, Donau
+72120207	70	Bayer Hypo- und Vereinsbank Ndl 648 -alt-	Aschheim
 72122181	99	Bayer Hypo- und Vereinsbank	Neuburg a d Donau
-72130800	88	Merkur Bank	Ingolstadt, Donau
 72140052	13	Commerzbank	Ingolstadt, Donau
 72150000	00	Sparkasse Ingolstadt	Ingolstadt, Donau
 72151340	00	Sparkasse Eichstätt	Eichstätt, Bay
@@ -3610,9 +3534,9 @@
 72169080	88	Raiffeisenbank Gerolsbach	Gerolsbach
 72169111	88	Raiffeisenbank	Hohenwart, Paar
 72169218	88	Raiffeisenbank	Schrobenhausen
-72169246	88	Raiffeisenbank	Waidhofen, Oberbay
+72169246	88	Raiffeisenbank Schrobenhausener Land	Langenmosen
 72169380	88	Raiffeisenbank	Beilngries
-72169733	88	Raiffeisenbank Berg im Gau-Langenmosen	Berg im Gau
+72169733	88	Raiffeisenbank Berg im Gau-Langenmosen -alt-	Langenmosen
 72169740	88	Raiffeisenbank	Burgheim, Oberbay
 72169745	88	Raiffeisenbank Ehekirchen-Weidorf	Ehekirchen, Oberbay
 72169750	88	Raiffeisenbank -alt-	Karlshuld
@@ -3657,7 +3581,7 @@
 73311600	09	Hypo-Landesbank Kleinwalsertal	Riezlern, Kleinwalsertal
 73311800	09	Bank Austria Riezlern	Riezlern, Kleinwalsertal
 73320073	99	Bayer Hypo- und Vereinsbank	Kempten (Allgäu)
-73320442	70	Bayer Hypo- und Vereinsbank Ndl 669 Kpt	Aschheim
+73320442	70	Bayer Hypo- und Vereinsbank Ndl 669 -alt-	Aschheim
 73321177	99	Bayer Hypo- und Vereinsbank	Oberstdorf
 73322380	99	Bayer Hypo- und Vereinsbank	Sonthofen, Oberallgäu
 73331700	09	Gabler Saliter Bankgeschäft	Obergünzburg
@@ -3680,7 +3604,6 @@
 73369823	09	Raiffeisenbank Westallgäu	Gestratz
 73369824	88	Raiffeisenbank Heimenkirch-Ellhofen	Heimenkirch
 73369826	88	Volksbank	Lindenberg i. Allgäu
-73369838	88	Raiffeisenbank Weißensberg-Sigmarszell-Reitnau	Weißensberg
 73369851	88	Raiffeisenbank Aitrang-Ruderatshofen	Aitrang
 73369854	88	Raiffeisenbank Fuchstal-Denklingen	Fuchstal b Landsberg a Lech
 73369859	88	Raiffeisenbank	Bidingen, Schwab
@@ -3706,7 +3629,7 @@
 73392000	88	Volksbank Immenstadt	Immenstadt i. Allgäu
 73392400	32	Volksbank Tirol Jungholz	Jungholz, Tirol
 73420071	99	Bayer Hypo- und Vereinsbank	Kaufbeuren
-73420546	70	Bayer Hypo- und Vereinsbank Ndl 693 Kaufb	Aschheim
+73420546	70	Bayer Hypo- und Vereinsbank Ndl 693 -alt-	Aschheim
 73421478	99	Bayer Hypo- und Vereinsbank	Schongau
 73450000	00	Kreis- und Stadtsparkasse Kaufbeuren	Kaufbeuren
 73451330	00	Sparkasse Ostallgäu	Marktoberdorf
@@ -3718,7 +3641,7 @@
 74000000	09	Bundesbank eh Passau	Regensburg
 74020074	99	Bayer Hypo- und Vereinsbank	Passau
 74020100	09	Raiffeisenlandesbank OÖ Zndl Bayern	Passau
-74020414	70	Bayer Hypo- und Vereinsbank Ndl 672 Pass	Aschheim
+74020414	70	Bayer Hypo- und Vereinsbank Ndl 672 -alt-	Aschheim
 74040082	13	Commerzbank	Passau
 74050000	00	Sparkasse Passau	Passau
 74051230	00	Sparkasse Freyung-Grafenau	Freyung, Niederbay
@@ -3746,7 +3669,7 @@
 74090000	88	VR-Bank Passau	Passau
 74092400	88	Volksbank Vilshofen	Vilshofen, Niederbay
 74120071	99	Bayer Hypo- und Vereinsbank	Deggendorf
-74120514	70	Bayer Hypo- und Vereinsbank Ndl 674 Dgdf	Aschheim
+74120514	70	Bayer Hypo- und Vereinsbank Ndl 674 -alt-	Aschheim
 74131000	09	TEBA Kreditbank	Landau a d Isar
 74150000	00	Sparkasse Deggendorf	Deggendorf
 74151450	00	Sparkasse Regen-Viechtach	Regen
@@ -3771,7 +3694,7 @@
 74290100	98	CB Credit-Bank	Straubing
 74300000	09	Bundesbank eh Landshut	Regensburg
 74320073	99	Bayer Hypo- und Vereinsbank	Landshut, Isar
-74320307	70	Bayer Hypo- und Vereinsbank Ndl 601 Ldsht	Aschheim
+74320307	70	Bayer Hypo- und Vereinsbank Ndl 601 -alt-	Aschheim
 74340077	13	Commerzbank	Landshut, Isar
 74350000	11	Sparkasse Landshut	Landshut, Isar
 74351310	00	Sparkasse Dingolfing-Landau	Dingolfing
@@ -3802,7 +3725,7 @@
 75000000	09	Bundesbank	Regensburg
 75010111	13	SEB	Regensburg
 75020073	99	Bayer Hypo- und Vereinsbank	Regensburg
-75020314	70	Bayer Hypo- und Vereinsbank Ndl 670 Rgsb	Aschheim
+75020314	70	Bayer Hypo- und Vereinsbank Ndl 670 -alt-	Aschheim
 75021174	99	Bayer Hypo- und Vereinsbank	Schwandorf, Bay
 75040062	13	Commerzbank	Regensburg
 75050000	00	Sparkasse Regensburg	Regensburg
@@ -3835,7 +3758,6 @@
 75069154	88	Raiffeisen-Bank	Rötz, Oberpf
 75069164	88	Raiffeisenbank Schierling-Obertraubling	Schierling
 75069171	88	Raiffeisenbank im Naabtal	Nabburg
-75069196	88	Raiffeisenbank Pettenreuth-Wenzenbach	Wenzenbach
 75069206	88	Raiffeisenbank Winklarn und Umgebung	Winklarn, Oberpf
 75070013	63	Deutsche Bank	Regensburg
 75070024	63	Deutsche Bank Privat und Geschäftskunden	Regensburg
@@ -3860,31 +3782,29 @@
 75360011	88	Raiffeisenbank Weiden	Weiden, Oberpf
 75362039	88	Raiffeisenbank	Floß
 75363189	88	Raiffeisenbank Neustadt-Vohenstrauß	Vohenstrauß
-75364102	88	Raiffeisenbank Moosbach-Eslarn-Waidhaus	Moosbach b Vohenstrauß
 75390000	88	Volksbank Nordoberpfalz	Weiden, Oberpf
 76000000	09	Bundesbank	Nürnberg, Mittelfr
 76010085	24	Postbank	Nürnberg, Mittelfr
 76010111	13	SEB	Nürnberg, Mittelfr
 76020070	99	Bayer Hypo- und Vereinsbank	Nürnberg, Mittelfr
-76020214	70	Bayer Hypo- und Vereinsbank Ndl 156 Nbg	Aschheim
+76020214	70	Bayer Hypo- und Vereinsbank Ndl 156 -alt-	Aschheim
 76020300	06	Franken WKV Bank	Nürnberg, Mittelfr
 76020400	09	Noris Verbraucherbank	Nürnberg, Mittelfr
 76020600	09	Hanseatic Bank	Nürnberg, Mittelfr
 76020800	06	Commercial Bank of Greece	Nürnberg, Mittelfr
 76020900	09	Entrium Direct Bankers	Nürnberg, Mittelfr
 76026000	06	norisbank	Nürnberg, Mittelfr
-76030080	01	ConSors Discount-Broker	Nürnberg, Mittelfr
+76030080	01	Cortal Consors S.A. Zndl Deutschland	Nürnberg, Mittelfr
 76030600	06	Isbank Fil Nürnberg	Nürnberg, Mittelfr
 76035000	55	UmweltBank	Nürnberg, Mittelfr
 76040061	13	Commerzbank	Nürnberg, Mittelfr
-76050000	09	Bayerische Landesbank Girozentrale	Nürnberg, Mittelfr
+76050000	09	Bayerische Landesbank	Nürnberg, Mittelfr
 76050101	49	Sparkasse Nürnberg	Nürnberg, Mittelfr
-76050210	49	Sparkasse Nürnberg	Nürnberg, Mittelfr
 76052080	00	Sparkasse Neumarkt i d OPf-Parsberg	Neumarkt, Oberpf
 76060000	09	DZ BANK	Nürnberg, Mittelfr
 76060561	88	ACREDOBANK	Nürnberg, Mittelfr
 76060618	88	Volksbank Raiffeisenbank	Nürnberg, Mittelfr
-76061025	88	Raiffeisen-Spar- und Kreditbank	Lauf a d Pegnitz
+76061025	88	Raiffeisen Spar+Kreditbank	Lauf a d Pegnitz
 76061482	88	Raiffeisenbank	Hersbruck
 76069055	88	Raiffeisenbank	Höchstadt a d Aisch
 76069354	88	Raiffeisenbank Sachsen-Immeldorf -alt-	Sachsen b. Ansbach
@@ -3895,7 +3815,6 @@
 76069378	88	Raiffeisenbank	Bechhofen a d Heide
 76069381	88	Raiffeisenbank Berching-Mühlhausen -alt-	Berching
 76069382	88	Raiffeisenbank	Berg b Neumarkt, Oberpf
-76069383	88	Raiffeisenbank Bergen-Ettenstatt-Nennslingen	Bergen, Mittelfr
 76069384	88	Raiffeisenbank Berngau-Pilsach	Berngau
 76069393	88	Raiffeisenbank Büchenbach-Ottersdorf -alt-	Büchenbach, Mittelfr
 76069404	88	Raiffeisenbank Uehlfeld-Dachsbach	Dachsbach
@@ -3916,23 +3835,20 @@
 76069499	88	Raiffeisenbank	Kalchreuth
 76069503	88	Raiffeisenbank Katzwang -alt-	Nürnberg, Mittelfr
 76069512	88	Raiffeisenbank Knoblauchsland Nürnberg-Buch	Nürnberg, Mittelfr
-76069526	88	Raiffeisenbank Lauterhofen-Kastl	Lauterhofen, Oberpf
 76069539	88	Raiffeisenbank Markt Erlbach-Linden	Markt Erlbach
 76069540	88	Raiffeisenbank Meckenhausen-Weinsfeld	Hilpoltstein, Mittelfr
 76069542	88	Raiffeisenbank Merkendorf	Merkendorf, Mittelfr
 76069549	88	Raiffeisenbank Münchaurach	Aurachtal
 76069552	88	Raiffeisenbank	Neuhof a d Zenn
-76069553	88	Raiffeisenbank	Neumarkt, Oberpf
+76069553	88	Raiffeisenbank Neumarkt	Neumarkt, Oberpf
 76069559	88	Raiffeisenbank Neustadt, Aisch	Neustadt a.d.Aisch
 76069564	88	Raiffeisenbank Oberferrieden-Burgthann	Burgthann
 76069576	88	Raiffeisenbank Plankstetten	Berching
-76069583	88	Raiffeisenbank	Pyrbaum
 76069598	88	Raiffeisenbank Großhabersdorf-Roßtal	Roßtal
 76069601	88	Raiffeisenbank	Rothenburg ob der Tauber
 76069602	88	Raiffeisenbank Seebachgrund Heßdorf-Hannberg	Heßdorf, Mittelfr
 76069610	88	Raiffeisenbank Schillingsfürst -alt-	Schillingsfürst, Mittelfr
 76069611	88	Raiffeisenbank Unteres Vilstal	Schmidmühlen
-76069621	88	Raiffeisenbank Stopfenheim	Ellingen, Bay
 76069624	88	Raiffeisenbank	Thalmässing, Mittelfr
 76069635	88	Raiffeisenbank Ursensollen-Ammerthal-Hohenburg	Ursensollen
 76069654	88	Raiffeisenbank Weißenburg	Weißenburg i Bay
@@ -4001,7 +3917,7 @@
 77069044	88	Raiffeisenbank Küps-Mitwitz-Stockheim	Küps
 77069051	88	Raiffeisenbank	Heiligenstadt, Oberfr
 77069052	88	Raiffeisenbank	Heroldsbach
-77069084	88	Raiffeisenbank	Memmelsdorf
+77069084	88	Raiffeisenbank -alt-	Memmelsdorf
 77069091	88	Raiffeisenbank Ebrachgrund	Mühlhausen, Mittelfr
 77069128	88	Raiffeisenbank Scheßlitz-Zapfendorf	Scheßlitz
 77069158	88	Raiffeisenbank	Untersteinach b Kulmbach
@@ -4040,7 +3956,7 @@
 77390628	14	Deutsche Apotheker- und Ärztebank	Bayreuth
 78000000	09	Bundesbank eh Hof	Bayreuth
 78020070	99	Bayer Hypo- und Vereinsbank	Hof, Saale
-78020429	70	Bayer Hypo- und Vereinsbank Ndl 128 Hof	Aschheim
+78020429	70	Bayer Hypo- und Vereinsbank Ndl 128 -alt-	Aschheim
 78030070	01	SchmidtBank	Hof, Saale
 78030080	01	SchmidtBank Zentrale	Hof, Saale
 78040081	13	Commerzbank	Hof, Saale
@@ -4065,7 +3981,7 @@
 79000000	09	Bundesbank	Würzburg
 79010111	13	SEB	Würzburg
 79020076	99	Bayer Hypo- und Vereinsbank	Würzburg
-79020325	70	Bayer Hypo- und Vereinsbank Ndl 149 Wzb	Aschheim
+79020325	70	Bayer Hypo- und Vereinsbank Ndl 149 -alt-	Aschheim
 79020700	16	Hanseatic Bank	Würzburg
 79030001	09	Castell Bank	Würzburg
 79032038	00	Bank Schilling & Co	Hammelburg
@@ -4083,11 +3999,9 @@
 79068222	88	Raiffeisenbank Rimpar-Versbach	Rimpar
 79069001	88	Raiffeisenbank Wiesentheid und Umgebung	Wiesentheid
 79069010	88	Raiffeisenbank	Arnstein, Unterfr
-79069026	88	Raiffeisenbank Bischofsheim, Rhön-Oberelsb-alt	Bischofsheim a d Rhön
 79069031	88	Raiffeisenbank Bütthard-Gaukönigshofen	Bütthard
 79069078	88	Raiffeisenbank Geiselwind	Geiselwind
 79069090	88	Raiffeisenbank Ulsenheim-Gollhofen	Gollhofen
-79069096	88	Raiffbk Großbardorf-Kleineibstadt-Seubrigh-alt	Großbardorf
 79069110	88	Raiffeisenkasse Hendungen-Rappershausen	Hendungen
 79069145	88	Raiffeisenbank Kreuzwertheim-Hasloch -alt-	Kreuzwertheim
 79069150	88	Raiffeisenbank Karlstadt-Gemünden	Karlstadt, Main
@@ -4099,7 +4013,6 @@
 79069213	88	Raiffeisenbank Maßbach	Rannungen
 79069214	88	Raiffeisenbank Bad Kissingen u.Umgebung -alt-	Bad Kissingen
 79069271	88	Raiffeisenbank	Thüngersheim
-79069291	88	Raiffeisenbank Urspringen und Umgebung	Urspringen b Marktheidenfeld
 79069324	88	Raiffeisenbank Zellingen und Umgebung	Zellingen
 79070016	63	Deutsche Bank	Würzburg
 79070024	63	Deutsche Bank Privat und Geschäftskunden	Würzburg
@@ -4112,7 +4025,7 @@
 79190000	88	Volksbank Raiffeisenbank Kitzingen	Kitzingen
 79300000	09	Bundesbank eh Schweinfurt	Würzburg
 79320075	99	Bayer Hypo- und Vereinsbank	Schweinfurt
-79320432	70	Bayer Hypo- und Vereinsbank Ndl 137 Schft	Aschheim
+79320432	70	Bayer Hypo- und Vereinsbank Ndl 137 -alt-	Aschheim
 79330111	09	Bankhaus Max Flessa & Co.	Schweinfurt
 79340054	13	Commerzbank	Schweinfurt
 79350000	00	Städtische Sparkasse Schweinfurt	Schweinfurt
@@ -4132,7 +4045,7 @@
 79500000	09	Bundesbank eh Aschaffenburg	Würzburg
 79510111	13	SEB	Aschaffenburg
 79520070	99	Bayer Hypo- und Vereinsbank	Aschaffenburg
-79520533	70	Bayer Hypo- und Vereinsbank Ndl 125 Aschb	Aschheim
+79520533	70	Bayer Hypo- und Vereinsbank Ndl 125 -alt-	Aschheim
 79540049	13	Commerzbank	Aschaffenburg
 79550000	00	Sparkasse Aschaffenburg Alzenau	Aschaffenburg
 79560501	88	Raiffeisenbank Aschaffenburg-Schweinheim	Aschaffenburg
@@ -4159,7 +4072,6 @@
 80020087	99	Bayer Hypo- und Vereinsbank	Dessau, Anh
 80020130	65	Baden-Württembergische Bank	Halle (Saale)
 80040000	13	Commerzbank	Halle (Saale)
-80050250	20	Sparkasse Wittenberg (ehem Spk Anhalt-Ost)	Gräfenhainichen
 80050500	20	Kreissparkasse Merseburg-Querfurt	Merseburg
 80053000	20	Sparkasse Burgenlandkreis	Zeitz, Elster
 80053502	52	Kreissparkasse Quedlinburg	Quedlinburg
@@ -4168,8 +4080,6 @@
 80053572	52	Stadtsparkasse Dessau	Dessau, Anh
 80053612	52	Kreissparkasse Bernburg	Bernburg (Saale)
 80053622	52	Kreissparkasse Köthen	Köthen (Anhalt)
-80053652	52	Kreissparkasse Weißenfels (alt)	Weißenfels, Saale
-80053682	52	Spk Zeitz-Hohenmölsen (ehem Kr Spk Hohenm)	Hohenmölsen
 80053722	52	Kreissparkasse Bitterfeld	Bitterfeld
 80053762	53	Stadt- und Saalkreissparkasse Halle	Halle (Saale)
 80054000	20	Kreissparkasse Weißenfels	Weißenfels, Saale
@@ -4196,7 +4106,7 @@
 81010111	13	SEB	Magdeburg
 81020500	09	Sozialbank	Magdeburg
 81020700	16	Hanseatic Bank	Haldensleben
-81020886	70	Bayer Hypo- und Vereinsbank (ehem Hypo)	Magdeburg
+81020886	70	Bayer Hypo- und Vereinsbank -alt-	Magdeburg
 81040000	13	Commerzbank	Magdeburg
 81050000	20	Kreissparkasse Aschersleben-Staßfurt	Staßfurt
 81050555	20	Kreissparkasse Stendal	Stendal
@@ -4224,7 +4134,6 @@
 81093034	32	Volksbank	Gardelegen
 81093044	32	Volksbank Osterburg-Lüchow-Dannenberg -alt-	Osterburg (Altmark)
 81093054	32	Volksbank Stendal	Stendal
-81093134	28	Vereinigte Volksbank ehem VB Halberstadt	Halberstadt
 81093274	32	Volksbank Magdeburg	Magdeburg
 82000000	09	Bundesbank	Erfurt
 82010111	13	SEB	Erfurt
@@ -4263,16 +4172,14 @@
 83000000	09	Bundesbank	Gera
 83020086	99	Bayer Hypo- und Vereinsbank	Gera
 83020087	99	Bayer Hypo- und Vereinsbank	Jena
-83020088	99	Bayer Hypo- und Vereinsbank	Saalfeld /Saale
+83020088	99	Bayer Hypo- und Vereinsbank-alt-	Saalfeld /Saale
 83040000	13	Commerzbank	Gera
 83050000	20	Sparkasse Gera-Greiz	Gera
 83050200	20	Sparkasse Altenburger Land	Altenburg, Thür
 83050303	20	Kreissparkasse Saalfeld-Rudolstadt	Saalfeld /Saale
 83050505	20	Kreissparkasse Saale-Orla	Schleiz
 83053030	20	Sparkasse Jena-Saale-Holzland	Jena
-83064428	32	Raiffeisen-Volksbank Saale-Orla ehem Raiffbk	Saalfeld /Saale
 83064488	32	Raiffeisen-Volksbank Hermsdorfer Kreuz	Hermsdorf, Thür
-83064508	06	Volksbank Saaletal ehem Raiff-VB Schleiz	Schleiz
 83064538	32	Raiffeisen-Volksbank Greiz	Greiz
 83064568	32	Geraer Bank	Gera
 83065408	32	VR-Bank Altenburger Land	Schmölln, Thür
@@ -4283,7 +4190,7 @@
 83095404	06	Volksbank Schmölln	Schmölln, Thür
 83095424	06	Volksbank Altenburg	Altenburg, Thür
 84000000	09	Bundesbank	Meiningen
-84020086	99	Bayer Hypo- und Vereinsbank	Meiningen
+84020086	99	Bayer Hypo- und Vereinsbank-alt-	Meiningen
 84020087	99	Bayer Hypo- und Vereinsbank	Suhl
 84030111	09	Bankhaus Max Flessa & Co.	Meiningen
 84040000	13	Commerzbank	Meiningen
@@ -4298,17 +4205,16 @@
 84069065	32	Raiffeisenbank Schleusingen	Schleusingen
 84080000	76	Dresdner Bank	Meiningen
 84094704	32	Volksbank Sonneberg-Neuhaus	Neuhaus am Rennweg
-84094734	32	Volksbank Suhl-Hildburghausen (alt)	Hildburghausen
 84094754	32	Volks- und Raiffeisenbank Bad Salzungen Schmal	Bad Salzungen
 84094764	32	Volksbank Ilmenau	Ilmenau, Thür
 84094814	32	Volksbank Suhl-Hildburghausen	Suhl
 85000000	09	Bundesbank	Dresden
-85010500	09	Sächsische Aufbaubank	Dresden
+85010500	09	Sächsische Aufbaubank -Förderbank-	Dresden
 85020030	65	Baden-Württembergische Bank	Dresden
 85020086	99	Bayer Hypo- und Vereinsbank	Dresden
 85020500	09	Sozialbank	Dresden
 85020700	16	Hanseatic Bank	Dresden
-85020890	70	Bayer Hypo- und Vereinsbank Ndl 536 Dre	Aschheim
+85020890	70	Bayer Hypo- und Vereinsbank Ndl 536 -alt-	Aschheim
 85040000	13	Commerzbank	Dresden
 85050100	20	Niederschlesische Sparkasse Görlitz	Görlitz, Neiße
 85050200	20	Kreissparkasse Riesa-Großenhain	Riesa
@@ -4316,7 +4222,7 @@
 85055000	20	Kreissparkasse Meißen	Meißen, Sachs
 85055142	53	Stadtsparkasse Dresden	Dresden
 85060000	32	Volksbank Pirna	Pirna
-85064998	32	Raiffeisenbank Rödertal	Großenhain, Sachs
+85064998	32	Raiffeisenbank Rödertal -alt-	Großenhain, Sachs
 85065028	32	Raiffeisenbank Neustadt, Sachs	Sebnitz
 85069067	32	Dresdner Volksbank Raiffeisenbank ehem Raiffbk	Dresden
 85080000	76	Dresdner Bank	Dresden
@@ -4346,7 +4252,7 @@
 86020500	09	Sozialbank	Leipzig
 86020600	09	Hanseatic Bank	Leipzig
 86020700	70	HYPO Service-Bank	Leipzig
-86020880	70	Bayer Hypo- und Vereinsbank Ndl 508 Lei	Aschheim
+86020880	70	Bayer Hypo- und Vereinsbank Ndl 508 -alt-	Aschheim
 86030000	17	setis-bank	Leipzig
 86030300	09	Bankhaus Reuschel + Co	Leipzig
 86040000	13	Commerzbank	Leipzig
@@ -4374,7 +4280,6 @@
 87020086	99	Bayer Hypo- und Vereinsbank	Chemnitz, Sachs
 87020087	99	Bayer Hypo- und Vereinsbank	Plauen, Vogtl
 87020088	99	Bayer Hypo- und Vereinsbank	Zwickau
-87030800	88	Merkur Bank	Auerbach /Vogtl.
 87040000	13	Commerzbank	Chemnitz, Sachs
 87050000	20	Sparkasse Chemnitz	Chemnitz, Sachs
 87051000	20	Kreissparkasse Mittweida	Mittweida
@@ -4388,8 +4293,6 @@
 87065858	06	Raiffeisenbank Vogtland	Reichenbach, Vogtl
 87065893	06	Volksbank Erzgebirge (alt)	Aue, Sachs
 87065918	06	Raiffeisenbank Werdau-Zwickau	Zwickau
-87065978	06	Volksbank-Raiffeisenbank Glauchau (alt)	Glauchau
-87065998	06	Volksbank-Raiffeisenbank Glauchau (eh Raiffbk)	Hohenstein-Ernstthal
 87066078	06	Freiberger Bank ehem Raiffbk	Freiberg, Sachs
 87066088	06	Volksbank Mittleres Erzgebirge ehem Raiffbk	Flöha
 87069075	06	Volksbank Mittleres Erzgebirge	Olbernhau

@@ -1,3 +1,10 @@
+2004-02-18  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in: Released version 0.7
+
+	* src/bankdata/bankdata.txt: Updated, now valid from 2004-03-08
+	onwards.
+
 2004-01-28  Christian Stimming <stimming@tuhh.de>
 
 	* README.WIN32: Windows DLLs can be built. This is described in
