@@ -1,3 +1,7 @@
+2005-01-20  Christian Stimming <stimming@tuhh.de>
+
+	* src/lib/algorithms.cc: Fixing algo06, by Erik Kerger
+
 2005-01-17  Christian Stimming <stimming@tuhh.de>
 
 	* src/lib/algorithms.h, algorithms.cc: Implement some slight

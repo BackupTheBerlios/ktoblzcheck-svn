@@ -377,30 +377,32 @@ algo06(const std::string& accountId) {
   }
   
   while( a5 < 0 || a5 > 4) {
-	if (a5 > 4) {
+      if (a5 > 4) {
 	  a5 -= 5;
-	} else {
+      } else {
 	  a5 += 5;
-	}
-	if (0 == d2) {
-	  p = tab1[a5];
-	} else {
-	  p = tab2[a5];
-	}
+      }
+  }
+  // Fixed wrong ending of while-loop; by Erik Kerger <erik@kedo.com>
+
+  if (0 == d2) {
+      p = tab1[a5];
+  } else {
+      p = tab2[a5];
   }
 
   if (p == account[9]) {
-	return AccountNumberCheck::OK;
+      return AccountNumberCheck::OK;
   } else {
-	if (0 == account[3]) {
+      if (0 == account[3]) {
 	  if (p > 4) {
-		p -= 5;
+	      p -= 5;
 	  } else {
-		p += 5;
+	      p += 5;
 	  }
 	  if (p == account[9])
-		return AccountNumberCheck::OK;
-	}	  
+	      return AccountNumberCheck::OK;
+      }	  
   }
    
   // hugh...
