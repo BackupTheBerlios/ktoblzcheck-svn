@@ -19,15 +19,28 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
 #include "iban.h"
 #include <stdio.h>
+
+#ifndef __GNUC__
+// A whacky workaround for MSVC
+# define snprintf(s,n,f,v) sprintf(s,f,v)
+#endif
 
 /** This structure holds the necessary IBAN information for each
  * country.  Some of the data is not yet used, but might be used
  * sometime in the future.
  */
-struct iban_country_info_s 
+class iban_country_info
 {
+public:
+	//iban_country_info() : countrycode(0), currencycode(0) {};
+	iban_country_info(Iban::Country, unsigned, const char*, 
+		unsigned, unsigned, const char*, unsigned);
+
       /** The value from the enum Country */
       Iban::Country enum_value;
       
@@ -36,7 +49,7 @@ struct iban_country_info_s
 
       /** The two-letter country code (Alpha-2) for this country
        * according to ISO 3166-1. */
-      const char countrycode[3];
+      const char* countrycode;
       /** The (maximum?) length of bank codes in this country,
        * i.e. their number of characters. */
       unsigned bankCodeLen;
@@ -45,25 +58,34 @@ struct iban_country_info_s
       unsigned accountCodeLen;
 
       /** Three-letter code for the currency used in this country */
-      const char currencycode[4];
+      const char* currencycode;
       /** Number of decimal places of the currency after the decimal
        * point/comma. */
       unsigned currency_decimalpoints;
 };
-typedef struct iban_country_info_s iban_country_info;
+iban_country_info::iban_country_info(Iban::Country e, unsigned c, const char* cc, 
+		unsigned bcl, unsigned acl, const char* curc, unsigned cd)
+		: enum_value(e)
+		, country(c)
+		, countrycode(cc)
+		, bankCodeLen(bcl)
+		, accountCodeLen(acl)
+		, currencycode(curc)
+		, currency_decimalpoints(cd)
+{};
 
 /** Define the values for some known countries here. Part of this data
  * comes from ISO 3166-1 which was replicated e.g. in the HBCI
  * specification chapter VIII.11. */
 iban_country_info country_info[] = 
 {
-   { Iban::DE, 280, "DE", 8, 10, "EUR", 2 },  
+   iban_country_info( Iban::DE, 280, "DE", 8, 10, "EUR", 2 ),  
    /* A note about Germany's numerical country code. The HBCI
     * specification says: The new values since 1990 (reunification) is
     * 276, but all banks still use 280, so we stick to this old
     * value. */
-   { Iban::AT, 40, "AT", 4, 12, "EUR", 2 },
-   { Iban::CH, 756, "CH", 5, 12, "CHF", 2 }
+   iban_country_info( Iban::AT, 40, "AT", 4, 12, "EUR", 2 ),
+   iban_country_info( Iban::CH, 756, "CH", 5, 12, "CHF", 2 )
 };
 // FIXME: The integer value of the enum Country is directly used as
 // subscript into this array! This means everything will break if the
@@ -167,7 +189,7 @@ int Iban::modulo97(const char *pszNumber)
 		// calc the module 97
 		lNum = lNum % 97;
 		// convert module97 to string
-		sprintf(szPart, "%i", lNum);
+		sprintf(szPart, "%li", lNum);
 		// iModLen digits are used to build the next 9 digits number
 		iModLen = strlen(szPart);
 	}	

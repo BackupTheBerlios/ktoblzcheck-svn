@@ -24,7 +24,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "config.h"
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
 
 #include "ktoblzcheck.h"
 #include <fstream>
@@ -197,7 +199,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
     try {
       Record rec = findBank(bankId);
       method = rec.method;
-    } catch (int i) {
+    } catch (int) {
 	// bank was not found, return error if not forced to use a spec. method
 	return BANK_NOT_KNOWN;
     }
@@ -396,7 +398,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
         // iterated transformation
             return algo07(account, transform);
         }
-        return ERROR;
+        //return ERROR;
   }
   if ("28" == method) {
 	number2Array("8765432000", weight);
@@ -1094,7 +1096,7 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
   }
   if ("97" == method) {
 	string tmp = array2Number(account).substr(0, 9);
-	long long valueX = number2LongLong(tmp);
+	long_long valueX = number2LongLong(tmp);
 	valueX -= (valueX / 11) * 11;
 	valueX = valueX % 10;
 	

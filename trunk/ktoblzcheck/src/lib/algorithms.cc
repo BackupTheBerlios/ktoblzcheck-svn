@@ -24,7 +24,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
 #include "algorithms.h"
 #include <fstream>
 #include <iostream>
@@ -481,8 +483,8 @@ void number2Array(string number, int a[10]) {
   }
 }
 
-long long number2LongLong(string number) {
-  long long result = 0;
+long_long number2LongLong(string number) {
+  long_long result = 0;
 
   for (unsigned int i=0; i<number.length(); i++) {
 	result *= 10;

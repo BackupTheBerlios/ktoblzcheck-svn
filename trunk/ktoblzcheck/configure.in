@@ -34,6 +34,9 @@ AC_PROG_CPP
 AC_PROG_CXX
 AC_PROG_CXXCPP
 
+# Check language features
+AC_C_LONG_LONG
+
 # Disable static libraries by default. Modern distros want the shared
 # ones.
 AC_DISABLE_STATIC

@@ -32,7 +32,9 @@
  * and the C wrappers are absolutely independent from all the rest of
  * the code.
  */
-#include <config.h>
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
 #include "ktoblzcheck.h"
 #include <assert.h>
 

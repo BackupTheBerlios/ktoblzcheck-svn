@@ -1,5 +1,12 @@
 2004-05-04  Christian Stimming  <stimming@tuhh.de>
 
+	* ktoblzcheck.vcproj: Add project file for Microsoft Visual Studio
+	C++ compiler -- this should run out-of-the-box. Fixed several
+	source code problems with the MSVC compiler.
+	
+	* macros/ac_c_long_long.m4: Add configure check for long long
+	type. Fix macros for upcoming automake-1.8.
+	
 	* src/lib/Makefile.am: Fix DLL rules.
 	
 	* INSTALL.WIN32: Add installation notes for windows archives.

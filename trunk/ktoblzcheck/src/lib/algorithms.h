@@ -26,13 +26,19 @@
 
 #include "ktoblzcheck.h"
 
+#ifdef HAVE_LONG_LONG
+# define long_long long long
+#else
+# define long_long long
+#endif // HAVE_LONG_LONG
+
 // forward declarations
 void   multArray(int a[10], int b[10], int dest[10]);
 void   crossFoot(int source[10], int dest[10], int start, int stop);
 int    add(int source[10], int start, int stop);
 std::string array2Number(int a[10]);
 void   number2Array(std::string number, int a[10]);
-long long number2LongLong(std::string number);
+long_long number2LongLong(std::string number);
 int    algo02(int modulus, int weight[10], bool crossfoot, int accountId[10]);
 int    algo03(int modulus, int weight[10], bool crossfoot, int accountId[10], 
 			  int startAdd, int stopAdd);
