@@ -1,3 +1,8 @@
+2005-01-24  Christian Stimming <stimming@tuhh.de>
+
+	* src/bin/ktoblzcheck.cc: Add file-based batch processing, by
+	Michael Plugge <m.plugge@fh-mannheim.de>
+
 2005-01-21  Christian Stimming <stimming@tuhh.de>
 
 	* src/lib/ktoblzcheck.cc: Optimized the file reading functions
