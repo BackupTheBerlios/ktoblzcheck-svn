@@ -1,4 +1,4 @@
-#!/usr/bin/sed -nf
+#!@SED@ -nf
 # 
 # This script converts the ascii file of German Bank Codes (BLZ-Datei)
 # as available from the Deutsche Bundesbank into the bankdata.txt file

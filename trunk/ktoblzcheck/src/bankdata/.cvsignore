@@ -4,3 +4,4 @@ Makefile.in
 .libs
 *.lo
 online_update.pl
+bundesbank.sed

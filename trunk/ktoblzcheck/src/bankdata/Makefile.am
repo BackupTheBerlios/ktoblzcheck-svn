@@ -8,6 +8,6 @@ dist_pkgdata_SCRIPTS = \
   bundesbank.sed \
   online_update.pl
 
-EXTRA_DIST = online_update.pl.in
+EXTRA_DIST = online_update.pl.in bundesbank.sed.in
 
-CLEANFILES = online_update.pl
+CLEANFILES = online_update.pl bundesbank.sed
