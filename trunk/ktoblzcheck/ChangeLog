@@ -1,3 +1,9 @@
+2005-01-02  Christian Stimming  <stimming@tuhh.de>
+
+	* src/lib/ktoblzcheck.cc: New methods by Jens Gecius
+	<jens@gecius.de>. He also discovered a fundamental problem with
+	algo02, but didn't have time so far to fix it.
+
 2004-11-10  Christian Stimming  <stimming@tuhh.de>
 
 	* configure.in: Released version 1.2

@@ -550,6 +550,8 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	}
   }
   // Added by Jens Gecius, validated with six test accountIDs
+  // Checked with positive numbers for methods A, B, C
+  // Exception handling see below
   if ("51" == method) {
         number2Array("0007654320", weight);
         if (OK == algo01(11, weight, false, 10, account))
@@ -559,9 +561,19 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
             return OK;  // Method B
         if (7 == account[9] || 8 == account[9] || 9 == account[9])
             return ERROR;  // Invalid IDs
-        if (9 == account[2] && 9 == account[3]) {
-            	number2Array("987654320", weight); weight[0] = 10;
-                return algo01(11, weight, false, 10, account);
+	// Modified by Jens Gecius, algo changed July 9th, 2004
+	// Exception handling
+	// This calculation, as far as I can see, is also influenced
+	// by the calculation "error" in algo02 (see below, method "B2"
+	// but I have no solution on hand.
+	//        if (9 == account[2] && 9 == account[3]) {
+	if (9 == account[2]) {
+	        number2Array("0087654320", weight);
+		if (algo01(11, weight, false, 10, account))
+		  return OK; // Variant 1
+		number2Array("0987654320", weight); weight[0] = 10;
+		//            	number2Array("987654320", weight); weight[0] = 10;
+                return algo01(11, weight, false, 10, account); // Variant 2
         }		   // Exception to method C
         return algo01(7, weight, false, 10, account); // Method C
   }
@@ -770,12 +782,26 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
   }
   // Added by Jens Gecius, validated with two test accountIDs
   if ("73" == method) {
-        if (account[2] == 9) {
-            number2Array("0987654320", weight); weight[0] = 10;
-            return algo01(11, weight, false, 10, account);
-        }
+        // Modified by Jens Gecius, algo changed December 6th, 2004
+        // Checked with (positive only) Bundesbank-Testnumbers
+	if (9 == account[2]) {
+	        number2Array("0087654320", weight);
+		if (algo01(11, weight, false, 10, account))
+		  return OK; // Variant 1
+		number2Array("0987654320", weight); weight[0] = 10;
+                return algo01(11, weight, false, 10, account); // Variant 2
+        }		   // Exception to method C, Method 51
+	//        if (account[2] == 9) {
+	//            number2Array("0987654320", weight); weight[0] = 10;
+	//            return algo01(11, weight, false, 10, account);
+	//        }
         number2Array("0001212120", weight);
-        return algo01(10,weight, true, 10, account);
+        if (OK == algo01(10, weight, true, 10, account))
+	  return OK;
+	number2Array("0000212120", weight);
+	if (OK == algo01(10, weight, true, 10, account))
+	  return OK;
+	return algo01(7, weight, true, 10, account);
   }
   // Added by Jens Gecius, validated with one (double) test accountID
   if ("74" == method) {
@@ -852,12 +878,20 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	return algo01(10, weight, true, checkIndex, account);
   }
   if ("80" == method) {
-	// exception:
-	if (9 == account[2] && 9 == account[3]) {
-	  number2Array("987654320", weight); weight[0] = 10;
-	  return algo01(11, weight, false, 10, account);
-	}
-
+        // exception:
+        // Modified by Jens Gecius, algo changed June 8th, 2004
+        // Checked with (positive only) Bundesbank-Testnumbers
+	if (9 == account[2]) {
+	        number2Array("0087654320", weight);
+		if (algo01(11, weight, false, 10, account))
+		  return OK; // Variant 1
+		number2Array("0987654320", weight); weight[0] = 10;
+                return algo01(11, weight, false, 10, account); // Variant 2
+        }		   // Exception to method C, Method 51
+        // if (9 == account[2] && 9 == account[3]) {
+	//	  number2Array("987654320", weight); weight[0] = 10;
+	//	  return algo01(11, weight, false, 10, account);
+	//	}
 	// var 1
 	number2Array("0000212120", weight);
 	if (OK == algo01(10, weight, true, 10, account))
@@ -868,10 +902,19 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
   }
   if ("81" == method) {
         // Modified by Jens Gecius, validated with three test accountIDs
-	number2Array("0987654320", weight); weight[0] = 10;
-	if (9 != account[2]) {
-	  weight[1] = 0; weight[2] = 0;
-	}
+        // Modified by Jens Gecius, algo changed September 6th, 2004
+        // Checked with (positive only) Bundesbank-Testnumbers
+	if (9 == account[2]) {
+	        number2Array("0087654320", weight);
+		if (algo01(11, weight, false, 10, account))
+		  return OK; // Variant 1
+		number2Array("0987654320", weight); weight[0] = 10;
+                return algo01(11, weight, false, 10, account); // Variant 2
+        }		   // Exception to method C, Method 51
+        number2Array("0007654320", weight); weight[0] = 10;
+	//	if (9 != account[2]) {
+	//	  weight[1] = 0; weight[2] = 0;
+	//	}
 	return algo01(11, weight, false, 10, account);
   }
   if ("82" == method) {
@@ -909,10 +952,19 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
   }
   if ("84" == method) {
 	// exception:
-	if (9 == account[2] && 9 == account[3]) {
-	  number2Array("987654320", weight); weight[0] = 10;
-	  return algo01(11, weight, false, 10, account);	  	  
-	}
+        // Modified by Jens Gecius, algo changed September 6th, 2004
+        // Checked with (positive only) Bundesbank-Testnumbers
+	if (9 == account[2]) {
+	        number2Array("0087654320", weight);
+		if (algo01(11, weight, false, 10, account))
+		  return OK; // Variant 1
+		number2Array("0987654320", weight); weight[0] = 10;
+                return algo01(11, weight, false, 10, account); // Variant 2
+        }		   // Exception to method C, Method 51
+	//	if (9 == account[2] && 9 == account[3]) {
+	//	  number2Array("987654320", weight); weight[0] = 10;
+	//	  return algo01(11, weight, false, 10, account);	  	  
+	//	}
 
 	// var 1
 	number2Array("0000654320", weight);
@@ -947,10 +999,19 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
   }
   if ("86" == method) {
 	// exception:
+        // Modified by Jens Gecius, algo changed September 6th, 2004
+        // Checked with (positive only) Bundesbank-Testnumbers
 	if (9 == account[2]) {
-	  number2Array("987654320", weight); weight[0] = 10;
-	  return algo01(11, weight, false, 10, account);	  
-	}
+	        number2Array("0087654320", weight);
+		if (algo01(11, weight, false, 10, account))
+		  return OK; // Variant 1
+		number2Array("0987654320", weight); weight[0] = 10;
+                return algo01(11, weight, false, 10, account); // Variant 2
+        }		   // Exception to method C, Method 51
+	//	if (9 == account[2]) {
+	//	  number2Array("987654320", weight); weight[0] = 10;
+	//	  return algo01(11, weight, false, 10, account);	  
+	//	}
 
 	// var 1
 	number2Array("0001212120", weight);
@@ -962,11 +1023,21 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	return algo01(11, weight, false, 10, account);
   }
   if ("87" == method) {
+        // Modified by Jens Gecius, algo changed September 6th, 2004
+        // Checked with (positive only) Bundesbank-Testnumbers
 	if (9 == account[2]) {
+	        number2Array("0087654320", weight);
+		if (algo01(11, weight, false, 10, account))
+		  return OK; // Variant 1
+		number2Array("0987654320", weight); weight[0] = 10;
+                return algo01(11, weight, false, 10, account); // Variant 2
+        }		   // Exception to method C, Method 51
+	// method a, b, c not verified in regard of changes (Sep 6th, 2004)!
+	//	if (9 == account[2]) {
 	  // calc with method 10
-	  number2Array("987654320", weight); weight[0] = 10;
-	  return algo01(11, weight, false, 10, account);
-	}
+	//	  number2Array("987654320", weight); weight[0] = 10;
+	//	  return algo01(11, weight, false, 10, account);
+	//	}
 
 	// method a
 	if (OK == algo06(accountId))
@@ -1236,15 +1307,36 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
         return algo01(10, weight, false, 10, account);
   }
   if ("A8" == method) {
-	number2Array("0987654320", weight); weight[0] = 10;
-	if (9 != account[2])
-	  weight[1] = weight[2] = 0;
+        // Modified by Jens Gecius, indirect change due to method 81 (see there)
+        // as of September 6th, 2004
+        // Checked with Bundesbank-Testnumbers; could someone investigate,
+        // why test-number 3199500502 is shown correct, although it should be wrong?
+        //	number2Array("0987654320", weight); weight[0] = 10;
+        //	if (9 != account[2])
+        //	  weight[1] = weight[2] = 0;
+	if (9 == account[2]) {
+	        number2Array("0087654320", weight);
+		if (algo01(11, weight, false, 10, account))
+		  return OK; // Variant 1
+		number2Array("0987654320", weight); weight[0] = 10;
+                return algo01(11, weight, false, 10, account); // Variant 2
+        }		   // Exception to method C, Method 51
+        number2Array("0007654320", weight);
 	if (OK == algo01(11, weight, false, 10, account))
 	    return OK;
         if (account[2] == 9)
             return ERROR;
+	// Further test according to method 73 (see there), without account[2]==9
+	// (not tested in variant 2)
         number2Array("0001212120", weight);
-        return algo01(10,weight, true, 10, account);
+        if (OK == algo01(10, weight, true, 10, account))
+	  return OK;
+	number2Array("0000212120", weight);
+	if (OK == algo01(10, weight, true, 10, account))
+	  return OK;
+	return algo01(7, weight, true, 10, account);
+	//        number2Array("0001212120", weight);
+	//        return algo01(10,weight, true, 10, account);
   }
   if ("A9" == method) {
 	number2Array("1731731730", weight);
@@ -1254,6 +1346,62 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	}
 	return OK;
   }
+  // Added by Jens Gecius (new Method as of December 6th, 2004)
+  // Not checked, no bank seems to use it.
+  if ("B0" == method) {
+    if (array2Number(account) < "1000000000" || account[0] == 8)
+      return ERROR;
+    if (account[7] == 1 || account[7] == 2 || account[7] == 3 || account[7] == 6)
+      return OK; // variant 1 -> no check if 1,2,3 or 6 at 8th place of account (method "09")
+    // Other accounts: method "06"
+    number2Array("4327654320", weight);
+    return algo01(11, weight, false, 10, account);
+  }
+  // Added by Jens Gecius (new Method as of September 6th, 2004)
+  // Checked with Bundesbank-Testnumbers
+  if ("B1" == method) {
+    number2Array("1371371370", weight);
+    if (OK == algo01(10, weight, false, 10, account))
+      return OK; // variant 1 (method "05")
+    number2Array("1731731730", weight);
+    return algo01(10, weight, false, 10, account);
+    // variant 2 (method "01")
+  }
+  // Added by Jens Gecius (new Method as of September 6th, 2004)
+  // Checked with Bundesbank-Testnumbers (one of them failed the test due to deeper
+  // problem with algo02, where the result for method 02 is wrongly calculated!!
+  // result shows account is valid although it is not. I don't know about deeper
+  // implications of a change of that line:
+  //   result = (modulus - result) % 10;
+  // to
+  //   result = (modulus - result)
+  // as per method "02" with modulus 11 and test-result "10", it shows an invalid account,
+  // which is here shown as valid account.
+  if ("B2" == method) {
+    if (account[0] < 8) {
+      number2Array("2987654320", weight);
+      return algo01(11, weight, false, 10, account);
+    } // variant 1 (method "02")
+    if (account[0] == 8 || account[0] == 9) {
+      number2Array("2121212120", weight);
+      return algo01(10, weight, true, 10, account);	
+    } // variant 2 (method "00")
+    return ERROR; // should never happen, to be on the safe side
+  }
+  // Added by Jens Gecius (new method as of December 6th, 2004)
+  // Checked with Bundesbank-Testnumbers
+  if ("B3" == method) {
+    if (account[0] < 9) {
+      number2Array("0007654320", weight);
+      return algo01(11, weight, false, 10, account);
+    } // variant 1 (method "32")
+    if (account[0] == 9) {
+      number2Array("4327654320", weight);
+      return algo01(11, weight, false, 10, account);
+    } // variant 2 (method "06")
+    return ERROR; // should never happen, to be on the safe side
+  }
+
   std::cerr << "AccountNumberCheck::check: Specified method '" << method 
 	    << "' is unknown." << std::endl;
   return UNKNOWN;
