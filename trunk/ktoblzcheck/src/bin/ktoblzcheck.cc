@@ -78,13 +78,13 @@ int main(int argc, char **argv) {
 
   // skip the init-stuff, we don't need the banknames
   // if method is forced
-  if ("" == method) {  
+  //  if ("" == method) {  
 #ifdef COMPILE_RESOURCE
-	AccountNumberCheck::init();
+    AccountNumberCheck checker();
 #else
-	AccountNumberCheck::init(resFile);
+    AccountNumberCheck checker(resFile);
 #endif
-  }
+    //  }
 
   bankId = argv[nextArg++];
   accountId = argv[nextArg++];
@@ -92,13 +92,13 @@ int main(int argc, char **argv) {
 
   AccountNumberCheck::Record bankData;
   try {
-	bankData = AccountNumberCheck::findBank(bankId);
+	bankData = checker.findBank(bankId);
   } catch (int i) {
 	found = false;
   }
 
   AccountNumberCheck::Result result =
-	AccountNumberCheck::check(bankId, accountId, method);
+	checker.check(bankId, accountId, method);
 
   if (! justReturnCode) {
 	cout << "Bank: " << (found?(bankData.bankName + " " + bankData.location):"<unknown>") << " (" << bankId << ")" << endl;
@@ -116,7 +116,6 @@ int main(int argc, char **argv) {
 	cout << "Result is: " << "(" << result << ") " << text << endl << endl;
   }
 
-  AccountNumberCheck::flush();
   return result;
 }
 

@@ -29,8 +29,6 @@
 #include <fstream>
 #include <iostream>
 
-list<AccountNumberCheck::Record*> AccountNumberCheck::data;
-
 // forward declarations
 void   multArray(int a[10], int b[10], int dest[10]);
 void   crossFoot(int source[10], int dest[10], int start, int stop);
@@ -63,12 +61,12 @@ AccountNumberCheck::Result
 }
 
 #ifdef COMPILE_RESOURCE
-void AccountNumberCheck::init() {
+AccountNumberCheck::AccountNumberCheck() {
   Record *newRecord = NULL;
 #include "data.cc"
 }
 #else /* COMPILE_RESOURCE */
-void AccountNumberCheck::init(string filename) {
+AccountNumberCheck::AccountNumberCheck(string filename) {
   ifstream file(filename.c_str());
   char *buffer = new char[200];
   string line;
@@ -104,12 +102,12 @@ void AccountNumberCheck::init(string filename) {
 }
 #endif /* COMPILE_RESOURCE */
 
-void AccountNumberCheck::flush() {
+AccountNumberCheck::~AccountNumberCheck() {
   for (list<Record*>::iterator iter = data.begin(); iter != data.end(); iter++)
 	delete (*iter);
 }
 
-int AccountNumberCheck::count() {
+int AccountNumberCheck::bankCount() {
   return data.size();
 }
 

@@ -69,20 +69,6 @@ public:
 	string location;
   };
 
-  /**
-   * Check if <code>bankId</code> and <code>accountId</code> form a valid
-   * combination.
-   * @param method If set, force the use of specified check-method
-   */
-  static const Result check(string bankId, string accountId, 
-							string method=""); 
-
-  /**
-   * Find the info-record for a bank specified by <code>bankId</code>
-   * @throws int if <code>bankId</code> could not be found in the database
-   */
-  static const Record findBank(string bankId);
-
   // Depends on whether you specified "--with-compile-into-lib"
   // at "./configure"
 #ifdef COMPILE_RESOURCE
@@ -90,35 +76,50 @@ public:
    * Initialize the bank-database<br>
    * You must call it prior to any operation you want to perform<br>
    */
-  static void init();
+  AccountNumberCheck();
 #else
   /**
    * Initialize the bank-database specified by <code>filename</code>
    * @param filename The absolute location of the KtoBlzCheck-database
    */
-  static void init(string filename);
+  AccountNumberCheck(string filename);
 #endif
+
+  /**
+   * Flush all resources<br>
+   * Do not perform any operation except "init" afterwards
+   */
+  ~AccountNumberCheck();
+
+
+  /**
+   * Check if <code>bankId</code> and <code>accountId</code> form a valid
+   * combination.
+   * @param method If set, force the use of specified check-method
+   */
+  const Result check(string bankId, string accountId, string method=""); 
+
+  /**
+   * Find the info-record for a bank specified by <code>bankId</code>
+   * @throws int if <code>bankId</code> could not be found in the database
+   */
+  const Record findBank(string bankId);
 
   /**
    * Returns the number of bank-records currently loaded
    */
-  static int count();
+  int bankCount();
 
   /**
    * Generates an index over the bankIds.<br>
    * This way you can speed up the checking if you want to check
    * 100s of combination (batch-processing)
    */
-  static void createIndex();
+  void createIndex();
 
-  /**
-   * Flush all resources<br>
-   * Do not perform any operation except "init" afterwards
-   */
-  static void flush();
 
 private:
-  static list<Record*> data;
+  list<Record*> data;
 };
 
 #endif
