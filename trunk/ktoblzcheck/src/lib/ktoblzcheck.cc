@@ -1028,7 +1028,13 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 		return OK;
 	  else {	
 		number2Array("0987650432", weight); weight[0] = 10;	
-		return algo01(11, weight, false, 7, account);
+		tmp = algo01(11, weight, false, 7, account);
+		if (OK == tmp)
+		  return OK;
+		else {
+		  number2Array("9058420000", weight); weight[1] = 10;
+		  return algo01(11, weight, false, 7, account);
+		}
 	  }
 	}
   }
@@ -1225,6 +1231,14 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
             return ERROR;
         number2Array("0001212120", weight);
         return algo01(10,weight, true, 10, account);
+  }
+  if ("A9" == method) {
+	number2Array("1731731730", weight);
+	if(algo01(10, weight, false, 10, account) != OK) {
+	  number2Array("4327654320", weight);
+	  return algo01(11, weight, false, 10, account);
+	}
+	return OK;
   }
   std::cerr << "AccountNumberCheck::check: Specified method '" << method 
 	    << "' is unknown." << std::endl;

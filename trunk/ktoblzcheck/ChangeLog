@@ -1,3 +1,8 @@
+2004-05-02  Christian Stimming  <stimming@tuhh.de>
+
+	* src/lib/ktoblzcheck.cc: Change at algorithm 91 and insert A1 --
+	patch by Daniel Glöckner <daniel-gl@gmx.net>.
+
 2004-04-24  Christian Stimming  <stimming@tuhh.de>
 
 	* src/include/iban.h, src/lib/iban.cc, src/bin/ibanchk.cc: Initial
