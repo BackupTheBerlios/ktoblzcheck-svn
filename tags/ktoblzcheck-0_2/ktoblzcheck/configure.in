@@ -1,0 +1,38 @@
+AC_INIT(src/lib/ktoblzcheck.cc)
+AM_INIT_AUTOMAKE(ktoblzcheck, 0.2)
+AM_CONFIG_HEADER(config.h)
+
+
+AC_PREFIX_DEFAULT(/usr/local)
+AC_ISC_POSIX
+AC_PROG_CC
+AM_PROG_CC_STDC
+AC_HEADER_STDC
+AC_PROG_CPP
+AC_PROG_CXX
+AC_PROG_CXXCPP
+AM_PROG_LIBTOOL
+
+
+# check path for installation of bank data
+AC_MSG_CHECKING(bankdata path)
+if test "x$prefix" != xNONE; then
+  BANKDATA_PATH="$prefix/share/ktoblzcheck"
+else
+  BANKDATA_PATH="$ac_default_prefix/share/ktoblzcheck"
+fi
+AC_ARG_WITH(bankdata-path, [  --with-bankdata-path=DIR where to store the bank data],
+  [BANKDATA_PATH="$withval"])
+AC_SUBST(BANKDATA_PATH)
+AC_DEFINE_UNQUOTED(BANKDATA_PATH, "$BANKDATA_PATH", [Default path for bank data])
+AC_MSG_RESULT($BANKDATA_PATH)
+
+
+AC_OUTPUT( \
+  Makefile \
+  src/Makefile \
+  src/bankdata/Makefile \
+  src/bin/Makefile \
+  src/include/Makefile \
+  src/lib/Makefile \
+)

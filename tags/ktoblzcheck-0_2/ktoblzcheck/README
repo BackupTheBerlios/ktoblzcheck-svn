@@ -1,0 +1,37 @@
+KtoBLZCheck is a library to check account numbers and bank codes of
+German banks.
+
+Both a library for other programs as well as a short command-line tool
+is available. It is possible to check pairs of account numbers and
+bank codes (BLZ) of German banks, and to map bank codes (BLZ) to the
+clear-text name and location of the bank.
+
+How to compile:
+
+Type 
+"./autogen.sh" to create the necessary build-stuff
+
+Type "./configure" to calculate some system dependencies.
+
+"./configure --prefix=/your/prefix
+--with-bankdata-path=/your/favorite/directory" compiles KtoBLZCheck
+and reads the bank data at runtime from the specified path. The
+default path is $prefix/share/ktoblzcheck where the default for
+$prefix is /usr/local. The advantage is, you can update it regularly
+at this location. Additionally you can specify another location at
+runtime.
+
+Now type "make", "make install"
+
+And then give it a try:
+
+"ktoblzcheck <your-bank-id> <your-account-id>"
+
+FIXME: need some example BLZ/account ids here.
+
+
+Jan 2003, Fabian Kaiser (fabian@openhbci.de)
+May 2003, Christian Stimming <stimming@tuhh.de>
+
+PS: "./configure --with-compile-into-lib" was disabled because the
+compiler would need way too much memory to actually compile that.
