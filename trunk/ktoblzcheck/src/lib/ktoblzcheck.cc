@@ -56,6 +56,17 @@ AccountNumberCheck::Record::Record(unsigned long id,
 {
 }
 
+AccountNumberCheck::Record::Record(const char *id,
+				   const char *meth, 
+				   const char *name, 
+				   const char *loc)
+   : bankId(atol(id))
+   , method(meth)
+   , bankName(name)
+   , location(loc)
+{
+}
+
 std::string AccountNumberCheck::resultToString(Result r)
 {
    switch(r) 
@@ -102,8 +113,11 @@ AccountNumberCheck::~AccountNumberCheck()
   deleteList();
 }
 
+#define BLZ_SIZE    (8+1)
+#define METHOD_SIZE (2+1)
+#define NAME_SIZE   (58+1)
+#define PLACE_SIZE  (29+1)
 
-#define LINEBUFFER_SIZE 250
 void 
 AccountNumberCheck::readFile(const string &filename) 
 {
@@ -122,38 +136,27 @@ AccountNumberCheck::readFile(const string &filename)
       return;
     }
   
-  char *buffer = new char[LINEBUFFER_SIZE];
+  char blz[BLZ_SIZE];
+  char method[METHOD_SIZE];
+  char name[NAME_SIZE];
+  char place[PLACE_SIZE];
+
   string line;
-  while (file) {
-        // get line from file
-	file.getline(buffer, LINEBUFFER_SIZE);
-	// copy line to string variable
-	line.assign(buffer);
-	if (line.length() < 10)
-	  break;
+  while (file) 
+  {
+     // get indiviual fields from file
+     file.getline(blz, BLZ_SIZE, '\t');
+     file.getline(method, METHOD_SIZE, '\t');
+     file.getline(name, NAME_SIZE, '\t');
+     file.getline(place, PLACE_SIZE, '\n');
+     
+     // Create new record object
+     Record *newRecord = 
+	new Record(blz, method, name, place);
 
-	Record *newRecord = new Record;
-
-	// bankId
-	unsigned int pos1;
-	unsigned int pos2;
-	pos1 = line.find('\t');
-	newRecord->bankId = atol(line.substr(0, pos1).c_str());
-	pos1++;
-
-	// check-type
-	newRecord->method = line.substr(pos1, 2);
-	pos1 += 3;
-
-	// bank name
-	pos2 = line.find('\t', pos1);
-	newRecord->bankName = line.substr(pos1, pos2 - pos1);
-	pos1 = pos2 + 1;
-
-	// bank location
-	newRecord->location = line.substr(pos1);
-
-	data.insert(banklist_type::value_type(newRecord->bankId, newRecord));
+     // Insert this always at the end, since the file is sorted by
+     // ascending BLZ
+     data.insert(data.end(), banklist_type::value_type(newRecord->bankId, newRecord));
   }
 }
 

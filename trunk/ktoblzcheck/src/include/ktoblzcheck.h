@@ -108,6 +108,10 @@ public:
     Record(unsigned long id, const std::string& method, 
 	   const std::string& name, 
 	   const std::string& loc);
+    /** Constructor with all values from strings */
+    Record(const char *id, const char *method, 
+	   const char *name, 
+	   const char *loc);
   };
 
   /**

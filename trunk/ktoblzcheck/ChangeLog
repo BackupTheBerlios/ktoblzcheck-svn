@@ -1,5 +1,8 @@
 2005-01-21  Christian Stimming <stimming@tuhh.de>
 
+	* src/lib/ktoblzcheck.cc: Optimized the file reading functions
+	quite a bit, so that it runs 25% faster. Gee, this pays off.
+
 	* src/bin/ktoblzcheck.cc: Add argument --outformat for optionally
 	getting the output format, tab-delimited: "Bankname, Ort,
 	Check-Ergebnis, BLZ, Kontonummer, Methodenname"
