@@ -301,12 +301,29 @@ AccountNumberCheck::check(string bankId, string accountId) {
 	else 
 	  return ERROR;
   }
+  if ("33" == method) {
+	number2Array("0000654321", weight);
+	int tmp = algo02(11, weight, false, account) % 10;
+	if  (tmp == account[9])
+	  return OK;
+	else 
+	  return ERROR;
+  }
   if ("34" == method) {
 	int weight[10] = {7,9,10,5,8,4,2,0,0,1};
 	int tmp = algo02(11, weight, false, account) % 10;
 	if (tmp == account[7])
 	  return OK;
 	else
+	  return ERROR;
+  }
+  if ("38" == method) {
+	number2Array("0009058420", weight);
+	weight[4] = 10;
+	int tmp = algo02(11, weight, false, account) % 10;
+	if  (tmp == account[9])
+	  return OK;
+	else 
 	  return ERROR;
   }
   if ("63" == method) {
@@ -322,6 +339,18 @@ AccountNumberCheck::check(string bankId, string accountId) {
 		return OK;
 	}
 	return ERROR;
+  }
+  if ("65" == method) {
+	number2Array("2121212000", weight);
+	if (9 == account[8]) {
+	  weight[8] = 1;
+	  weight[9] = 2;
+	}
+	int tmp = (10 - algo03(10, weight, true, account, 0, 9)) % 10;
+	if (tmp == account[7])
+	  return OK;
+	else
+	  return ERROR;
   }
   if ("68" == method) {
 	// size=10
@@ -417,7 +446,6 @@ int algo03(int modulus, int weight[10], bool crossfoot, int accountId[10],
   // add all values
   int result = add(res, startAdd, stopAdd);
   result = result % modulus;
-
   return result;
 }
 
