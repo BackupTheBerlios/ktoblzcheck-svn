@@ -269,9 +269,18 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
 	number2Array("987654320", weight);
 	weight[0] = 10;
 	int tmp = algo03(11, weight, false, account, 0, 9);
-	tmp = (11 - tmp) % 10;
-	if (10 == tmp)
-	  tmp = 9;
+
+	// Code by Erik Kerger:
+	if (tmp > 0)    //if result == 0 then check is 0 too
+	    tmp = 11 - tmp;
+	if (10 == tmp)  //use 9 instead of 0
+	    tmp = 9;
+	else
+	    tmp = tmp % 10; 
+	//tmp = (11 - tmp) % 10;
+	//if (10 == tmp)
+	// tmp = 9;
+
 	if  (tmp == account[9])
 	  return OK;
 	else 
