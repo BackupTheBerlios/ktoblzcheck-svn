@@ -11,7 +11,8 @@ EXTRA_WIN_DIST =  README.WIN32 INSTALL.WIN32 AUTHORS README COPYING
 
 EXTRA_DIST = $(EXTRA_WIN_DIST) \
   ktoblzcheck.spec.in \
-  ktoblzcheck.spec
+  ktoblzcheck.spec \
+  ktoblzcheck.vcproj
 
 rpm:    $(PACKAGE).spec dist
 	rpmbuild="rpm" && \
