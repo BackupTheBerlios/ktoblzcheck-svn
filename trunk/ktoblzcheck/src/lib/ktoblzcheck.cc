@@ -60,13 +60,27 @@ AccountNumberCheck::Result
   data.push_back(newRecord);\
 }
 
-#ifdef COMPILE_RESOURCE
 AccountNumberCheck::AccountNumberCheck() {
+#ifdef COMPILE_RESOURCE
+
   Record *newRecord = NULL;
 #include "data.cc"
-}
+
 #else /* COMPILE_RESOURCE */
-AccountNumberCheck::AccountNumberCheck(string filename) {
+  std::cerr << "AccountNumberCheck::AccountNumberCheck(): "
+    "KtoBlzCheck was not compiled with bank data compiled into. "
+    "Don't use this function, you won't have any bank data."
+	    << std::endl;
+#endif
+}
+
+AccountNumberCheck::AccountNumberCheck(const string& filename) {
+#ifdef COMPILE_RESOURCE
+  std::cerr << "AccountNumberCheck::AccountNumberCheck(const string&): "
+    "KtoBlzCheck was compiled with bank data compiled into. "
+    "Don't use this function, you won't have any bank data."
+	    << std::endl;
+#else /* COMPILE_RESOURCE */
   ifstream file(filename.c_str());
   char *buffer = new char[200];
   string line;
@@ -99,15 +113,15 @@ AccountNumberCheck::AccountNumberCheck(string filename) {
 
 	data.push_back(newRecord);
   }
-}
 #endif /* COMPILE_RESOURCE */
+}
 
 AccountNumberCheck::~AccountNumberCheck() {
   for (list<Record*>::iterator iter = data.begin(); iter != data.end(); iter++)
 	delete (*iter);
 }
 
-int AccountNumberCheck::bankCount() {
+unsigned int AccountNumberCheck::bankCount() const {
   return data.size();
 }
 
@@ -115,9 +129,9 @@ void AccountNumberCheck::createIndex() {
   // not yet implemented
 }
 
-const AccountNumberCheck::Record 
-AccountNumberCheck::findBank(string bankId) {  
-  list<Record*>::iterator iter = data.begin();
+const AccountNumberCheck::Record& 
+AccountNumberCheck::findBank(const string& bankId) const {  
+  list<Record*>::const_iterator iter = data.begin();
 
   unsigned long lbankId = atol(bankId.c_str());
   while (iter != data.end()) {
@@ -129,18 +143,23 @@ AccountNumberCheck::findBank(string bankId) {
   throw -1;
 }
 
-const AccountNumberCheck::Result 
-AccountNumberCheck::check(string bankId, string accountId, string method) {
+AccountNumberCheck::Result 
+AccountNumberCheck::check(const string& bankId, const string& accountId, 
+			  const string& given_method) const 
+{
   int account[10] = {9,1,3,0,0,0,0,2,0,1};
   int weight[10]  = {0,0,0,0,0,0,0,0,0,0};
+  string method = given_method;
 
-  try {
-	Record rec = findBank(bankId);
-	method = rec.method;
-  } catch (int i) {
-	// bank was not found, return error if not forced to use a spec. method
-	if ("" == method)
-	  return BANK_NOT_KNOWN;
+  if (method != "") {
+    try {
+      Record rec = findBank(bankId);
+      method = rec.method;
+    } catch (int i) {
+      // bank was not found, return error if not forced to use a spec. method
+      if ("" == method)
+	return BANK_NOT_KNOWN;
+    }
   }
 
 //  method = "39";
@@ -199,7 +218,7 @@ AccountNumberCheck::check(string bankId, string accountId, string method) {
 	int tmp = algo03(11, weight, false, account, 0, 9);
 	tmp = (11 - tmp) % 10;
 	if (10 == tmp)
-	  tmp == 9;
+	  tmp = 9;
 	if  (tmp == account[9])
 	  return OK;
 	else 
@@ -1245,7 +1264,7 @@ void number2Array(string number, int a[10]) {
 long long number2LongLong(string number) {
   long long result = 0;
 
-  for (int i=0; i<number.length(); i++) {
+  for (unsigned int i=0; i<number.length(); i++) {
 	result *= 10;
 	result += number[i] - 48;
   }

@@ -24,9 +24,11 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef _ANCHECK_HH
-#define _ANCHECK_HH
+#ifndef KTOBLZCHECK_HH
+#define KTOBLZCHECK_HH
 
+
+#ifdef __cplusplus
 using namespace std;
 
 #include <string>
@@ -69,21 +71,23 @@ public:
 	string location;
   };
 
-  // Depends on whether you specified "--with-compile-into-lib"
-  // at "./configure"
-#ifdef COMPILE_RESOURCE
   /**
    * Initialize the bank-database<br>
    * You must call it prior to any operation you want to perform<br>
+   *
+   * If compiled with wrong "--with-compile-into-lib" option, this
+   * will output an error message and you won't have any bank data.
    */
   AccountNumberCheck();
-#else
+
   /**
    * Initialize the bank-database specified by <code>filename</code>
    * @param filename The absolute location of the KtoBlzCheck-database
+   *
+   * If compiled with wrong "--with-compile-into-lib" option, this
+   * will output an error message and you won't have any bank data.
    */
-  AccountNumberCheck(string filename);
-#endif
+  AccountNumberCheck(const string& filename);
 
   /**
    * Flush all resources<br>
@@ -97,23 +101,28 @@ public:
    * combination.
    * @param method If set, force the use of specified check-method
    */
-  const Result check(string bankId, string accountId, string method=""); 
+  Result check(const string& bankId, const string& accountId, 
+	       const string& method="") const; 
 
   /**
    * Find the info-record for a bank specified by <code>bankId</code>
+   * or otherwise throw an exception.
+   *
    * @throws int if <code>bankId</code> could not be found in the database
    */
-  const Record findBank(string bankId);
+  const Record& findBank(const string& bankId) const;
 
   /**
    * Returns the number of bank-records currently loaded
    */
-  int bankCount();
+  unsigned int bankCount() const;
 
   /**
    * Generates an index over the bankIds.<br>
    * This way you can speed up the checking if you want to check
    * 100s of combination (batch-processing)
+   *
+   * Currently not implemented.
    */
   void createIndex();
 
@@ -122,5 +131,76 @@ private:
   list<Record*> data;
 };
 
-#endif
+typedef AccountNumberCheck::Result AccountNumberCheck_Result;
+typedef AccountNumberCheck::Record AccountNumberCheck_Record;
+
+extern "C" {
+#else /* __cplusplus */
+typedef int AccountNumberCheck_Result;
+typedef struct AccountNumberCheck AccountNumberCheck;
+typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
+#endif /* __cplusplus */
+
+  /** Constructor for banklist compiled into library. Returns NULL if
+      not available. */
+  extern AccountNumberCheck *AccountNumberCheck_new();
+
+  /** Constructor for banklist in separate file. Returns NULL if not
+      available. */
+  extern AccountNumberCheck *AccountNumberCheck_new_file(const char *filename);
+
+  /** Destructor */
+  extern void AccountNumberCheck_delete(AccountNumberCheck *a);
+
+  /**
+   * Check if <code>bankId</code> and <code>accountId</code> form a valid
+   * combination. 
+   *
+   * The returned value is simply an integer. Please look up the
+   * meanings of each integer values as defined in the
+   * AccountNumberCheck::Result enum.
+   */
+  extern AccountNumberCheck_Result
+  AccountNumberCheck_check(const AccountNumberCheck *a, 
+			   const char *bankId, 
+			   const char *accountId); 
+
+  /**
+   * Find the info-record for a bank specified by <code>bankId</code>
+   * @throws int if <code>bankId</code> could not be found in the database
+   */
+  extern const AccountNumberCheck_Record *
+  AccountNumberCheck_findBank(const AccountNumberCheck *a, 
+			      const char *bankId);
+
+  /**
+   * Returns the number of bank-records currently loaded
+   */
+  extern unsigned int 
+  AccountNumberCheck_bankCount(const AccountNumberCheck *a);
+
+  /**
+   * Generates an index over the bankIds.<br>
+   * Currently not implemented.
+   */
+  extern void AccountNumberCheck_createIndex(AccountNumberCheck *a);
+
+
+  extern void
+  AccountNumberCheck_Record_delete(AccountNumberCheck_Record *a);
+
+  extern unsigned long 
+  AccountNumberCheck_Record_bankId(const AccountNumberCheck_Record *a);
+
+  extern const char *
+  AccountNumberCheck_Record_bankName(const AccountNumberCheck_Record *a);
+
+  extern const char *
+  AccountNumberCheck_Record_location(const AccountNumberCheck_Record *a);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+#endif /* KTOBLZCHECK_HH */
 

@@ -1,0 +1,12 @@
+Makefile
+Makefile.in
+autom4te.cache
+config.cache
+config.h
+config.log
+config.status
+configure
+libtool
+stamp-h1
+aclocal.m4
+Doxyfile
