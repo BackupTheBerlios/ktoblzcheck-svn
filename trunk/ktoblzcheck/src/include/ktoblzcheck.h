@@ -188,6 +188,10 @@ public:
    */
   void createIndex();
 
+  /**
+   * Returns a meaningful english string explaining the result value
+   */
+  static std::string resultToString(Result r);
 
 private:
   /** The type of the list of the bank data */

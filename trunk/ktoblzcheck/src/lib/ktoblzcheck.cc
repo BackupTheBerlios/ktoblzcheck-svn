@@ -56,6 +56,23 @@ AccountNumberCheck::Record::Record(unsigned long id,
 {
 }
 
+std::string AccountNumberCheck::resultToString(Result r)
+{
+   switch(r) 
+   {
+      case AccountNumberCheck::OK:
+	 return "Ok";
+      case AccountNumberCheck::ERROR:
+	 return "ERROR: account and bank do not match";
+      case AccountNumberCheck::BANK_NOT_KNOWN:
+	 return "Bank is unknown";
+      default:
+      case AccountNumberCheck::UNKNOWN:
+	 return "Validation algorithm unknown";
+   }
+}
+
+
 
 AccountNumberCheck::AccountNumberCheck() 
     : data() // std::map doesn't take size as argument

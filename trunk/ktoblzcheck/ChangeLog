@@ -1,3 +1,12 @@
+2005-01-21  Christian Stimming <stimming@tuhh.de>
+
+	* src/bin/ktoblzcheck.cc: Add argument --outformat for optionally
+	getting the output format, tab-delimited: "Bankname, Ort,
+	Check-Ergebnis, BLZ, Kontonummer, Methodenname"
+
+	* src/include/ktoblzcheck.h: Add resultToString method for
+	easy conversion of enum to string.
+
 2005-01-20  Christian Stimming <stimming@tuhh.de>
 
 	* src/lib/algorithms.cc: Fixing algo06, by Erik Kerger

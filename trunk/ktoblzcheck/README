@@ -48,7 +48,17 @@ And then give it a try:
 
 "ktoblzcheck <your-bank-id> <your-account-id>"
 
-FIXME: need some example BLZ/account ids here.
+Some example BLZ;Account-ids are the following from Bundesbank:
+64192220;12345008
+20210200;0240334000
+56061472;0000191919
+
+The ktoblzcheck command has several optional arguments; use "--help"
+to see a summary. The argument --outformat by default is
+"multiline". The other choice, "--outformat=oneline", gives you one
+line of result with the following tab-delimited fields: "bank name,
+bank city, result of check, BLZ, accountId, name of the checking
+algorithm"
 
 
 Bank List Format
