@@ -284,7 +284,34 @@ AccountNumberCheck::check(string bankId, string accountId) {
 	else 
 	  return ERROR;
   }
-  
+  if ("32" == method) {
+	number2Array("0007654321", weight);
+	int tmp = algo02(11, weight, false, account);
+	if (10 == tmp)
+	  tmp == 9;
+	if  (tmp == account[9])
+	  return OK;
+	else 
+	  return ERROR;
+  }
+  if ("34" == method) {
+	int weight[10] = {7,9,10,5,8,4,2,0,0,1};
+	int tmp = algo02(11, weight, false, account) % 10;
+	if (tmp == account[7])
+	  return OK;
+	else
+	  return ERROR;
+  }
+  if ("88" == method) {
+	number2Array("0007654321", weight);
+	if (9 == account[2])
+	  number2Array("0087654321", weight);
+	int tmp = algo02(11, weight, false, account) % 10;
+	if  (tmp == account[9])
+	  return OK;
+	else 
+	  return ERROR;	
+  }
   return UNKNOWN;
 }
 
