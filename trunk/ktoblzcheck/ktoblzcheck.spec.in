@@ -1,5 +1,5 @@
 %define name ktoblzcheck
-%define version @rpm_version@
+%define version @VERSION@
 %define release @rpm_release@.%{disttag}%{distver}
 
 %define is_mandrake %(test -e /etc/mandrake-release && echo 1 || echo 0)

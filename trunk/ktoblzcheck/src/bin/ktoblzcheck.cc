@@ -31,7 +31,7 @@
 
 using namespace std;
 
-string resFile = "../bankdata/bankdata.txt";
+string resFile = "";
 string method = "";
 bool justReturnCode = false;
 int nextArg = 1;
@@ -40,6 +40,11 @@ void checkArg(string argument) {
   if (argument == "--returncode") {
 	nextArg++;
 	justReturnCode = true;
+  }
+
+  if (argument == "--bankdata-path") {
+     std::cout << "BANKDATA_PATH=" << BANKDATA_PATH << std::endl;
+     exit(0);
   }
   
   if (argument.length() > string("--file=").length()) {
@@ -67,10 +72,15 @@ int main(int argc, char **argv) {
 
   if (argc - nextArg < 2) {
 	cout << "Usage:" << endl;
-	cout << argv[0] << " [--returncode] [--file=datafile] <bank-id> <account-id>" << endl;
-	cout << "  --file=<resource-file>: The file that contains the bankinformation" << endl;
-	cout << "  --returncode: no output, result is returned via the returncode";
-	cout << endl;
+	cout << argv[0] 
+	     << " [--returncode] [--file=datafile] <bank-id> <account-id>"
+	     << endl
+	     << "  --file=<resource-file>: The file that contains the bankinformation" 
+	     << endl
+	     << "  --bankdata-path: No checking, only print the bankdata-path"
+	     << endl
+	     << "  --returncode: no output, result is returned via the returncode"
+	     << endl;
 	cout << "                0: account/bank ok" << endl;
 	cout << "                1: unknown" << endl;
 	cout << "                2: account/bank not ok" << endl;
@@ -79,24 +89,26 @@ int main(int argc, char **argv) {
 	exit(1);
   }
 
-  // This is the location of the installed data file
-  string default_path = BANKDATA_PATH;
-  string default_filename = default_path + "/bankdata.txt";
+  // Can we open the specified data file? If not, use the installed
+  // data file
+  AccountNumberCheck *check_ptr;
+  if (resFile.empty())
+     check_ptr = new AccountNumberCheck();
+  else 
+  {
+     ifstream test(resFile.c_str());
+     if (test.fail())
+     {
+	std::cerr << "ktoblzcheck: main: File '" << resFile
+		  << "' could not be opened. Trying default file."
+		  << std::endl;
+	check_ptr = new AccountNumberCheck();
+     } 
+     else 
+	check_ptr = new AccountNumberCheck(resFile);
+  }
 
-  // Can we open the specified data file? If not, use the installed data file
-  ifstream test(resFile.c_str());
-  if (test.fail())
-      resFile = default_filename;
-
-  // skip the init-stuff, we don't need the banknames
-  // if method is forced
-  //  if ("" == method) {  
-  //#ifdef COMPILE_RESOURCE
-  //AccountNumberCheck checker();
-  //#else
-  AccountNumberCheck checker(resFile);
-  //#endif
-  //  }
+  AccountNumberCheck& checker = *check_ptr;
 
   bankId = argv[nextArg++];
   accountId = argv[nextArg++];

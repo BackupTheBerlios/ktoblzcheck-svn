@@ -1,10 +1,10 @@
 # Installation of the data file
 
-datadir=@BANKDATA_PATH@
-data_DATA= bankdata.txt
+# Have this installed in $prefix/ktoblzcheck
+idatadir = $(BANKDATA_PATH)
+dist_idata_DATA = bankdata.txt
 
 EXTRA_DIST= \
-  bankdata.txt \
   bundesbank.sed
 
 #all-local:

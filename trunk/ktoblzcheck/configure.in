@@ -2,10 +2,9 @@ AC_INIT(src/lib/ktoblzcheck.cc)
 AM_INIT_AUTOMAKE(ktoblzcheck, 0.6)
 AM_CONFIG_HEADER(config.h)
 
-rpm_version="0.6"
 rpm_release="1"
-AC_SUBST(rpm_version)
 AC_SUBST(rpm_release)
+# rpm_version is set by the VERSION in AM_INIT_AUTOMAKE
 
 AC_PREFIX_DEFAULT(/usr/local)
 AC_ISC_POSIX
@@ -21,16 +20,12 @@ AC_PROG_CXXCPP
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 
-# check whether hash_map is available
-#AC_CXX_HAVE_EXT_HASH_MAP
-# disabled because std::map is used always.
-
 # check path for installation of bank data
 AC_MSG_CHECKING(bankdata path)
 if test "x$prefix" != xNONE; then
-  BANKDATA_PATH="$prefix/share/ktoblzcheck"
+   BANKDATA_PATH="${prefix}/share/${PACKAGE}"
 else
-  BANKDATA_PATH="$ac_default_prefix/share/ktoblzcheck"
+   BANKDATA_PATH="${ac_default_prefix}/share/${PACKAGE}"
 fi
 
 AC_ARG_WITH(bankdata-path, 
