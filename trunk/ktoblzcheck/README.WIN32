@@ -20,7 +20,10 @@ of the BANKDATA_PATH variable, since this is where the file
 src/bankdata/bankdata.txt needs to be copied to. 
 
 Apart from that, the project file should compile everything and you
-can safely ignore the rest of this file.
+can safely ignore the rest of this file. For installation, you have to
+manually copy the files "src/includes/ktoblzcheck.h",
+"src/bankdata/bankdata.txt" and the compiled DLL into your desired
+locations.
 
 MinGW32
 -------

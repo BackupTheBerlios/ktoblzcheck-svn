@@ -18,21 +18,28 @@ Compile & Install
 
 How to compile:
 
+If you got this package from CVS, then type "./autogen.sh" to create
+the necessary build tools. Then:
+
 Type 
-"./autogen.sh" to create the necessary build-stuff
 
-Type "./configure" to calculate some system dependencies.
+  ./configure
 
+to calculate some system dependencies. See "./configure --help" for
+possible options. Usually you might want to write something like
 "./configure --prefix=/your/prefix
---with-bankdata-path=/your/favorite/directory" compiles KtoBLZCheck
-and reads the bank data at runtime from the specified path. The
-default path is $prefix/share/ktoblzcheck where the default for
-$prefix is /usr/local. The advantage is, you can update it regularly
-at this location. Additionally you can specify another location at
-runtime.
+--with-bankdata-path=/your/favorite/directory", which installs
+KtoBLZCheck under the given prefix and its bank data file at the
+specified path. The default bank data path is
+$prefix/share/ktoblzcheck where the default for $prefix is
+/usr/local. 
 
-Now type "make", "make install"
+Now type 
 
+  make
+  make install
+
+and you're done.
 
 Running
 -------
@@ -47,26 +54,35 @@ FIXME: need some example BLZ/account ids here.
 Bank List Format
 ----------------
 
-The file with all bank codes (BLZ Datei) can regularly be retrieved
-from bundesbank.de, more specifically from
+A file with all bank codes (BLZ Datei) can regularly be retrieved from
+the Deutsche Bundesbank at bundesbank.de, more specifically from
 
 http://www.bundesbank.de/zahlungsverkehr/zahlungsverkehr_bankleitzahlen_download.php
 
-The bankdata.txt file contains only four tab-delimited columns. The
-sed script src/bankdata/bundesbank.sed (provided by Daniel Gloeckner
+The bankdata.txt file used by ktoblzcheck contains less information
+than the file provided by the Bundesbank. Namely, it contains only
+four tab-delimited columns and only those lines that refer to the main
+institutes instead of all branches. The provided sed script
+src/bankdata/bundesbank.sed (provided by Daniel Gloeckner
 <daniel-gl@gmx.net>) will automatically convert the Bundesbank's ascii
 file into the required ktoblzcheck format.
 
-If you got the BLZ file in excel format, the four columns for
-bankdata.txt are A, O, G, J, in that order, and it has only those
+If you got the Bundesbank BLZ file in excel format, the four columns
+for bankdata.txt are A, O, G, J, in that order, and it has only those
 lines which have a '1' in column B.
 
 
 Authors
 -------
 
-Jan 2003, Fabian Kaiser (fabian@openhbci.de)
-May 2003, Christian Stimming <stimming@tuhh.de>
+The original author was Fabian Kaiser <fabian@openhbci.de>. The
+current maintainer is Christian Stimming <stimming@tuhh.de>.  
+
+For contacting the authors, please write to the mailing list
+<openhbci-general@sourceforge.net>. This list is subscriber-only which
+means you need to subscribe if you want to post to the
+list. Subscription information can be found on
+http://lists.sourceforge.net/lists/listinfo/openhbci-general
 
 
 PS: Benchmark Notes
