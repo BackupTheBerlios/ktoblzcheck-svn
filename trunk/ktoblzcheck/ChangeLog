@@ -1,5 +1,8 @@
 2004-08-14  Christian Stimming  <stimming@tuhh.de>
 
+	* src/bankdata/bankdata.txt: Updated, now valid from 2004-09-06
+	onwards.
+
 	* src/lib/algorithms.cc, src/lib/ktoblzcheck.cc: Fix for algo 53
 	by Erik Kerger <erik@kedo.com>.
 
