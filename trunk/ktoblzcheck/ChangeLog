@@ -1,3 +1,9 @@
+2003-05-22  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in: Fixed detection of bankdata installation path.
+
+	* src/bankdata/Makefile.am: Add bankdata.txt to EXTRA_DIST.
+
 2003-05-04  Christian Stimming  <stimming@tuhh.de>
 
 	* src/bankdata/bankdata.txt: Update BLZ list from bundesbank.de to

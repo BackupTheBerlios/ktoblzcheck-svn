@@ -1,5 +1,5 @@
 AC_INIT(src/lib/ktoblzcheck.cc)
-AM_INIT_AUTOMAKE(KtoBlzCheck, 0.1)
+AM_INIT_AUTOMAKE(ktoblzcheck, 0.1)
 AM_CONFIG_HEADER(config.h)
 
 
@@ -39,7 +39,11 @@ dnl fi
 
 # check path for installation of bank data
 AC_MSG_CHECKING(bankdata path)
-BANKDATA_PATH="`eval echo $datadir`/ktoblzcheck"
+if test "x$prefix" != xNONE; then
+  BANKDATA_PATH="$prefix/share/ktoblzcheck"
+else
+  BANKDATA_PATH="$ac_default_prefix/share/ktoblzcheck"
+fi
 AC_ARG_WITH(bankdata-path, [  --with-bankdata-path=DIR where to store the bank data],
   [BANKDATA_PATH="$withval"])
 AC_SUBST(BANKDATA_PATH)
