@@ -39,7 +39,7 @@
 
 AccountNumberCheck *AccountNumberCheck_new()
 {
-    return NULL;
+    return new AccountNumberCheck();
 }
 
 AccountNumberCheck *AccountNumberCheck_new_file(const char *filename)
@@ -59,7 +59,7 @@ AccountNumberCheck_check(const AccountNumberCheck *a,
 {
     assert(a);
     return a->check(std::string(bankId ? bankId : ""),
-		   std::string(accountId ? accountId : ""));
+		    std::string(accountId ? accountId : ""));
 }
 
 const AccountNumberCheck_Record *

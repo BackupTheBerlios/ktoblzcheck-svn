@@ -1,5 +1,8 @@
 2003-06-08  Christian Stimming  <stimming@tuhh.de>
 
+	* src/lib/accnum.cc (AccountNumberCheck_new): Fix stoopid bug that
+	prevented proper initialization.
+
 	* configure.in: Released version 0.2
 	
 	* src/lib/algorithms.{h,cpp}: Moved algorithm functions into
