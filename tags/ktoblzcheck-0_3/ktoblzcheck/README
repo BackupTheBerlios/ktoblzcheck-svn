@@ -1,0 +1,88 @@
+KtoBLZCheck is a library to check account numbers and bank codes of
+German banks.
+
+Introduction
+------------
+
+Both a library for other programs as well as a short command-line tool
+is available. It is possible to check pairs of account numbers and
+bank codes (BLZ) of German banks, and to map bank codes (BLZ) to the
+clear-text name and location of the bank.
+
+
+Compile & Install
+-----------------
+
+How to compile:
+
+Type 
+"./autogen.sh" to create the necessary build-stuff
+
+Type "./configure" to calculate some system dependencies.
+
+"./configure --prefix=/your/prefix
+--with-bankdata-path=/your/favorite/directory" compiles KtoBLZCheck
+and reads the bank data at runtime from the specified path. The
+default path is $prefix/share/ktoblzcheck where the default for
+$prefix is /usr/local. The advantage is, you can update it regularly
+at this location. Additionally you can specify another location at
+runtime.
+
+Now type "make", "make install"
+
+And then give it a try:
+
+"ktoblzcheck <your-bank-id> <your-account-id>"
+
+FIXME: need some example BLZ/account ids here.
+
+
+Compilation Options
+-------------------
+
+Note: If you have the GNU C++ extension __gnu_cxx::hash_map available
+(in include <ext/hash_map>), then the lookup of specific banks in the
+list will be performed in a hash map, i.e. *very* fast! If hash_map is
+not available, std::vector will be used as a fallback solution. For an
+application it shouldn't make a difference at all.
+
+
+Bank List Format
+----------------
+
+The file with all bank codes (BLZ Datei) can regularly be retrieved
+from bundesbank.de, more specifically from
+http://192.109.2.70/internet/bankleit.nsf/ludownloads/Download+Bankleitzahlen?OpenDocument
+The bankdata.txt file contains only four tab-delimited columns. If
+you got the BLZ file in excel format, the four columns for
+bankdata.txt are A, O, G, J, in that order, and it has only those
+lines which have a '1' in column B.
+
+
+Authors
+-------
+
+Jan 2003, Fabian Kaiser (fabian@openhbci.de)
+May 2003, Christian Stimming <stimming@tuhh.de>
+
+PS: "./configure --with-compile-into-lib" was disabled because the
+compiler would need way too much memory to actually compile that.
+
+
+PS: Benchmark Notes
+-------------------
+
+Some benchmark notes:
+
+Each time tried 10000 BLZs with random first 2 digits so that 66% of
+the banks are found, see src/bin/benchmark.cc. All results in seconds
+on my 1.3 GHz Duron, compiled with no optimization. Time check simply
+by calling "time ./benchmark 10000".
+
+With list<Record*> and manual finding with for(...) loop:  5.3s
+With list<Record*> and find_if() from <algorithm>:         4.2s
+With vector<Record*> and find_if():                        1.6s 
+(the above at a later test: 3.5s)
+With hash_map<...> and hash_map::find:                     0.2s (!!)
+
+Gee. This is kind of obvious :-)
