@@ -85,6 +85,17 @@ list. Subscription information can be found on
 http://lists.sourceforge.net/lists/listinfo/openhbci-general
 
 
+Related projects
+----------------
+
+A ruby interface to ktoblzcheck:
+http://www.vdp-software.com/Rbktoblzcheck/
+
+A different implementation of this checking algorithms:
+http://axp3.sv.fh-mannheim.de/pub/konto_check/index.html
+
+
+
 PS: Benchmark Notes
 -------------------
 
