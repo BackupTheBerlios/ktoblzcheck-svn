@@ -2,5 +2,4 @@
 iheaderdir=${includedir}
 
 include_HEADERS = \
-  ktoblzcheck.h \
-  ktoblzcheck.hh
+  ktoblzcheck.h 

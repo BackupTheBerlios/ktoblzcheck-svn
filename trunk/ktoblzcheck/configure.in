@@ -15,7 +15,11 @@ AC_HEADER_STDC
 AC_PROG_CPP
 AC_PROG_CXX
 AC_PROG_CXXCPP
-AM_PROG_LIBTOOL
+
+# Disable static libraries by default. Modern distros want the shared
+# ones.
+AC_DISABLE_STATIC
+AC_PROG_LIBTOOL
 
 # check whether hash_map is available
 #AC_CXX_HAVE_EXT_HASH_MAP
