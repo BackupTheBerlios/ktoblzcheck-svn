@@ -58,3 +58,4 @@ AccountNumberCheck::Result
 algo01(int modulus, int weight[10], bool crossfoot, 
        int checkIndex, int accountId[10]);
 
+std::string accnum_getRegKey(const char *value_name);

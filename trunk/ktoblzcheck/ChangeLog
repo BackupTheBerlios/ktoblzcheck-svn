@@ -1,3 +1,10 @@
+2004-09-08   Christian Stimming <stimming@tuhh.de>
+
+	* src/lib/algorithms.cc (accnum_getRegKey): Add function to
+	retrieve installation path from windows registry.
+
+	* ktoblzcheck.iss.in: Add setup file for Inno Setup compiler.
+
 2004-08-23  Christian Stimming  <stimming@tuhh.de>
 
 	* src/lib/algorithms.cc: Another fix for algo 53/54 by Erik Kerger

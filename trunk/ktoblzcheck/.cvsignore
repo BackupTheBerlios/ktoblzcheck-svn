@@ -26,3 +26,4 @@ mkinstalldirs
 Debug
 *.ncb
 *.suo
+ktoblzcheck.iss

@@ -143,6 +143,7 @@ int main(int argc, char **argv) {
 	cout << "Result is: " << "(" << result << ") " << text << endl << endl;
   }
 
+  delete check_ptr;
   return result;
 }
 

@@ -31,7 +31,71 @@
 #include <fstream>
 #include <iostream>
 
+
+#if OS_WIN32
+# include <windows.h>
+# include <shlobj.h>
+# undef ERROR
+#endif // OS_WIN32
+
 using namespace std;
+
+std::string accnum_getRegKey(const char *value_name) 
+{
+#if OS_WIN32
+   HKEY hkey; 
+   TCHAR nbuffer[MAX_PATH];
+   BYTE vbuffer[MAX_PATH];
+   DWORD nsize;
+   DWORD vsize;
+   DWORD typ;
+   int i;
+
+   snprintf(nbuffer, sizeof(nbuffer), "Software\\Ktoblzcheck\\Paths");
+
+   /* open the key */
+   if (RegOpenKey(HKEY_LOCAL_MACHINE, nbuffer, &hkey)){
+      // std::cerr << "_getRegKey: Key does not exist in the registry" << std::endl;
+      return "";
+   }
+
+   for (i=0;; i++) {
+      nsize=sizeof(nbuffer);
+      vsize=sizeof(vbuffer);
+      if (ERROR_SUCCESS!=RegEnumValue(hkey,
+				      i,    /* index */
+				      nbuffer,
+				      &nsize,
+				      0,       /* reserved */
+				      &typ,
+				      vbuffer,
+				      &vsize))
+	 break;
+      if (strcasecmp(nbuffer, value_name)==0 &&
+	  typ==REG_SZ) {
+	 /* variable found */
+	 RegCloseKey(hkey);
+
+	 // WATCH OUT: The string length of the string is one less than
+	 // the buffer length! You *have* to think of that or otherwise
+	 // the resulting string will (silently) contain a zero byte.
+	 std::string result((char*)vbuffer, vsize-1);
+
+	 // std::cerr << "_getRegKey: Got resulting value \"" << result << "\"" << std::endl;
+	 return result;
+      }
+   } /* for */
+
+   RegCloseKey(hkey);
+
+   // std::cerr << "_getRegKey: No value for \"" << value_name
+   //     << "\" found in the registry" << std::endl;
+   return "";
+#else // OS_WIN32
+   return "";
+#endif // OS_WIN32
+}
+
 
 AccountNumberCheck::Result
 algo01(int modulus, int weight[10], bool crossfoot, 
@@ -483,3 +547,5 @@ long_long number2LongLong(string number) {
 
   return result;
 }
+
+

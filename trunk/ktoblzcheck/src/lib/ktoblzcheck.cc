@@ -56,15 +56,24 @@ AccountNumberCheck::Record::Record(unsigned long id,
 {
 }
 
+
 AccountNumberCheck::AccountNumberCheck() 
     : 
     data() // std::map doesn't take size as argument
 {
   // Disabled COMPILE_RESOURCE because the big list cannot be handled by the compiler anyway.
 
-  string data_path = BANKDATA_PATH;
-  string filename = data_path + "/bankdata.txt";
-  readFile(filename);
+   string registry_path = accnum_getRegKey("datadir");
+   string data_path = BANKDATA_PATH;
+   string filename = (registry_path.empty() ? data_path : registry_path)
+      + 
+#if OS_WIN32
+      "\\"
+#else
+      "/"
+#endif
+      + std::string("bankdata.txt");
+   readFile(filename);
 }
 
 AccountNumberCheck::AccountNumberCheck(const string& filename) {

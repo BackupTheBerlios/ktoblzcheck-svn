@@ -12,7 +12,8 @@ EXTRA_WIN_DIST =  README.WIN32 INSTALL.WIN32 AUTHORS README COPYING
 EXTRA_DIST = $(EXTRA_WIN_DIST) \
   ktoblzcheck.spec.in \
   ktoblzcheck.spec \
-  ktoblzcheck.vcproj
+  ktoblzcheck.vcproj \
+  ktoblzcheck.iss.in
 
 rpm:    $(PACKAGE).spec dist
 	rpmbuild="rpm" && \
@@ -59,3 +60,13 @@ win32: dist
 	  && zip -9r $(win_bindir).zip $(win_bindir) \
 	  && rm -Rf $(win_develdir) $(win_bindir)
 	$(am__remove_distdir)
+
+# Rule for using the Inno Setup compiler. The path to iscc.exe is set
+# manually here for now.
+ISCC = "C:\Programme\Inno Setup 4\iscc.exe"
+ISCC_TMPDIR = win32-tmp
+setup: $(PACKAGE).iss
+	mkdir -p $(ISCC_TMPDIR)
+	make prefix="`pwd`/$(ISCC_TMPDIR)" BANKDATA_PATH="`pwd`/$(ISCC_TMPDIR)/data" install \
+	 && $(ISCC) $(PACKAGE).iss \
+	 && rm -rf $(ISCC_TMPDIR)

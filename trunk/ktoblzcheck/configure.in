@@ -99,6 +99,7 @@ ACX_COMPILE_WARN
 AC_OUTPUT( \
   Makefile \
   ktoblzcheck.spec \
+  ktoblzcheck.iss \
   macros/Makefile \
   src/Makefile \
   src/bankdata/Makefile \
