@@ -3,7 +3,9 @@
 #AUTOMAKE_OPTIONS = 1.4
 
 
-SUBDIRS = src doc
+SUBDIRS = src doc macros
+
+ACLOCAL_AMFLAGS = -I macros
 
 EXTRA_DIST = AUTHORS TODO README INSTALL \
   ktoblzcheck.spec.in \
@@ -13,3 +15,6 @@ rpm:    $(PACKAGE).spec dist
 	rpmbuild="rpm" && \
 	if [ `rpm --version | awk '{ print $$3 }'` > /dev/null ]; then rpmbuild="rpmbuild"; fi && \
 	$$rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz
+
+dll: 
+	make -C src/lib dll

@@ -1,11 +1,24 @@
+# Input file to autoconf to produce a ./configure script
+
 AC_INIT(src/lib/ktoblzcheck.cc)
-AM_INIT_AUTOMAKE(ktoblzcheck, 0.6)
+
+VERSION_MAJOR="0"
+VERSION_MINOR="6"
+rpm_release="1"
+# no patchlevel here since this package is small enough to stick with
+# two numbers.
+
+AM_INIT_AUTOMAKE(ktoblzcheck, "${VERSION_MAJOR}.${VERSION_MINOR}")
 AM_CONFIG_HEADER(config.h)
 
-rpm_release="1"
+AC_SUBST(VERSION_MAJOR)
+AC_SUBST(VERSION_MINOR)
 AC_SUBST(rpm_release)
 # rpm_version is set by the VERSION in AM_INIT_AUTOMAKE
 
+#
+# Check for programs
+#
 AC_PREFIX_DEFAULT(/usr/local)
 AC_ISC_POSIX
 AC_PROG_CC
@@ -20,7 +33,9 @@ AC_PROG_CXXCPP
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 
+#
 # check path for installation of bank data
+#
 AC_MSG_CHECKING(bankdata path)
 if test "x$prefix" != xNONE; then
    BANKDATA_PATH="${prefix}/share/${PACKAGE}"
@@ -36,16 +51,41 @@ AC_SUBST(BANKDATA_PATH)
 AC_DEFINE_UNQUOTED(BANKDATA_PATH, "$BANKDATA_PATH", [Default path for bank data])
 AC_MSG_RESULT($BANKDATA_PATH)
 
+#
+# OS dependant settings
+#
+AQ_CHECK_OS
+
+case "$OS_TYPE" in
+    posix)
+        ktoblzcheck_libs="-L${top_builddir}/src/lib -lktoblzcheck"
+	ktoblzcheck_includes="-I${top_srcdir}/src/include"
+    	;;
+    windows)
+        AQ_WINDOZE
+        ktoblzcheck_libs="-L${WIN_PATH_SYSTEM_MINGW} -L${top_builddir}/src/lib -lktoblzcheck32"
+	ktoblzcheck_includes="-I${top_srcdir}/src/include"
+    	;;
+esac
+AC_SUBST(ktoblzcheck_libs)
+AC_SUBST(ktoblzcheck_includes)
+
+AM_CONDITIONAL(IS_WINDOWS, [test "$OS_TYPE" = "windows"])
+
+#
 # Add compile switches
+#
 ACX_COMPILE_WARN
 
 AC_OUTPUT( \
   Makefile \
   ktoblzcheck.spec \
+  macros/Makefile \
   src/Makefile \
   src/bankdata/Makefile \
   src/bin/Makefile \
   src/include/Makefile \
   src/lib/Makefile \
+  src/lib/ressource.rc \
   doc/Makefile
 )

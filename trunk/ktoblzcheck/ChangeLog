@@ -1,3 +1,8 @@
+2004-01-28  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in, everywhere: Improve build system for compiling on
+	Windows/mingw.
+
 2004-01-27  Christian Stimming <stimming@tuhh.de>
 
 	* src/bin/ktoblzcheck.cc: Fix handling of bankdata path
