@@ -1,23 +1,21 @@
-#AUTOMAKE_OPTIONS = 1.4
+# Automake variables for the various executables in this directory
 
-bin_PROGRAMS = ktoblzcheck 
+# This program should be installed
+bin_PROGRAMS = ktoblzcheck
+
+# This programs should be built, but not be installed
+noinst_PROGRAMS = ctest benchmark ibanchk
 
 INCLUDES = -I$(top_srcdir)/src/include
-#EXTRA_DIST=
-
-ktoblzcheck_SOURCES = \
-  ktoblzcheck.cc
-
 LIBS = $(ktoblzcheck_libs)
 
-#ktoblzcheck_LDADD = 
-
-noinst_PROGRAMS = ctest benchmark
-#ctest_LDADD =
-#benchmark_LDADD =
+# Specify the source files. 
+ktoblzcheck_SOURCES = ktoblzcheck.cc
+ibanchk_SOURCES = ibanchk.cc
 benchmark_SOURCES = benchmark.cc
+# ctest.c will be found automatically
 
-# Add check script for 
+# Add check script for this package.
 TESTS = check_ktoblzcheck
 TESTS_ENVIRONMENT = BANKDATA_SRCPATH=$(top_srcdir)/src/bankdata
 dist_check_SCRIPTS = check_ktoblzcheck

@@ -11,7 +11,8 @@ lib_LTLIBRARIES = libktoblzcheck.la
 libktoblzcheck_la_SOURCES= \
   ktoblzcheck.cc \
   algorithms.cc \
-  accnum.cc 
+  accnum.cc \
+  iban.cc
 
 libktoblzcheck_la_LDFLAGS = -version-info 1:3:0
 libktoblzcheck_la_LIBADD = -lstdc++

@@ -1,3 +1,10 @@
+2004-04-24  Christian Stimming  <stimming@tuhh.de>
+
+	* src/include/iban.h, src/lib/iban.cc, src/bin/ibanchk.cc: Initial
+	IBAN creation and check code, contributed by Gerhard Gappmeier
+	<gerhard.gappmeier@ascolab.com>. Test code is in ibanchk.cc, and
+	further contributions and improvements are welcomed!
+
 2004-02-18  Christian Stimming <stimming@tuhh.de>
 
 	* configure.in: Released version 0.7
