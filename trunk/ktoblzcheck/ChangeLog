@@ -1,3 +1,12 @@
+2003-06-11  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in: released version 0.3
+
+	* README: Updated.
+
+	* src/bankdata/bankdata.txt: Updated, now valid from 2003-06-09
+	onwards.
+
 2003-06-09  Christian Stimming  <stimming@tuhh.de>
 
 	* src/bin/benchmark.cc: Added program to evaluate the different

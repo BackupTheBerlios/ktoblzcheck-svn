@@ -1,6 +1,6 @@
 AUTOMAKE_OPTIONS = 1.4
 
-INCLUDES=-I../include
+INCLUDES=-I../include -I../../include
 
 iheaderdir=${includedir}
 include_HEADERS = 

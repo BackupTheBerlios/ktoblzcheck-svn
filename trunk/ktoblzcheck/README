@@ -1,10 +1,17 @@
 KtoBLZCheck is a library to check account numbers and bank codes of
 German banks.
 
+Introduction
+------------
+
 Both a library for other programs as well as a short command-line tool
 is available. It is possible to check pairs of account numbers and
 bank codes (BLZ) of German banks, and to map bank codes (BLZ) to the
 clear-text name and location of the bank.
+
+
+Compile & Install
+-----------------
 
 How to compile:
 
@@ -29,6 +36,10 @@ And then give it a try:
 
 FIXME: need some example BLZ/account ids here.
 
+
+Compilation Options
+-------------------
+
 Note: If you have the GNU C++ extension __gnu_cxx::hash_map available
 (in include <ext/hash_map>), then the lookup of specific banks in the
 list will be performed in a hash map, i.e. *very* fast! If hash_map is
@@ -36,12 +47,30 @@ not available, std::vector will be used as a fallback solution. For an
 application it shouldn't make a difference at all.
 
 
+Bank List Format
+----------------
+
+The file with all bank codes (BLZ Datei) can regularly be retrieved
+from bundesbank.de, more specifically from
+http://192.109.2.70/internet/bankleit.nsf/ludownloads/Download+Bankleitzahlen?OpenDocument
+The bankdata.txt file contains only four tab-delimited columns. If
+you got the BLZ file in excel format, the four columns for
+bankdata.txt are A, O, G, J, in that order, and it has only those
+lines which have a '1' in column B.
+
+
+Authors
+-------
+
 Jan 2003, Fabian Kaiser (fabian@openhbci.de)
 May 2003, Christian Stimming <stimming@tuhh.de>
 
 PS: "./configure --with-compile-into-lib" was disabled because the
 compiler would need way too much memory to actually compile that.
 
+
+PS: Benchmark Notes
+-------------------
 
 Some benchmark notes:
 
