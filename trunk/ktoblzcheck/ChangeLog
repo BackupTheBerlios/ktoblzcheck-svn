@@ -1,3 +1,10 @@
+2004-11-10  Christian Stimming  <stimming@tuhh.de>
+
+	* configure.in: Released version 1.2
+
+	* src/bankdata/bankdata.txt: Updated, now valid from 2004-12-04
+	onwards.
+
 2004-09-10   Christian Stimming <stimming@tuhh.de>
 
 	* src/include/ktoblzcheck.h, src/lib/accnum.cc: Improve
