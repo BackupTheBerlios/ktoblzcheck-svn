@@ -1,3 +1,13 @@
+2005-03-01  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in: Released version 1.3
+
+	* src/bankdata/bankdata.txt: Updated bankdata file, now valid from
+	2005-03-05 onwards.
+
+	* src/bankdata/online_update.pl.in, README: Add perl script for
+	automated download of updated bankdata files.
+
 2005-01-24  Christian Stimming <stimming@tuhh.de>
 
 	* src/bin/ktoblzcheck.cc: Add file-based batch processing, by

@@ -4,5 +4,10 @@
 idatadir = $(BANKDATA_PATH)
 dist_idata_DATA = bankdata.txt
 
-EXTRA_DIST= \
-  bundesbank.sed
+dist_pkgdata_SCRIPTS = \
+  bundesbank.sed \
+  online_update.pl
+
+EXTRA_DIST = online_update.pl.in
+
+CLEANFILES = online_update.pl

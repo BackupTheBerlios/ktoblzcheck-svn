@@ -69,6 +69,15 @@ the Deutsche Bundesbank at bundesbank.de, more specifically from
 
 http://www.bundesbank.de/zahlungsverkehr/zahlungsverkehr_bankleitzahlen_download.php
 
+Since version 1.3, ktoblzcheck includes a script for automated
+updating of the BLZ script in /usr/share/ktoblzcheck/online_update.pl
+. Simply run this script with no arguments. It will first download the
+information HTML page by bundesbank and parse this page for BLZ
+updates. Then, the user will be asked whether one particular available
+file should be downloaded. If the user agrees, the file is downloaded,
+copied into the correct BANKDATA_PATH, and converted into
+ktoblzcheck's format.
+
 The bankdata.txt file used by ktoblzcheck contains less information
 than the file provided by the Bundesbank. Namely, it contains only
 four tab-delimited columns and only those lines that refer to the main
