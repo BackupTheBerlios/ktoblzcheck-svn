@@ -141,8 +141,13 @@ AccountNumberCheck::readFile(const string &filename)
   char name[NAME_SIZE];
   char place[PLACE_SIZE];
 
-  while (fscanf(istr, "%8s\t%2s\t%58[^\t]\t%29[^\t\n]\n", blz, method, name, place) > 0)
+  while (fgets(blz, BLZ_SIZE, istr))
   {
+     if (fgetc(istr) == EOF) break; // remove delimiter
+     if (!fgets(method, METHOD_SIZE, istr)) break; // get method
+     if (fgetc(istr) == EOF) break; // remove delimiter
+     if (!fscanf(istr, "%58[^\t]\t%29[^\t\n]", name, place)) break;
+
      // Create new record object
      Record *newRecord = 
 	new Record(blz, method, name, place);
@@ -150,6 +155,7 @@ AccountNumberCheck::readFile(const string &filename)
      // Insert this always at the end, since the file is sorted by
      // ascending BLZ
      data.insert(data.end(), banklist_type::value_type(newRecord->bankId, newRecord));
+     if (fgetc(istr) == EOF) break; // remove delimiter
   }
   fclose(istr);
 }
