@@ -60,7 +60,12 @@ AccountNumberCheck::Record::Record(unsigned long id,
 }
 
 AccountNumberCheck::AccountNumberCheck() 
-    : data(6000)
+    : 
+#ifdef USING_HASH_MAP
+    data(6000) // hash_map takes size as argument
+#else
+    data() // std::map doesn't take size as argument
+#endif
 {
   // Disabled COMPILE_RESOURCE because the big list cannot be handled by the compiler anyway.
 
@@ -131,11 +136,7 @@ AccountNumberCheck::readFile(const string &filename)
 	// bank location
 	newRecord->location = line.substr(pos1);
 
-#if USING_HASH_MAP
 	data.insert(banklist_type::value_type(newRecord->bankId, newRecord));
-#else
-	data.push_back(newRecord);
-#endif
   }
 }
 
@@ -143,11 +144,7 @@ void
 AccountNumberCheck::deleteList() 
 {
   for (banklist_type::iterator iter = data.begin(); iter != data.end(); iter++) {
-#if USING_HASH_MAP
     delete iter->second;
-#else
-    delete (*iter);
-#endif
   }
 }
 
@@ -178,18 +175,10 @@ AccountNumberCheck::findBank(const string& bankId) const {
 
   unsigned long lbankId = atol(bankId.c_str());
   banklist_type::const_iterator iter;
-#if USING_HASH_MAP
   iter = data.find(lbankId);
-#else
-  iter = find_if(data.begin(), data.end(), MatchBlz(lbankId));
-#endif
 
   if (iter != data.end()) {
-#if USING_HASH_MAP
     return *(iter->second);
-#else
-    return **iter;
-#endif
   }
   
   throw -1;

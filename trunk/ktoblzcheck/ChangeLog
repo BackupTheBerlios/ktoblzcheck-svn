@@ -1,3 +1,10 @@
+2003-06-16  Christian Stimming <stimming@tuhh.de>
+
+	* src/include/ktoblzcheck.h, src/lib/ktoblzcheck.cc: It turned out
+	that std::map from <map> is really equally fast as
+	__gnu_cxx::hash_map. Therefore std::map is now used if
+	<ext/hash_map> is not available.
+
 2003-06-12  Christian Stimming <stimming@tuhh.de>
 
 	* src/bin/benchmark.cc: Add forgotten include.

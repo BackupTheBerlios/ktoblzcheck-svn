@@ -43,8 +43,8 @@ Compilation Options
 Note: If you have the GNU C++ extension __gnu_cxx::hash_map available
 (in include <ext/hash_map>), then the lookup of specific banks in the
 list will be performed in a hash map, i.e. *very* fast! If hash_map is
-not available, std::vector will be used as a fallback solution. For an
-application it shouldn't make a difference at all.
+not available, std::map will be used, which is still almost as fast
+(see below).
 
 
 Bank List Format
@@ -86,3 +86,11 @@ With vector<Record*> and find_if():                        1.6s
 With hash_map<...> and hash_map::find:                     0.2s (!!)
 
 Gee. This is kind of obvious :-)
+
+Actually, some time later I tested 100000 BLZs between std::map<> and 
+__gnu_cxx::hash_map. Results:
+__gnu_cxx::hash_hash<...>:                   0.89s
+std::map<...>:                               0.91s
+
+Wow. Therefore the default fallback data type, if <ext/hash_map> is
+unavailable, is changed now to std::map<>. 

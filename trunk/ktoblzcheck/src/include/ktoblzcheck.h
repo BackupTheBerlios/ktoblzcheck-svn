@@ -31,9 +31,9 @@
 #ifdef __cplusplus
 
 #include <string>
-#include <vector>
+#include <map>
 #ifdef HAVE_EXT_HASH_MAP 
-#include <ext/hash_map>
+#  include <ext/hash_map>
 #endif
 
 /** Class that stores a list of known banks, returns banks with given
@@ -156,7 +156,7 @@ private:
 #ifdef HAVE_EXT_HASH_MAP 
   typedef __gnu_cxx::hash_map<unsigned long, Record*> banklist_type;
 #else
-  typedef std::vector<Record*> banklist_type;
+  typedef std::map<unsigned long, Record*> banklist_type;
 #endif
   banklist_type data;
 
