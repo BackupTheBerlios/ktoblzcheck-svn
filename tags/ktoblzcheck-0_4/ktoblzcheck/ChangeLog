@@ -1,0 +1,160 @@
+2003-08-11  Christian Stimming <stimming@tuhh.de>
+	
+	* configure.in: released version 0.4
+
+2003-08-04  Christian Stimming <stimming@tuhh.de>
+
+	* src/lib/ktoblzcheck.cc: Fix unparenthesed array initialization.
+
+2003-08-03  Christian Stimming  <stimming@tuhh.de>
+
+	* src/include/ktoblzcheck.h: Removed __gnu_cxx::hash_map since
+	library headers that change depending on some define variable are
+	no good -- imagine compiling the lib with this define active, but
+	using it without. Then the program sees objects with a different
+	ABI. Therefore removed that.
+
+	* doc/ktoblzcheck.1, src/lib/ktoblzcheck.cc,
+	src/lib/algorithms.{h,cc}: Many more algorithm implementation by
+	Jens Gecius <jens@gecius.de>. According to him now all
+	Bundesbank's algorithms are now implemented. Plus man page.
+
+2003-06-16  Christian Stimming <stimming@tuhh.de>
+
+	* src/include/ktoblzcheck.h, src/lib/ktoblzcheck.cc: It turned out
+	that std::map from <map> is really equally fast as
+	__gnu_cxx::hash_map. Therefore std::map is now used if
+	<ext/hash_map> is not available.
+
+2003-06-12  Christian Stimming <stimming@tuhh.de>
+
+	* src/bin/benchmark.cc: Add forgotten include.
+
+2003-06-11  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in: released version 0.3
+
+	* README: Updated.
+
+	* src/bankdata/bankdata.txt: Updated, now valid from 2003-06-09
+	onwards.
+
+2003-06-09  Christian Stimming  <stimming@tuhh.de>
+
+	* src/bin/benchmark.cc: Added program to evaluate the different
+	lookup methods.
+
+	* acinclude.m4, configure.in: Added macros for checking for
+	<ext/hash_map>
+
+	* src/include/ktoblzcheck.h, src/lib/ktoblzcheck.cc: Implemented
+	hash_map support if it is available.
+
+	* ktoblzcheck.spec.in, Makefile.am: Add spec file and automated
+	rules for rpm building.
+
+2003-06-08  Christian Stimming  <stimming@tuhh.de>
+
+	* src/lib/accnum.cc (AccountNumberCheck_new): Fix stoopid bug that
+	prevented proper initialization.
+
+	* configure.in: Released version 0.2
+	
+	* src/lib/algorithms.{h,cpp}: Moved algorithm functions into
+	seperate file to make maintaining easier.
+
+	* src/include/ktoblzcheck.h: Moved code to here.
+
+	* src/include/ktoblzcheck.hh: Added deprecated warning since .hh
+	suffix is totally unusual for system-wide installed headers.
+
+2003-05-22  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in: Fixed detection of bankdata installation path.
+
+	* src/bankdata/Makefile.am: Add bankdata.txt to EXTRA_DIST.
+
+2003-05-04  Christian Stimming  <stimming@tuhh.de>
+
+	* src/bankdata/bankdata.txt: Update BLZ list from bundesbank.de to
+	the state of 03.03.2003.
+	
+	* src/lib/ktoblzcheck.cc (check): Fix stupid bug (caused by
+	myself) when looking for the method to use.
+
+	* */Makefile.am: Edited all Makefile.am's to use autotools
+	standard targets and paths. Now --prefix will adjust all
+	installation places accordingly.
+
+	* src/bin/ktoblzcheck.cc: Use the bankdata_path as default data
+	file.
+	
+	* configure.in, src/lib/ktoblzcheck.cc: Removed the
+	COMPILE_RESOURCE flag because the compiler would need too much
+	memory to compile it anyway. Instead, added the configure switch
+	--with-bankdata-path which defaults to $prefix/share/ktoblzcheck,
+	and made the default constructor use that location.
+
+	* src/include/ktoblzcheck.hh: Update function documentation.
+
+2003-05-03  Christian Stimming  <stimming@tuhh.de>
+
+	* src/lib/accnum.cc: Add missing include to satisfy gcc3.3.
+
+2003-05-02  Christian Stimming <stimming@tuhh.de>
+
+	* src/lib/accnum.cc: Created new file with the C wrappers inside.
+
+	* src/include/ktoblzcheck.hh: Added a lot of 'const's where
+	possible. Added C wrappers for all methods.
+
+	* src/bin/ctest.c: Small test compile file whether the header is C
+	compliant.
+
+2003-01-06  Fabian Kaiser  <fabian@openhbci.de>
+	* Changelog: Rebuilt
+
+	* README: Added some installation info
+
+	* src/include/ktoblzcheck.hh, src/lib/ktoblzcheck.cc: Fixes for
+	gcc-3.2, thanks to Harald Anlauf
+	
+2002-09-02  Fabian Kaiser  <fabian@openhbci.de>
+
+	* src/lib/ktoblzcheck.cc: some new methods
+
+2002-09-01  Fabian Kaiser  <fabian@openhbci.de>
+
+	* src/lib/ktoblzcheck.cc: many new methods
+
+	* src/include/ktoblzcheck.hh, src/lib/ktoblzcheck.cc,
+	src/bin/ktoblzcheck.cc: some new check-methods, some fixes, code
+	cleaned up
+
+2002-08-31  Fabian Kaiser  <fabian@openhbci.de>
+
+	* src/lib/ktoblzcheck.cc: support for 91 48 47 46 40 39 81 60 59
+	57 54 49 50
+
+2002-08-29  Fabian Kaiser  <fabian@openhbci.de>
+
+	* src/bin/ktoblzcheck.cc: the demo-tool now displays the bank-name
+
+	* src/bin/ktoblzcheck.cc: in the demo-tool, an external file can
+	now be specified on the command line
+
+	* src/lib/ktoblzcheck.cc: support for 65,33,38,68
+
+	* src/lib/ktoblzcheck.cc: support for 68
+
+	* src/lib/ktoblzcheck.cc: support for 99
+
+	* src/lib/ktoblzcheck.cc: support for 63,76
+
+	* src/lib/ktoblzcheck.cc: support for 2,4,7,14
+
+	* config.cache, config.log: not needed
+
+	* src/lib/ktoblzcheck.cc: support for 32,34,88
+
+
