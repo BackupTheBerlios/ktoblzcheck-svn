@@ -64,6 +64,6 @@ LIBRARY_PATH=$RPM_BUILD_ROOT%{_libdir} make DESTDIR=$RPM_BUILD_ROOT \
 %{_bindir}/ktoblzcheck
 %{_datadir}/ktoblzcheck/bankdata.txt
 %{_includedir}/ktoblzcheck.h
-%{_mandir}/man1/ktoblzcheck.1
+%{_mandir}/man1/ktoblzcheck.1*
 
 %changelog
