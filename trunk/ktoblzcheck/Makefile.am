@@ -5,7 +5,7 @@
 
 SUBDIRS = src doc
 
-EXTRA_DIST = AUTHORS TODO README \
+EXTRA_DIST = AUTHORS TODO README INSTALL \
   ktoblzcheck.spec.in \
   ktoblzcheck.spec
 

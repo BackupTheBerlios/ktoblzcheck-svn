@@ -1,1 +1,0 @@
-#undef COMPILE_RESOURCE

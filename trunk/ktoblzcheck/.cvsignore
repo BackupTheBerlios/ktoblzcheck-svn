@@ -19,3 +19,7 @@ Makefile
 Makefile.in
 stamp-h1
 *.tar.gz
+depcomp
+install-sh
+missing
+mkinstalldirs
