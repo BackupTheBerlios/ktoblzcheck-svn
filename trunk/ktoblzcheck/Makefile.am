@@ -7,47 +7,7 @@ SUBDIRS = src doc
 
 EXTRA_DIST = AUTHORS TODO README configure 
 
-rpm: ktoblzcheck.spec
-	@echo "Please use one of the targets below:"
-	@echo " rpm-suse81     - build RPMs for SuSE 8.1"
-	@echo " rpm-suse82     - build RPMs for SuSE 8.2"
-	@echo " rpm-suse90     - build RPMs for SuSE 9.0"
-	@echo " rpm-redhat80   - build RPMs for Redhat 8.0"
-	@echo " rpm-redhat90   - build RPMs for Redhat 9.0"
-	@echo " rpm-mandrake90 - build RPMs for Mandrake 9.0"
-
-rpm-suse81: ktoblzcheck.spec
-	rpm -bb ktoblzcheck.spec
-	mkdir -p distribution
-	cp /usr/src/packages/RPMS/i386/ktoblzcheck-@rpm_version@-@rpm_release@.i386.rpm \
-           `pwd`/distribution/ktoblzcheck-@rpm_version@-@rpm_release@.i586.suse81.rpm
-
-rpm-suse82: ktoblzcheck.spec
-	rpm -bb ktoblzcheck.spec
-	mkdir -p distribution
-	cp /usr/src/packages/RPMS/i386/ktoblzcheck-@rpm_version@-@rpm_release@.i386.rpm \
-           `pwd`/distribution/ktoblzcheck-@rpm_version@-@rpm_release@.i586.suse82.rpm
-
-rpm-suse90: ktoblzcheck.spec
-	rpmbuild -bb ktoblzcheck.spec
-	mkdir -p distribution
-	cp /usr/src/packages/RPMS/i586/ktoblzcheck-@rpm_version@-@rpm_release@.i586.rpm \
-           `pwd`/distribution/ktoblzcheck-@rpm_version@-@rpm_release@.i586.suse90.rpm
-
-rpm-redhat80: ktoblzcheck.spec
-	rpmbuild -ba ktoblzcheck.spec
-	mkdir -p distribution
-	cp /usr/src/redhat/RPMS/i386/ktoblzcheck-@rpm_version@-@rpm_release@.i386.rpm \
-           `pwd`/distribution/ktoblzcheck-@rpm_version@-@rpm_release@.i586.redhat80.rpm
-
-rpm-redhat90: ktoblzcheck.spec
-	rpmbuild -ba ktoblzcheck.spec
-	mkdir -p distribution
-	cp /usr/src/redhat/RPMS/i386/ktoblzcheck-@rpm_version@-@rpm_release@.i386.rpm \
-           `pwd`/distribution/ktoblzcheck-@rpm_version@-@rpm_release@.i586.redhat90.rpm
-
-rpm-mandrake90: ktoblzcheck.spec
-	rpmbuild -ba ktoblzcheck.spec
-	mkdir -p distribution
-	cp /usr/src/RPM/RPMS/i586/ktoblzcheck-@rpm_version@-@rpm_release@.i586.rpm \
-           `pwd`/distribution/ktoblzcheck-@rpm_version@-@rpm_release@.i586.mandrake90.rpm
+rpm:    dist
+	rpmbuild="rpm" && \
+	if [ `rpm --version | awk '{ print $$3 }'` > 4 ]; then rpmbuild="rpmbuild"; fi && \
+	$$rpmbuild -ta gwenhywfar-@rpm_version@.tar.gz

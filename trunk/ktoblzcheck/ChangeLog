@@ -1,3 +1,11 @@
+
+2004/01/19: Martin Preuss<martin@libchipcard.de>
+------------------------------------------------
+- applied a multi-distribution patch for RPMs submitted by
+  Ronny Buchmann. Thanks to him it is now much easier to create RPMs for
+  the various distributions ;-)
+
+
 2004-01-02  Christian Stimming  <stimming@tuhh.de>
 
 	* AUTHORS: Add remark about authors and contributors. Add
