@@ -1,3 +1,8 @@
+2005-04-07  Christian Stimming <stimming@tuhh.de>
+
+	* src/lib/ktoblzcheck.cc: Make sure the account-id is not too
+	long.
+
 2005-03-17  Christian Stimming <stimming@tuhh.de>
 
 	* configure.in: Released version 1.4 -sigh- because of the

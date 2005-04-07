@@ -228,6 +228,10 @@ AccountNumberCheck::check(const string& bankId, const string& accountId,
     }
   }
 
+  // Check account-id length
+  if (accountId.size() > 10 || bankId.size() > 8)
+     return ERROR;
+
   // Convert string to array of integers
   number2Array(accountId, account);
 
