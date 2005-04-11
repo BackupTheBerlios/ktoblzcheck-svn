@@ -1,3 +1,8 @@
+2005-04-11  Christian Stimming <stimming@tuhh.de>
+
+	* src/include/iban.h, src/lib/iban.cc: Add C wrappers to iban and
+	added warning about potential code problems there.
+
 2005-04-07  Christian Stimming <stimming@tuhh.de>
 
 	* src/lib/ktoblzcheck.cc: Make sure the account-id is not too

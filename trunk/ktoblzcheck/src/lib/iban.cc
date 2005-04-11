@@ -24,11 +24,15 @@
 #endif
 #include "iban.h"
 #include <stdio.h>
+#include <assert.h>
 
 #ifndef __GNUC__
 // A whacky workaround for MSVC
 # define snprintf(s,n,f,v) sprintf(s,f,v)
 #endif
+
+// ////////////////////////////////////////////////////////////
+// Country information
 
 /** This structure holds the necessary IBAN information for each
  * country.  Some of the data is not yet used, but might be used
@@ -95,6 +99,16 @@ iban_country_info country_info[] =
 // from some integers (i.e. the infamous "280" for Germany) to this
 // array subscript.
 
+
+
+// ////////////////////////////////////////////////////////////
+// Actual class Iban
+//
+// FIXME (2005-04-10, cstim): The code here is VERY UNTESTED and
+// probably quite non-functional! Please fix it and also get rid of
+// the char[] array before you intend to do anything serious with it!
+
+
 Iban::Iban()
 {
 	memset(m_szIban, 0, 34);
@@ -103,12 +117,15 @@ Iban::Iban()
 
 Iban::Iban(const Iban &copy)
 {
+    assert(0); // FIXME: Obviously this constructor was never implemented!
+
 	memset(m_szIban, 0, 34);
 	m_bValid = false;
 }
 
 Iban::Iban(const char *pszIban)
 {
+	assert(pszIban);
 	memset(m_szIban, 0, 34);
 	m_bValid = false;
 	
@@ -122,13 +139,48 @@ Iban::Iban(const char *pszIban)
 	m_bValid = (1 == iModulo97);
 }
 
+Iban::Iban(Country country, const std::string& pszBID, const std::string& pszAccountID)
+{
+	// set country code	
+	m_sCountryCode = country_info[country].countrycode;
+	// set BID
+	m_sBLZ = pszBID;
+	// fill up BID with preceding zeros
+	while (m_sBLZ.length() < country_info[country].bankCodeLen)
+		m_sBLZ = "0" + m_sBLZ;
+	// set AccountID
+	m_sAccountID = pszAccountID;
+	// fill up AccountID with preceding zeros
+	while (m_sAccountID.length() < country_info[country].accountCodeLen)
+		m_sAccountID = "0" + m_sAccountID;
+		
+	// build IBAN string
+      // FIXME: It is absolutely baaad practice to use a char[] array
+      // here! By all means, please us a std::string instead!
+	strcpy(m_szIban, m_sCountryCode.data());
+	// add dummy checksum
+	strcat(m_szIban, "00");
+	strcat(m_szIban, m_sBLZ.data());
+	strcat(m_szIban, m_sAccountID.data());
+		
+	// convert iban to number according the IBAN conversion table
+	std::string sSubstitution = iban2number(m_szIban);
+		
+	// calc modulo 97
+	int iModulo97 = modulo97(sSubstitution.data());
+	iModulo97 = 98 - iModulo97;
+	
+	// set new checksum
+	m_szIban[2] = (int)(iModulo97/10)+'0';
+	m_szIban[3] = (int)(iModulo97%10)+'0';
+}
 
 
 Iban::~Iban()
 {
 }
 
-bool Iban::isValid()
+bool Iban::isValid() const
 {
 	return m_bValid;
 }
@@ -137,7 +189,10 @@ std::string Iban::iban2number(const char *pszIban)
 {
 	std::string sSubstitution;
 	char szNum[3];
-			
+
+	assert(pszIban);
+      // FIXME: It is absolutely baaad practice to use a char[] array
+      // here! By all means, please us a std::string instead!
 	for (unsigned i=4; i<strlen(pszIban); i++)
 	{
 		if (pszIban[i] >= '0' && pszIban[i] <= '9')
@@ -197,8 +252,9 @@ int Iban::modulo97(const char *pszNumber)
 	return lNum;
 }
 
-Iban Iban::create(Country country, char *pszBID, char *pszAccountID)
+Iban Iban::create(Country country, const std::string& pszBID, const std::string& pszAccountID)
 {
+    // FIXME: Replace this by the correct constructor, but first repair the copy constructor!
 	Iban iban;
 	
 	// set country code	
@@ -215,6 +271,8 @@ Iban Iban::create(Country country, char *pszBID, char *pszAccountID)
 		iban.m_sAccountID = "0" + iban.m_sAccountID;
 		
 	// build IBAN string
+      // FIXME: It is absolutely baaad practice to use a char[] array
+      // here! By all means, please us a std::string instead!
 	strcpy(iban.m_szIban, iban.m_sCountryCode.data());
 	// add dummy checksum
 	strcat(iban.m_szIban, "00");
@@ -235,7 +293,61 @@ Iban Iban::create(Country country, char *pszBID, char *pszAccountID)
 	return iban;
 }
 
-Iban::operator const char*()
+const char* Iban::toChar() const
 {
+      // FIXME: It is absolutely baaad practice to use a char[] array
+      // here! By all means, please us a std::string instead!
 	return m_szIban;
+}
+Iban::operator const char*() const
+{
+      // FIXME: It is absolutely baaad practice to use a char[] array
+      // here! By all means, please us a std::string instead!
+	return m_szIban;
+}
+const std::string& Iban::toString() const
+{
+    assert(0);
+}
+
+
+
+// ////////////////////////////////////////////////////////////
+// C wrappers
+
+
+Iban* Iban_new_empty()
+{
+   return new Iban();
+}
+Iban* Iban_copy(const Iban* i)
+{
+   assert(i);
+   return new Iban(*i);
+}
+Iban* Iban_fromString(const char* c)
+{
+   return new Iban(c ? c : "");
+}
+Iban* Iban_new(Iban_Country country, const char * pszBID, 
+	       const char * pszAccountID)
+{
+   return new Iban(country, pszBID ? pszBID : "",
+		   pszAccountID ? pszAccountID : "");
+}
+
+void Iban_delete(Iban *i)
+{
+   if (i)
+      delete (i);
+}
+int Iban_isValid(const Iban *i)
+{
+   assert(i);
+   return i->isValid();
+}
+const char* Iban_toChar(const Iban *i)
+{
+   assert(i);
+   return i->toChar();
 }
