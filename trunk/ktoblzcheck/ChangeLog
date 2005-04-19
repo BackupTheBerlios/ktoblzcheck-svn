@@ -1,3 +1,13 @@
+2005-04-19  Andreas Degert  <ad@papyrus-gmbh.de>
+
+	* src/bin/ibanchk.cc: work with new interface, use streams instead
+	of stdio, accept IBAN as command line argument.
+
+	* src/include/iban.h, src/lib/iban.cc: new interface and
+	implementation.
+
+	* src/bankdata/ibandata.txt: data file describing IBAN format.
+
 2005-04-11  Christian Stimming <stimming@tuhh.de>
 
 	* src/include/iban.h, src/lib/iban.cc: Add C wrappers to iban and

@@ -3,38 +3,25 @@
 #endif
 
 #include "iban.h"
-#include <stdio.h>
+#include <ostream>
 
 int main(int argc, char *argv[])
 {
-    printf("This is only a very initial test program for the Iban class, and it doesn't use the command line arguments yet. Have a look at its source code, please.\n");
-    
-
-	// test IBAN
-	Iban iban("DE21200500000123456000");
-	// check test IBAN
-	if (iban.isValid())
-	{
-		printf("this IBAN is valid\n");
-	}
-	else
-	{
-		printf("this IBAN is invalid\n");
-	}
-	
-	// create a new IBAN
-	iban = Iban::create(Iban::DE, "50050201", "12345");
-	const char *pszIban = iban; // get the IBAN string
-	Iban test(pszIban); // validate it again
-	// check created IBAN
-	if (test.isValid())
-	{
-		printf("this IBAN is valid\n");
-	}
-	else
-	{
-		printf("this IBAN is invalid\n");
-	}
-	
-	return EXIT_SUCCESS;
+  if (argc != 2 || argv[1][0] == '-') {
+    std::cerr << "Aufruf: ibanchk iban" << std::endl;
+    return 2;
+  }
+  IbanCheck ibanchk;
+  if (ibanchk.error()) {
+    std::cerr << "Fehler beim Lesen von ibandata.txt" << std::endl;
+    return 3;
+  }
+  Iban iban(argv[1]);
+  IbanCheck::Result res = ibanchk.check(iban);
+  std::cout << iban.printableForm() << ": "
+	    << ibanchk.resultText(res) << std::endl;
+  if (res == IbanCheck::OK)
+    return 0;
+  else
+    return 1;
 }

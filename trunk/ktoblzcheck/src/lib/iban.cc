@@ -1,6 +1,14 @@
-/*-*-c++-*-*****************************************************************
- *   Copyright (C) 2004 by Gerhard Gappmeier                               *
- *   gerhard.gappmeier@ascolab.com                                         *
+/***************************************************************************
+                             -------------------
+    cvs         : $Id$
+    begin       : Tue Apr 19 2005
+    copyright   : (C) 2005 by Andreas Degert (some parts Gerhard Gappmeier)
+    email       : ad@papyrus-gmbh.de
+
+    based on the older version from Gerhard Gappmeier
+    (gerhard.gappmeier@ascolab.com)
+
+ ***************************************************************************
  *                                                                         *
  *   This library is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU Lesser General Public            *
@@ -22,332 +30,380 @@
 #ifdef HAVE_CONFIG_H
 # include "config.h"
 #endif
+
+#include "algorithms.h"
 #include "iban.h"
-#include <stdio.h>
-#include <assert.h>
-
-#ifndef __GNUC__
-// A whacky workaround for MSVC
-# define snprintf(s,n,f,v) sprintf(s,f,v)
-#endif
-
-// ////////////////////////////////////////////////////////////
-// Country information
-
-/** This structure holds the necessary IBAN information for each
- * country.  Some of the data is not yet used, but might be used
- * sometime in the future.
- */
-class iban_country_info
-{
-public:
-	//iban_country_info() : countrycode(0), currencycode(0) {};
-	iban_country_info(Iban::Country, unsigned, const char*, 
-		unsigned, unsigned, const char*, unsigned);
-
-      /** The value from the enum Country */
-      Iban::Country enum_value;
-      
-      /** Numerical country code for this country according to ISO 3166-1 */
-      unsigned country;
-
-      /** The two-letter country code (Alpha-2) for this country
-       * according to ISO 3166-1. */
-      const char* countrycode;
-      /** The (maximum?) length of bank codes in this country,
-       * i.e. their number of characters. */
-      unsigned bankCodeLen;
-      /** The (maximum?) length of account codes / account numbers in
-       * this country. */
-      unsigned accountCodeLen;
-
-      /** Three-letter code for the currency used in this country */
-      const char* currencycode;
-      /** Number of decimal places of the currency after the decimal
-       * point/comma. */
-      unsigned currency_decimalpoints;
-};
-iban_country_info::iban_country_info(Iban::Country e, unsigned c, const char* cc, 
-		unsigned bcl, unsigned acl, const char* curc, unsigned cd)
-		: enum_value(e)
-		, country(c)
-		, countrycode(cc)
-		, bankCodeLen(bcl)
-		, accountCodeLen(acl)
-		, currencycode(curc)
-		, currency_decimalpoints(cd)
-{};
-
-/** Define the values for some known countries here. Part of this data
- * comes from ISO 3166-1 which was replicated e.g. in the HBCI
- * specification chapter VIII.11. */
-iban_country_info country_info[] = 
-{
-   iban_country_info( Iban::DE, 280, "DE", 8, 10, "EUR", 2 ),  
-   /* A note about Germany's numerical country code. The HBCI
-    * specification says: The new values since 1990 (reunification) is
-    * 276, but all banks still use 280, so we stick to this old
-    * value. */
-   iban_country_info( Iban::AT, 40, "AT", 4, 12, "EUR", 2 ),
-   iban_country_info( Iban::CH, 756, "CH", 5, 12, "CHF", 2 )
-};
-// FIXME: The integer value of the enum Country is directly used as
-// subscript into this array! This means everything will break if the
-// enum Country is changed and someone forgets this array
-// accordingly. We should implement a different mapping from enum
-// values to array subscripts, probably with an intermediate std::map
-// from some integers (i.e. the infamous "280" for Germany) to this
-// array subscript.
-
-
-
-// ////////////////////////////////////////////////////////////
-// Actual class Iban
-//
-// FIXME (2005-04-10, cstim): The code here is VERY UNTESTED and
-// probably quite non-functional! Please fix it and also get rid of
-// the char[] array before you intend to do anything serious with it!
-
 
 Iban::Iban()
 {
-	memset(m_szIban, 0, 34);
-	m_bValid = false;
 }
-
-Iban::Iban(const Iban &copy)
-{
-    assert(0); // FIXME: Obviously this constructor was never implemented!
-
-	memset(m_szIban, 0, 34);
-	m_bValid = false;
-}
-
-Iban::Iban(const char *pszIban)
-{
-	assert(pszIban);
-	memset(m_szIban, 0, 34);
-	m_bValid = false;
-	
-	// convert iban to number according the IBAN conversion table
-	std::string sSubstitution = iban2number(pszIban);
-		
-	// calc modulo 97
-	int iModulo97 = modulo97(sSubstitution.data());
-	
-	// modulo97 must be 1
-	m_bValid = (1 == iModulo97);
-}
-
-Iban::Iban(Country country, const std::string& pszBID, const std::string& pszAccountID)
-{
-	// set country code	
-	m_sCountryCode = country_info[country].countrycode;
-	// set BID
-	m_sBLZ = pszBID;
-	// fill up BID with preceding zeros
-	while (m_sBLZ.length() < country_info[country].bankCodeLen)
-		m_sBLZ = "0" + m_sBLZ;
-	// set AccountID
-	m_sAccountID = pszAccountID;
-	// fill up AccountID with preceding zeros
-	while (m_sAccountID.length() < country_info[country].accountCodeLen)
-		m_sAccountID = "0" + m_sAccountID;
-		
-	// build IBAN string
-      // FIXME: It is absolutely baaad practice to use a char[] array
-      // here! By all means, please us a std::string instead!
-	strcpy(m_szIban, m_sCountryCode.data());
-	// add dummy checksum
-	strcat(m_szIban, "00");
-	strcat(m_szIban, m_sBLZ.data());
-	strcat(m_szIban, m_sAccountID.data());
-		
-	// convert iban to number according the IBAN conversion table
-	std::string sSubstitution = iban2number(m_szIban);
-		
-	// calc modulo 97
-	int iModulo97 = modulo97(sSubstitution.data());
-	iModulo97 = 98 - iModulo97;
-	
-	// set new checksum
-	m_szIban[2] = (int)(iModulo97/10)+'0';
-	m_szIban[3] = (int)(iModulo97%10)+'0';
-}
-
 
 Iban::~Iban()
 {
 }
 
-bool Iban::isValid() const
+Iban::Iban(const Iban& iban):
+  m_transmission(iban.m_transmission),
+  m_printable(iban.m_printable)
 {
-	return m_bValid;
 }
 
-std::string Iban::iban2number(const char *pszIban)
+Iban::Iban(const std::string& iban, bool normalize)
 {
-	std::string sSubstitution;
-	char szNum[3];
+  if (normalize)
+    createTransmission(iban);
+  else
+    m_transmission = iban;
+}
 
-	assert(pszIban);
-      // FIXME: It is absolutely baaad practice to use a char[] array
-      // here! By all means, please us a std::string instead!
-	for (unsigned i=4; i<strlen(pszIban); i++)
-	{
-		if (pszIban[i] >= '0' && pszIban[i] <= '9')
-		{
-			// add numeric values to substitution string
-			sSubstitution += pszIban[i];
-		}
-		else
-		{
-			// convert A-Z into its numeric expression, A='10' - Z='35' according the IBAN conversion table (ISO 7064)
-			snprintf(szNum, 2, "%i", pszIban[i] - 'A' + 10);
-			sSubstitution += szNum;
-		}	
-	}
-	
-	// add country code
-	snprintf(szNum, 3, "%i", pszIban[0] - 'A' + 10);
-	sSubstitution += szNum;
-	snprintf(szNum, 3, "%i", pszIban[1] - 'A' + 10);
-	sSubstitution += szNum;
-	
-	// add checksum
-	sSubstitution += pszIban[2];
-	sSubstitution += pszIban[3];
-	
-	return sSubstitution;
+const char* IbanCheck::m_ResultText[] = {
+  "IBAN is ok",
+  "IBAN is too short",
+  "unknown IBAN country prefix",
+  "wrong length of IBAN",
+  "country for IBAN not found",
+  "IBAN prefix does not match for country",
+  "IBAN has incorrect checksum",
+  "unknown Result code!",
+};
+
+bool IbanCheck::selftest()
+{
+  bool ret = true;
+  specmap::iterator it = m_IbanSpec.begin();
+  for (; it != m_IbanSpec.end(); it++) {
+    Iban ex = it->second->example;
+    int r = check(ex.transmissionForm(), ex.transmissionForm().substr(0,2));
+    if (r != OK) {
+      std::cout << r << " " << it->second->example << std::endl;
+      ret = false;
+    }
+  }
+  return ret;
+}
+
+std::string IbanCheck::iban2number(const std::string& iban)
+{
+  std::ostringstream s;
+
+  for (unsigned i = 4; i < iban.size(); i++) {
+    if (iban[i] >= '0' && iban[i] <= '9') {
+      // add numeric values to substitution string
+      s << iban[i];
+    }
+    else {
+      // convert A-Z into its numeric expression,
+      // A='10' - Z='35' according the IBAN conversion table (ISO 7064)
+      s << to_number(iban[i]);
+    }	
+  }
+
+  // add country code
+  s << to_number(iban[0]);
+  s << to_number(iban[1]);
+
+  // add checksum
+  s << iban[2];
+  s << iban[3];
+
+  return s.str();
 }
 
 /** this method is calculating modulo97 for huge numbers. */
-int Iban::modulo97(const char *pszNumber)
+int IbanCheck::modulo97(const std::string& number)
 {
-	int iLen = strlen(pszNumber);
-	int iPos = 0;
-	int iModLen = 0;
-	char szPart[10];
-	long lNum = 0;
-	
-	szPart[0] = 0;
-	
-	while (iPos < iLen)
-	{
-		// build number with 9 digits
-		strncat(szPart, pszNumber+iPos, 9-iModLen);
-		szPart[9] = 0;
-		iPos += strlen(szPart) - iModLen;
-		
-		// convert string to long
-		lNum = atoi(szPart);
-		// calc the module 97
-		lNum = lNum % 97;
-		// convert module97 to string
-		sprintf(szPart, "%li", lNum);
-		// iModLen digits are used to build the next 9 digits number
-		iModLen = strlen(szPart);
-	}	
-	
-	return lNum;
+  unsigned int iPos = 0;
+  int iModLen = 0;
+  std::string part;
+  long lNum = 0;
+
+  while (iPos < number.size()) {
+    // build number with maximal 9 digits
+    unsigned int n = 9 - iModLen;
+    if (iPos + n > number.size())
+      n = number.size() - iPos;
+    part += number.substr(iPos, n);
+    iPos += part.size() - iModLen;
+
+    // convert string to long
+    std::istringstream is(part);
+    is >> lNum;
+    // calc the module 97
+    lNum = lNum % 97;
+    // convert module97 to string
+    std::ostringstream os;
+    os << lNum;
+    part = os.str();
+    // iModLen digits are used to build the next 9 digits number
+    iModLen = part.size();
+  }
+
+  return lNum;
 }
 
-Iban Iban::create(Country country, const std::string& pszBID, const std::string& pszAccountID)
+IbanCheck::Result IbanCheck::check(const std::string& iban, const std::string& country)
 {
-    // FIXME: Replace this by the correct constructor, but first repair the copy constructor!
-	Iban iban;
-	
-	// set country code	
-	iban.m_sCountryCode = country_info[country].countrycode;
-	// set BID
-	iban.m_sBLZ = pszBID;
-	// fill up BID with preceding zeros
-	while (iban.m_sBLZ.length() < country_info[country].bankCodeLen)
-		iban.m_sBLZ = "0" + iban.m_sBLZ;
-	// set AccountID
-	iban.m_sAccountID = pszAccountID;
-	// fill up AccountID with preceding zeros
-	while (iban.m_sAccountID.length() < country_info[country].accountCodeLen)
-		iban.m_sAccountID = "0" + iban.m_sAccountID;
-		
-	// build IBAN string
-      // FIXME: It is absolutely baaad practice to use a char[] array
-      // here! By all means, please us a std::string instead!
-	strcpy(iban.m_szIban, iban.m_sCountryCode.data());
-	// add dummy checksum
-	strcat(iban.m_szIban, "00");
-	strcat(iban.m_szIban, iban.m_sBLZ.data());
-	strcat(iban.m_szIban, iban.m_sAccountID.data());
-		
-	// convert iban to number according the IBAN conversion table
-	std::string sSubstitution = iban2number(iban.m_szIban);
-		
-	// calc modulo 97
-	int iModulo97 = modulo97(sSubstitution.data());
-	iModulo97 = 98 - iModulo97;
-	
-	// set new checksum
-	iban.m_szIban[2] = (int)(iModulo97/10)+'0';
-	iban.m_szIban[3] = (int)(iModulo97%10)+'0';
-	
-	return iban;
+  if (iban.size() < 2)
+    return TOO_SHORT;
+  std::string prefix = iban.substr(0,2);
+  specmap::iterator si = m_IbanSpec.find(prefix);
+  if (si == m_IbanSpec.end())
+    return PREFIX_NOT_FOUND;
+  if (iban.size() != si->second->length)
+    return WRONG_LENGTH;
+  if (!country.empty()) {
+    countrymap::iterator ci = m_CountryMap.find(country);
+    if (ci == m_CountryMap.end())
+      return COUNTRY_NOT_FOUND;
+    svector sl = ci->second->prefixes;
+    svector::iterator p = sl.begin();
+    for (; p != sl.end(); p++) {
+      if (*p == prefix)
+	break;
+    }
+    if (p == sl.end())
+      return WRONG_COUNTRY;
+  }
+  if (modulo97(iban2number(iban)) != 1)
+    return BAD_CHECKSUM;
+  return OK;
 }
 
-const char* Iban::toChar() const
+IbanCheck::Result IbanCheck::bic_position(const std::string& iban,
+					  int& start, int& end)
 {
-      // FIXME: It is absolutely baaad practice to use a char[] array
-      // here! By all means, please us a std::string instead!
-	return m_szIban;
+  if (iban.size() < 2)
+    return TOO_SHORT;
+  std::string prefix = iban.substr(0,2);
+  specmap::iterator si = m_IbanSpec.find(prefix);
+  if (si == m_IbanSpec.end())
+    return PREFIX_NOT_FOUND;
+  start = si->second->bic_start;
+  end = si->second->bic_end;
+  return OK;
 }
-Iban::operator const char*() const
+
+void Iban::createTransmission(const std::string& str)
 {
-      // FIXME: It is absolutely baaad practice to use a char[] array
-      // here! By all means, please us a std::string instead!
-	return m_szIban;
+  std::istringstream is(str);
+  while (is) {
+    std::string s;
+    is >> s;
+    if (s.empty())
+      break;
+    std::string::iterator si = s.begin();
+    for (; si != s.end(); si++)
+      *si = toupper(*si);
+    m_transmission.append(s);
+  }
+  if (m_transmission.substr(0,4) == "IBAN")
+    m_transmission = m_transmission.substr(4);
 }
-const std::string& Iban::toString() const
+
+void Iban::createPrintable()
 {
-    assert(0);
+  m_printable = m_transmission.substr(0,4);
+  for (int i = 4; ; i += 4) {
+    int n = m_transmission.size() - i;
+    if (n <= 0)
+      break;
+    else if (n > 4)
+      n = 4;
+    std::string s = m_transmission.substr(i,n);
+    m_printable += " " + s;
+  }
+}
+
+std::istream& operator>>(std::istream &is, IbanCheck::Spec &spec)
+{
+  is >> spec.prefix >> spec.length
+     >> spec.bic_start >> spec.bic_end >> std::ws;
+  is.ignore();
+  getline(is, spec.example);
+  return is;
+}
+
+std::istream& operator>>(std::istream &is, IbanCheck::Country &c)
+{
+  std::string words;
+  is >> c.country >> words;
+  int pos = 0;
+  while (true) {
+    int n = words.find("|", pos);
+    if (n < 0)
+      break;
+    c.prefixes.push_back(words.substr(pos, n - pos));
+    pos = n + 1;
+  }
+  c.prefixes.push_back(words.substr(pos));
+  is.ignore('\n');
+  return is;
+}
+
+bool IbanCheck::readSpecTable(std::istream &fin,
+			      const std::string& stopcomment)
+{
+  std::string line;
+  while (getline(fin, line)) {
+    if (line.empty())
+      continue;
+    if (line[0] == '#') {
+      if (line == stopcomment)
+	break;
+      continue;
+    }
+    Spec &spec = *new Spec;
+    std::istringstream istr(line);
+    istr >> spec;
+    if (!istr)
+      return false;
+    m_IbanSpec.insert(specmap::value_type(spec.prefix,&spec));
+  }
+  return true;
+}
+
+bool IbanCheck::readCountryTable(std::istream& fin)
+{
+  std::string line;
+  while (getline(fin, line)) {
+    if (line.empty() || line[0] == '#')
+      continue;
+    std::istringstream istr(line);
+    Country &country = *new Country;
+    istr >> country;
+    if (!istr)
+      return false;
+    m_CountryMap.insert(countrymap::value_type(country.country, &country));
+  }
+  return true;
+}
+
+IbanCheck::IbanCheck(const std::string& filename)
+{
+  std::string fname = filename;
+  if (fname.empty()) {
+    std::string registry_path = accnum_getRegKey("datadir");
+    std::string data_path = BANKDATA_PATH;
+    fname = (registry_path.empty() ? data_path : registry_path)
+      + 
+#if OS_WIN32
+      "\\"
+#else
+      "/"
+#endif
+      + std::string("ibandata.txt");
+  }
+  std::ifstream fin(fname.c_str());
+  if (!readSpecTable(fin, "#IBAN_prefix") || !readCountryTable(fin)) {
+    std::cerr << "Error reading Tables!" << std::endl;
+    m_IbanSpec.clear();
+    m_CountryMap.clear();
+  }
+}
+
+IbanCheck::~IbanCheck()
+{
+  for (specmap::iterator p = m_IbanSpec.begin(); p != m_IbanSpec.end(); p++)
+    delete p->second;
+  for (countrymap::iterator p = m_CountryMap.begin(); p != m_CountryMap.end(); p++)
+    delete p->second;
+}
+
+const char* IbanCheck::resultText(Result res)
+{
+  // check if res is inside of array range
+  unsigned int r = res;
+  unsigned int n = sizeof m_ResultText / sizeof m_ResultText[0] - 1;
+  return m_ResultText[r < n ? r : n];
+}
+
+extern "C" {
+  IbanCheck *IbanCheck_new(const char *filename)
+  {
+    return new IbanCheck(filename ? filename : "");
+  }
+
+  void IbanCheck_free(IbanCheck *p)
+  {
+    delete p;
+  }
+
+  int IbanCheck_error(IbanCheck *p)
+  {
+    return p->error();
+  }
+
+  int IbanCheck_check_str(IbanCheck *p, const char *iban, const char *country)
+  {
+    return p->check(iban, country ? country : "");
+  }
+
+  int IbanCheck_check_iban(IbanCheck *p, Iban *iban, const char *country)
+  {
+    return p->check(*iban, country ? country : "");
+  }
+
+  int IbanCheck_bic_position(IbanCheck *p, const char *iban,
+			      int *start, int *end)
+  {
+    return p->bic_position(iban, *start, *end);
+  }
+
+  Iban *Iban_new(const char* iban, int normalize)
+  {
+    return new Iban(iban, normalize);
+  }
+
+  void Iban_free(Iban *p)
+  {
+    delete p;
+  }
+
+  const char *Iban_transmissionForm(Iban *iban)
+  {
+    return iban->transmissionForm().c_str();
+  }
+
+  const char *Iban_printableForm(Iban *iban)
+  {
+    return iban->printableForm().c_str();
+  }
+
+  const char *IbanCheck_resultText(int res)
+  {
+    return IbanCheck::resultText((IbanCheck::Result)res);
+  }
+
+  int IbanCheck_selftest(IbanCheck *p)
+  {
+    return p->selftest();
+  }
 }
 
 
+#if TEST
+int main(int argc, char **argv)
+{
+  IbanCheck ck;
+  if (ck.selftest())
+    std::cout << "selftest ok" << std::endl;
+  else
+    std::cout << "selftest failed" << std::endl;
+  std::string s = " iban fr14 2004 1010 0505 0001 3m02 606";
+  std::cout << "test for iban    : " << s << std::endl;
+  Iban iban = s;
+  std::cout << "transmission form: " << iban.transmissionForm() << std::endl;
+  IbanCheck::Result res = ck.check(iban);
+  std::cout << "check result     : " << res
+	    << " (" << ck.resultText(res) << ")" << std::endl;
+  std::cout << "printable form   : " << iban.printableForm()
+	    << std::endl;
+  s = "FR1420041010050500013X02606";
+  std::cout << "expect incorrect checksum:" << std::endl;
+  res = ck.check(s);
+  std::cout << s << ": " << res
+	    << " (" << ck.resultText(res) << ")" << std::endl;
 
-// ////////////////////////////////////////////////////////////
-// C wrappers
-
-
-Iban* Iban_new_empty()
-{
-   return new Iban();
+  return 0;
 }
-Iban* Iban_copy(const Iban* i)
-{
-   assert(i);
-   return new Iban(*i);
-}
-Iban* Iban_fromString(const char* c)
-{
-   return new Iban(c ? c : "");
-}
-Iban* Iban_new(Iban_Country country, const char * pszBID, 
-	       const char * pszAccountID)
-{
-   return new Iban(country, pszBID ? pszBID : "",
-		   pszAccountID ? pszAccountID : "");
-}
-
-void Iban_delete(Iban *i)
-{
-   if (i)
-      delete (i);
-}
-int Iban_isValid(const Iban *i)
-{
-   assert(i);
-   return i->isValid();
-}
-const char* Iban_toChar(const Iban *i)
-{
-   assert(i);
-   return i->toChar();
-}
+#endif

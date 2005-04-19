@@ -2,7 +2,7 @@
 
 # Have this installed in $prefix/ktoblzcheck
 idatadir = $(BANKDATA_PATH)
-dist_idata_DATA = bankdata.txt
+dist_idata_DATA = bankdata.txt ibandata.txt
 
 dist_pkgdata_SCRIPTS = \
   bundesbank.sed \
