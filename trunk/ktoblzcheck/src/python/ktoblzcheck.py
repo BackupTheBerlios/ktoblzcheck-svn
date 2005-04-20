@@ -105,8 +105,8 @@ class AccountNumberCheck(c_void_p):
             p = kto.AccountNumberCheck_new_file(filename)
         c_void_p.__init__(self, p)
 
-    def __del__(self):
-        kto.AccountNumberCheck_delete(self)
+    def __del__(self, f=kto.AccountNumberCheck_delete):
+	f(self)
 
     def check(self, bankId, accountId):
         return kto.AccountNumberCheck_check(self, bankId, accountId)
@@ -134,8 +134,8 @@ class Iban(c_void_p):
     def __init__(self, iban, normalize = True):
         c_void_p.__init__(self, kto.Iban_new(iban, normalize))
 
-    def __del__(self):
-        kto.Iban_free(self)
+    def __del__(self, f=kto.Iban_free):
+        f(self)
 
     def transmissionForm(self):
         return kto.Iban_transmissionForm(self)
@@ -162,8 +162,8 @@ class IbanCheck(c_void_p):
         if kto.IbanCheck_error(self):
             raise ValueError("IbanCheck: file not found or wrong format")
 
-    def __del__(self):
-        kto.IbanCheck_free(self)
+    def __del__(self, f=kto.IbanCheck_free):
+        f(self)
 
     def resultText(code):
         return kto.IbanCheck_resultText(code)

@@ -1,5 +1,9 @@
 2005-04-20  Andreas Degert  <ad@papyrus-gmbh.de>
 
+	* src/python/ktoblzcheck.py: do not use the global shared library
+	handle inside __del__ functions; global variables might be already
+	deleted when __del__ is called.
+
 	* src/include/iban.h: add dokumentation for constructor.
 
 2005-04-20  Christian Stimming <stimming@tuhh.de>
