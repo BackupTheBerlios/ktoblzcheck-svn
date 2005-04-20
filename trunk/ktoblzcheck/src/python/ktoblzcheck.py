@@ -40,8 +40,7 @@ from ctypes import c_void_p, c_char_p, c_int, c_ulong, cdll, POINTER, byref
 __all__ = ["Record", "AccountNumberCheck", "Iban", "IbanCheck"]
 
 if os.name == 'nt':
-    raise NotImplemented('please add windows library name in source')
-    #kto = cdll.??
+    kto = cdll.ktoblzcheck32
 else:
     kto = cdll['libktoblzcheck.so.1']
 
