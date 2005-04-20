@@ -54,12 +54,25 @@
 class Iban
 {
 public:
+
   /** Constructor for an empty Iban. */
   Iban();
+
   /** Copy constructor. */
   Iban(const Iban& iban);
-  /** Constructor from a string */
+
+  /** Constructor from a string.
+   * @param iban IBAN string
+   * @param normalize when true (the default), @a iban will be
+   *        normalized to transmission format; when false, @a iban
+   *        must be in transmission format already.
+   *
+   * normalization consists of deleting all white space, converting
+   * lowercase letters to uppercase, and deleting a prefix of the form
+   * "IBAN".
+   */
   Iban(const std::string& iban, bool normalize = true);
+
   /** Default destructor. */
   ~Iban();
 

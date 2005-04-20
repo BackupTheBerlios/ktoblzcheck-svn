@@ -1,3 +1,7 @@
+2005-04-20  Andreas Degert  <ad@papyrus-gmbh.de>
+
+	* src/include/iban.h: add dokumentation for constructor.
+
 2005-04-20  Christian Stimming <stimming@tuhh.de>
 
 	* doc/mainpage.doxygen.in: Added doxygen mainpage that will also
