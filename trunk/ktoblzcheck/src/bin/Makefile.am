@@ -17,6 +17,6 @@ benchmark_SOURCES = benchmark.cc
 
 # Add check script for this package.
 TESTS = check_ktoblzcheck
-TESTS_ENVIRONMENT = BANKDATA_SRCPATH=$(top_srcdir)/src/bankdata
+TESTS_ENVIRONMENT = PATH=$${PATH}:$(top_builddir)/src/lib LD_LIBRARY_PATH=$(top_builddir)/src/lib BANKDATA_SRCPATH=$(top_srcdir)/src/bankdata
 dist_check_SCRIPTS = check_ktoblzcheck
 check_ktoblzcheck: ktoblzcheck

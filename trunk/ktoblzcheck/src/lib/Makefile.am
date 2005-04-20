@@ -21,7 +21,7 @@ libktoblzcheck_la_LIBADD = -lstdc++
 # Add check script for this package.
 check_PROGRAMS = iban_check
 iban_check_SOURCES = iban_check.cc
-iban_check_LDADD = -lktoblzcheck
+iban_check_LDADD = $(ktoblzcheck_libs)
 TESTS = iban_check
 TESTS_ENVIRONMENT = BANKDATA_SRCPATH=$(top_srcdir)/src/bankdata
 
