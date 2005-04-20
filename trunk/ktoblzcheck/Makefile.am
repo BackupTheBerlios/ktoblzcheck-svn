@@ -23,7 +23,8 @@ rpm:    $(PACKAGE).spec dist
 dll: 
 	make -C src/lib dll
 
-srcdoc: Doxyfile
+srcdoc: Doxyfile 
+	make -C doc mainpage.doxygen
 	doxygen
 
 # Rule for using the Inno Setup compiler. The path to iscc.exe is set

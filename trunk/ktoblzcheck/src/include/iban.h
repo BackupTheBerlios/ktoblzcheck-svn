@@ -30,6 +30,12 @@
 #ifndef IBAN_H
 #define IBAN_H
 
+/** @file 
+ * @brief Checking of International Bank Account Numbers (IBAN)
+ *
+ * This file contains the classes and C wrappers for IBAN checking.
+ */
+
 #ifdef __cplusplus
 
 #include <iostream>
@@ -39,7 +45,9 @@
 #include <map>
 #include <ctype.h>
 
-/** Stores an IBAN (International Bank Account Number) and produces
+/** @brief Stores one IBAN (International Bank Account Number)
+ *
+ * Stores an IBAN (International Bank Account Number) and produces
  * the electronic format (transmission format) and the printable
  * format (paper format) according to the ECBS document TR 201.
  */
@@ -56,14 +64,17 @@ public:
   ~Iban();
 
   /** Returns the transmission format for the IBAN */
-  const std::string& transmissionForm() {
-    if (m_transmission.empty()) createTransmission(m_printable);
+  const std::string& transmissionForm() const {
+    // if (m_transmission.empty()) 
+    // m_transmission = createTransmission(m_printable);
+    // --^^ this is always set in the constructors
     return m_transmission;
   }
 
   /** Returns the printable format for the IBAN */
   const std::string& printableForm() {
-    if (m_printable.empty()) createPrintable();
+    if (m_printable.empty()) 
+      m_printable = createPrintable();
     return m_printable;
   }
 
@@ -72,12 +83,14 @@ private:
   std::string m_printable;    ///< stored paper format
 
   /** create the electronic format */
-  void createTransmission(const std::string& iban_str);
+  static std::string createTransmission(const std::string& iban_str);
   /** create the paper format */
-  void createPrintable();
+  std::string createPrintable() const;
 };
 
-/** Stores a mapping of IBAN-prefixes to required length of the IBAN
+/** @brief IBAN bank information database and IBAN verification
+ *
+ * Stores a mapping of IBAN-prefixes to required length of the IBAN
  * and BIC (Bank Identification Code) position inside the IBAN, and a
  * second mapping of the ISO 3166 2-character country code to the list
  * of prefixes for that country (usually one, identically to the
@@ -106,33 +119,50 @@ public:
   /** Constructor that initalizes the mappings from a data file at
    * @a filename.
    *
+   * If the file name argument is empty, then the compile-time
+   * datafile will be used. On Windows, the location of the datafile
+   * will be looked up in the registry.
+   *
    * If the file could not be found or is not successfully read, the
    * mappings will be empty. Use error() to check for such an error
    * condition.
    *
-   * @param filename The (preferably) absolute location of the data
-   * file
+   * @param filename If empty, then the compile-time file name will be
+   * used. Otherwise the relative or absolute full filename of the
+   * data file
    */
   IbanCheck(const std::string& filename = "");
+
+  /** Default destructor */
   ~IbanCheck();
 
-  /** check the formal correctness of a given iban.  This function
+  /** Check the formal correctness of a given iban.  This function
    * checks if the prefix is known, if the length is correct for the
    * prefix, if the checksum is ok and if the prefix is valid for a
    * given country (if set).
+   *
    * @param iban     Iban instance
    * @param country  2-character country code (ISO 3166)
    */
-  Result check(Iban& iban, const std::string& country = "") {
+  Result check(const Iban& iban, const std::string& country = "") const {
     return check(iban.transmissionForm(), country); }
 
   /** @overload
    * @param iban     IBAN in transmission format
    * @param country  2-character country code (ISO 3166)
    */
-  Result check(const std::string& iban, const std::string& country = "");
+  Result check(const std::string& iban, const std::string& country = "") const;
 
-  /** convert Result code into an english message string.
+  /** Returns the position of the BIC inside the IBAN. The iban should
+   * be formally correct, if not an error Result might be returned.
+   *
+   * @param iban   [in] IBAN in transmission format
+   * @param start  [out] start of BIC (0-based index)
+   * @param end    [out] first position after BIC (0-based index)
+   */
+  Result bic_position(const std::string& iban, int& start, int& end) const;
+
+  /** Convert Result code into an english message string.
    *
    * @note if the value of @a res is an integer not inside
    * the enum range, a special message will be returned.
@@ -141,19 +171,10 @@ public:
    */
   static const char *resultText(Result res);
 
-  /** Returns the position of the BIC inside the IBAN. The iban should
-   * be formally correct, if not an error Result might be returned.
-   *
-   * @param[in] iban    IBAN in transmission format
-   * @param[out] start  start of BIC (0-based index)
-   * @param[out] end    first position after BIC (0-based index)
-   */
-  Result bic_position(const std::string& iban, int& start, int& end);
-
   /** @return false if the data file could not be opened and
    * successfully read.
    */
-  bool error() { return m_IbanSpec.size() == 0; }
+  bool error() const { return m_IbanSpec.size() == 0; }
 
   /** uses the example data to test the check routines.
    * @return false if not successfull
@@ -187,34 +208,102 @@ private:
 
   bool readSpecTable(std::istream &fin, const std::string& stopcomment);
   bool readCountryTable(std::istream &fin);
-  int to_number(char c) { return c - 'A' + 10; }
-  std::string IbanCheck::iban2number(const std::string& iban);
-  int IbanCheck::modulo97(const std::string& number);
+  static int to_number(char c) { return c - 'A' + 10; }
+  static std::string IbanCheck::iban2number(const std::string& iban);
+  static int IbanCheck::modulo97(const std::string& number);
 
   specmap m_IbanSpec;
   countrymap m_CountryMap;
 };
 
+typedef IbanCheck::Result IbanCheck_Result;
 extern "C" {
 #else /* __cplusplus */
   typedef struct IbanCheck IbanCheck;
   typedef struct Iban Iban;
+  typedef int IbanCheck_Result;
 #endif /* __cplusplus */
+  /** @name IbanCheck methods */
+  /* @{ */
+
+  /** Constructor that initalizes the mappings from a data file at
+   * @a filename.
+   *
+   * If the file name argument is empty, then the compile-time
+   * datafile will be used. On Windows, the location of the datafile
+   * will be looked up in the registry.
+   *
+   * If the file could not be found or is not successfully read, the
+   * mappings will be empty. Use error() to check for such an error
+   * condition.
+   *
+   * @param filename If empty, then the compile-time file name will be
+   * used. Otherwise the relative or absolute full filename of the
+   * data file
+   */
   extern IbanCheck *IbanCheck_new(const char *filename);
+  /** Default destructor */
   extern void IbanCheck_free(IbanCheck *p);
-  extern int IbanCheck_error(IbanCheck *p);
-  extern int IbanCheck_check_str(IbanCheck *p, const char *iban,
-				 const char *country);
-  extern int IbanCheck_check_iban(IbanCheck *p, Iban *iban,
-				  const char *country);
-  extern int IbanCheck_bic_position(IbanCheck *p, const char *iban,
-				    int *start, int *end);
-  extern Iban *Iban_new(const char* iban, int normalize);
-  extern void Iban_free(Iban *p);
-  extern const char *Iban_transmissionForm(Iban *iban);
-  extern const char *Iban_printableForm(Iban *iban);
-  extern const char *IbanCheck_resultText(int res);
+  /** @overload
+   * @param p        IbanCheck object
+   * @param iban     IBAN in transmission format
+   * @param country  2-character country code (ISO 3166)
+   */
+  extern IbanCheck_Result IbanCheck_check_str(const IbanCheck *p,
+					      const char *iban,
+					      const char *country);
+  /** Check the formal correctness of a given iban.  This function
+   * checks if the prefix is known, if the length is correct for the
+   * prefix, if the checksum is ok and if the prefix is valid for a
+   * given country (if set).
+   *
+   * @param p        IbanCheck object
+   * @param iban     Iban instance
+   * @param country  2-character country code (ISO 3166)
+   */
+  extern IbanCheck_Result IbanCheck_check_iban(const IbanCheck *p,
+					       const Iban *iban,
+					       const char *country);
+  /** Returns the position of the BIC inside the IBAN. The iban should
+   * be formally correct, if not an error Result might be returned.
+   *
+   * @param p        IbanCheck object
+   * @param iban    [in] IBAN in transmission format
+   * @param start  [out] start of BIC (0-based index)
+   * @param end    [out] first position after BIC (0-based index)
+   */
+  extern IbanCheck_Result IbanCheck_bic_position(const IbanCheck *p, 
+						 const char *iban,
+						 int *start, int *end);
+  /** Convert Result code into an english message string.
+   *
+   * @note if the value of @a res is an integer not inside
+   * the enum range, a special message will be returned.
+   *
+   * @param res   Result code from check() or bic_position()
+   */
+  extern const char *IbanCheck_resultText(IbanCheck_Result res);
+  /** @return false if the data file could not be opened and
+   * successfully read.
+   */
+  extern int IbanCheck_error(const IbanCheck *p);
+  /** uses the example data to test the check routines.
+   * @return false if not successfull
+   */
   extern int IbanCheck_selftest(IbanCheck *p);
+  /* @} */
+
+  /** @name Iban methods */
+  /* @{ */
+  /** Constructor from a string */
+  extern Iban *Iban_new(const char* iban, int normalize);
+  /** Default destructor. */
+  extern void Iban_free(Iban *p);
+  /** Returns the transmission format for the IBAN */
+  extern const char *Iban_transmissionForm(const Iban *iban);
+  /** Returns the printable format for the IBAN */
+  extern const char *Iban_printableForm(Iban *iban);
+  /* @} */
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

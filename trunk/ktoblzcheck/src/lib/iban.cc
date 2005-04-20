@@ -33,8 +33,13 @@
 
 #include "algorithms.h"
 #include "iban.h"
+#include <assert.h>
+
+// ////////////////////////////////////////////////////////////
 
 Iban::Iban()
+  : m_transmission()
+  , m_printable()
 {
 }
 
@@ -42,19 +47,54 @@ Iban::~Iban()
 {
 }
 
-Iban::Iban(const Iban& iban):
-  m_transmission(iban.m_transmission),
-  m_printable(iban.m_printable)
+Iban::Iban(const Iban& iban)
+  : m_transmission(iban.m_transmission)
+  , m_printable(iban.m_printable)
 {
 }
 
 Iban::Iban(const std::string& iban, bool normalize)
+  : m_transmission(normalize ? createTransmission(iban) : iban)
+  , m_printable()
 {
-  if (normalize)
-    createTransmission(iban);
-  else
-    m_transmission = iban;
 }
+
+std::string Iban::createTransmission(const std::string& str)
+{
+  std::string result;
+  std::istringstream is(str);
+  while (is) {
+    std::string s;
+    is >> s;
+    if (s.empty())
+      break;
+    std::string::iterator si = s.begin();
+    for (; si != s.end(); si++)
+      *si = toupper(*si);
+    result.append(s);
+  }
+  if (result.substr(0,4) == "IBAN")
+    result = result.substr(4);
+  return result;
+}
+
+std::string Iban::createPrintable() const
+{
+  std::string result = m_transmission.substr(0,4);
+  for (int i = 4; ; i += 4) {
+    int n = m_transmission.size() - i;
+    if (n <= 0)
+      break;
+    else if (n > 4)
+      n = 4;
+    std::string s = m_transmission.substr(i,n);
+    result += " " + s;
+  }
+  return result;
+}
+
+
+// ////////////////////////////////////////////////////////////
 
 const char* IbanCheck::m_ResultText[] = {
   "IBAN is ok",
@@ -72,7 +112,7 @@ bool IbanCheck::selftest()
   bool ret = true;
   specmap::iterator it = m_IbanSpec.begin();
   for (; it != m_IbanSpec.end(); it++) {
-    Iban ex = it->second->example;
+    const Iban& ex = it->second->example;
     int r = check(ex.transmissionForm(), ex.transmissionForm().substr(0,2));
     if (r != OK) {
       std::cout << r << " " << it->second->example << std::endl;
@@ -141,22 +181,22 @@ int IbanCheck::modulo97(const std::string& number)
   return lNum;
 }
 
-IbanCheck::Result IbanCheck::check(const std::string& iban, const std::string& country)
+IbanCheck::Result IbanCheck::check(const std::string& iban, const std::string& country) const
 {
   if (iban.size() < 2)
     return TOO_SHORT;
   std::string prefix = iban.substr(0,2);
-  specmap::iterator si = m_IbanSpec.find(prefix);
+  specmap::const_iterator si = m_IbanSpec.find(prefix);
   if (si == m_IbanSpec.end())
     return PREFIX_NOT_FOUND;
   if (iban.size() != si->second->length)
     return WRONG_LENGTH;
   if (!country.empty()) {
-    countrymap::iterator ci = m_CountryMap.find(country);
+    countrymap::const_iterator ci = m_CountryMap.find(country);
     if (ci == m_CountryMap.end())
       return COUNTRY_NOT_FOUND;
     svector sl = ci->second->prefixes;
-    svector::iterator p = sl.begin();
+    svector::const_iterator p = sl.begin();
     for (; p != sl.end(); p++) {
       if (*p == prefix)
 	break;
@@ -170,48 +210,17 @@ IbanCheck::Result IbanCheck::check(const std::string& iban, const std::string& c
 }
 
 IbanCheck::Result IbanCheck::bic_position(const std::string& iban,
-					  int& start, int& end)
+					  int& start, int& end) const
 {
   if (iban.size() < 2)
     return TOO_SHORT;
   std::string prefix = iban.substr(0,2);
-  specmap::iterator si = m_IbanSpec.find(prefix);
+  specmap::const_iterator si = m_IbanSpec.find(prefix);
   if (si == m_IbanSpec.end())
     return PREFIX_NOT_FOUND;
   start = si->second->bic_start;
   end = si->second->bic_end;
   return OK;
-}
-
-void Iban::createTransmission(const std::string& str)
-{
-  std::istringstream is(str);
-  while (is) {
-    std::string s;
-    is >> s;
-    if (s.empty())
-      break;
-    std::string::iterator si = s.begin();
-    for (; si != s.end(); si++)
-      *si = toupper(*si);
-    m_transmission.append(s);
-  }
-  if (m_transmission.substr(0,4) == "IBAN")
-    m_transmission = m_transmission.substr(4);
-}
-
-void Iban::createPrintable()
-{
-  m_printable = m_transmission.substr(0,4);
-  for (int i = 4; ; i += 4) {
-    int n = m_transmission.size() - i;
-    if (n <= 0)
-      break;
-    else if (n > 4)
-      n = 4;
-    std::string s = m_transmission.substr(i,n);
-    m_printable += " " + s;
-  }
 }
 
 std::istream& operator>>(std::istream &is, IbanCheck::Spec &spec)
@@ -328,30 +337,41 @@ extern "C" {
     delete p;
   }
 
-  int IbanCheck_error(IbanCheck *p)
+  int IbanCheck_error(const IbanCheck *p)
   {
     return p->error();
   }
 
-  int IbanCheck_check_str(IbanCheck *p, const char *iban, const char *country)
+  IbanCheck_Result 
+  IbanCheck_check_str(const IbanCheck *p,
+		      const char *iban, const char *country)
   {
-    return p->check(iban, country ? country : "");
+    assert(p);
+    return p->check(iban ? iban : "", country ? country : "");
   }
 
-  int IbanCheck_check_iban(IbanCheck *p, Iban *iban, const char *country)
+  IbanCheck_Result
+  IbanCheck_check_iban(const IbanCheck *p,
+		       const Iban *iban, const char *country)
   {
+    assert(p);
+    assert(iban);
     return p->check(*iban, country ? country : "");
   }
 
-  int IbanCheck_bic_position(IbanCheck *p, const char *iban,
-			      int *start, int *end)
+  IbanCheck_Result
+  IbanCheck_bic_position(const IbanCheck *p, const char *iban,
+			 int *start, int *end)
   {
-    return p->bic_position(iban, *start, *end);
+    assert(p);
+    assert(start);
+    assert(end);
+    return p->bic_position(iban ? iban : "", *start, *end);
   }
 
   Iban *Iban_new(const char* iban, int normalize)
   {
-    return new Iban(iban, normalize);
+    return new Iban(iban ? iban : "", normalize);
   }
 
   void Iban_free(Iban *p)
@@ -359,23 +379,26 @@ extern "C" {
     delete p;
   }
 
-  const char *Iban_transmissionForm(Iban *iban)
+  const char *Iban_transmissionForm(const Iban *iban)
   {
+    assert(iban);
     return iban->transmissionForm().c_str();
   }
 
   const char *Iban_printableForm(Iban *iban)
   {
+    assert(iban);
     return iban->printableForm().c_str();
   }
 
-  const char *IbanCheck_resultText(int res)
+  const char *IbanCheck_resultText(IbanCheck_Result res)
   {
-    return IbanCheck::resultText((IbanCheck::Result)res);
+    return IbanCheck::resultText(res);
   }
 
   int IbanCheck_selftest(IbanCheck *p)
   {
+    assert(p);
     return p->selftest();
   }
 }

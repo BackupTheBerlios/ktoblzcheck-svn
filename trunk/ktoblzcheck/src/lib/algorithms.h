@@ -26,6 +26,12 @@
 
 #include "ktoblzcheck.h"
 
+/** @file 
+ * @brief Internal algorithms
+ *
+ * This file contains the internal algorithms that are used for
+ * checking account numbers.
+ */
 #ifdef HAVE_LONG_LONG
 # define long_long long long
 #else
@@ -34,11 +40,18 @@
 
 // forward declarations
 void   multArray(const int *a, const int *b, int dest[10]);
-/** @param source Must be array of size 10 */
+/** @param source Must be array of size 10 
+ * @param dest DOCUMENTME 
+ * @param start DOCUMENTME 
+ * @param stop DOCUMENTME 
+*/
 void   crossFoot(const int *source, int dest[10], int start, int stop);
 /** @param source Must be array of size 10 */
 void   crossFoot(int *source);
-/** @param source Must be array of size 10 */
+/** @param source Must be array of size 10
+ * @param start DOCUMENTME 
+ * @param stop DOCUMENTME 
+*/
 int    add(const int *source, int start, int stop);
 /** @param source Must be array of size 10 */
 inline int add_10(const int *source);

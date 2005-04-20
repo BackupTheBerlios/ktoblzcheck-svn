@@ -1,3 +1,17 @@
+2005-04-20  Christian Stimming <stimming@tuhh.de>
+
+	* doc/mainpage.doxygen.in: Added doxygen mainpage that will also
+	be used as the new web page. Improved documentation all over the
+	place.
+	
+	* src/python/ktoblzcheck.py: Added Andreas' python module for
+	accessing ktoblzcheck. This is enabled by --enable-python.
+
+	* src/lib/iban_check.cc: Add test program. Prepare "make check"
+	rules for using the test program.
+	
+	* src/include/iban.h, src/lib/iban.cc: Add const where applicable.
+
 2005-04-19  Andreas Degert  <ad@papyrus-gmbh.de>
 
 	* src/bin/ibanchk.cc: work with new interface, use streams instead

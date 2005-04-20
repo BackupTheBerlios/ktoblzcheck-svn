@@ -27,15 +27,23 @@
 #ifndef KTOBLZCHECK_H
 #define KTOBLZCHECK_H
 
+/** @file 
+ * @brief Checking of German BLZ and account numbers
+ *
+ * This file contains the classes and C wrappers for checking German
+ * BLZ (bank codes) and account numbers.
+ */
 
 #ifdef __cplusplus
 
 #include <string>
 #include <map>
 
-/** Class that stores a list of known banks, returns banks with given
- * bank codes and validates account numbers accordings to the bank's
- * known validation/checking algorithms.
+/** @brief German bank information database and account code verification
+ *
+ * Class that stores a list of known German banks, returns banks with
+ * given bank codes, and validates account numbers accordings to the
+ * bank's known validation/checking algorithms.
  *
  * The list of known banks is read from the configuration file when
  * this object is constructed.
@@ -72,7 +80,8 @@ public:
       BANK_NOT_KNOWN = 3
   } Result;
   
-  /**
+  /** @brief Available information about one bank
+   *
    * This class holds information about one bank.
    *
    * <ul>
@@ -204,9 +213,14 @@ private:
   banklist_type data;
 
 public:
+#ifndef DOXYGEN_IGNORE
+  /** Internal callback function */
   typedef Result (*MethodFunc)(int *account, int *weight);
+  /** Internal callback function */
   typedef Result (*MethodFuncLong)(int *account, int *weight, 
 				   const std::string& accountId, const std::string& bankId);
+#endif // DOXYGEN_IGNORE
+
 private:
   typedef std::map<std::string, MethodFunc> method_map_t;
   method_map_t method_map;
@@ -233,6 +247,7 @@ typedef struct AccountNumberCheck AccountNumberCheck;
 typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
 #endif /* __cplusplus */
 
+  /** @name AccountNumberCheck methods */
   /*@{*/
 
   /**
@@ -286,9 +301,9 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
    * <li><b>3</b> No bank with the specified bankid could be found
    * </ul>
    *
+   * @param a The AccountNumberCheck object
    * @param bankId The bank code (BLZ) of the bank to test
    * @param accountId The account id to check
-   * @param method If set, force the use of specified check-method
    */
   extern AccountNumberCheck_Result
   AccountNumberCheck_check(const AccountNumberCheck *a, 
@@ -325,6 +340,7 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
   extern void AccountNumberCheck_createIndex(AccountNumberCheck *a);
   /*@}*/
 
+  /** @name AccountNumberCheck_Record methods */
   /*@{*/
   /** Destructor */
   extern void

@@ -18,6 +18,13 @@ libktoblzcheck_la_SOURCES = \
 libktoblzcheck_la_LDFLAGS = -version-info 3:0:2
 libktoblzcheck_la_LIBADD = -lstdc++
 
+# Add check script for this package.
+check_PROGRAMS = iban_check
+iban_check_SOURCES = iban_check.cc
+iban_check_LDADD = -lktoblzcheck
+TESTS = iban_check
+TESTS_ENVIRONMENT = BANKDATA_SRCPATH=$(top_srcdir)/src/bankdata
+
 ############################################################
 # DLL settings: 
 # Only these need to be modified

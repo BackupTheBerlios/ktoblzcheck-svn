@@ -9,3 +9,4 @@ ressource.rc
 ktoblzcheck32.def
 ktoblzcheck32.dll
 ktoblzcheck32.lib
+iban_check
