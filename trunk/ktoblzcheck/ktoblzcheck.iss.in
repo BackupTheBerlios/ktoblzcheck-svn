@@ -36,8 +36,8 @@ Name: "doc"; Description: "{cm:DocFiles}"; Types: full
 Source: "src\lib\ktoblzcheck32.dll"; DestDir: "{win}"; Flags: sharedfile; Components: main
 Source: "win32-tmp\bin\ktoblzcheck.exe"; DestDir: "{app}"; Components: main
 
-; The data file
-Source: "win32-tmp\data\bankdata.txt"; DestDir: "{app}\data"; Flags: ignoreversion; Components: main
+; The data files
+Source: "win32-tmp\data\*"; DestDir: "{app}\data"; Flags: ignoreversion; Components: main
 
 ; The lib file for linking against it
 Source: "src\lib\ktoblzcheck32.lib"; DestDir: "{app}\lib"; Flags: sharedfile; Components: devel
