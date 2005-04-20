@@ -102,6 +102,7 @@ ACX_COMPILE_WARN
 #
 AC_OUTPUT( \
   Makefile \
+  Doxyfile \
   ktoblzcheck.spec \
   ktoblzcheck.iss \
   macros/Makefile \
