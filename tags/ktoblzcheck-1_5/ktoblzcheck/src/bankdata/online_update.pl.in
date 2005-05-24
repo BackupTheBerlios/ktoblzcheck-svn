@@ -1,0 +1,138 @@
+#!/usr/bin/perl
+
+# Simply run this script with no arguments. It will first download the
+# information HTML page by bundesbank and parse this page for blz
+# updates. Then, the user will be asked whether one particular
+# available file should be downloaded. If the user agrees, the file is
+# downloaded, copied into BANKDATA_PATH, and converted into
+# ktoblzcheck's format.
+
+## Configuration
+$LYNX = "@LYNX@";
+$SED = "@SED@";
+$GREP = "@GREP@";
+$BANKDATADIR="@BANKDATA_PATH@";
+$prefix="@prefix@";
+$datadir="@datadir@";
+$pkgdatadir="$datadir/@PACKAGE@";
+
+## Sanity checks
+die "lynx is not available on your system. This tool requires it. Aborting." 
+  if $LYNX eq "NO";
+die "sed or grep is not available on your system. This tool requires it. Aborting." if $SED eq "NO" || $GREP eq "NO";
+die "The directory for the bankdata \"$BANKDATADIR\" does not exist. Aborting." if ! -d $BANKDATADIR;
+die "The directory for the bankdata \"$BANKDATADIR\" is not writable. You need to run this script as the user who owns that directory. This probably means you must run this script as root." if ! -w $BANKDATADIR;
+
+
+## Common constants
+$debug=0; # set this to nonzero for activating debugging mode
+$BASE_URL="http://www.bundesbank.de";
+$MAIN_URL="$BASE_URL/zahlungsverkehr";
+$MAIN_DOC="$MAIN_URL/zahlungsverkehr_bankleitzahlen_download.php";
+$INSTALLED_NAME="bankdata.txt";
+
+if ($debug == 0) {
+  $LYNXCMD = "$LYNX -source $MAIN_DOC";
+} else {
+  print "DEBUG MODE! Will only echo commands, not execute them.\n";
+  $LYNXCMD = "cat ~/privat/hbci/blabla.html";
+}
+$datafile_regexp = 'blz\d{4,8}?pc\.txt';
+
+## Find the available potential download files
+@potential_files = ();
+@potential_urls = ();
+open(INPUT, "$LYNXCMD |") || die "can't open $LYNXCMD: $!";;
+while (<INPUT>) {
+  my ($addr) = m|($datafile_regexp)|giosx;
+  if ($addr) {
+    push @potential_files, $addr;
+    push @potential_urls, $_;
+  };
+};
+close INPUT;
+#print join("\n",@potential_files);print "\n";
+
+## Find the already installed files
+opendir(DIR, $BANKDATADIR) || die "can't opendir $BANKDATADIR: $!";
+@datafiles = grep( /$datafile_regexp/ && -f "$BANKDATADIR/$_", readdir(DIR));
+closedir DIR;
+#print join("\n",@datafiles);print "\n";
+
+## Calculate the difference between both lists
+@diff = ();
+%union = ();
+foreach $e (@datafiles) { $union{$e} = 1 }
+foreach $e (@potential_files) {
+    if ( !$union{$e} ) { 
+      push @diff, $e; 
+    }
+}
+#print join("\n",@diff);print "\n";
+#@diff = @potential_files;
+
+## Select the correct file to download
+if (scalar @diff == 0) {
+  print "Sorry, no new bankdata file found. Probably none available. Exiting.\n";
+  exit 0;
+} elsif (scalar @diff == 1) {
+  $file = $diff[0];
+} else {
+  print "The following bankdata files are available for download: \n";
+  $k = 0;
+  foreach $e (@diff) { print " [".$k++."] ".$e."\n"; };
+  print "Which one should be chosen? (Hint: The file names contain \n".
+    "the two-digit year and month as YYMM. You should probably \n".
+      "choose the file that corresponds to a year/month pair that \n".
+	"lies in the future.) \n".
+	  "Please type the corresponding number and press Enter.\n";
+  $key = <STDIN>;
+  #print "Got $key which gives ".$diff[$key];
+  $file = $diff[$key];
+};
+
+## Pick the URL for downloading the file
+($correct_url_line) = grep (m|$file|, @potential_urls);
+($correct_url) = ($correct_url_line =~ m|([^"]*$file[^"]*)|gio);
+
+$download = "$MAIN_URL/$correct_url";
+$install_1 = "$BANKDATADIR/$file";
+$install_2 = "$BANKDATADIR/$INSTALLED_NAME";
+$conv_script = "$pkgdatadir/bundesbank.sed";
+print "Summary: Will download \n".
+  "  $download \n".
+  "to \n".
+  "  $install_1 \n".
+  "and convert it into ktoblzcheck's format at \n".
+  "  $install_2 \n".
+  "Is this ok? Please press <Enter> if yes, or <Control-C> to abort:\n";
+$key = <STDIN>;
+
+if ($debug == 0) {
+  $ECHO = "";
+  $gt = ">";
+  $lt = "<";
+} else {
+  $ECHO = "echo";
+  $gt = "gt";
+  $lt = "lt";
+}
+
+## Now the real work:
+##
+## 1. Download
+print "$ECHO $LYNX -source $download $gt $install_1\n";
+system("$ECHO $LYNX -source $download $gt $install_1");# || die "can't call system: $!";
+## 2. Check whether the Bundesbank's BLZ is in there
+print "$GREP -q 10000000 $install_1\n";
+if (system("$GREP -q 10000000 $install_1") != 0) {
+  die "Downloaded file $install_1 is not in valid BLZ format. Aborting.";
+}
+## 3. Backup copy of old bankdata file
+print "$ECHO cp $install_2 $install_2~\n";
+system("$ECHO cp $install_2 $install_2~");# || die "can't call system: $!";
+## 4. Convert new file into the place of the old one.
+print "$ECHO $SED -nf $conv_script $lt $install_1 $gt $install_2\n";
+system("$ECHO $SED -nf $conv_script $lt $install_1 $gt $install_2");# || die "can't call system: $!";
+
+print "Finished.\n";

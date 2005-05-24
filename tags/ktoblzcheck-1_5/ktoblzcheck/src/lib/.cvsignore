@@ -1,0 +1,12 @@
+Makefile
+Makefile.in
+.deps
+.libs
+*.lo
+data.cc
+libktoblzcheck.la
+ressource.rc
+ktoblzcheck32.def
+ktoblzcheck32.dll
+ktoblzcheck32.lib
+iban_check

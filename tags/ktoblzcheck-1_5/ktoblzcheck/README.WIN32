@@ -1,0 +1,100 @@
+(Copied from a similar file by Martin Preuﬂ <martin@aquamaniac.de>)
+
+For *Installation* instructions from the Windows archives, please see
+the file INSTALL.WIN32.
+
+Compiling Ktoblzcheck on Windows
+=================================
+
+There are two ways to compile ktoblzcheck: Either you are using
+Microsoft Visual Studio C++ compiler (MSVC), or you are using the
+MinGW32 environment. 
+
+MSVC
+------
+
+For the MSVC, a (slightly outdated?) project file ktoblzcheck.vcproj
+is provided.
+
+The only necessary adjustment probably is the preprocessor definition
+of the BANKDATA_PATH variable, since this is where the file
+src/bankdata/bankdata.txt needs to be copied to. 
+
+Apart from that, the project file should compile everything and you
+can safely ignore the rest of this file. For installation, you have to
+manually copy the files "src/includes/ktoblzcheck.h",
+"src/bankdata/bankdata.txt" and the compiled DLL into your desired
+locations.
+
+MinGW32
+-------
+
+First: Compiling under Windows with mingw32 is not easy for the
+average Windows user.  So please, if you aren't used to Unix, then you
+probably shouldn't try to.
+
+However, developers who worked with Linux/*BSD before will find the compiler
+environment chosen very familiar.
+
+
+1. Needed Components
+----------------------
+
+1.1. MinGW32
+
+Ktoblzcheck has been adapted to Windows using mingw32.  MinGW32 is a
+project with the goal to provide a free compiler system and a nearly
+complete shell environment which allows to execute the configure
+script. The resulting DLLs and EXEs only link against Windows
+libraries, so there are no licence issues when releasing binary
+packages.  The compiler itself is the very well known GCC.
+
+MinGW creates an environment just like under Linux (with quite the same
+file hierarchie, including a home directory).
+Paths including hard drive identifiers are used like this:
+c:\SOMEPATH -> /c/SOMEPATH
+d:\SOMEPATH -> /d/SOMEPATH
+and so on.
+
+
+So you will have to install MinGW32. You can get the needed components from
+http://www.mingw.org/
+
+Install instructions:
+- download and install MSYS 1.0.9 
+  (there is an executable, which wants to install itself to "c:/msys". 
+  This is a good choice, so from here on I assume you have choosen this path,
+  too)
+- download and install  MinGW-3.1.0-1.exe (when asked for the install path
+  please make sure you use "c:/msys/1.0/mingw" !!)
+- download and install msysDTK-1.0.1.exe (it finds its install path by itself)
+
+There are many more packages on their download site, but you don't need them, 
+since most of them are already included in the packages we just installed.
+
+
+
+
+2. Make Order
+---------------
+
+To compile Ktoblzcheck yourself, do this:
+- ./configure
+
+  Common options in this step are --with-bankdata-path and
+  LDFLAGS (sometimes necessary to link against your mingw
+  libraries). The paths by default are Unix paths which will not work
+  on Windows. Therefore you have to specify something that works on
+  windows.
+
+  Please note that when using native windows paths
+  (like in "c:\here\there") you must use a shell escape mechanism. 
+  The path "c:\here\there" must be given as "c:\\here\\there". E.g.
+  ./configure LDFLAGS=-L/mingw/lib \
+    --with-bankdata-path="c:\\msys\\1.0\\local\\share\\ktoblzcheck"
+
+- make     (this creates the dll and executable)
+- then copy the DLL src/lib/ktoblzcheck32.dll to your windows folder.
+- make check (this will try to run a short test)
+- make install (this installs your data file to the specified location)
+
