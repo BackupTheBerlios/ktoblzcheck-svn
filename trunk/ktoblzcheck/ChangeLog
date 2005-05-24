@@ -1,3 +1,13 @@
+2005-05-24  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in: Release version 1.5
+
+	* src/bankdata/bankdata.txt: Updated bankdata file, now valid from
+	2005-06-06 onwards
+
+	* src/lib/Makefile.am: Incremented SO_VERSION and SO_AGE because
+	of added iban functions.
+
 2005-04-20  Andreas Degert  <ad@papyrus-gmbh.de>
 
 	* src/python/ktoblzcheck.py: do not use the global shared library

@@ -8,7 +8,7 @@ AC_CANONICAL_TARGET([])
 # Version numbering
 #
 VERSION_MAJOR="1"
-VERSION_MINOR="4"
+VERSION_MINOR="5"
 rpm_release="1"
 # no patchlevel here since this package is small enough to stick with
 # two numbers.

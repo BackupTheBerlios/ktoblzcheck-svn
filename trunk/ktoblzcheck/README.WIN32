@@ -13,7 +13,8 @@ MinGW32 environment.
 MSVC
 ------
 
-For the MSVC, a project file ktoblzcheck.vcproj is provided. 
+For the MSVC, a (slightly outdated?) project file ktoblzcheck.vcproj
+is provided.
 
 The only necessary adjustment probably is the preprocessor definition
 of the BANKDATA_PATH variable, since this is where the file
@@ -29,8 +30,8 @@ MinGW32
 -------
 
 First: Compiling under Windows with mingw32 is not easy for the
-average Windows user.  So please, if you aren't used to *nix (correct,
-I don't mean Windows here), then you probably shouldn't try to.
+average Windows user.  So please, if you aren't used to Unix, then you
+probably shouldn't try to.
 
 However, developers who worked with Linux/*BSD before will find the compiler
 environment chosen very familiar.

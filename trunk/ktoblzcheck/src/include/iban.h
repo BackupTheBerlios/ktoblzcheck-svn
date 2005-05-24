@@ -78,9 +78,6 @@ public:
 
   /** Returns the transmission format for the IBAN */
   const std::string& transmissionForm() const {
-    // if (m_transmission.empty()) 
-    // m_transmission = createTransmission(m_printable);
-    // --^^ this is always set in the constructors
     return m_transmission;
   }
 
@@ -115,7 +112,7 @@ private:
 class IbanCheck {
 public:
 
-  /** code returned by check() (and also by bic_position()). */
+  /** Code returned by check() (and also by bic_position()). */
   enum Result {
     // do not change anything here without changing
     // the initialisation of m_ResultText!
@@ -125,7 +122,7 @@ public:
     WRONG_LENGTH,      ///< IBAN has the wrong length
     COUNTRY_NOT_FOUND, ///< the country code to check against is unknown
     WRONG_COUNTRY,     ///< the IBAN doesn't belong to the country
-    BAD_CHECKSUM,      ///< bad IBAN checksum
+    BAD_CHECKSUM,      ///< Bad IBAN checksum, i.e. the IBAN probably contains a typo
   };
 
 
@@ -190,7 +187,7 @@ public:
   bool error() const { return m_IbanSpec.size() == 0; }
 
   /** uses the example data to test the check routines.
-   * @return false if not successfull
+   * @return false if not successful
    */
   bool selftest();
 
@@ -301,7 +298,7 @@ extern "C" {
    */
   extern int IbanCheck_error(const IbanCheck *p);
   /** uses the example data to test the check routines.
-   * @return false if not successfull
+   * @return false if not successful
    */
   extern int IbanCheck_selftest(IbanCheck *p);
   /* @} */

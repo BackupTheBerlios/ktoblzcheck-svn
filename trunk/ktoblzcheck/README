@@ -7,10 +7,12 @@ Introduction
 Both a library for other programs as well as a short command-line tool
 is available. It is possible to check pairs of account numbers and
 bank codes (BLZ) of German banks, and to map bank codes (BLZ) to the
-clear-text name and location of the bank.
+clear-text name and location of the bank. Python bindings are provided
+as well (--enable-python).
 
 For compile instructions concerning MS Windows, please see the file
-README.WIN32.
+README.WIN32. On the download page a self-installing setup file for
+Windows compiled with MinGW/gcc3.2 can be found.
 
 
 Compile & Install
@@ -40,6 +42,7 @@ Now type
   make install
 
 and you're done.
+
 
 Running
 -------

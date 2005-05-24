@@ -13,10 +13,14 @@ German banks.
 Both a library for other programs as well as a short command-line tool
 is available. It is possible to check pairs of account numbers and
 bank codes (BLZ) of German banks, and to map bank codes (BLZ) to the
-clear-text name and location of the bank. See \ref AccountNumberCheck
-and \ref IbanCheck for more information.
+clear-text name and location of the bank.
 
-(FIXME: Need to add more information here)
+For using the library in your own application, you have to include
+"ktoblzcheck.h" and then use \ref AccountNumberCheck and \ref
+IbanCheck; see there for more information.
+
+Python bindings are provided as well (needs compiling with
+--enable-python).
 
 For compile instructions concerning MS Windows, please see the file
 README.WIN32.
@@ -24,12 +28,14 @@ README.WIN32.
 
 \section sect_plat Platforms
 
-Ktoblzcheck v@VERSION@ has been successfully compiled on the following platforms:
-- Linux/Unix gcc3.x
+Ktoblzcheck v@VERSION@ has been successfully compiled on the following
+platforms:
+
+- Linux/Unix gcc3.x, gcc4.x
 - Linux/Unix gcc2.95.x
 - Windows 9x/NT/2000 under MinGW and gcc3.x (see file README.W32)
 
-If you have compiled Ktoblzcheck on another platform successfully, then
+If you have compiled Ktoblzcheck on another platform successfully,
 the maintainer would be glad to hear about that.
 
 

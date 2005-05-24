@@ -81,10 +81,11 @@ if (scalar @diff == 0) {
   print "The following bankdata files are available for download: \n";
   $k = 0;
   foreach $e (@diff) { print " [".$k++."] ".$e."\n"; };
-  print "Which one should be chosen? (Hint: You should probably \n".
-    "choose the file that corresponds to a date/month pair that \n".
-      "lies a few weeks in the future.) \n".
-	"Please type the corresponding number and press Enter.\n";
+  print "Which one should be chosen? (Hint: The file names contain \n".
+    "the two-digit year and month as YYMM. You should probably \n".
+      "choose the file that corresponds to a year/month pair that \n".
+	"lies in the future.) \n".
+	  "Please type the corresponding number and press Enter.\n";
   $key = <STDIN>;
   #print "Got $key which gives ".$diff[$key];
   $file = $diff[$key];
@@ -104,7 +105,7 @@ print "Summary: Will download \n".
   "  $install_1 \n".
   "and convert it into ktoblzcheck's format at \n".
   "  $install_2 \n".
-  "Is this ok? Please press Enter if yes, or Control-C to abort:\n";
+  "Is this ok? Please press <Enter> if yes, or <Control-C> to abort:\n";
 $key = <STDIN>;
 
 if ($debug == 0) {
