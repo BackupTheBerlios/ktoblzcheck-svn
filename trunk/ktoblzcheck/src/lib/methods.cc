@@ -1293,6 +1293,30 @@ AccountNumberCheck::Result method_B3(int *account, int *weight) {
     } // variant 2 (method "06")
     return AccountNumberCheck::ERROR; // should never happen, to be on the safe side
 }
+// B4 and B5 Added by Alexander Kurz
+// new method as of March 7th, 2005, checked with Bundesbank-Testnumbers
+AccountNumberCheck::Result method_B4(int *account, int *weight) {
+    if (account[0] == 9) {
+	number2Array("2121212120", weight);
+	return algo01(10, weight, true, 10, account);
+    } // variant 1 (method "00")
+    if (account[0] < 9) {
+	number2Array("0987654320", weight); weight[0] = 10;
+	return algo01(11, weight, false, 10, account);
+    } // variant 2 (method "02")
+    return AccountNumberCheck::ERROR; // should never happen, to be on the safe side
+}
+// new method B5 as of June 6th, 2005, checked with Bundesbank-Testnumbers
+AccountNumberCheck::Result method_B5(int *account, int *weight) {
+    number2Array("1371371370", weight);
+    if (AccountNumberCheck::OK == algo01(10, weight, false, 10, account))
+	return AccountNumberCheck::OK; // variant 1 (method "05")
+    if (account[0] == 8 || account[0] == 9)
+	return AccountNumberCheck::ERROR;
+    number2Array("2121212120", weight);
+    return algo01(10, weight, true, 10, account);
+    // variant 1 (method "00")
+}
 
 struct method_func_s {
     const char *str;
@@ -1408,6 +1432,8 @@ const struct method_func_s cb_funcs[] = {
   { "B1", method_B1},
   { "B2", method_B2},
   { "B3", method_B3},
+  { "B4", method_B4},
+  { "B5", method_B5},
   { 0, 0} // Important: The array has to end with the {0,0} entry,
 	  // otherwise initMethodMap() will runaway and crash!
 };
