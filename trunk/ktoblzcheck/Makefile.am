@@ -29,7 +29,7 @@ srcdoc: Doxyfile
 
 # Rule for using the Inno Setup compiler. The path to iscc.exe is set
 # manually here for now.
-ISCC = "C:\Programme\Inno Setup 4\iscc.exe"
+ISCC = "C:\Programme\Inno Setup 5\iscc.exe"
 ISCC_TMPDIR = win32-tmp
 setup: $(PACKAGE).iss
 	mkdir -p $(ISCC_TMPDIR)
