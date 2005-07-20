@@ -1,3 +1,8 @@
+2005-07-20  Christian Stimming <stimming@tuhh.de>
+
+	* src/lib/methods.cc: B6, B7 and B8 methods added by Alexander
+	Kurz.
+
 2005-06-22  Christian Stimming <stimming@tuhh.de>
 
 	* configure.in: Release version 1.6

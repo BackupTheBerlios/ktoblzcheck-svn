@@ -1317,6 +1317,32 @@ AccountNumberCheck::Result method_B5(int *account, int *weight) {
     return algo01(10, weight, true, 10, account);
     // variant 1 (method "00")
 }
+// B6, B7 and B8 Added by Alexander Kurz
+// new method as of September 5th, 2005, checked with Bundesbank-Testnumbers
+AccountNumberCheck::Result method_B6(int *account, int *weight,
+				     const std::string& accountId, const std::string& bankId) {
+    if (account[0] > 0 && account[0] <= 9)
+	return method_20(account,weight);	// variant 1
+    if (account[0] == 0)
+	return method_53(account, weight, accountId, bankId);	// variant 2
+    return AccountNumberCheck::ERROR; // should never happen, to be on the safe side
+}
+// new method as of September 5th, 2005, checked with Bundesbank-Testnumbers
+AccountNumberCheck::Result method_B7(int *account, int *weight) {
+    std::string accNumber = array2Number(account);
+    if (("0001000000" <= accNumber && accNumber <= "0005999999") ||
+	("0700000000" <= accNumber && accNumber <= "0899999999"))
+	return method_01(account,weight);	// variant 1
+    else
+	return AccountNumberCheck::OK;		// variant 2, "method 9" :-))
+}
+// new method as of September 5th, 2005, checked with Bundesbank-Testnumbers
+AccountNumberCheck::Result method_B8(int *account, int *weight) {
+    if (AccountNumberCheck::OK == method_20(account,weight) ) // variant 1
+	return AccountNumberCheck::OK;
+    else
+	return method_29(account,weight);	// variant 2
+}
 
 struct method_func_s {
     const char *str;
@@ -1434,6 +1460,8 @@ const struct method_func_s cb_funcs[] = {
   { "B3", method_B3},
   { "B4", method_B4},
   { "B5", method_B5},
+  { "B7", method_B7},
+  { "B8", method_B8},
   { 0, 0} // Important: The array has to end with the {0,0} entry,
 	  // otherwise initMethodMap() will runaway and crash!
 };
@@ -1456,6 +1484,7 @@ const struct method_funcLong_s cb_funcs_long[] = {
    { "53", method_53},
    { "74", method_74},
    { "87", method_87},
+   { "B6", method_B6},
    { 0, 0} // Important: The array has to end with the {0,0} entry,
            // otherwise initMethodMap() will runaway and crash!
 };
