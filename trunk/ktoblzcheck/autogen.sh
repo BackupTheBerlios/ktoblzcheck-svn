@@ -1,16 +1,9 @@
-#!/bin/sh
+#!/bin/sh -x
 
-echo libtoolize -f --automake
 libtoolize -f --automake
-echo aclocal -I macros...
-aclocal -I macros
-echo autoheader...
+aclocal -I macros ${ACLOCAL_FLAGS}
 autoheader
-echo automake -a...
-automake -a
-echo autoconf...
+automake --add-missing
 autoconf
-echo
-echo
-echo configure $@
-./configure $@
+
+echo "Now you can run ./configure"
