@@ -1,3 +1,9 @@
+2005-07-27  Christian Stimming  <stimming@tuhh.de>
+
+	* src/include/ktoblzcheck.h: Add function
+	AccountNumberCheck::stringEncoding() to make the character
+	encoding of the returned strings publicly known.
+
 2005-07-21  Christian Stimming <stimming@tuhh.de>
 
 	* autogen.sh: Simplify the bootstrap script even more.

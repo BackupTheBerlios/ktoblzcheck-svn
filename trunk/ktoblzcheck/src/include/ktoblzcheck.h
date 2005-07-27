@@ -206,6 +206,13 @@ public:
    */
   static std::string resultToString(Result r);
 
+  /** 
+   * Returns the character encoding that is used when strings are
+   * returned. So far this has been "ISO-8859-15" but at some point in
+   * the future it might change into "UTF-8".
+   */
+  static const char* stringEncoding();
+
 private:
   /** The type of the list of the bank data */
   typedef std::map<unsigned long, Record*> banklist_type;
@@ -338,6 +345,13 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
    * Currently not implemented.
    */
   extern void AccountNumberCheck_createIndex(AccountNumberCheck *a);
+
+  /** 
+   * Returns the character encoding that is used when strings are
+   * returned. So far this has been "ISO-8859-15" but at some point in
+   * the future it might change into "UTF-8".
+   */
+  extern const char* AccountNumberCheck_stringEncoding();
   /*@}*/
 
   /** @name AccountNumberCheck_Record methods */

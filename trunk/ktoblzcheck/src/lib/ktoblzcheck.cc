@@ -41,6 +41,15 @@
 
 using namespace std;
 
+const char* AccountNumberCheck::stringEncoding()
+{
+  return "ISO-8859-15";
+}
+const char* AccountNumberCheck_stringEncoding()
+{
+  return AccountNumberCheck::stringEncoding();
+}
+
 
 AccountNumberCheck::Record::Record()
 {
