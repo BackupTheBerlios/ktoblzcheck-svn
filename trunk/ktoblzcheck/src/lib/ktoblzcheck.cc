@@ -45,11 +45,10 @@ const char* AccountNumberCheck::stringEncoding()
 {
   return "ISO-8859-15";
 }
-const char* AccountNumberCheck_stringEncoding()
+const char* AccountNumberCheck::libraryVersion()
 {
-  return AccountNumberCheck::stringEncoding();
+  return VERSION;
 }
-
 
 AccountNumberCheck::Record::Record()
 {

@@ -1,3 +1,10 @@
+2005-07-29  Christian Stimming  <stimming@tuhh.de>
+
+	* src/include/ktoblzcheck.h: Add function
+	AccountNumberCheck::libraryVersion() to return the VERSION conf
+	variable, a string like "1.6". Currently the easiest way to get a
+	version number into here.
+
 2005-07-27  Christian Stimming  <stimming@tuhh.de>
 
 	* src/include/ktoblzcheck.h: Add function

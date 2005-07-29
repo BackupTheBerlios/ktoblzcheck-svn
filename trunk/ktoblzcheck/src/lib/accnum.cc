@@ -123,3 +123,13 @@ AccountNumberCheck_Record_copy(const AccountNumberCheck_Record *a)
     assert(a);
     return new AccountNumberCheck_Record(*a);
 }
+
+const char* AccountNumberCheck_stringEncoding()
+{
+  return AccountNumberCheck::stringEncoding();
+}
+
+const char* AccountNumberCheck_libraryVersion()
+{
+  return AccountNumberCheck::libraryVersion();
+}

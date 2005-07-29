@@ -206,12 +206,20 @@ public:
    */
   static std::string resultToString(Result r);
 
+  /** @name Ktoblzcheck library information */
+  //@{
   /** 
    * Returns the character encoding that is used when strings are
    * returned. So far this has been "ISO-8859-15" but at some point in
    * the future it might change into "UTF-8".
    */
   static const char* stringEncoding();
+  /**
+   * Returns the value of ktoblzcheck's configuration variable
+   * VERSION, which can be "1.6" or something similar. 
+   */
+  static const char* libraryVersion();
+  //@}
 
 private:
   /** The type of the list of the bank data */
@@ -345,13 +353,21 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
    * Currently not implemented.
    */
   extern void AccountNumberCheck_createIndex(AccountNumberCheck *a);
+  /*@}*/
 
+  /** @name Ktoblzcheck library information */
+  /*@{*/
   /** 
    * Returns the character encoding that is used when strings are
    * returned. So far this has been "ISO-8859-15" but at some point in
    * the future it might change into "UTF-8".
    */
   extern const char* AccountNumberCheck_stringEncoding();
+  /**
+   * Returns the value of ktoblzcheck's configuration variable
+   * VERSION, which can be "1.6" or something similar. 
+   */
+  extern const char* AccountNumberCheck_libraryVersion();
   /*@}*/
 
   /** @name AccountNumberCheck_Record methods */
