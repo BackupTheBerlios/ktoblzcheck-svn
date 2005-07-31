@@ -17,11 +17,11 @@ $datadir="@datadir@";
 $pkgdatadir="$datadir/@PACKAGE@";
 
 ## Sanity checks
-die "lynx is not available on your system. This tool requires it. Aborting." 
+die "lynx is not available on your system, or was not available on the system where the installed rpm was built. This tool requires lynx. If you have it installed, then edit the script and set the variable LYNX to the full path to lynx. Aborting for now." 
   if $LYNX eq "NO";
 die "sed or grep is not available on your system. This tool requires it. Aborting." if $SED eq "NO" || $GREP eq "NO";
 die "The directory for the bankdata \"$BANKDATADIR\" does not exist. Aborting." if ! -d $BANKDATADIR;
-die "The directory for the bankdata \"$BANKDATADIR\" is not writable. You need to run this script as the user who owns that directory. This probably means you must run this script as root." if ! -w $BANKDATADIR;
+die "The directory for the bankdata \"$BANKDATADIR\" is not writable. You need to run this script as the user who owns that directory. This probably means you must run this script as root, but this script will not write until it tells you so and you confirm it." if ! -w $BANKDATADIR;
 
 
 ## Common constants
