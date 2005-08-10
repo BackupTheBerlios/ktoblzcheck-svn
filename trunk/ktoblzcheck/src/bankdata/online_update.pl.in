@@ -8,21 +8,28 @@
 # ktoblzcheck's format.
 
 ## Configuration
+# Commands
 $LYNX = "@LYNX@";
 $SED = "@SED@";
 $GREP = "@GREP@";
+$RECODE = "@RECODE@";
+# Directories
 $BANKDATADIR="@BANKDATA_PATH@";
 $prefix="@prefix@";
 $datadir="@datadir@";
 $pkgdatadir="$datadir/@PACKAGE@";
 
 ## Sanity checks
-die "lynx is not available on your system, or was not available on the system where the installed rpm was built. This tool requires lynx. If you have it installed, then edit the script and set the variable LYNX to the full path to lynx. Aborting for now." 
+die "lynx is not available on your system, or was not available on the system where the installed rpm was built. This tool requires lynx. If you have it installed, then edit the script and set the variable LYNX to the full path to lynx. Aborting for now."
   if $LYNX eq "NO";
-die "sed or grep is not available on your system. This tool requires it. Aborting." if $SED eq "NO" || $GREP eq "NO";
-die "The directory for the bankdata \"$BANKDATADIR\" does not exist. Aborting." if ! -d $BANKDATADIR;
-die "The directory for the bankdata \"$BANKDATADIR\" is not writable. You need to run this script as the user who owns that directory. This probably means you must run this script as root, but this script will not write until it tells you so and you confirm it." if ! -w $BANKDATADIR;
-
+die "sed or grep is not available on your system. This tool requires it. Aborting."
+  if $SED eq "NO" || $GREP eq "NO";
+die "The directory for the bankdata \"$BANKDATADIR\" does not exist. Aborting."
+  if ! -d $BANKDATADIR;
+die "The directory for the bankdata \"$BANKDATADIR\" is not writable. You need to run this script as the user who owns that directory. This probably means you must run this script as root! However this script will not write anything anywhere until it tells you so and you confirm it."
+  if ! -w $BANKDATADIR;
+print "The recode program is not available. This is okay as long as your system default encoding is latin1/ISO-8859-1 or similar. However if your system default encoding is UTF-8 then the conversion of the downloaded file will fail. In that case please cancel now, edit this script and set the variable RECODE to the full path to recode.\n"
+  if $RECODE eq "NO";
 
 ## Common constants
 $debug=0; # set this to nonzero for activating debugging mode
@@ -123,16 +130,33 @@ if ($debug == 0) {
 ## 1. Download
 print "$ECHO $LYNX -source $download $gt $install_1\n";
 system("$ECHO $LYNX -source $download $gt $install_1");# || die "can't call system: $!";
+
 ## 2. Check whether the Bundesbank's BLZ is in there
 print "$GREP -q 10000000 $install_1\n";
 if (system("$GREP -q 10000000 $install_1") != 0) {
   die "Downloaded file $install_1 is not in valid BLZ format. Aborting.";
 }
+
 ## 3. Backup copy of old bankdata file
 print "$ECHO cp $install_2 $install_2~\n";
 system("$ECHO cp $install_2 $install_2~");# || die "can't call system: $!";
-## 4. Convert new file into the place of the old one.
+
+## 4. Recode the downloaded file from its latin1 encoding into the
+## locale encoding
+if ($RECODE ne "NO") {
+  print "$ECHO $RECODE latin1.. $install_1\n";
+  system("$ECHO $RECODE latin1.. $install_1\n");
+};
+
+## 5. Convert new file into the place of the old one.
 print "$ECHO $SED -nf $conv_script $lt $install_1 $gt $install_2\n";
 system("$ECHO $SED -nf $conv_script $lt $install_1 $gt $install_2");# || die "can't call system: $!";
+
+## 6. Recode the locally encoded file into this library's
+## encoding (latin1 for now)
+if ($RECODE ne "NO") {
+  print "$ECHO $RECODE ..latin1 $install_2\n";
+  system("$ECHO $RECODE ..latin1 $install_2\n");
+};
 
 print "Finished.\n";
