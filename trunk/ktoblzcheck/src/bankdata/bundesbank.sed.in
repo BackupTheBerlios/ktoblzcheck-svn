@@ -16,12 +16,12 @@
 # Divide lines into the different text fields. Print only the required ones
 s/^\(.\{8\}\).\{19\}\(.\{58\}\).\{25\}\(.\{29\}\).\{42\}\(.\{2\}\).\{5\}/\1	\4	\2	\3/
 # Replace multiple whitespaces with one tab character
-s/ \+	/	/g
+s/ \{1,\}	/	/g
 # Transliterate DOS line endings by one whitespace
 y/
 / /
 # Remove trailing whitespaces and/or carriage return (ASCII 13) characters
-s| \+\r*$||
+s| \{1,\}\r*$||
 # Print the result
 p
 : weg

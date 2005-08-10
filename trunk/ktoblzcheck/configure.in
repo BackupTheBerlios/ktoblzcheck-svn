@@ -8,7 +8,7 @@ AC_CANONICAL_TARGET([])
 # Version numbering
 #
 VERSION_MAJOR="1"
-VERSION_MINOR="6"
+VERSION_MINOR="7"
 rpm_release="1"
 # no patchlevel here since this package is small enough to stick with
 # two numbers.
@@ -37,6 +37,7 @@ AC_PROG_CXXCPP
 AC_PATH_PROG([SED], [sed], [NO])
 AC_PATH_PROG([LYNX], [lynx], [NO])
 AC_PATH_PROG([GREP], [grep], [NO])
+AC_PATH_PROG([PERL], [perl], [NO])
 
 # Check language features
 AC_C_LONG_LONG

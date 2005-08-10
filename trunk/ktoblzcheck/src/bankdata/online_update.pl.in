@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!@PERL@
 
 # Simply run this script with no arguments. It will first download the
 # information HTML page by bundesbank and parse this page for blz
