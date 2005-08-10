@@ -61,7 +61,7 @@ case "$OS_TYPE" in
     	;;
     windows)
 	ACX_WINDOWS_PATHS
-        ktoblzcheck_libs='-L$(WIN_PATH_SYSTEM_MINGW) -L$(top_builddir)/src/lib -lktoblzcheck32'
+        ktoblzcheck_libs='-L$(top_builddir)/src/lib -lktoblzcheck32 -L/mingw/lib -L$(WIN_PATH_SYSTEM_MINGW)'
 	ktoblzcheck_includes='-I$(top_srcdir)/src/include'
     	;;
 esac

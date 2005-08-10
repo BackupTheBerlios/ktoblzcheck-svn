@@ -36,6 +36,7 @@
 #include <ktoblzcheck.h>
 #include <iostream>
 #include <fstream>
+#include <cassert>
 
 using namespace std;
 
@@ -160,7 +161,7 @@ int main(int argc, char **argv) {
 
    // Can we open the specified bankdata file? If not, use the
    // installed data file
-   AccountNumberCheck *check_ptr;
+   AccountNumberCheck *check_ptr = 0;
    if (bankdataFile.empty())
       check_ptr = new AccountNumberCheck();
    else 
@@ -177,6 +178,7 @@ int main(int argc, char **argv) {
       else 
 	 check_ptr = new AccountNumberCheck(bankdataFile);
    }
+   assert(check_ptr);
 
    AccountNumberCheck& checker = *check_ptr;
    AccountNumberCheck::Result finalresult = AccountNumberCheck::OK;
