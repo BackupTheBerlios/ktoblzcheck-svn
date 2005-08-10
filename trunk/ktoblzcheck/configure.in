@@ -38,6 +38,7 @@ AC_PATH_PROG([SED], [sed], [NO])
 AC_PATH_PROG([LYNX], [lynx], [NO])
 AC_PATH_PROG([GREP], [grep], [NO])
 AC_PATH_PROG([PERL], [perl], [NO])
+AC_PATH_PROG([RECODE], [recode], [NO])
 
 # Check language features
 AC_C_LONG_LONG

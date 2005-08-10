@@ -1,3 +1,20 @@
+2005-08-10  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in: Release version 1.7
+
+	* src/bankdata/bankdata.txt: Updated bankdata file, now valid from
+	2005-09-05 onwards
+
+	* src/bankdata/online_update.pl.in: Add recoding of the downloaded
+	file into the locale encoding before SED is run, and into the
+	library encoding afterwards.
+
+	* src/bankdata/bundesbank.sed.in: non-gnu SED does not have the
+	'+' in regexp. Fixed by Alexander Kurz.
+
+	* src/bankdata/online_update.pl.in: Replace hardcoded perl path by
+	one determined by ./configure, by Alexander Kurz.
+
 2005-07-29  Christian Stimming  <stimming@tuhh.de>
 
 	* src/include/ktoblzcheck.h: Add function
