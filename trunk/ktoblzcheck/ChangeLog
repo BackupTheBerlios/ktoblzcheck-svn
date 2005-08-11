@@ -1,3 +1,8 @@
+2005-08-11  Christian Stimming <stimming@tuhh.de>
+
+	* src/bankdata/bundesbank.pl.in: New conversion script by
+	Alexander Kurz.
+
 2005-08-10  Christian Stimming <stimming@tuhh.de>
 
 	* configure.in: Release version 1.7

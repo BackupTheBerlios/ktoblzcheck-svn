@@ -139,7 +139,7 @@ AC_OUTPUT( \
   src/Makefile \
   src/bankdata/Makefile \
   src/bankdata/online_update.pl \
-  src/bankdata/bundesbank.sed \
+  src/bankdata/bundesbank.pl \
   src/bin/Makefile \
   src/include/Makefile \
   src/lib/Makefile \

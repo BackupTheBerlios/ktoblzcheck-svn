@@ -1,0 +1,32 @@
+#!@PERL@ -w
+#
+# This script converts the ascii file of German Bank Codes (BLZ-Datei)
+# as available from the Deutsche Bundesbank into the bankdata.txt file
+# for the ktoblzcheck library.
+#
+# This script is a replacement for bundesbank.sed which failed
+# on some platforms, NetBSD e.g.
+#
+#   Usage: ./bundesbank.pl < blzAABB.txt > bankdata.txt
+#
+# converted from sed to perl by Alexander Kurz
+# original sed version By Daniel Gloeckner <daniel-gl@gmx.net>
+# $Id$
+#
+use strict;
+while (<>) {
+    # Only use lines that have a "1" as 9th character (Hauptniederlassungen)
+    if (/^.{8}1/) {
+	# Ignore lines starting with 8 zeros (deleted banks)
+	goto Weg if /^0{8}/;
+	# Divide lines into the different text fields. Print only the required ones
+	s/^(.{8}).{19}(.{58}).{25}(.{29}).{42}(.{2}).{5}/$1\t$4\t$2\t$3/;
+	# Remove trailing whitespaces in columns
+	s/ +\t/\t/g;
+	# Remove trailing whitespaces and/or CR/LF in last column
+	s/[ \r\n]+$/\n/;
+	# Print the result
+	print;
+      Weg:
+    }
+}

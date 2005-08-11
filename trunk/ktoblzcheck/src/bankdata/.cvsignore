@@ -5,3 +5,4 @@ Makefile.in
 *.lo
 online_update.pl
 bundesbank.sed
+bundesbank.pl
