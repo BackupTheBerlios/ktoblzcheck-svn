@@ -1,3 +1,11 @@
+2005-08-12  Christian Stimming <stimming@tuhh.de>
+
+	* Note: Silently released the version 1.7 again with the upgraded
+	bundesbank.pl script.
+	
+	* src/bankdata/online_update.pl.in: Only use the new conversion
+	script, dont use recode anymore.
+
 2005-08-11  Christian Stimming <stimming@tuhh.de>
 
 	* src/bankdata/bundesbank.pl.in: New conversion script by

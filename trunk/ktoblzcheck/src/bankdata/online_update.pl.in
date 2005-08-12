@@ -12,7 +12,7 @@
 $LYNX = "@LYNX@";
 #$SED = "@SED@";
 $GREP = "@GREP@";
-$RECODE = "@RECODE@";
+$RECODE = "NO"; #"@RECODE@"; -- dont use recode, it is not widely available
 # Directories
 $BANKDATADIR="@BANKDATA_PATH@";
 $prefix="@prefix@";
@@ -28,8 +28,8 @@ die "The directory for the bankdata \"$BANKDATADIR\" does not exist. Aborting."
   if ! -d $BANKDATADIR;
 die "The directory for the bankdata \"$BANKDATADIR\" is not writable. You need to run this script as the user who owns that directory. This probably means you must run this script as root! However this script will not write anything anywhere until it tells you so and you confirm it."
   if ! -w $BANKDATADIR;
-print "The recode program is not available. This is okay as long as your system default encoding is latin1/ISO-8859-1 or similar. However if your system default encoding is UTF-8 then the conversion of the downloaded file will fail. In that case please cancel now, edit this script and set the variable RECODE to the full path to recode.\n"
-  if $RECODE eq "NO";
+#print "The recode program is not available. This is okay as long as your system default encoding is latin1/ISO-8859-1 or similar. However if your system default encoding is UTF-8 then the conversion of the downloaded file will fail. In that case please cancel now, edit this script and set the variable RECODE to the full path to recode.\n"
+#  if $RECODE eq "NO";
 
 ## Common constants
 $debug=0; # set this to nonzero for activating debugging mode
