@@ -77,8 +77,10 @@ make DESTDIR=$RPM_BUILD_ROOT install
 %{_libdir}/*.so.*
 %{_bindir}/ktoblzcheck
 %{_datadir}/ktoblzcheck/*
-%{_includedir}/ktoblzcheck.h
 %{_includedir}/iban.h
+%{_includedir}/ktoblzcheck.h
+%{_libdir}/pkgconfig/ktoblzcheck.pc
 %{_mandir}/man1/ktoblzcheck.1*
+%{py_sitedir}/*.py*
 
 %changelog

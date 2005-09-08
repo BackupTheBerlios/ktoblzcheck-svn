@@ -8,7 +8,7 @@ Both a library for other programs as well as a short command-line tool
 is available. It is possible to check pairs of account numbers and
 bank codes (BLZ) of German banks, and to map bank codes (BLZ) to the
 clear-text name and location of the bank. Python bindings are provided
-as well (--enable-python).
+as well (--enable-python; requires the python module "ctypes").
 
 For compile instructions concerning MS Windows, please see the file
 README.WIN32. On the download page a self-installing setup file for

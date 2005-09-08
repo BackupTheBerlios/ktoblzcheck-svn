@@ -33,8 +33,8 @@ First: Compiling under Windows with mingw32 is not easy for the
 average Windows user.  So please, if you aren't used to Unix, then you
 probably shouldn't try to.
 
-However, developers who worked with Linux/*BSD before will find the compiler
-environment chosen very familiar.
+However, developers who worked with Linux/*BSD before will find
+the compiler environment chosen very familiar.
 
 
 1. Needed Components
@@ -94,7 +94,13 @@ To compile Ktoblzcheck yourself, do this:
     --with-bankdata-path="c:\\msys\\1.0\\local\\share\\ktoblzcheck"
 
 - make     (this creates the dll and executable)
-- then copy the DLL src/lib/ktoblzcheck32.dll to your windows folder.
-- make check (this will try to run a short test)
-- make install (this installs your data file to the specified location)
+
+- Now either install manually by copying the DLL
+  src/lib/ktoblzcheck32.dll to your windows folder and manually
+  copy the data file to the specified location.
+
+- Or install the "Inno Setup Compiler" from
+  http://www.jrsoftware.org/isdl.php and run "make setup" so that a
+  self-installing setup.exe file will be created.
+
 

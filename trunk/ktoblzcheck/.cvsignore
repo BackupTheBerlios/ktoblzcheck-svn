@@ -31,3 +31,4 @@ ktoblzcheck.iss
 *.zip
 ktoblzcheck.tag
 py-compile
+ktoblzcheck.pc

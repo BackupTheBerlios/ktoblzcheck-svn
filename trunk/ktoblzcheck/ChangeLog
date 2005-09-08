@@ -1,3 +1,10 @@
+2005-09-08  Christian Stimming <stimming@tuhh.de>
+
+	* configure.in: Enable python files by default.
+
+	* ktoblzcheck.pc.in: Add configuration file for pkg-config, let
+	this also be installed.
+
 2005-08-12  Christian Stimming <stimming@tuhh.de>
 
 	* Note: Silently released the version 1.7 again with the upgraded
