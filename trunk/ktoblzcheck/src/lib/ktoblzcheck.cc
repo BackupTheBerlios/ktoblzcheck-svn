@@ -124,7 +124,9 @@ AccountNumberCheck::~AccountNumberCheck()
 #define BLZ_SIZE    (8+1)
 #define METHOD_SIZE (2+1)
 #define NAME_SIZE   (58+1)
-#define PLACE_SIZE  (29+1)
+#define PLACE_SIZE  (35+1)
+// From 2006-06-05 onwards the field "PLACE" has 35 instead of 29
+// characters!
 
 void 
 AccountNumberCheck::readFile(const string &filename) 
@@ -154,7 +156,7 @@ AccountNumberCheck::readFile(const string &filename)
      if (fgetc(istr) == EOF) break; // remove delimiter
      if (!fgets(method, METHOD_SIZE, istr)) break; // get method
      if (fgetc(istr) == EOF) break; // remove delimiter
-     if (!fscanf(istr, "%58[^\t]\t%29[^\t\n]", name, place)) break;
+     if (!fscanf(istr, "%58[^\t]\t%35[^\t\n]", name, place)) break;
 
      // Create new record object
      Record *newRecord = 

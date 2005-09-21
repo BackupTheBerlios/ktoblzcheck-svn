@@ -1,3 +1,8 @@
+2005-09-21  Christian Stimming <stimming@tuhh.de>
+
+	* src/lib/ktoblzcheck.cc (readFile): Fix longer PLACE field in the
+	new bankdata format which is valid from 2006-06-05 onwards.
+
 2005-09-08  Christian Stimming <stimming@tuhh.de>
 
 	* configure.in: Enable python files by default.
