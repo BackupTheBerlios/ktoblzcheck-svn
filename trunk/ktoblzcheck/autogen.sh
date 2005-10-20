@@ -3,10 +3,16 @@
 # Make sure this script exits if a command was not found
 trap exit ERR
 
-libtoolize -f --automake
-aclocal -I macros ${ACLOCAL_FLAGS}
-autoheader
-automake --add-missing
-autoconf
+: ${LIBTOOLIZE=libtoolize}
+: ${ACLOCAL=aclocal}
+: ${AUTOMAKE=automake}
+: ${AUTOHEADER=autoheader}
+: ${AUTOCONF=autoconf}
+
+${LIBTOOLIZE} -f --automake
+${ACLOCAL} -I macros ${ACLOCAL_FLAGS}
+${AUTOMAKE} --add-missing
+${AUTOHEADER}
+${AUTOCONF}
 
 echo "Now you can run ./configure"
