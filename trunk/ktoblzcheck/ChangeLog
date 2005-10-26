@@ -1,3 +1,8 @@
+2005-10-26  Christian Stimming <stimming@tuhh.de>
+
+	* src/lib/Makefile.am, configure.in: Have the windows DLL be
+	created by libtool directly. Greatly simplifies the Makefile.
+
 2005-09-21  Christian Stimming <stimming@tuhh.de>
 
 	* src/lib/ktoblzcheck.cc (readFile): Fix longer PLACE field in the
