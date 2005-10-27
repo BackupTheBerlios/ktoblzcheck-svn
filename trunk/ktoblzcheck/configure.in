@@ -159,7 +159,6 @@ AC_CONFIG_FILES([
   src/bin/Makefile
   src/include/Makefile
   src/lib/Makefile
-  src/lib/ressource.rc
   src/python/Makefile
   doc/Makefile
   doc/mainpage.doxygen
