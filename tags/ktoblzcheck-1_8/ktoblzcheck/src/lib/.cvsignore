@@ -1,0 +1,7 @@
+Makefile
+Makefile.in
+.deps
+.libs
+*.lo
+libktoblzcheck.la
+iban_check
