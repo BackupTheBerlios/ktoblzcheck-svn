@@ -224,10 +224,40 @@ AccountNumberCheck::Result method_23(int *account, int *weight) {
 	
     return AccountNumberCheck::ERROR;
 }
-AccountNumberCheck::Result method_24(int *account, int *weight, 
-				     const std::string& accountId, const std::string& bankId) {
-    return algo05(accountId); 
+// rewrite of method_24(), moved part of the code from algorithms.c old algo05() here
+AccountNumberCheck::Result method_24(int *account, int *weight) {
+    int start=0;
+    if (2 < account[0] && 7 > account[0])
+	account[0] = 0;
+    if (9 == account[0]) {
+	account[0] = 0;
+	account[1] = 0;
+	account[2] = 0;
+	if (0 == account[3])
+	    return AccountNumberCheck::ERROR;
+    }
+
+    // check how many leading "0", shift weight to right
+    std::string weightString = "";  
+    for (int i=0; i<10; i++) {
+	if (0 == account[i])
+	    weightString += "0";
+	else {
+	    start = i;
+	    break;
+	}
+    }
+    weightString += "123123123";
+    weightString = weightString.substr(0, 9) + "0";
+
+    number2Array(weightString, weight);
+
+    int result = algo05(11, 10, weight, account, 0, 8);
+    if (result == account[9])
+	return AccountNumberCheck::OK;
+    return AccountNumberCheck::ERROR;
 }
+
 // Added by Jens Gecius, validated with one test accountID
 AccountNumberCheck::Result method_25(int *account, int *weight) {
     number2Array("987654320", weight);
@@ -1343,6 +1373,35 @@ AccountNumberCheck::Result method_B8(int *account, int *weight) {
     else
 	return method_29(account,weight);	// variant 2
 }
+// B9 and C0 added by Alexander Kurz
+// new method as of December 5th, 2005, checked with Bundesbank-Testnumbers
+AccountNumberCheck::Result method_B9(int *account, int *weight) {
+    if (account[0] == 0 && account[1] == 0 && account[2] > 0 ) {
+	number2Array("0012312310", weight);	// variant 1
+	int result = algo05(11, 10, weight, account, 2, 8);
+	if (result == account[9])
+	    return AccountNumberCheck::OK;
+	result += result<5?5:-5;
+	if (result == account[9])
+	    return AccountNumberCheck::OK;
+    } else if (account[0] == 0 && account[1] == 0 && account[2] == 0 && account[3] > 0 ) {
+	number2Array("0006543210", weight);	// variant 2
+	int result = algo03(11, weight, false, account, 3, 8);
+	if (result == account[9])
+	    return AccountNumberCheck::OK;
+	result += result<5?5:-5;
+	if (result == account[9])
+	    return AccountNumberCheck::OK;
+    }
+    return AccountNumberCheck::ERROR;
+}
+AccountNumberCheck::Result method_C0(int *account, int *weight,
+				     const std::string& accountId, const std::string& bankId) {
+    if (account[0] == 0 && account[1] == 0 && account[2] > 0 )
+	if (AccountNumberCheck::OK == method_52(account, weight, accountId, bankId) )	// variant 1
+	    return AccountNumberCheck::OK;
+    return method_20(account,weight);	// variant 2
+}
 
 struct method_func_s {
     const char *str;
@@ -1373,6 +1432,7 @@ const struct method_func_s cb_funcs[] = {
   { "21", method_21},
   { "22", method_22},
   { "23", method_23},
+  { "24", method_24},
   { "25", method_25},
   { "26", method_26},
   { "27", method_27},
@@ -1462,6 +1522,7 @@ const struct method_func_s cb_funcs[] = {
   { "B5", method_B5},
   { "B7", method_B7},
   { "B8", method_B8},
+  { "B9", method_B9},
   { 0, 0} // Important: The array has to end with the {0,0} entry,
 	  // otherwise initMethodMap() will runaway and crash!
 };
@@ -1479,12 +1540,12 @@ struct method_funcLong_s {
     AccountNumberCheck::MethodFuncLong func;
 };
 const struct method_funcLong_s cb_funcs_long[] = {
-   { "24", method_24},
    { "52", method_52},
    { "53", method_53},
    { "74", method_74},
    { "87", method_87},
    { "B6", method_B6},
+   { "C0", method_C0},
    { 0, 0} // Important: The array has to end with the {0,0} entry,
            // otherwise initMethodMap() will runaway and crash!
 };

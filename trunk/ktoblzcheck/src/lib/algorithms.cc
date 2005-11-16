@@ -247,51 +247,21 @@ int algo03a(int weight[10], bool crossfoot, int accountId[10],
   return result;
 }
 
-AccountNumberCheck::Result
-algo05(const std::string& accountId) {
-  int account[10];
-  int weight[10];
-  
-  number2Array(accountId, account);
+// Algorithm used in methods 24 and B9 variant 1.
+int algo05(int modulus1, int modulus2, int weight[10], int accountId[10], 
+		   int startAdd, int stopAdd) {
+  int res[10];
+  // mult the weight with the account id
+  multArray(accountId, weight, res);
 
-	if (2 < account[0] && 7 > account[0])
-	  account[0] = 0;
-	if (9 == account[0]) {
-	  account[0] = 0;
-	  account[1] = 0;
-	  account[2] = 0;
-	  if (0 == account[3])
-		return AccountNumberCheck::ERROR;
-	}
-	
-	// check how many leading "0", shift weight to right
-	string weightString = "";
-	for (int i=0; i<10; i++) {
-	  if (0 == account[i])
-		weightString += "0";
-	  else
-		break;
-	}
-	     	
-	weightString += "123123123";
-	weightString = weightString.substr(0, 9) + "0";
-	number2Array(weightString, weight);
+  // add the weight, individual modulus
+  for (int i=startAdd; i<=stopAdd; i++)
+    res[i] = (res[i] + weight[i]) % modulus1;
 
-	// now mult the account with the weight
-	int res[10];	
-	multArray(account, weight, res);
+  // sum the stuff, final modulus
+    int result = add(res, startAdd, stopAdd) % modulus2;
 
-	// add the weight
-	for (int i=0; i<10; i++)
-	  res[i] = (res[i] + weight[i]) % 11;
-
-	// sum the stuff
-	int result = add_10(res) % 10;
-	
-	if (result == account[9])
-	  return AccountNumberCheck::OK;
-	else
-	  return AccountNumberCheck::ERROR;
+  return result;
 }
  
 AccountNumberCheck::Result

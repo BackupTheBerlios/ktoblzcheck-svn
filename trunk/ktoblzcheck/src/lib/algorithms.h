@@ -64,12 +64,12 @@ int    algo03(int modulus, int weight[10], bool crossfoot, int accountId[10],
 			  int startAdd, int stopAdd);
 int    algo03a(int weight[10], bool crossfoot, int accountId[10], 
 			  int startAdd, int stopAdd);
+int    algo05(int modulus1, int modulus2, int weight[10], int accountId[10],
+			  int startAdd, int stopAdd);
 AccountNumberCheck::Result 
 algo04(const std::string& bankId, std::string accountId);
 AccountNumberCheck::Result 
 algo04a(const std::string& bankId, std::string accountId);
-AccountNumberCheck::Result 
-algo05(const std::string& accountId);
 AccountNumberCheck::Result
 algo06(const std::string& accountId);
 AccountNumberCheck::Result
