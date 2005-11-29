@@ -277,7 +277,7 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
    * bank data in the registry in the key
    * HKEY_LOCAL_MACHINE/Software/Ktoblzcheck/Paths, key "datadir".
    */
-  extern AccountNumberCheck *AccountNumberCheck_new();
+  AccountNumberCheck *AccountNumberCheck_new();
 
   /**
    * Constructor that initialize the bank-database from a data file at
@@ -289,7 +289,7 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
    *
    * @param filename The absolute location of the KTOBLZCheck-database
    */
-  extern AccountNumberCheck *AccountNumberCheck_new_file(const char *filename);
+  AccountNumberCheck *AccountNumberCheck_new_file(const char *filename);
 
   /**
    * Destructor. All entries of the bank database are deleted as well.
@@ -299,7 +299,7 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
    * not to use these references any longer after this destructor has
    * been called.
    */
-  extern void AccountNumberCheck_delete(AccountNumberCheck *a);
+  void AccountNumberCheck_delete(AccountNumberCheck *a);
 
   /**
    * Check if <code>bankId</code> and <code>accountId</code> form a valid
@@ -320,7 +320,7 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
    * @param bankId The bank code (BLZ) of the bank to test
    * @param accountId The account id to check
    */
-  extern AccountNumberCheck_Result
+  AccountNumberCheck_Result
   AccountNumberCheck_check(const AccountNumberCheck *a, 
 			   const char *bankId, 
 			   const char *accountId); 
@@ -338,21 +338,21 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
    * by this AccountNumberObject and it becomes invalid if the
    * AcccountNumberObject is being deleted.
    */
-  extern const AccountNumberCheck_Record *
+  const AccountNumberCheck_Record *
   AccountNumberCheck_findBank(const AccountNumberCheck *a, 
 			      const char *bankId);
 
   /**
    * Returns the number of bank-records currently loaded
    */
-  extern unsigned int 
+  unsigned int 
   AccountNumberCheck_bankCount(const AccountNumberCheck *a);
 
   /**
    * Generates an index over the bankIds.<br>
    * Currently not implemented.
    */
-  extern void AccountNumberCheck_createIndex(AccountNumberCheck *a);
+  void AccountNumberCheck_createIndex(AccountNumberCheck *a);
   /*@}*/
 
   /** @name Ktoblzcheck library information */
@@ -362,18 +362,18 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
    * returned. So far this has been "ISO-8859-15" but at some point in
    * the future it might change into "UTF-8".
    */
-  extern const char* AccountNumberCheck_stringEncoding();
+  const char* AccountNumberCheck_stringEncoding();
   /**
    * Returns the value of ktoblzcheck's configuration variable
    * VERSION, which can be "1.6" or something similar. 
    */
-  extern const char* AccountNumberCheck_libraryVersion();
+  const char* AccountNumberCheck_libraryVersion();
   /*@}*/
 
   /** @name AccountNumberCheck_Record methods */
   /*@{*/
   /** Destructor */
-  extern void
+  void
   AccountNumberCheck_Record_delete(AccountNumberCheck_Record *a);
 
   /** Copy constructor. The returned object will be owned by the
@@ -381,20 +381,20 @@ typedef struct AccountNumberCheck_Record AccountNumberCheck_Record;
    * used. FIXME: Needs to be tested whether it works correctly --
    * internally it uses the automatically synthetized copy constructor
    * of the C++ compiler. */
-  extern AccountNumberCheck_Record *
+  AccountNumberCheck_Record *
   AccountNumberCheck_Record_copy(const AccountNumberCheck_Record *a);
 
   /** Returns the id of the bank (german BLZ) */
-  extern unsigned long 
+  unsigned long 
   AccountNumberCheck_Record_bankId(const AccountNumberCheck_Record *a);
 
   /** Returns the  name of the bank as listed in the file of the 
    * <b>Deutsche Bundesbank</b> */
-  extern const char *
+  const char *
   AccountNumberCheck_Record_bankName(const AccountNumberCheck_Record *a);
 
   /**  Returns the city where the bank is located */
-  extern const char *
+  const char *
   AccountNumberCheck_Record_location(const AccountNumberCheck_Record *a);
   /*@}*/
 

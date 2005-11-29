@@ -219,8 +219,8 @@ private:
   bool readSpecTable(std::istream &fin, const std::string& stopcomment);
   bool readCountryTable(std::istream &fin);
   static int to_number(char c) { return c - 'A' + 10; }
-  static std::string IbanCheck::iban2number(const std::string& iban);
-  static int IbanCheck::modulo97(const std::string& number);
+  static std::string iban2number(const std::string& iban);
+  static int modulo97(const std::string& number);
 
   specmap m_IbanSpec;
   countrymap m_CountryMap;
@@ -251,15 +251,15 @@ extern "C" {
    * used. Otherwise the relative or absolute full filename of the
    * data file
    */
-  extern IbanCheck *IbanCheck_new(const char *filename);
+  IbanCheck *IbanCheck_new(const char *filename);
   /** Default destructor */
-  extern void IbanCheck_free(IbanCheck *p);
+  void IbanCheck_free(IbanCheck *p);
   /** @overload
    * @param p        IbanCheck object
    * @param iban     IBAN in transmission format
    * @param country  2-character country code (ISO 3166)
    */
-  extern IbanCheck_Result IbanCheck_check_str(const IbanCheck *p,
+  IbanCheck_Result IbanCheck_check_str(const IbanCheck *p,
 					      const char *iban,
 					      const char *country);
   /** Check the formal correctness of a given iban.  This function
@@ -271,7 +271,7 @@ extern "C" {
    * @param iban     Iban instance
    * @param country  2-character country code (ISO 3166)
    */
-  extern IbanCheck_Result IbanCheck_check_iban(const IbanCheck *p,
+  IbanCheck_Result IbanCheck_check_iban(const IbanCheck *p,
 					       const Iban *iban,
 					       const char *country);
   /** Returns the position of the BIC inside the IBAN. The iban should
@@ -282,7 +282,7 @@ extern "C" {
    * @param start  [out] start of BIC (0-based index)
    * @param end    [out] first position after BIC (0-based index)
    */
-  extern IbanCheck_Result IbanCheck_bic_position(const IbanCheck *p, 
+  IbanCheck_Result IbanCheck_bic_position(const IbanCheck *p, 
 						 const char *iban,
 						 int *start, int *end);
   /** Convert Result code into an english message string.
@@ -292,27 +292,27 @@ extern "C" {
    *
    * @param res   Result code from check() or bic_position()
    */
-  extern const char *IbanCheck_resultText(IbanCheck_Result res);
+  const char *IbanCheck_resultText(IbanCheck_Result res);
   /** @return false if the data file could not be opened and
    * successfully read.
    */
-  extern int IbanCheck_error(const IbanCheck *p);
+  int IbanCheck_error(const IbanCheck *p);
   /** uses the example data to test the check routines.
    * @return false if not successful
    */
-  extern int IbanCheck_selftest(IbanCheck *p);
+  int IbanCheck_selftest(IbanCheck *p);
   /* @} */
 
   /** @name Iban methods */
   /* @{ */
   /** Constructor from a string */
-  extern Iban *Iban_new(const char* iban, int normalize);
+  Iban *Iban_new(const char* iban, int normalize);
   /** Default destructor. */
-  extern void Iban_free(Iban *p);
+  void Iban_free(Iban *p);
   /** Returns the transmission format for the IBAN */
-  extern const char *Iban_transmissionForm(const Iban *iban);
+  const char *Iban_transmissionForm(const Iban *iban);
   /** Returns the printable format for the IBAN */
-  extern const char *Iban_printableForm(Iban *iban);
+  const char *Iban_printableForm(Iban *iban);
   /* @} */
 #ifdef __cplusplus
 }
