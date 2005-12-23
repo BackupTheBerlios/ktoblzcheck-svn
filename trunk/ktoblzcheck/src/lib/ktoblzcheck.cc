@@ -68,10 +68,10 @@ AccountNumberCheck::Record::Record(const char *id,
 				   const char *meth, 
 				   const char *name, 
 				   const char *loc)
-  : bankId(atol(id))
-   , method(meth)
-   , bankName(name)
-   , location(loc)
+  : bankId(id ? atol(id) : 0)
+   , method(meth ? meth : "")
+   , bankName(name ? name : "")
+   , location(loc ? loc : "")
 {
 }
 
@@ -96,17 +96,21 @@ std::string AccountNumberCheck::resultToString(Result r)
 AccountNumberCheck::AccountNumberCheck() 
     : data() // std::map doesn't take size as argument
 {
-   string registry_path = accnum_getRegKey("datadir");
-   string data_path = BANKDATA_PATH;
-   string filename = (registry_path.empty() ? data_path : registry_path)
-      + 
+   std::string registry_path(accnum_getRegKey("datadir"));
+   std::string data_path(BANKDATA_PATH);
+   std::string dirsep(
 #if OS_WIN32
       "\\"
 #else
       "/"
 #endif
-      + std::string("bankdata.txt");
-   readFile(filename);
+      );
+   std::string bankdata_filename("bankdata.txt");
+
+   std::string full_filename(
+      (registry_path.empty() ? data_path : registry_path)
+      + dirsep + bankdata_filename);
+   readFile(full_filename);
 }
 
 AccountNumberCheck::AccountNumberCheck(const string& filename) 
@@ -190,6 +194,8 @@ void AccountNumberCheck::createIndex() {
 
 
 // Function object for the predicate of matching a job result
+#if 0
+// currently unused; was only used for std::vector et al
 class MatchBlz {
     unsigned long blz;
   public:
@@ -199,6 +205,7 @@ class MatchBlz {
 	return r && (r->bankId == blz);
     }
 };
+#endif
 
 const AccountNumberCheck::Record& 
 AccountNumberCheck::findBank(const string& bankId) const 

@@ -1,3 +1,9 @@
+2005-12-23  Christian Stimming <stimming@tuhh.de>
+
+	* src/lib/ktoblzcheck.cc: Check really all const chars for
+	sanity. This should hopefully fix the errorneous free's that were
+	sighted on debian.
+
 2005-12-22  Christian Stimming <stimming@tuhh.de>
 
 	* configure.ac: Release version 1.9
