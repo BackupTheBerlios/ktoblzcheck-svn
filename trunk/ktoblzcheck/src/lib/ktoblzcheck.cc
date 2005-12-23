@@ -32,6 +32,7 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <cassert>
 
 // The actual algorithms for number checking are there
 #include "algorithms.h"
@@ -132,6 +133,15 @@ AccountNumberCheck::~AccountNumberCheck()
 // From 2006-06-05 onwards the field "PLACE" has 35 instead of 29
 // characters!
 
+//#define ARRAY_BOUNDS_CHECK 1
+#undef ARRAY_BOUNDS_CHECK
+
+#ifdef ARRAY_BOUNDS_CHECK
+#  define PLUSONE +1
+#else
+#  define PLUSONE
+#endif
+
 void 
 AccountNumberCheck::readFile(const string &filename) 
 {
@@ -150,10 +160,18 @@ AccountNumberCheck::readFile(const string &filename)
      return;
   }
 
-  char blz[BLZ_SIZE];
-  char method[METHOD_SIZE];
-  char name[NAME_SIZE];
-  char place[PLACE_SIZE];
+  // We better use heap-allocated arrays because some weird stack
+  // corruption has been reported with ktoblzcheck-1.8 on Debian.
+  char *blz = new char[BLZ_SIZE PLUSONE];
+  char *method = new char[METHOD_SIZE PLUSONE];
+  char *name = new char[NAME_SIZE PLUSONE];
+  char *place = new char[PLACE_SIZE PLUSONE];
+#ifdef ARRAY_BOUNDS_CHECK
+  blz[BLZ_SIZE]=17;
+  method[METHOD_SIZE]=17;
+  name[NAME_SIZE]=17;
+  place[PLACE_SIZE]=17;
+#endif
 
   while (fgets(blz, BLZ_SIZE, istr))
   {
@@ -170,7 +188,17 @@ AccountNumberCheck::readFile(const string &filename)
      // ascending BLZ
      data.insert(data.end(), banklist_type::value_type(newRecord->bankId, newRecord));
      if (fgetc(istr) == EOF) break; // remove delimiter
+#ifdef ARRAY_BOUNDS_CHECK
+     assert(blz[BLZ_SIZE]==17);
+     assert(method[METHOD_SIZE]==17);
+     assert(name[NAME_SIZE]==17);
+     assert(place[PLACE_SIZE]==17);
+#endif
   }
+  delete[] blz;
+  delete[] method;
+  delete[] name;
+  delete[] place;
   fclose(istr);
 }
 

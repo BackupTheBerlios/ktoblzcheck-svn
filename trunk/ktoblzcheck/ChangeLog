@@ -1,5 +1,9 @@
 2005-12-23  Christian Stimming <stimming@tuhh.de>
 
+	* src/lib/ktoblzcheck.cc: Use heap-allocated arrays when reading
+	the file instead of stack-allocated ones to avoid stack
+	corruption.
+
 	* src/lib/ktoblzcheck.cc: Check really all const chars for
 	sanity. This should hopefully fix the errorneous free's that were
 	sighted on debian.
