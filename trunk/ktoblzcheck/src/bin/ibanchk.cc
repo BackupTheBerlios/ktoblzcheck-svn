@@ -3,7 +3,7 @@
 #endif
 
 #include "iban.h"
-#include <ostream>
+#include <iostream>
 
 int main(int argc, char *argv[])
 {

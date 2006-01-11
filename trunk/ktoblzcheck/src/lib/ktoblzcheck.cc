@@ -33,6 +33,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cassert>
+#include <cstdio>
 
 // The actual algorithms for number checking are there
 #include "algorithms.h"
