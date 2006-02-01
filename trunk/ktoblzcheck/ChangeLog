@@ -1,3 +1,8 @@
+2006-02-01   Christian Stimming <stimming@tuhh.de>
+
+	* src/bankdata/bankdata.txt: Updated bankdata file, now valid from
+	2006-03-06 onwards
+
 2006-01-11  Christian Stimming <stimming@tuhh.de>
 
 	* src/lib/ktoblzcheck.cc: Add missing includes for gcc2.x
@@ -10,7 +15,7 @@
 	corruption.
 
 	* src/lib/ktoblzcheck.cc: Check really all const chars for
-	sanity. This should hopefully fix the errorneous free's that were
+	sanity. This should hopefully fix the erroneous free's that were
 	sighted on debian.
 
 2005-12-22  Christian Stimming <stimming@tuhh.de>
