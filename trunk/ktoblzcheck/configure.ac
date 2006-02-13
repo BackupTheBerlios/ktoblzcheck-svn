@@ -8,7 +8,7 @@ AC_CANONICAL_TARGET([])
 # Version numbering
 #
 VERSION_MAJOR="1"
-VERSION_MINOR="9"
+VERSION_MINOR="10"
 rpm_release="1"
 # no patchlevel here since this package is small enough to stick with
 # two numbers.
@@ -158,6 +158,7 @@ AC_CONFIG_FILES([
   src/bankdata/bundesbank.pl
   src/bin/Makefile
   src/include/Makefile
+  src/include/ktoblzcheck.h
   src/lib/Makefile
   src/python/Makefile
   doc/Makefile

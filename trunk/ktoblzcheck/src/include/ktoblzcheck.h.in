@@ -27,6 +27,11 @@
 #ifndef KTOBLZCHECK_H
 #define KTOBLZCHECK_H
 
+/** The major version number of this library */
+#define KTOBLZCHECK_VERSION_MAJOR @VERSION_MAJOR@
+/** The minor version number of this library */
+#define KTOBLZCHECK_VERSION_MINOR @VERSION_MINOR@
+
 /** @file 
  * @brief Checking of German BLZ and account numbers
  *

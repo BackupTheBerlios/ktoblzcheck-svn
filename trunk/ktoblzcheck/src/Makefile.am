@@ -4,5 +4,5 @@ else
 pythonsubdir =
 endif
 
-SUBDIRS = bankdata lib bin include $(pythonsubdir)
-DIST_SUBDIRS = bankdata lib bin include python
+SUBDIRS = bankdata include lib bin $(pythonsubdir)
+DIST_SUBDIRS = bankdata include lib bin python
