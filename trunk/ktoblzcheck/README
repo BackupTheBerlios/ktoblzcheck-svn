@@ -146,3 +146,4 @@ a hash map internally. That, and together with the thought that a
 header file dependency on a configuration variable is probably a bad
 idea, lead to the decision to throw out <ext/hash_map> completely and
 only use std::map<>.
+
