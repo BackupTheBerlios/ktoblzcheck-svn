@@ -87,23 +87,23 @@ def usage(code, msg=''):
 
 
 
-def calculate_diff(filespec):
+def calculate_diff(filespec, filedir):
     try:
         file, oldrev, newrev = string.split(filespec, ',')
     except ValueError:
         # No diff to report
         return '***** Bogus filespec: %s' % filespec
     if oldrev == 'NONE':
-        lines = ['--- NEW FILE: %s ---\n' % file]
+        lines = ['- New file: http://cvs.sourceforge.net/viewcvs.py/ktoblzcheck/%s/%s?rev=%s' % (filedir, file, newrev)]
     elif newrev == 'NONE':
         lines = ['--- %s DELETED ---\n' % file]
     else:
-        lines = ''
+        lines = ['- View diff: http://cvs.sourceforge.net/viewcvs.py/ktoblzcheck/%s/%s?r1=%s&r2=%s' % (filedir, file, oldrev, newrev)]
     return string.join(lines, '')
 
 
 
-def blast_mail(mailcmd, filestodiff, contextlines):
+def blast_mail(mailcmd, filestodiff, contextlines, filedir):
     # cannot wait for child process or that will cause parent to retain cvs
     # lock for too long.  Urg!
     if not os.fork():
@@ -113,9 +113,10 @@ def blast_mail(mailcmd, filestodiff, contextlines):
         fp = os.popen(mailcmd, 'w')
         fp.write(sys.stdin.read())
         fp.write('\n')
+        fp.write('Note: URLs are only valid after the 5h anonymous CVS delay!\n\n')
         # append the diffs if available
         for file in filestodiff:
-            fp.write(calculate_diff(file))
+            fp.write(calculate_diff(file, filedir))
             fp.write('\n')
         fp.close()
         # doesn't matter what code we return, it isn't waited on
@@ -179,7 +180,7 @@ def main():
                 L.append(s)
         specs = L
     print 'Generating notification message...'
-    blast_mail(mailcmd, specs[1:], contextlines)
+    blast_mail(mailcmd, specs[1:], contextlines, specs[0])
     print 'Generating notification message... done.'
 
 
