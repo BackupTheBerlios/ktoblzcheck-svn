@@ -1,9 +1,0 @@
-Makefile
-Makefile.in
-.deps
-.libs
-*.lo
-ktoblzcheck
-ctest
-benchmark
-ibanchk
